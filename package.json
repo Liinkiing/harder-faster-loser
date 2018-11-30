@@ -14,11 +14,13 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
-  "devDependencies": {
+  "devDependencies": {∂
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.10",
     "@types/react": "^16.7.10",
     "@types/react-dom": "^16.0.11",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
     "typescript": "^3.2.1"
   }
 }

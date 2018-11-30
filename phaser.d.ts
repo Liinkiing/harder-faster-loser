@@ -8962,7 +8962,7 @@ declare namespace Phaser {
          * The parsed XML object is returned, or `null` if there was an error while parsing the data.
          * @param data The XML source stored in a string.
          */
-        function ParseXML(data: string): DOMParser | ActiveXObject;
+        function ParseXML(data: string): DOMParser;
 
         /**
          * Attempts to remove the element from its parentNode in the DOM.
