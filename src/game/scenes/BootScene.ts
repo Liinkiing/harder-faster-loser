@@ -1,3 +1,4 @@
+import minigameManager from "../manager/MinigameManager";
 
 export default class BootScene extends Phaser.Scene {
   constructor() {
@@ -7,10 +8,10 @@ export default class BootScene extends Phaser.Scene {
   }
 
   public preload(): void {
-    console.log('qsdqsdqsd qds qsdq')
+    console.log('Preload BootScene')
   }
 
-  public update(): void {
-    console.log('cc')
+  public init(): void {
+    this.scene.start(minigameManager.pickNextGameKey())
   }
 }
