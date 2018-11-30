@@ -12,6 +12,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   public init(): void {
-    this.scene.start(minigameManager.pickNextGameKey())
+    console.log('init BootScene')
+    // this.scene.start(minigameManager.pickNextGameKey())
   }
 }

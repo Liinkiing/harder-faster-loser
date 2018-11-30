@@ -13,7 +13,7 @@ export const gameConfig: GameConfig = {
     gamepad: false,
     keyboard: true,
     mouse: false,
-    touch: false,
+    touch: true,
   },
   physics: {
     arcade: {
@@ -22,9 +22,10 @@ export const gameConfig: GameConfig = {
     },
     default: "arcade",
   },
-  title: "Test game",
-  version: "1.1",
-  width: 256,
+  title: "Harder, Faster, Looser",
+  version: "1.0",
+  width: window.innerWidth,
+  height: window.innerHeight,
   zoom: 3,
   parent: "game",
   scene: [BootScene, ActionFirstGameScene, ActionSecondGameScene, ActionThirdGameScene, ElevatorFirstGameScene, ElevatorSecondGameScene],

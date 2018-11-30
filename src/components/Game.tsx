@@ -4,7 +4,7 @@ import {gameConfig} from "../utils/game";
 
 class Game extends React.Component {
 
-  public game: Phaser.Game;
+  public game?: Phaser.Game;
 
   public componentDidMount(): void {
     this.game = new Phaser.Game(gameConfig)
@@ -12,7 +12,10 @@ class Game extends React.Component {
 
   public render() {
     return (
-      <div id="game" className="Game"/>
+
+      <div id="game" className="Game">
+        <h1>Issou</h1>
+      </div>
     );
   }
 }

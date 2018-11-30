@@ -10,7 +10,6 @@ export default class ActionFirstGameScene extends Phaser.Scene {
   }
 
   public init(): void {
-    console.log('INIT ' + scenesKeys.ACTION_FIRST_GAME)
     this.scene.start(minigameManager.pickNextGameKey())
   }
 }

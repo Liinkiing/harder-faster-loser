@@ -1,8 +1,9 @@
 import {GameCategory} from "../../utils/enums";
 import {categoriesProbability, scenesKeys} from "../../utils/constants";
+import {List} from "../../utils/extensions";
 
 interface IGames {
-  [category: string]: string[],
+  [category: string]: List<string>,
 }
 
 class MinigameManager {
@@ -11,13 +12,13 @@ class MinigameManager {
   private lastGame?: string
 
   private games: IGames = {
-    [GameCategory.Action]: [scenesKeys.ACTION_FIRST_GAME, scenesKeys.ACTION_SECOND_GAME, scenesKeys.ACTION_THIRD_GAME],
-    [GameCategory.Waiting]: [scenesKeys.ELEVATOR_FIRST_GAME, scenesKeys.ELEVATOR_SECOND_GAME]
+    [GameCategory.Action]: new List<string>([scenesKeys.ACTION_FIRST_GAME, scenesKeys.ACTION_SECOND_GAME, scenesKeys.ACTION_THIRD_GAME]),
+    [GameCategory.Waiting]: new List<string>([scenesKeys.ELEVATOR_FIRST_GAME, scenesKeys.ELEVATOR_SECOND_GAME])
   }
 
   private playedGames: IGames = {
-    [GameCategory.Action]: [],
-    [GameCategory.Waiting]: []
+    [GameCategory.Action]: new List<string>(),
+    [GameCategory.Waiting]: new List<string>()
   }
 
   public pickNextGameKey(): string {

@@ -10,6 +10,5 @@ export default class ElevatorFirstGameScene extends Phaser.Scene {
 
 
   public init(): void {
-    console.log('INIT ' + scenesKeys.ELEVATOR_FIRST_GAME)
     this.scene.start(minigameManager.pickNextGameKey())
   }}
