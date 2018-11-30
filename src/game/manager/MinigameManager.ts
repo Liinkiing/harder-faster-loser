@@ -26,7 +26,6 @@ class MinigameManager {
 
     if (this.currentCategory === GameCategory.Waiting && selectedCategory === GameCategory.Waiting) {
       while (selectedCategory === GameCategory.Waiting) {
-        console.log('fdp')
         selectedCategory = this.pickRandomCategory(Math.random())
       }
     }
