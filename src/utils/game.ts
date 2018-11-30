@@ -1,4 +1,10 @@
-import BootScene from "../game/scenes/BootScene";
+import {
+  ActionFirstGameScene,
+  ActionSecondGameScene,
+  ActionThirdGameScene,
+  BootScene,
+  ElevatorFirstGameScene, ElevatorSecondGameScene
+} from '../game/scenes'
 
 export const gameConfig: GameConfig = {
   antialias: false,
@@ -21,7 +27,7 @@ export const gameConfig: GameConfig = {
   width: 256,
   zoom: 3,
   parent: "game",
-  scene: [BootScene],
+  scene: [BootScene, ActionFirstGameScene, ActionSecondGameScene, ActionThirdGameScene, ElevatorFirstGameScene, ElevatorSecondGameScene],
   type: Phaser.AUTO,
   pixelArt: true,
 }

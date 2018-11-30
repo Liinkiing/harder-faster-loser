@@ -1,0 +1,9 @@
+export {default as BootScene} from './BootScene'
+
+export {default as ActionFirstGameScene} from './action/ActionFirstGameScene'
+export {default as ActionSecondGameScene} from './action/ActionSecondGameScene'
+export {default as ActionThirdGameScene} from './action/ActionThirdGameScene'
+
+export {default as ElevatorFirstGameScene} from './waiting/ElevatorFirstGameScene'
+export {default as ElevatorSecondGameScene} from './waiting/ElevatorSecondGameScene'
+
