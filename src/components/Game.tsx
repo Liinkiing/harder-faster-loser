@@ -1,23 +1,28 @@
 import 'phaser'
 import * as React from 'react';
 import {gameConfig} from "../utils/game";
+import {useResize} from "../utils/hooks";
+import GameUI from "./ui/GameUI";
 
-class Game extends React.Component {
+const game = new Phaser.Game(gameConfig)
 
-  public game?: Phaser.Game;
+const Game = () => {
+  const { width, height } = useResize()
 
-  public componentDidMount(): void {
-    this.game = new Phaser.Game(gameConfig)
+  if (game.canvas) {
+    game.canvas.width = width
+    game.canvas.height = height
+    game.canvas.style.width = `${width}px`
+    game.canvas.style.height = `${height}px`
   }
 
-  public render() {
-    return (
-
-      <div id="game" className="Game">
-        <h1>Issou</h1>
-      </div>
-    );
-  }
+  return (
+    <div id="game" className="game">
+      <GameUI/>
+    </div>
+  )
 }
 
-export default Game;
+export default Game
+
+
