@@ -15,6 +15,7 @@
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
+    "experimentalDecorators": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "importHelpers": true,
