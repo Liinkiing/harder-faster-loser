@@ -4,7 +4,7 @@ import gameStore from "../../../store/GameStore";
 import {GameState} from "../../../utils/enums";
 import {ChangeEvent} from "react";
 
-const GameStateList = () => {
+const GameDebugStateList = () => {
   const {state, changeState} = gameStore
   const availableStates = Object.keys(GameState).map(gameState => GameState[gameState])
 
@@ -32,7 +32,7 @@ const GameStateList = () => {
 }
 
 export default observer(
-  GameStateList
+  GameDebugStateList
 )
 
 

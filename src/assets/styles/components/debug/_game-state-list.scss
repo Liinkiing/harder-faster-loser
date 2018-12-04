@@ -1,10 +1,12 @@
 .game-state-list {
-  margin-top: 10px;
+  &.container {
+    position: absolute;
+    top: $debug-container-margin;
+    left: $debug-container-margin;
+    max-width: $game-state-list-container-width;
+  }
   &--item {
-    margin-right: 10px;
-    &:last-of-type {
-      margin-right: 0;
-    }
+    margin: 10px;
     & input:checked + span {
       color: red;
     }

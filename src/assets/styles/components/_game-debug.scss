@@ -5,4 +5,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  & h1 {
+    position: absolute;
+    bottom: $debug-container-margin;
+    right: $debug-container-margin;
+  }
 }

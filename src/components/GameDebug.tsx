@@ -1,12 +1,14 @@
 import * as React from 'react';
-import GameStateList from "./ui/debug/GameStateList";
+import GameDebugStateList from "./ui/debug/GameDebugStateList";
+import GameDebugCloseButton from "./ui/debug/GameDebugCloseButton";
 
 const GameDebug = () => {
 
   return (
-    <div id="game" className="game-debug game-ui">
+    <div className="game-debug game-ui">
       <h1>Debug interface</h1>
-      <GameStateList/>
+      <GameDebugStateList/>
+      <GameDebugCloseButton/>
     </div>
   )
 }
