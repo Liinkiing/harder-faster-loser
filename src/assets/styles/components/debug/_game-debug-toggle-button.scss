@@ -1,0 +1,22 @@
+.game-debug-toggle-button {
+  position: absolute;
+  z-index: 10000;
+  top: $debug-container-margin;
+  right: $debug-container-margin;
+  background: white;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #26292d;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  & i.icon.debug {
+    background: url("~/images/icons/debug.png") no-repeat;
+    height: 50px;
+    width: 50px;
+  }
+}
