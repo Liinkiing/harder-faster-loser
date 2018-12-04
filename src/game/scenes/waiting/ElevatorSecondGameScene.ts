@@ -4,10 +4,9 @@ import minigameManager from "../../manager/MinigameManager";
 export default class ElevatorSecondGameScene extends Phaser.Scene {
   constructor() {
     super({
-      key: scenesKeys.ELEVATOR_SECOND_GAME
+      key: scenesKeys.ElevatorSecondGame
     });
   }
-
 
   public init(): void {
     this.scene.start(minigameManager.pickNextGameKey())

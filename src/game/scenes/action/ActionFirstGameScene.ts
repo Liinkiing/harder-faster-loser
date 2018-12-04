@@ -1,15 +1,15 @@
 import {scenesKeys} from "../../../utils/constants";
-import minigameManager from "../../manager/MinigameManager";
 
 export default class ActionFirstGameScene extends Phaser.Scene {
 
   constructor() {
     super({
-      key: scenesKeys.ACTION_FIRST_GAME
+      key: scenesKeys.ActionFirstGame
     });
   }
 
   public init(): void {
-    this.scene.start(minigameManager.pickNextGameKey())
+    console.log("FIRST GAME INIT")
+    // this.scene.start(minigameManager.pickNextGameKey())
   }
 }

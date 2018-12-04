@@ -4,7 +4,7 @@ import minigameManager from "../../manager/MinigameManager";
 export default class ActionThirdGameScene extends Phaser.Scene {
   constructor() {
     super({
-      key: scenesKeys.ACTION_THIRD_GAME
+      key: scenesKeys.ActionThirdGame
     });
   }
 

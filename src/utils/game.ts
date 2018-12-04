@@ -1,9 +1,11 @@
 import {
+  BootScene,
+  SplashscreenScene,
   ActionFirstGameScene,
   ActionSecondGameScene,
   ActionThirdGameScene,
-  BootScene,
-  ElevatorFirstGameScene, ElevatorSecondGameScene
+  ElevatorFirstGameScene,
+  ElevatorSecondGameScene
 } from '../game/scenes'
 
 export const gameConfig: GameConfig = {
@@ -28,7 +30,15 @@ export const gameConfig: GameConfig = {
   height: window.innerHeight,
   zoom: 3,
   parent: "game",
-  scene: [BootScene, ActionFirstGameScene, ActionSecondGameScene, ActionThirdGameScene, ElevatorFirstGameScene, ElevatorSecondGameScene],
+  scene: [
+    BootScene,
+    SplashscreenScene,
+    ActionFirstGameScene,
+    ActionSecondGameScene,
+    ActionThirdGameScene,
+    ElevatorFirstGameScene,
+    ElevatorSecondGameScene
+  ],
   type: Phaser.AUTO,
   pixelArt: true,
 }

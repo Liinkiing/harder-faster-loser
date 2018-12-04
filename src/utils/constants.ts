@@ -1,12 +1,15 @@
 import {GameCategory} from "./enums";
 
 export const scenesKeys = {
-  ACTION_FIRST_GAME: 'ActionFirstGameScene',
-  ACTION_SECOND_GAME: 'ActionSecondGameScene',
-  ACTION_THIRD_GAME: 'ActionThirdGameScene',
+  Boot: 'BootScene',
+  Splashscreen: 'SplashscreenScene',
 
-  ELEVATOR_FIRST_GAME: 'ElevatorFirstGame',
-  ELEVATOR_SECOND_GAME: 'ElevatorSecondGame',
+  ActionFirstGame: 'ActionFirstGameScene',
+  ActionSecondGame: 'ActionSecondGameScene',
+  ActionThirdGame: 'ActionThirdGameScene',
+
+  ElevatorFirstGame: 'ElevatorFirstGame',
+  ElevatorSecondGame: 'ElevatorSecondGame',
 }
 
 export const categoriesProbability = {

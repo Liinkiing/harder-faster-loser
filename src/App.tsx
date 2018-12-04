@@ -1,6 +1,6 @@
 import * as React from 'react';
+import {FunctionComponent} from 'react';
 import Game from "./components/Game";
-import {FunctionComponent} from "react";
 
 const App: FunctionComponent = () => {
 
