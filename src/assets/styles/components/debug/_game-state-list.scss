@@ -1,0 +1,9 @@
+.game-state-list {
+  margin-top: 10px;
+  &--item {
+    margin-right: 10px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

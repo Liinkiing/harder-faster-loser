@@ -3,6 +3,7 @@ import * as React from 'react';
 import {gameConfig} from "../utils/game";
 import {useResize} from "../utils/hooks";
 import GameUI from "./ui/GameUI";
+import GameDebug from "./GameDebug";
 
 const game = new Phaser.Game(gameConfig)
 
@@ -18,6 +19,7 @@ const Game = () => {
 
   return (
     <div id="game" className="game">
+      <GameDebug/>
       <GameUI/>
     </div>
   )

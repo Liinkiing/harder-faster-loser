@@ -6,8 +6,11 @@
   height: 100%;
   display: flex;
   z-index: 10;
+  color: whitesmoke;
   & h1 {
     font-size: 3rem;
-    color: white;
+  }
+  & h2 {
+    font-size: 2.5rem;
   }
 }
