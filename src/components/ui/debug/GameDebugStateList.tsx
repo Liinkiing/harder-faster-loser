@@ -2,9 +2,9 @@ import * as React from 'react';
 import {observer} from "mobx-react-lite";
 import gameStore from "../../../store/GameStore";
 import {GameState} from "../../../utils/enums";
-import {ChangeEvent} from "react";
+import {ChangeEvent, FunctionComponent} from "react";
 
-const GameDebugStateList = () => {
+const GameDebugStateList: FunctionComponent = () => {
   const {state, changeState} = gameStore
   const availableStates = Object.keys(GameState).map(gameState => GameState[gameState])
 

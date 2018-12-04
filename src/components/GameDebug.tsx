@@ -1,8 +1,9 @@
 import * as React from 'react';
 import GameDebugStateList from "./ui/debug/GameDebugStateList";
 import GameDebugCloseButton from "./ui/debug/GameDebugCloseButton";
+import {FunctionComponent} from "react";
 
-const GameDebug = () => {
+const GameDebug: FunctionComponent = () => {
 
   return (
     <div className="game-debug game-ui">

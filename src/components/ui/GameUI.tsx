@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FunctionComponent} from 'react'
 import {observer} from "mobx-react-lite";
 import gameStore from "../../store/GameStore";
 import {GameState} from "../../utils/enums";
@@ -8,7 +8,7 @@ import MinigameUI from "./MinigameUI";
 import PostMinigameUI from "./PostMinigameUI";
 import DeathscreenUI from "./DeathscreenUI";
 
-const GameUI = () => {
+const GameUI: FunctionComponent = () => {
   const {state} = gameStore
 
   let UIComponent = <SplashscreenUI/>

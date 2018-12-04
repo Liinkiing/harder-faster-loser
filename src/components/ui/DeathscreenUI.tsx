@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {FunctionComponent} from 'react'
 
-const DeathscreenUI = () => {
+const DeathscreenUI: FunctionComponent = () => {
   return (
     <div className="deathscreen-ui">
       <h1>Je suis l'ui du deathscreen</h1>

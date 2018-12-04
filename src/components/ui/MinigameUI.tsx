@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {FunctionComponent} from 'react'
 
-const MinigameUI = () => {
+const MinigameUI: FunctionComponent = () => {
   return (
     <div className="minigame-ui">
       <h1>Je suis l'ui du mini jeu</h1>
