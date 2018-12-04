@@ -6,6 +6,7 @@
     "events": "^3.0.0",
     "mobx": "^5.6.0",
     "mobx-react-lite": "^0.3.4",
+    "nes.css": "https://github.com/BcRikko/NES.css",
     "node-sass": "^4.10.0",
     "phaser": "^3.15.1",
     "react": "^16.7.0-alpha.2",

@@ -11,23 +11,23 @@ const GameStateList = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => changeState(e.target.value as GameState)
 
   return (
-    <div className="game-state-list">
+    <section className="game-state-list container is-dark with-title">
+      <h2 className="title">Game state</h2>
       {availableStates.map(availableState => {
         return (
-          <span key={availableState} className="game-state-list--item">
-          <input
-            id={availableState}
-            type="radio"
-            name="currentState"
-            value={availableState}
-            checked={availableState === state}
-            onChange={handleInputChange}
-          />
-          <label htmlFor={availableState}>{availableState}</label>
-        </span>
+          <label key={availableState} className="game-state-list--item">
+            <input id={availableState}
+                   className="radio"
+                   type="radio"
+                   name="currentState"
+                   value={availableState}
+                   checked={availableState === state}
+                   onChange={handleInputChange}/>
+              <span>{availableState}</span>
+          </label>
         )
       })}
-    </div>
+    </section>
   )
 }
 

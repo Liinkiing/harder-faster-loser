@@ -6,7 +6,6 @@ const GameDebug = () => {
   return (
     <div id="game" className="game-debug game-ui">
       <h1>Debug interface</h1>
-      <h2>Game's state</h2>
       <GameStateList/>
     </div>
   )

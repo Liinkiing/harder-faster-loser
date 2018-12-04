@@ -5,5 +5,11 @@
     &:last-of-type {
       margin-right: 0;
     }
+    & input:checked + span {
+      color: red;
+    }
+    &:hover {
+      opacity: 0.5;
+    }
   }
 }
