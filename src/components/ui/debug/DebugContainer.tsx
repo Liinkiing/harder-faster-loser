@@ -1,20 +1,26 @@
-import React, {FunctionComponent} from 'react'
+import React, {FunctionComponent, ReactNode} from 'react'
 import {observer} from "mobx-react-lite";
-import gameDebugStore from "../../../store/GameDebugStore";
+import {ForceThemeProps} from "../../../utils/interfaces";
+import {useClassTheme} from "../../../utils/hooks";
 
 interface Props {
+  x?: number,
+  y?: number,
+  zIndex?: number,
+  children?: ReactNode | string,
   center?: boolean,
   rounded?: boolean,
   title?: string,
 }
 
-const DebugContainer: FunctionComponent<Props> = (props) => {
-  const { title, children, center, rounded } = props
-  const { theme } = gameDebugStore
+const DebugContainer: FunctionComponent<Props & ForceThemeProps> = (props) => {
+  const { title, children, center, rounded, forceTheme, x, y, zIndex } = props
   const classNames = ['game-state-list', 'container']
-  if (theme === 'dark') {
-    classNames.push('is-dark')
+  const themeClass = useClassTheme(forceTheme)
+  if (themeClass) {
+    classNames.push(themeClass)
   }
+
   if (title && title !== "") {
     classNames.push('with-title')
   }
@@ -26,7 +32,7 @@ const DebugContainer: FunctionComponent<Props> = (props) => {
   }
 
   return (
-    <section className={classNames.join(' ')}>
+    <section className={classNames.join(' ')} style={{left: x, top: y, zIndex }}>
       {title && title !== "" && <h2 className="title">{title}</h2>}
       {children}
     </section>

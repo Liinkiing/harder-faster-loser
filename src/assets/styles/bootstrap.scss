@@ -3,8 +3,10 @@
 
 @import "./components/game";
 @import "./components/game-ui";
+
 @import "./components/game-debug";
 @import "./components/debug/debug-container";
+@import "./components/debug/debug-button";
 @import "./components/debug/game-debug-toggle-button";
 @import "./components/debug/game-debug-buttons-toolbar";
 @import "./components/debug/game-debug-toggle-theme-button";

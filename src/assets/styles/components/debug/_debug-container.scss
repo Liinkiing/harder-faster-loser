@@ -9,6 +9,10 @@
     position: relative;
   }
 
+  &.is-dark {
+    color: whitesmoke;
+  }
+
   &:not(.is-dark) {
     background: $debug-container-light-background;
     color: #26292d;

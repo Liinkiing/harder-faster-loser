@@ -13,24 +13,3 @@
     right: $debug-container-margin;
   }
 }
-
-.debug-button {
-  width: 64px;
-  outline: none;
-  border: none;
-  height: 64px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  color: #26292d;
-  &.is-dark {
-    background: #26292d;
-    color: whitesmoke;
-  }
-  z-index: 10000;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
-}

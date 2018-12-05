@@ -12,22 +12,25 @@ const GameDebugStateList: FunctionComponent = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => changeState(e.target.value as GameState)
 
   return (
-    <DebugContainer title="Game state">
-      {availableStates.map(availableState => {
-        return (
-          <label key={availableState} className="game-state-list--item">
-            <input id={availableState}
-                   className="radio"
-                   type="radio"
-                   name="currentState"
-                   value={availableState}
-                   checked={availableState === state}
-                   onChange={handleInputChange}/>
-            <span>{availableState}</span>
-          </label>
-        )
-      })}
-    </DebugContainer>
+    <>
+      <DebugContainer x={10} y={10} title="Game state">
+        {availableStates.map(availableState => {
+          return (
+            <label key={availableState} className="game-state-list--item">
+              <input id={availableState}
+                     className="radio"
+                     type="radio"
+                     name="currentState"
+                     value={availableState}
+                     checked={availableState === state}
+                     onChange={handleInputChange}/>
+              <span>{availableState}</span>
+            </label>
+          )
+        })}
+      </DebugContainer>
+    </>
+
   )
 }
 
