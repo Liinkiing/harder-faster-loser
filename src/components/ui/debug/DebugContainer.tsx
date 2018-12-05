@@ -35,8 +35,6 @@ const DebugContainer: FunctionComponent<Props & ForceThemeProps & Positionneable
     {children}
   </section>
 
-  console.log(isDraggable)
-
   if (isDraggable) {
     return (
       <Draggable>
