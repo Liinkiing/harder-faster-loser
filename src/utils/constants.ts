@@ -11,6 +11,10 @@ export const scenesKeys = {
 
   ElevatorFirstGame: 'ElevatorFirstGame',
   ElevatorSecondGame: 'ElevatorSecondGame',
+
+  PostMinigameScene: 'PostMinigameScene',
+
+  Deathscreen: 'DeathscreenScene'
 }
 
 export const categoriesProbability = {

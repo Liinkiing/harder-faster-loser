@@ -19,7 +19,11 @@ class GameManager {
 
   public loadMinigame = (minigameKey: string): void => {
     this.game.scene.start(minigameKey)
-    gameStore.changeState(GameState.Minigame)
+  }
+
+  public loadDeathscreen = (): void => {
+    this.game.scene.start(scenesKeys.Deathscreen)
+    gameStore.changeState(GameState.Deathscreen)
   }
 
 }

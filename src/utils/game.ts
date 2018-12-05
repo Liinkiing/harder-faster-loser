@@ -2,10 +2,10 @@ import {
   ActionFirstGameScene,
   ActionSecondGameScene,
   ActionThirdGameScene,
-  BootScene,
+  BootScene, DeathscreenScene,
   ElevatorFirstGameScene,
   ElevatorSecondGameScene,
-  HomescreenScene,
+  HomescreenScene, PostMinigameScene,
   SplashscreenScene,
 } from '../game/scenes'
 
@@ -41,7 +41,10 @@ export const gameConfig: GameConfig = {
     ActionThirdGameScene,
 
     ElevatorFirstGameScene,
-    ElevatorSecondGameScene
+    ElevatorSecondGameScene,
+
+    PostMinigameScene,
+    DeathscreenScene
   ],
   type: Phaser.AUTO,
   pixelArt: true,

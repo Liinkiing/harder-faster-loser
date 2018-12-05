@@ -4,12 +4,27 @@ import gameStore from "../../../store/GameStore";
 import {GameState} from "../../../utils/enums";
 import {ChangeEvent, FunctionComponent} from "react";
 import DebugContainer from "./DebugContainer";
+import gameManager from "../../../game/manager/GameManager";
 
 const GameDebugStateList: FunctionComponent = () => {
   const {state, changeState} = gameStore
   const availableStates = Object.keys(GameState).map(gameState => GameState[gameState])
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => changeState(e.target.value as GameState)
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    switch (e.target.value as GameState) {
+      case GameState.Splashscreen:
+        gameManager.loadSplashscreen()
+        break;
+      case GameState.Homescreen:
+        gameManager.loadHomescreen()
+        break;
+      case GameState.Deathscreen:
+        gameManager.loadDeathscreen()
+        break;
+      default:
+        changeState(e.target.value as GameState)
+    }
+  }
 
   return (
     <>
