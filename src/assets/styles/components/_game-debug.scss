@@ -12,4 +12,9 @@
     bottom: $debug-container-margin;
     right: $debug-container-margin;
   }
+
+  & .react-draggable-dragging {
+    z-index: 9000;
+  }
+
 }

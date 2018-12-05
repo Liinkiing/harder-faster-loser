@@ -25,7 +25,7 @@ const Game: FunctionComponent = () => {
   return (
     <div id="game" className="game">
       <GameDebugButtonsToolbar/>
-      {debug && <GameDebug/>}
+      <GameDebug visible={debug}/>
       <GameUI/>
     </div>
   )

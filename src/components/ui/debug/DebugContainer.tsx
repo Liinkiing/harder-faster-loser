@@ -1,4 +1,5 @@
 import React, {FunctionComponent, ReactNode} from 'react'
+import Draggable from 'react-draggable';
 import {observer} from "mobx-react-lite";
 import {ForceThemeProps} from "../../../utils/interfaces";
 import {useClassTheme} from "../../../utils/hooks";
@@ -32,10 +33,12 @@ const DebugContainer: FunctionComponent<Props & ForceThemeProps> = (props) => {
   }
 
   return (
-    <section className={classNames.join(' ')} style={{left: x, top: y, zIndex }}>
-      {title && title !== "" && <h2 className="title">{title}</h2>}
-      {children}
-    </section>
+    <Draggable>
+      <section className={classNames.join(' ')} style={{left: x, top: y, zIndex }}>
+        {title && title !== "" && <h2 className="title">{title}</h2>}
+        {children}
+      </section>
+    </Draggable>
   )
 
 }
