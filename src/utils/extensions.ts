@@ -1,6 +1,10 @@
 export class List<T> extends Array<T> {
   constructor(items?: T[]) {
-    super(items ? items.length : 0)
+    if (items && items.length > 0) {
+      super(...items)
+    } else {
+      super(0)
+    }
   }
   
   public random(): T {
