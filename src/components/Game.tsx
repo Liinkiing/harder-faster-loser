@@ -5,15 +5,15 @@ import {useResize} from "../utils/hooks";
 import GameUI from "./ui/GameUI";
 import GameDebug from "./GameDebug";
 import {FunctionComponent} from "react";
-import gameStore from "../store/GameStore";
 import {observer} from "mobx-react-lite";
-import GameDebugToggleButton from "./ui/debug/GameDebugToggleButton";
+import GameDebugButtonsToolbar from "./ui/debug/GameDebugButtonsToolbar";
+import gameDebugStore from "../store/GameDebugStore";
 
 const game = new Phaser.Game(gameConfig)
 
 const Game: FunctionComponent = () => {
   const { width, height } = useResize()
-  const { debug } = gameStore
+  const { debug } = gameDebugStore
 
   if (game.canvas) {
     game.canvas.width = width
@@ -24,7 +24,7 @@ const Game: FunctionComponent = () => {
 
   return (
     <div id="game" className="game">
-      <GameDebugToggleButton/>
+      <GameDebugButtonsToolbar/>
       {debug && <GameDebug/>}
       <GameUI/>
     </div>
