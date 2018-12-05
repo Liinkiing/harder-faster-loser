@@ -1,13 +1,12 @@
 import {scenesKeys} from "../../../utils/constants";
-import minigameManager from "../../manager/MinigameManager";
+import BaseScene from "../BaseScene";
 
-export default class ElevatorFirstGameScene extends Phaser.Scene {
+export default class ElevatorFirstGameScene extends BaseScene {
+
   constructor() {
     super({
       key: scenesKeys.ElevatorFirstGame
     });
   }
 
-  public init(): void {
-    this.scene.start(minigameManager.pickNextGameKey())
-  }}
+}

@@ -1,17 +1,12 @@
 import {scenesKeys} from "../../utils/constants";
+import BaseScene from "./BaseScene";
 
-export default class HomescreenScene extends Phaser.Scene {
+export default class HomescreenScene extends BaseScene {
+
   constructor() {
     super({
       key: scenesKeys.Homescreen
     });
   }
 
-  public preload(): void {
-    console.log('Preload HOMESCREEN')
-  }
-
-  public init(): void {
-    console.log('init HOMESCREEN')
-  }
 }

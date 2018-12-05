@@ -1,6 +1,7 @@
 import {scenesKeys} from "../../../utils/constants";
+import BaseScene from "../BaseScene";
 
-export default class ActionFirstGameScene extends Phaser.Scene {
+export default class ActionFirstGameScene extends BaseScene {
 
   constructor() {
     super({
@@ -8,8 +9,4 @@ export default class ActionFirstGameScene extends Phaser.Scene {
     });
   }
 
-  public init(): void {
-    console.log("FIRST GAME INIT")
-    // this.scene.start(minigameManager.pickNextGameKey())
-  }
 }

@@ -1,17 +1,12 @@
 import {scenesKeys} from "../../utils/constants";
+import BaseScene from "./BaseScene";
 
-export default class DeathscreenScene extends Phaser.Scene {
+export default class DeathscreenScene extends BaseScene {
+
   constructor() {
     super({
       key: scenesKeys.Deathscreen
     });
   }
 
-  public preload(): void {
-    console.log('Preload DEATHSCREEN')
-  }
-
-  public init(): void {
-    console.log('init DEATHSCREEN')
-  }
 }

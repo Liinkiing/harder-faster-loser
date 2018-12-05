@@ -1,15 +1,12 @@
 import {scenesKeys} from "../../../utils/constants";
-import minigameManager from "../../manager/MinigameManager";
+import BaseScene from "../BaseScene";
 
-export default class ActionThirdGameScene extends Phaser.Scene {
+export default class ActionThirdGameScene extends BaseScene {
+
   constructor() {
     super({
       key: scenesKeys.ActionThirdGame
     });
-  }
-
-  public init(): void {
-    this.scene.start(minigameManager.pickNextGameKey())
   }
 
 }

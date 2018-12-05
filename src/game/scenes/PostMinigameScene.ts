@@ -1,17 +1,12 @@
 import {scenesKeys} from "../../utils/constants";
+import BaseScene from "./BaseScene";
 
-export default class PostMinigameScene extends Phaser.Scene {
+export default class PostMinigameScene extends BaseScene {
+
   constructor() {
     super({
       key: scenesKeys.PostMinigameScene
     });
   }
 
-  public preload(): void {
-    console.log('Preload DEATHSCREEN')
-  }
-
-  public init(): void {
-    console.log('init DEATHSCREEN')
-  }
 }

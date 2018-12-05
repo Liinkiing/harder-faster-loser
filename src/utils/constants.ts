@@ -1,20 +1,20 @@
 import {GameCategory} from "./enums";
 
 export const scenesKeys = {
-  Boot: 'BootScene',
-  Splashscreen: 'SplashscreenScene',
-  Homescreen: 'HomescreenScene',
+  Boot: 'BOOT_SCENE',
+  Splashscreen: 'SPLASHSCREEN_SCENE',
+  Homescreen: 'HOMESCREEN_SCENE',
 
-  ActionFirstGame: 'ActionFirstGameScene',
-  ActionSecondGame: 'ActionSecondGameScene',
-  ActionThirdGame: 'ActionThirdGameScene',
+  ActionFirstGame: 'ACTION_FIRST_GAME_SCENE',
+  ActionSecondGame: 'ACTION_SECOND_GAME_SCENE',
+  ActionThirdGame: 'ACTION_THIRD_GAME_SCENE',
 
-  ElevatorFirstGame: 'ElevatorFirstGame',
-  ElevatorSecondGame: 'ElevatorSecondGame',
+  ElevatorFirstGame: 'ELEVATOR_FIRST_GAME',
+  ElevatorSecondGame: 'ELEVATOR_SECOND_GAME_SCENE',
 
-  PostMinigameScene: 'PostMinigameScene',
+  PostMinigameScene: 'POST_MINIGAME_SCENE',
 
-  Deathscreen: 'DeathscreenScene'
+  Deathscreen: 'DEATHSCREEN_SCENE'
 }
 
 export const categoriesProbability = {
