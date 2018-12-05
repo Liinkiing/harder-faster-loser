@@ -1,4 +1,6 @@
 import {scenesKeys} from "../../utils/constants";
+import {wait} from "../../utils/functions";
+import gameManager from "../manager/GameManager";
 
 export default class SplashscreenScene extends Phaser.Scene {
   constructor() {
@@ -11,7 +13,9 @@ export default class SplashscreenScene extends Phaser.Scene {
     console.log('Preload SPLASHSCREEN')
   }
 
-  public init(): void {
+  public async init() {
     console.log('init SPLASHSCREEN')
+    await wait(3000)
+    gameManager.loadHomescreen()
   }
 }

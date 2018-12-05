@@ -1,11 +1,12 @@
 import {
-  BootScene,
-  SplashscreenScene,
   ActionFirstGameScene,
   ActionSecondGameScene,
   ActionThirdGameScene,
+  BootScene,
   ElevatorFirstGameScene,
-  ElevatorSecondGameScene
+  ElevatorSecondGameScene,
+  HomescreenScene,
+  SplashscreenScene,
 } from '../game/scenes'
 
 export const gameConfig: GameConfig = {
@@ -33,9 +34,12 @@ export const gameConfig: GameConfig = {
   scene: [
     BootScene,
     SplashscreenScene,
+    HomescreenScene,
+
     ActionFirstGameScene,
     ActionSecondGameScene,
     ActionThirdGameScene,
+
     ElevatorFirstGameScene,
     ElevatorSecondGameScene
   ],

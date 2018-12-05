@@ -3,6 +3,7 @@ import {GameCategory} from "./enums";
 export const scenesKeys = {
   Boot: 'BootScene',
   Splashscreen: 'SplashscreenScene',
+  Homescreen: 'HomescreenScene',
 
   ActionFirstGame: 'ActionFirstGameScene',
   ActionSecondGame: 'ActionSecondGameScene',

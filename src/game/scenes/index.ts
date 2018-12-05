@@ -1,5 +1,6 @@
 export {default as BootScene} from './BootScene'
 export {default as SplashscreenScene} from './SplashscreenScene'
+export {default as HomescreenScene} from './HomescreenScene'
 
 export {default as ActionFirstGameScene} from './action/ActionFirstGameScene'
 export {default as ActionSecondGameScene} from './action/ActionSecondGameScene'
