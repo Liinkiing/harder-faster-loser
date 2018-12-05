@@ -14,6 +14,7 @@ export default class SpamGameScene extends BaseScene {
   }
 
   public preload(): void {
+
   }
 
   public create(): void {
