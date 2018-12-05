@@ -1,21 +1,19 @@
 import React, {FunctionComponent, ReactNode} from 'react'
 import Draggable from 'react-draggable';
 import {observer} from "mobx-react-lite";
-import {ForceThemeProps} from "../../../utils/interfaces";
+import {ForceThemeProps, PositionneableProps} from "../../../utils/interfaces";
 import {useClassTheme} from "../../../utils/hooks";
 
 interface Props {
-  x?: number,
-  y?: number,
-  zIndex?: number,
   children?: ReactNode | string,
   center?: boolean,
   rounded?: boolean,
   title?: string,
 }
 
-const DebugContainer: FunctionComponent<Props & ForceThemeProps> = (props) => {
-  const { title, children, center, rounded, forceTheme, x, y, zIndex } = props
+const DebugContainer: FunctionComponent<Props & ForceThemeProps & PositionneableProps> = (props) => {
+  const {title, children, center, rounded, forceTheme, x, y, zIndex, draggable} = props
+  const isDraggable = draggable !== undefined ? draggable : DebugContainer.defaultProps!.draggable
   const classNames = ['game-state-list', 'container']
   const themeClass = useClassTheme(forceTheme)
   if (themeClass) {
@@ -32,19 +30,27 @@ const DebugContainer: FunctionComponent<Props & ForceThemeProps> = (props) => {
     classNames.push('is-rounded')
   }
 
-  return (
-    <Draggable>
-      <section className={classNames.join(' ')} style={{left: x, top: y, zIndex }}>
-        {title && title !== "" && <h2 className="title">{title}</h2>}
-        {children}
-      </section>
-    </Draggable>
-  )
+  const section = <section className={classNames.join(' ')} style={{left: x, top: y, zIndex}}>
+    {title && title !== "" && <h2 className="title">{title}</h2>}
+    {children}
+  </section>
 
+  console.log(isDraggable)
+
+  if (isDraggable) {
+    return (
+      <Draggable>
+        {section}
+      </Draggable>
+    )
+  }
+
+  return section
 }
 
 DebugContainer.defaultProps = {
   center: false,
+  draggable: true,
   rounded: false
 }
 
