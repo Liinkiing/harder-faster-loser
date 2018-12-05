@@ -1,10 +1,11 @@
 import * as React from 'react';
+import {ChangeEvent, FunctionComponent} from 'react';
 import {observer} from "mobx-react-lite";
 import gameStore from "../../../store/GameStore";
 import {GameState} from "../../../utils/enums";
-import {ChangeEvent, FunctionComponent} from "react";
 import DebugContainer from "./DebugContainer";
 import gameManager from "../../../game/manager/GameManager";
+import {scenesKeys} from "../../../utils/constants";
 
 const GameDebugStateList: FunctionComponent = () => {
   const {state, changeState} = gameStore
@@ -20,6 +21,9 @@ const GameDebugStateList: FunctionComponent = () => {
         break;
       case GameState.Deathscreen:
         gameManager.loadDeathscreen()
+        break;
+      case GameState.Minigame:
+        gameManager.loadMinigame(scenesKeys.SpamGame)
         break;
       default:
         changeState(e.target.value as GameState)

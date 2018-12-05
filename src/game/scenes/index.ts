@@ -2,7 +2,7 @@ export {default as BootScene} from './BootScene'
 export {default as SplashscreenScene} from './SplashscreenScene'
 export {default as HomescreenScene} from './HomescreenScene'
 
-export {default as ActionFirstGameScene} from './action/ActionFirstGameScene'
+export {default as SpamGameScene} from './action/SpamGameScene'
 export {default as ActionSecondGameScene} from './action/ActionSecondGameScene'
 export {default as ActionThirdGameScene} from './action/ActionThirdGameScene'
 

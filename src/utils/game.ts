@@ -1,5 +1,5 @@
 import {
-  ActionFirstGameScene,
+  SpamGameScene,
   ActionSecondGameScene,
   ActionThirdGameScene,
   BootScene, DeathscreenScene,
@@ -36,7 +36,7 @@ export const gameConfig: GameConfig = {
     SplashscreenScene,
     HomescreenScene,
 
-    ActionFirstGameScene,
+    SpamGameScene,
     ActionSecondGameScene,
     ActionThirdGameScene,
 
