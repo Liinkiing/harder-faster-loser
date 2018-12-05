@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 
 export const useResize = (): {width: number, height: number} =>  {
   const [size, setSize] = useState({
@@ -19,4 +19,15 @@ export const useResize = (): {width: number, height: number} =>  {
   }, [window.innerWidth, window.innerHeight])
 
   return size
+}
+
+export const useKeyboardInput = (listener: (e: KeyboardEvent) => void) => {
+  useEffect(() => {
+    window.addEventListener('keydown', listener)
+
+    return () => {
+      window.removeEventListener('keydown', listener)
+    }
+  }, [])
+
 }
