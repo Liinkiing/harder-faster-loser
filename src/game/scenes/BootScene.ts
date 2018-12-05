@@ -1,18 +1,16 @@
-import minigameManager from "../manager/MinigameManager";
+import {scenesKeys} from "../../utils/constants";
+import gameManager from "../manager/GameManager";
+import BaseScene from "./BaseScene";
 
-export default class BootScene extends Phaser.Scene {
+export default class BootScene extends BaseScene {
+
   constructor() {
     super({
-      key: "BootScene"
+      key: scenesKeys.Boot
     });
   }
 
   public preload(): void {
-    console.log('Preload BootScene')
-  }
-
-  public init(): void {
-    console.log('init BootScene')
-    // this.scene.start(minigameManager.pickNextGameKey())
+    gameManager.loadSplashscreen()
   }
 }
