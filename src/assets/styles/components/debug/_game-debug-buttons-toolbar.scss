@@ -1,0 +1,12 @@
+.game-debug-buttons-toolbar {
+  position: absolute;
+  top: $debug-container-margin;
+  right: $debug-container-margin;
+  display: flex;
+  & > * {
+    margin-right: 20px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

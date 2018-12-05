@@ -1,0 +1,11 @@
+.game-debug-toggle-theme-button {
+  position: absolute;
+  top: $debug-container-margin;
+  right: $debug-container-margin;
+  color: #26292d;
+  & i.icon.debug {
+    background: url("~/images/icons/debug.png") no-repeat;
+    height: 50px;
+    width: 50px;
+  }
+}

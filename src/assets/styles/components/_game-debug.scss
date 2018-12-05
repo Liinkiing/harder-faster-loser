@@ -1,0 +1,20 @@
+.game-debug {
+  user-select: none;
+  z-index: 9999;
+  background: rgba(255, 44, 52, 0.22);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & h1 {
+    position: absolute;
+    bottom: $debug-container-margin;
+    right: $debug-container-margin;
+  }
+
+  & .react-draggable-dragging {
+    z-index: 9000;
+  }
+
+}

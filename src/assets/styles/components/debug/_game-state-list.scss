@@ -1,0 +1,17 @@
+.game-state-list {
+  &.container {
+    position: absolute;
+    top: $debug-container-margin;
+    left: $debug-container-margin;
+    max-width: $game-state-list-container-width;
+  }
+  &--item {
+    margin: 10px;
+    & input:checked + span {
+      color: red;
+    }
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
