@@ -12,7 +12,8 @@
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-scripts": "^2.1.1",
-    "react-spring": "^6.1.10"
+    "react-spring": "^6.1.10",
+    "ts-key-enum": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
