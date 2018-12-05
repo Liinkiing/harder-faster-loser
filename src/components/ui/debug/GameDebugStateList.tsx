@@ -12,7 +12,7 @@ const GameDebugStateList: FunctionComponent = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => changeState(e.target.value as GameState)
 
   return (
-    <DebugContainer title="Game state" theme="light">
+    <DebugContainer title="Game state">
       {availableStates.map(availableState => {
         return (
           <label key={availableState} className="game-state-list--item">
