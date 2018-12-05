@@ -17,4 +17,8 @@
       background-color: $debug-container-light-background;
     }
   }
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
 }
