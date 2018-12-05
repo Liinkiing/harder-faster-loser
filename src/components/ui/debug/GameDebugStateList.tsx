@@ -3,6 +3,7 @@ import {observer} from "mobx-react-lite";
 import gameStore from "../../../store/GameStore";
 import {GameState} from "../../../utils/enums";
 import {ChangeEvent, FunctionComponent} from "react";
+import DebugContainer from "./DebugContainer";
 
 const GameDebugStateList: FunctionComponent = () => {
   const {state, changeState} = gameStore
@@ -11,8 +12,7 @@ const GameDebugStateList: FunctionComponent = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => changeState(e.target.value as GameState)
 
   return (
-    <section className="game-state-list container is-dark with-title">
-      <h2 className="title">Game state</h2>
+    <DebugContainer title="Game state" theme="light">
       {availableStates.map(availableState => {
         return (
           <label key={availableState} className="game-state-list--item">
@@ -23,11 +23,11 @@ const GameDebugStateList: FunctionComponent = () => {
                    value={availableState}
                    checked={availableState === state}
                    onChange={handleInputChange}/>
-              <span>{availableState}</span>
+            <span>{availableState}</span>
           </label>
         )
       })}
-    </section>
+    </DebugContainer>
   )
 }
 

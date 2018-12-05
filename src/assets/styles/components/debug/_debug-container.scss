@@ -1,0 +1,20 @@
+.container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  &::before, &::after {
+    z-index: 0;
+  }
+
+  &.with-title > .title {
+    z-index: 1;
+    position: relative;
+  }
+
+  &:not(.is-dark) {
+    background: $debug-container-light-background;
+    color: #26292d;
+
+    &.with-title > .title {
+      background-color: $debug-container-light-background;
+    }
+  }
+}
