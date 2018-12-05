@@ -13,6 +13,7 @@ class GameManager {
   }
 
   public loadHomescreen = (): void => {
+    this.game.scene.remove(scenesKeys.SpamGame)
     this.game.scene.start(scenesKeys.Homescreen)
     gameStore.changeState(GameState.Homescreen)
   }
