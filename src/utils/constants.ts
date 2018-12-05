@@ -5,7 +5,7 @@ export const scenesKeys = {
   Splashscreen: 'SPLASHSCREEN_SCENE',
   Homescreen: 'HOMESCREEN_SCENE',
 
-  ActionFirstGame: 'ACTION_FIRST_GAME_SCENE',
+  SpamGame: 'SPAM_GAME_SCENE',
   ActionSecondGame: 'ACTION_SECOND_GAME_SCENE',
   ActionThirdGame: 'ACTION_THIRD_GAME_SCENE',
 

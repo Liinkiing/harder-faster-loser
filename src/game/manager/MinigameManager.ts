@@ -12,7 +12,7 @@ class MinigameManager {
   private lastGame?: string
 
   private games: IGames = {
-    [GameCategory.Action]: new List<string>([scenesKeys.ActionFirstGame, scenesKeys.ActionSecondGame, scenesKeys.ActionThirdGame]),
+    [GameCategory.Action]: new List<string>([scenesKeys.SpamGame, scenesKeys.ActionSecondGame, scenesKeys.ActionThirdGame]),
     [GameCategory.Waiting]: new List<string>([scenesKeys.ElevatorFirstGame, scenesKeys.ElevatorSecondGame])
   }
 
