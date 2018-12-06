@@ -13,6 +13,14 @@ export interface PositionneableProps {
   draggable?: boolean,
 }
 
+export interface ContainerConstructor {
+  scene: Phaser.Scene,
+  spamTexture: string,
+  x?: number,
+  y?: number,
+  children?: Phaser.GameObjects.GameObject[]
+}
+
 export interface SpriteConstructor {
   scene: Phaser.Scene,
   x: number,

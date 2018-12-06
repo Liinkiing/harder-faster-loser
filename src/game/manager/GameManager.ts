@@ -1,7 +1,8 @@
 import {gameConfig} from "../../utils/game";
 import gameStore from "../../store/GameStore";
-import {GameState} from "../../utils/enums";
+import {GameEvents, GameState} from "../../utils/enums";
 import {scenesKeys} from "../../utils/constants";
+import {Emitter} from "../../index";
 
 class GameManager {
 
@@ -31,7 +32,7 @@ class GameManager {
     this.game.scene.scenes
       .filter(scene => scene.scene.key !== key)
       .forEach(scene => scene.scene.stop(scene.scene.key))
-
+    Object.keys(GameEvents).forEach(event => { Emitter.removeAllListeners(GameEvents[event]) })
     console.log('STARTED ' + key)
     this.game.scene.start(key, optionnalData)
     gameStore.changeState(key as GameState)
