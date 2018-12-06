@@ -1,3 +1,5 @@
+import {GameDebugTheme} from "./enums";
+
 export interface GameSettings {
   volume: number
 }
@@ -29,14 +31,3 @@ export interface SpriteConstructor {
   frame?: string | integer
 }
 
-export interface ContainerConstructor {
-  scene: Phaser.Scene,
-  x: number,
-  y: number,
-  children: any
-}
-
-export enum GameDebugTheme {
-  Light = "LIGHT",
-  Dark = "DARK"
-}
