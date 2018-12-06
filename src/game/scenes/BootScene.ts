@@ -10,8 +10,7 @@ export default class BootScene extends BaseScene {
     });
   }
 
-  public create(): void {
+  public preload(): void {
     gameManager.loadSplashscreen()
   }
-
 }

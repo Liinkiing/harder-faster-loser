@@ -8,33 +8,23 @@ class GameManager {
   public game: Phaser.Game = new Phaser.Game(gameConfig)
 
   public loadSplashscreen = (): void => {
-    this.startScene(scenesKeys.Splashscreen)
+    this.game.scene.start(scenesKeys.Splashscreen)
     gameStore.changeState(GameState.Splashscreen)
   }
 
   public loadHomescreen = (): void => {
-    this.startScene(scenesKeys.Homescreen)
+    this.game.scene.start(scenesKeys.Homescreen)
     gameStore.changeState(GameState.Homescreen)
   }
 
   public loadMinigame = (minigameKey: string): void => {
-    this.startScene(minigameKey)
+    this.game.scene.start(minigameKey)
     gameStore.changeState(GameState.Minigame)
   }
 
   public loadDeathscreen = (): void => {
-    this.startScene(scenesKeys.Deathscreen)
+    this.game.scene.start(scenesKeys.Deathscreen)
     gameStore.changeState(GameState.Deathscreen)
-  }
-
-  public startScene = (key: string, optionnalData?: any): void => {
-    this.game.scene.scenes
-      .filter(scene => scene.scene.key !== key)
-      .forEach(scene => scene.scene.stop(scene.scene.key))
-
-    console.log('STARTED ' + key)
-    this.game.scene.start(key, optionnalData)
-    gameStore.changeState(key as GameState)
   }
 
 }
