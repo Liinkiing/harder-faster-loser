@@ -29,7 +29,7 @@ export default class SpamGameScene extends BaseScene {
     this.load.image('close', '/assets/sprites/spam-game/CLOSE.png')
   }
 
-  public create() {
+  public create(): void {
     super.create()
     const availablesSpam = new List<string>(["sp_1", "sp_2", "sp_3", "sp_4_1", "sp_5_1", "sp_6_1"])
     this.scene.scene.time.addEvent({
