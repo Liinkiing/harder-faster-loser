@@ -60100,7 +60100,7 @@ declare namespace Phaser {
             /**
              * The array in which all of the scenes are kept.
              */
-            scenes: any[];
+            scenes: Phaser.Scene[];
 
             /**
              * Is the Scene Manager actively processing the Scenes list?
