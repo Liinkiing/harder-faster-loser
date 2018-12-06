@@ -13,6 +13,21 @@ export interface PositionneableProps {
   draggable?: boolean,
 }
 
+export interface SpriteConstructor {
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  texture: string,
+  frame?: string | integer
+}
+
+export interface ContainerConstructor {
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  children: any
+}
+
 export enum GameDebugTheme {
   Light = "LIGHT",
   Dark = "DARK"
