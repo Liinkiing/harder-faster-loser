@@ -1,31 +1,41 @@
 import {gameConfig} from "../../utils/game";
 import gameStore from "../../store/GameStore";
-import {GameState} from "../../utils/enums";
+import {GameEvents, GameState} from "../../utils/enums";
 import {scenesKeys} from "../../utils/constants";
+import {Emitter} from "../../index";
 
 class GameManager {
 
   public game: Phaser.Game = new Phaser.Game(gameConfig)
 
   public loadSplashscreen = (): void => {
-    this.game.scene.start(scenesKeys.Splashscreen)
+    this.startScene(scenesKeys.Splashscreen)
     gameStore.changeState(GameState.Splashscreen)
   }
 
   public loadHomescreen = (): void => {
-    this.game.scene.remove(scenesKeys.SpamGame)
-    this.game.scene.start(scenesKeys.Homescreen)
+    this.startScene(scenesKeys.Homescreen)
     gameStore.changeState(GameState.Homescreen)
   }
 
   public loadMinigame = (minigameKey: string): void => {
-    this.game.scene.start(minigameKey)
+    this.startScene(minigameKey)
     gameStore.changeState(GameState.Minigame)
   }
 
   public loadDeathscreen = (): void => {
-    this.game.scene.start(scenesKeys.Deathscreen)
+    this.startScene(scenesKeys.Deathscreen)
     gameStore.changeState(GameState.Deathscreen)
+  }
+
+  public startScene = (key: string, optionnalData?: any): void => {
+    this.game.scene.scenes
+      .filter(scene => scene.scene.key !== key)
+      .forEach(scene => scene.scene.stop(scene.scene.key))
+    Object.keys(GameEvents).forEach(event => { Emitter.removeAllListeners(GameEvents[event]) })
+    console.log('STARTED ' + key)
+    this.game.scene.start(key, optionnalData)
+    gameStore.changeState(key as GameState)
   }
 
 }

@@ -15,7 +15,7 @@ export const gameConfig: GameConfig = {
   input: {
     gamepad: false,
     keyboard: true,
-    mouse: false,
+    mouse: true,
     touch: true,
   },
   physics: {

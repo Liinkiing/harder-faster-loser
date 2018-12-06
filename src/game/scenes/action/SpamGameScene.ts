@@ -1,18 +1,14 @@
-import { scenesKeys } from "../../../utils/constants";
+import {scenesKeys} from "../../../utils/constants";
 import BaseScene from "../BaseScene";
 import Spam from "../../objects/Spam";
-import { List } from "../../../utils/extensions";
-import { randomRange } from "../../../utils/functions";
-import gameStore from '../../../store/GameStore';
-import { useKeyboardInput } from "../../../utils/hooks";
-import { Key } from 'ts-key-enum';
-import SpamContent from '../../objects/SpamContent';
+import {List} from "../../../utils/extensions";
+import {randomRange} from "../../../utils/functions";
+import {GameEvents} from "../../../utils/enums";
+import {Emitter} from "../../../index";
 
 export default class SpamGameScene extends BaseScene {
 
-  public spams: Phaser.GameObjects.Container[] = new List<Phaser.GameObjects.Container>()
-  public spam?: Spam
-  public counter: number = 0
+  public spams: List<Spam> = new List<Spam>()
 
   constructor() {
     super({
@@ -26,48 +22,35 @@ export default class SpamGameScene extends BaseScene {
       '/assets/sprites/spam-game/pack.json',
       'preload'
     )
-
     this.load.image('close', '/assets/sprites/spam-game/CLOSE.png')
-    this.load.image('sprite', '/assets/sprites/spam-game/sp_1.png')
+    this.load.image('close_active', '/assets/sprites/spam-game/CLOSE_active.png')
   }
 
-  public create(): void {
+  public create() {
+    super.create()
+    Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
+      this.spams.remove(spam)
+    })
+    this.input.setGlobalTopOnly(true)
     const availablesSpam = new List<string>(["sp_1", "sp_2", "sp_3", "sp_4_1", "sp_5_1", "sp_6_1"])
-    
-    for (let i = 0; i < 10; i++) {
-      const handleTimout = () => {
-
-        const container = this.add.container(randomRange(0, window.innerWidth), randomRange(0, window.innerHeight)).setScale(0.5, 0.5)
-        const close = this.add.sprite(0, 0, 'close').setOrigin(0, 0)
-
-        const sprite = new SpamContent({
-          scene: this,
-          x: 0,
-          y: 0,
-          texture: availablesSpam.random()
-        })
-
-        container.add(sprite)
-        container.add(close)
-
-        if (container.x > (window.innerWidth - sprite.width/gameStore.ratioResolution)) {
-          container.x = container.x - sprite.width/gameStore.ratioResolution
-        }
-    
-        if (container.y > (window.innerHeight - sprite.height/gameStore.ratioResolution)) {
-          container.y = container.y - sprite.height/gameStore.ratioResolution
-        }
-        
-        this.spams.push(container)
-        
+    this.scene.scene.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: () => {
+        this.spams.push(
+          new Spam({
+            scene: this,
+            x: randomRange(0, window.innerWidth),
+            y: randomRange(0, window.innerHeight),
+            spamTexture: availablesSpam.random()
+          })
+        )
       }
-
-      setTimeout(handleTimout, i * 500)
-    }
+    })
   }
 
   public update(time: number, delta: number): void {
-    // this.spams.forEach(spam => spam.update(time, delta))
-
   }
+
+
 }
