@@ -60100,7 +60100,7 @@ declare namespace Phaser {
             /**
              * The array in which all of the scenes are kept.
              */
-            scenes: any[];
+            scenes: Phaser.Scene[];
 
             /**
              * Is the Scene Manager actively processing the Scenes list?
@@ -61178,6 +61178,7 @@ declare namespace Phaser {
          * @param delta The delta time in ms since the last frame. This is a smoothed and capped value based on the FPS rate.
          */
         update(time: number, delta: number): void;
+
 
     }
 

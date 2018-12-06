@@ -22,7 +22,7 @@ const GameDebugStateList: FunctionComponent = () => {
         gameManager.loadDeathscreen()
         break;
       default:
-        changeState(e.target.value as GameState)
+        gameManager.startScene(e.target.value)
     }
   }
 
