@@ -8,7 +8,7 @@ import DebugButton from "./DebugButton";
 import {GameDebugTheme} from "../../../utils/enums";
 
 const GameDebugToggleButton: FunctionComponent = () => {
-  const {debug, showDebug, hideDebug} = gameDebugStore
+  const { debug, showDebug, hideDebug } = gameDebugStore
 
   useKeyboardShortcuts([
     {
@@ -22,14 +22,13 @@ const GameDebugToggleButton: FunctionComponent = () => {
   ])
 
   return (
-    <DebugButton onClick={debug ? hideDebug : showDebug} forceTheme={GameDebugTheme.Light}>
-      {debug ? <i className="icon close"/> : <i className="icon debug"/> }
+    <DebugButton
+      onClick={debug ? hideDebug : showDebug}
+      forceTheme={GameDebugTheme.Light}
+    >
+      {debug ? <i className="icon close" /> : <i className="icon debug" />}
     </DebugButton>
   )
 }
 
-export default observer(
-  GameDebugToggleButton
-)
-
-
+export default observer(GameDebugToggleButton)

@@ -27,15 +27,11 @@ const Game: FunctionComponent = () => {
 
   return (
     <div id="game" className="game">
-      <GameDebugButtonsToolbar/>
-      <GameDebug visible={debug}/>
-      <GameUI/>
+      <GameDebugButtonsToolbar />
+      <GameDebug visible={debug} />
+      <GameUI />
     </div>
   )
 }
 
-export default observer(
-  Game
-)
-
-
+export default observer(Game)
