@@ -21,7 +21,7 @@ const Game: FunctionComponent = () => {
     gameManager.game.canvas.height = height
     gameManager.game.canvas.style.width = `${width}px`
     gameManager.game.canvas.style.height = `${height}px`
-    gameManager.game.canvas.style.filter = paused ? 'blur(20px)' : null
+    gameManager.game.canvas.style.filter = paused ? 'blur(20px) grayscale(80%)' : null
     gameManager.game.canvas.style.transform = paused ? 'scale(1.2)' : null
   }
 
