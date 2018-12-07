@@ -11,6 +11,10 @@ export enum GameState {
   Deathscreen = 'DEATHSCREEN'
 }
 
+export enum BaseEvents {
+  SceneCreated = 'SCENE_CREATED'
+}
+
 export enum GameEvents {
   SpamDestroyed = 'SPAM_DESTROYED'
 }

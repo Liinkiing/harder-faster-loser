@@ -30,7 +30,7 @@ const DebugContainer: FunctionComponent<Props & ForceThemeProps & Positionneable
     classNames.push('is-rounded')
   }
 
-  const section = <section className={classNames.join(' ')} style={{left: x, top: y, zIndex}}>
+  const section = <section className={classNames.join(' ')} style={{left: x, top: y, zIndex, position: 'fixed'}}>
     {title && title !== "" && <h2 className="title">{title}</h2>}
     {children}
   </section>

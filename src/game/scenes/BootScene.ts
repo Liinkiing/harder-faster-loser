@@ -11,6 +11,7 @@ export default class BootScene extends BaseScene {
   }
 
   public create(): void {
+    super.create()
     gameManager.loadMinigame(scenesKeys.SpamGame)
   }
 

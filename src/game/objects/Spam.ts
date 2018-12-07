@@ -1,6 +1,6 @@
 import {ContainerConstructor} from "../../utils/interfaces";
 import gameStore from '../../store/GameStore';
-import {Emitter} from "../../index";
+import {Emitter} from "../manager/GameManager";
 import {GameEvents} from "../../utils/enums";
 
 export default class Spam extends Phaser.GameObjects.Container  {

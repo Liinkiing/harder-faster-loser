@@ -1,3 +1,6 @@
+import {Emitter} from "../manager/GameManager";
+import {BaseEvents} from "../../utils/enums";
+
 export default class BaseScene extends Phaser.Scene {
 
   public init(): void {
@@ -11,6 +14,7 @@ export default class BaseScene extends Phaser.Scene {
 
   public create(): void {
     console.log(`create (${this.scene.key})`)
+    Emitter.emit(BaseEvents.SceneCreated, this)
   }
 
 

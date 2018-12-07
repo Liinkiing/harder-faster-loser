@@ -4,6 +4,7 @@
   "homepage": "http://liinkiing.github.io/harder-faster-looser",
   "private": true,
   "dependencies": {
+    "@types/styled-components": "^4.1.3",
     "events": "^3.0.0",
     "mobx": "^5.6.0",
     "mobx-react-lite": "^0.3.4",
@@ -15,6 +16,7 @@
     "react-draggable": "^3.0.5",
     "react-scripts": "^2.1.1",
     "react-spring": "^6.1.10",
+    "styled-components": "^4.1.2",
     "ts-key-enum": "^2.0.0"
   },
   "scripts": {

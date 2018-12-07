@@ -4,7 +4,7 @@ import Spam from "../../objects/Spam";
 import {List} from "../../../utils/extensions";
 import {randomRange} from "../../../utils/functions";
 import {GameEvents} from "../../../utils/enums";
-import {Emitter} from "../../../index";
+import {Emitter} from "../../manager/GameManager";
 
 export default class SpamGameScene extends BaseScene {
 

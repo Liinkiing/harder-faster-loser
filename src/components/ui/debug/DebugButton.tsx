@@ -36,7 +36,7 @@ const DebugButton: FunctionComponent<Props & ForceThemeProps & PositionneablePro
 
   const button = <button
     {...(onClick ? {onClick} : {})}
-    style={{left: x, top: y, zIndex, ...(x || y ? {position: 'absolute'} : {})}}
+    style={{left: x, top: y, zIndex, ...(x || y ? {position: 'fixed'} : {})}}
     className={classNames.join(' ')}>
     {render}
   </button>

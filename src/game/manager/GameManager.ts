@@ -1,12 +1,21 @@
 import {gameConfig} from "../../utils/game";
 import gameStore from "../../store/GameStore";
-import {GameEvents, GameState} from "../../utils/enums";
+import {BaseEvents, GameEvents, GameState} from "../../utils/enums";
 import {scenesKeys} from "../../utils/constants";
-import {Emitter} from "../../index";
+import {EventEmitter} from "events";
+
+export const Emitter = new EventEmitter()
 
 class GameManager {
 
   public game: Phaser.Game = new Phaser.Game(gameConfig)
+  public activeScene?: Phaser.Scene
+
+  constructor() {
+    Emitter.on(BaseEvents.SceneCreated, (scene: Phaser.Scene) => {
+      this.activeScene = scene
+    })
+  }
 
   public loadSplashscreen = (): void => {
     this.startScene(scenesKeys.Splashscreen)
@@ -35,7 +44,29 @@ class GameManager {
     Object.keys(GameEvents).forEach(event => { Emitter.removeAllListeners(GameEvents[event]) })
     console.log('STARTED ' + key)
     this.game.scene.start(key, optionnalData)
+    gameStore.resume()
     gameStore.changeState(key as GameState)
+  }
+
+  public pause = (): void => {
+    this.activeScene!.scene.pause()
+    gameStore.pause()
+  }
+
+  public resume = (): void => {
+    this.activeScene!.scene.resume()
+    gameStore.resume()
+  }
+
+  public togglePause = (): void => {
+    if (gameStore.paused) {
+      this.activeScene!.scene.resume()
+    } else {
+      this.activeScene!.scene.pause()
+    }
+
+    console.log('TOGGLE PAUSE')
+    gameStore.togglePause()
   }
 
 }
