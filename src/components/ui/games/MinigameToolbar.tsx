@@ -11,6 +11,7 @@ const Div = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  padding: 20px;
 `
 
 const MinigameToolbar: FunctionComponent = props => {
