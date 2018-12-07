@@ -1,25 +1,21 @@
-import {scenesKeys} from "../../utils/constants";
-import BaseScene from "./BaseScene";
+import { scenesKeys } from '../../utils/constants'
+import BaseScene from './BaseScene'
 
 export default class HomescreenScene extends BaseScene {
-
   constructor() {
     super({
-      key: scenesKeys.Homescreen
-    });
+      key: scenesKeys.Homescreen,
+    })
   }
 
   public create(): void {
     super.create()
     const graphics = this.add.graphics()
     graphics.fillStyle(0xff9933, 1)
-    graphics.fillRect(100,200,600,300)
-    graphics.fillRect(200,100,100,100)
-    this.add.text(220,110,this.scene.key)
+    graphics.fillRect(100, 200, 600, 300)
+    graphics.fillRect(200, 100, 100, 100)
+    this.add.text(220, 110, this.scene.key)
   }
 
-  public update(time: number, delta: number): void {
-  }
-
-
+  public update(time: number, delta: number): void {}
 }

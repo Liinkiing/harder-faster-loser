@@ -1,26 +1,27 @@
-import * as React from 'react';
-import GameDebugStateList from "./ui/debug/GameDebugStateList";
-import {FunctionComponent} from "react";
+import * as React from 'react'
+import GameDebugStateList from './ui/debug/GameDebugStateList'
+import { FunctionComponent } from 'react'
 
 interface Props {
   visible?: boolean
 }
 
-const GameDebug: FunctionComponent<Props> = (props) => {
+const GameDebug: FunctionComponent<Props> = props => {
   const { visible } = props
 
   return (
-    <div style={{display: visible ? 'block' : 'none'}} className="game-debug game-ui">
+    <div
+      style={{ display: visible ? 'block' : 'none' }}
+      className="game-debug game-ui"
+    >
       <h1>Debug interface</h1>
-      <GameDebugStateList/>
+      <GameDebugStateList />
     </div>
   )
 }
 
 GameDebug.defaultProps = {
-  visible: false
+  visible: false,
 }
 
 export default GameDebug
-
-

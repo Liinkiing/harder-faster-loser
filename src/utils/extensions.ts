@@ -6,7 +6,7 @@ export class List<T> extends Array<T> {
       super(0)
     }
   }
-  
+
   public random(): T {
     return this[Math.floor(Math.random() * this.length)]
   }

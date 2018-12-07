@@ -1,31 +1,40 @@
-import {GameCategory} from "../../utils/enums";
-import {categoriesProbability, scenesKeys} from "../../utils/constants";
-import {List} from "../../utils/extensions";
+import { GameCategory } from '../../utils/enums'
+import { categoriesProbability, scenesKeys } from '../../utils/constants'
+import { List } from '../../utils/extensions'
 
 interface IGames {
-  [category: string]: List<string>,
+  [category: string]: List<string>
 }
 
 class MinigameManager {
-
   public currentCategory: GameCategory = GameCategory.Action
   private lastGame?: string
 
   private games: IGames = {
-    [GameCategory.Action]: new List<string>([scenesKeys.SpamGame, scenesKeys.ActionSecondGame, scenesKeys.ActionThirdGame]),
-    [GameCategory.Waiting]: new List<string>([scenesKeys.ElevatorFirstGame, scenesKeys.ElevatorSecondGame])
+    [GameCategory.Action]: new List<string>([
+      scenesKeys.SpamGame,
+      scenesKeys.ActionSecondGame,
+      scenesKeys.ActionThirdGame,
+    ]),
+    [GameCategory.Waiting]: new List<string>([
+      scenesKeys.ElevatorFirstGame,
+      scenesKeys.ElevatorSecondGame,
+    ]),
   }
 
   private playedGames: IGames = {
     [GameCategory.Action]: new List<string>(),
-    [GameCategory.Waiting]: new List<string>()
+    [GameCategory.Waiting]: new List<string>(),
   }
 
   public pickNextGameKey(): string {
-    let selectedCategory: GameCategory;
-    selectedCategory = this.pickRandomCategory(Math.random());
+    let selectedCategory: GameCategory
+    selectedCategory = this.pickRandomCategory(Math.random())
 
-    if (this.currentCategory === GameCategory.Waiting && selectedCategory === GameCategory.Waiting) {
+    if (
+      this.currentCategory === GameCategory.Waiting &&
+      selectedCategory === GameCategory.Waiting
+    ) {
       while (selectedCategory === GameCategory.Waiting) {
         selectedCategory = this.pickRandomCategory(Math.random())
       }
@@ -34,7 +43,6 @@ class MinigameManager {
     this.currentCategory = selectedCategory
 
     return this.pickGameKey(selectedCategory)
-
   }
 
   public pickGameKey(category: GameCategory): string {
@@ -65,17 +73,17 @@ class MinigameManager {
   private pickRandomCategory(random: number): GameCategory {
     if (random < categoriesProbability[GameCategory.Waiting]) {
       return GameCategory.Waiting
-    } else if (random >= categoriesProbability[GameCategory.Waiting] && categoriesProbability[GameCategory.Action]) {
+    } else if (
+      random >= categoriesProbability[GameCategory.Waiting] &&
+      categoriesProbability[GameCategory.Action]
+    ) {
       return GameCategory.Action
     }
 
     return GameCategory.Action
   }
-
 }
 
 const minigameManager = new MinigameManager()
 
 export default minigameManager
-
-

@@ -1,4 +1,4 @@
-import {GameCategory} from "./enums";
+import { GameCategory } from './enums'
 
 export const scenesKeys = {
   Boot: 'BOOT_SCENE',
@@ -14,7 +14,7 @@ export const scenesKeys = {
 
   PostMinigameScene: 'POST_MINIGAME_SCENE',
 
-  Deathscreen: 'DEATHSCREEN_SCENE'
+  Deathscreen: 'DEATHSCREEN_SCENE',
 }
 
 export const categoriesProbability = {

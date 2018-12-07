@@ -1,43 +1,37 @@
-import React, {FunctionComponent} from 'react'
-import {observer} from "mobx-react-lite";
-import gameStore from "../../store/GameStore";
-import {GameState} from "../../utils/enums";
-import HomescreenUI from "./HomescreenUI";
-import SplashscreenUI from "./SplashscreenUI";
-import MinigameUI from "./MinigameUI";
-import PostMinigameUI from "./PostMinigameUI";
-import DeathscreenUI from "./DeathscreenUI";
+import React, { FunctionComponent } from 'react'
+import { observer } from 'mobx-react-lite'
+import gameStore from '../../store/GameStore'
+import { GameState } from '../../utils/enums'
+import HomescreenUI from './HomescreenUI'
+import SplashscreenUI from './SplashscreenUI'
+import MinigameUI from './MinigameUI'
+import PostMinigameUI from './PostMinigameUI'
+import DeathscreenUI from './DeathscreenUI'
 
 const GameUI: FunctionComponent = () => {
-  const {state} = gameStore
+  const { state } = gameStore
 
-  let UIComponent = <SplashscreenUI/>
+  let UIComponent = <SplashscreenUI />
 
   switch (state) {
     case GameState.Splashscreen:
-      UIComponent = <SplashscreenUI/>
-      break;
+      UIComponent = <SplashscreenUI />
+      break
     case GameState.Homescreen:
-      UIComponent = <HomescreenUI/>
-      break;
+      UIComponent = <HomescreenUI />
+      break
     case GameState.Minigame:
-      UIComponent = <MinigameUI/>
-      break;
+      UIComponent = <MinigameUI />
+      break
     case GameState.PostMinigame:
-      UIComponent = <PostMinigameUI/>
-      break;
+      UIComponent = <PostMinigameUI />
+      break
     case GameState.Deathscreen:
-      UIComponent = <DeathscreenUI/>
-      break;
+      UIComponent = <DeathscreenUI />
+      break
   }
 
-  return (
-    <div className="game-ui">
-      {UIComponent}
-    </div>
-  )
+  return <div className="game-ui">{UIComponent}</div>
 }
 
-export default observer(
-  GameUI
-)
+export default observer(GameUI)

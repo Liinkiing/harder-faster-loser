@@ -7,10 +7,9 @@ import GameDebugTogglePauseButton from "./GameDebugTogglePauseButton";
 const GameDebugButtonsToolbar: FunctionComponent = () => (
   <div className="game-debug-buttons-toolbar">
     <GameDebugTogglePauseButton/>
-    <GameDebugToggleThemeButton/>
-    <GameDebugToggleButton/>
+    <GameDebugToggleThemeButton />
+    <GameDebugToggleButton />
   </div>
 )
 
 export default GameDebugButtonsToolbar
-

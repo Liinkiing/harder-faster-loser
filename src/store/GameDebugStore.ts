@@ -2,7 +2,6 @@ import {action, computed, observable} from "mobx";
 import {GameDebugTheme} from "../utils/enums";
 
 class GameDebugStore {
-
   @observable public debug: boolean = false
   @observable public theme: GameDebugTheme = GameDebugTheme.Dark
 
@@ -19,9 +18,10 @@ class GameDebugStore {
   }
 
   @action public toggleTheme = (): void => {
-    this.theme = this.theme === GameDebugTheme.Dark ?
-      GameDebugTheme.Light :
-      GameDebugTheme.Dark
+    this.theme =
+      this.theme === GameDebugTheme.Dark
+        ? GameDebugTheme.Light
+        : GameDebugTheme.Dark
   }
 
   @computed get isDarkTheme(): boolean {
@@ -33,11 +33,10 @@ class GameDebugStore {
   }
 
   @computed get otherThemeName(): string {
-    return this.theme === GameDebugTheme.Dark ?
-      GameDebugTheme.Light :
-      GameDebugTheme.Dark
+    return this.theme === GameDebugTheme.Dark
+      ? GameDebugTheme.Light
+      : GameDebugTheme.Dark
   }
-
 }
 
 const gameDebugStore = new GameDebugStore()
