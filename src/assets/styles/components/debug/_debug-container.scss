@@ -4,6 +4,12 @@
     z-index: 0;
   }
 
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(100%);
+  }
+
   &.with-title > .title {
     z-index: 1;
     position: relative;

@@ -6,31 +6,23 @@ import { useClassTheme } from '../../../utils/hooks'
 
 interface Props {
   children?: ReactNode | string
+  disabled?: boolean,
   center?: boolean
   rounded?: boolean
   title?: string
 }
 
-const DebugContainer: FunctionComponent<
-  Props & ForceThemeProps & PositionneableProps
-> = props => {
-  const {
-    title,
-    children,
-    center,
-    rounded,
-    forceTheme,
-    x,
-    y,
-    zIndex,
-    draggable,
-  } = props
-  const isDraggable =
-    draggable !== undefined ? draggable : DebugContainer.defaultProps!.draggable
+const DebugContainer: FunctionComponent<Props & ForceThemeProps & PositionneableProps> = (props) => {
+  const {title, children, center, rounded, forceTheme, x, y, zIndex, draggable, disabled} = props
+  const isDraggable = draggable !== undefined ? draggable : DebugContainer.defaultProps!.draggable
   const classNames = ['game-state-list', 'container']
   const themeClass = useClassTheme(forceTheme)
   if (themeClass) {
     classNames.push(themeClass)
+  }
+
+  if(disabled) {
+    classNames.push('disabled')
   }
 
   if (title && title !== '') {
@@ -63,6 +55,7 @@ const DebugContainer: FunctionComponent<
 DebugContainer.defaultProps = {
   center: false,
   draggable: true,
+  disabled: false,
   rounded: false,
 }
 
