@@ -1,5 +1,10 @@
 import {GameDebugTheme} from "./enums";
 
+export interface KeyboardShortcut {
+  keys: string[],
+  action: () => void
+}
+
 export interface GameSettings {
   volume: number
 }
