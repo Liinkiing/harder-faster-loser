@@ -4,32 +4,32 @@
       {
         "type": "image",
         "key": "sp_1",
-        "url": "/assets/sprites/spam-game/sp_1.png"
+        "url": "/static/assets/sprites/spam-game/sp_1.png"
       },
       {
         "type": "image",
         "key": "sp_2",
-        "url": "/assets/sprites/spam-game/sp_2.png"
+        "url": "/static/assets/sprites/spam-game/sp_2.png"
       },
       {
         "type": "image",
         "key": "sp_3",
-        "url": "/assets/sprites/spam-game/sp_3.png"
+        "url": "/static/assets/sprites/spam-game/sp_3.png"
       },
       {
         "type": "image",
         "key": "sp_4_1",
-        "url": "/assets/sprites/spam-game/sp_4_1.png"
+        "url": "/static/assets/sprites/spam-game/sp_4_1.png"
       },
       {
         "type": "image",
         "key": "sp_5_1",
-        "url": "/assets/sprites/spam-game/sp_5_1.png"
+        "url": "/static/assets/sprites/spam-game/sp_5_1.png"
       },
       {
         "type": "image",
         "key": "sp_6_1",
-        "url": "/assets/sprites/spam-game/sp_6_1.png"
+        "url": "/static/assets/sprites/spam-game/sp_6_1.png"
       }
     ]
   }
