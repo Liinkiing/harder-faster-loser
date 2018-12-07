@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react'
+import MinigameToolbar from './games/MinigameToolbar'
 
 const MinigameUI: FunctionComponent = () => {
   return (
     <div className="minigame-ui">
-      <h1>Je suis l'ui du mini jeu</h1>
+      <MinigameToolbar />
     </div>
   )
 }

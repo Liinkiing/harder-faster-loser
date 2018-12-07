@@ -12,14 +12,15 @@ export enum GameState {
 }
 
 export enum BaseEvents {
-  SceneCreated = 'SCENE_CREATED'
+  SceneInit = 'SCENE_INIT',
+  SceneCreated = 'SCENE_CREATED',
 }
 
 export enum GameEvents {
-  SpamDestroyed = 'SPAM_DESTROYED'
+  SpamDestroyed = 'SPAM_DESTROYED',
 }
 
 export enum GameDebugTheme {
-  Light = "LIGHT",
-  Dark = "DARK"
+  Light = 'LIGHT',
+  Dark = 'DARK',
 }

@@ -14,7 +14,7 @@ class GameManager {
   public gameFader?: HTMLDivElement
 
   constructor() {
-    Emitter.on(BaseEvents.SceneCreated, (scene: Phaser.Scene) => {
+    Emitter.on(BaseEvents.SceneInit, (scene: Phaser.Scene) => {
       this.activeScene = scene
     })
   }
@@ -36,7 +36,6 @@ class GameManager {
 
   public loadDeathscreen = async () => {
     await this.startScene(scenesKeys.Deathscreen)
-    gameStore.changeState(GameState.Deathscreen)
   }
 
   public startScene = async (key: string, optionnalData?: any) => {
@@ -63,16 +62,25 @@ class GameManager {
   }
 
   public pause = (): void => {
+    if (!this.activeScene) {
+      return
+    }
     this.activeScene!.scene.pause()
     gameStore.pause()
   }
 
   public resume = (): void => {
+    if (!this.activeScene) {
+      return
+    }
     this.activeScene!.scene.resume()
     gameStore.resume()
   }
 
   public togglePause = (): void => {
+    if (!this.activeScene) {
+      return
+    }
     if (gameStore.paused) {
       this.activeScene!.scene.resume()
     } else {
