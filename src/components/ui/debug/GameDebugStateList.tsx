@@ -1,40 +1,38 @@
-import * as React from 'react'
-import { ChangeEvent, FunctionComponent } from 'react'
-import { observer } from 'mobx-react-lite'
-import gameStore from '../../../store/GameStore'
-import { GameState } from '../../../utils/enums'
-import DebugContainer from './DebugContainer'
-import gameManager from '../../../game/manager/GameManager'
-import { scenesKeys } from '../../../utils/constants'
+import * as React from 'react';
+import {ChangeEvent, FunctionComponent} from 'react';
+import {observer} from "mobx-react-lite";
+import gameStore from "../../../store/GameStore";
+import {GameState} from "../../../utils/enums";
+import DebugContainer from "./DebugContainer";
+import gameManager from "../../../game/manager/GameManager";
+import {scenesKeys} from "../../../utils/constants";
 
 const GameDebugStateList: FunctionComponent = () => {
-  const { state, changeState } = gameStore
-  const availableStates = Object.keys(GameState).map(
-    gameState => GameState[gameState]
-  )
+  const {state, transitionning} = gameStore
+  const availableStates = Object.keys(GameState).map(gameState => GameState[gameState])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.value as GameState) {
       case GameState.Splashscreen:
         gameManager.loadSplashscreen()
-        break
+        break;
       case GameState.Homescreen:
         gameManager.loadHomescreen()
-        break
+        break;
       case GameState.Deathscreen:
         gameManager.loadDeathscreen()
-        break
+        break;
       case GameState.Minigame:
         gameManager.loadMinigame(scenesKeys.SpamGame)
-        break
+        break;
       default:
-        changeState(e.target.value as GameState)
+        gameManager.startScene(e.target.value as GameState)
     }
   }
 
   return (
     <>
-      <DebugContainer x={10} y={10} title="Game state">
+      <DebugContainer disabled={transitionning} x={10} y={10} title="Game state">
         {availableStates.map(availableState => {
           return (
             <label key={availableState} className="game-state-list--item">

@@ -76203,25 +76203,25 @@ declare namespace Phaser {
        * Create a Tween Timeline and return it, but do NOT add it to the active or pending Tween lists.
        * @param config [description]
        */
-      createTimeline(config: object): Phaser.Tweens.Timeline
+      createTimeline(config: TweenConfig): Phaser.Tweens.Timeline
 
       /**
        * Create a Tween Timeline and add it to the active Tween list/
        * @param config [description]
        */
-      timeline(config: object): Phaser.Tweens.Timeline
+      timeline(config: TweenConfig): Phaser.Tweens.Timeline
 
       /**
        * Create a Tween and return it, but do NOT add it to the active or pending Tween lists.
        * @param config [description]
        */
-      create(config: object): Phaser.Tweens.Tween
+      create(config: TweenConfig): Phaser.Tweens.Tween
 
       /**
        * Create a Tween and add it to the active Tween list.
        * @param config [description]
        */
-      add(config: object): Phaser.Tweens.Tween
+      add(config: TweenConfig): Phaser.Tweens.Tween
 
       /**
        * Add an existing tween into the active Tween list.

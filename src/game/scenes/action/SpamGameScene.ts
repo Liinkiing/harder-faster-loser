@@ -28,6 +28,7 @@ export default class SpamGameScene extends BaseScene {
 
   public create() {
     super.create()
+    this.spams = new List<Spam>()
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
     })
