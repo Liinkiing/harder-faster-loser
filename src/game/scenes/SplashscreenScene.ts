@@ -12,6 +12,7 @@ export default class SplashscreenScene extends BaseScene {
   }
 
   public create(): void {
+    super.create()
     console.log(`create (${this.scene.key})`)
     const graphics = this.add.graphics()
     graphics.fillStyle(0xff3300, 1)

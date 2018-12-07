@@ -4,9 +4,6 @@ import App from './App';
 import './assets/styles/app.scss';
 import registerServiceWorker from './registerServiceWorker';
 import './utils/extensions'
-import {EventEmitter} from "events";
-
-export const Emitter = new EventEmitter()
 
 ReactDOM.render(
   <App/>,

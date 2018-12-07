@@ -10,6 +10,7 @@ export default class HomescreenScene extends BaseScene {
   }
 
   public create(): void {
+    super.create()
     const graphics = this.add.graphics()
     graphics.fillStyle(0xff9933, 1)
     graphics.fillRect(100,200,600,300)
