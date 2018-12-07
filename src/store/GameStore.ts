@@ -8,6 +8,7 @@ class GameStore {
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public ratioResolution: number = 3
+  @observable public transitionning: boolean = false
 
   @action public changeState = (newState: GameState): void => {
     this.state = newState
@@ -22,16 +23,38 @@ class GameStore {
   }
 
   @action public togglePause = (): void => {
+    if (this.transitionning) {
+      return;
+    }
     this.paused = !this.paused
   }
 
   @action public pause = (): void => {
+    if (this.transitionning) {
+      return;
+    }
     this.paused = true
   }
 
   @action public resume = (): void => {
+    if (this.transitionning) {
+      return;
+    }
     this.paused = false
   }
+
+  @action public startTransitionning = (): void => {
+    this.transitionning = true
+  }
+
+  @action public stopTransitionning = (): void => {
+    this.transitionning = false
+  }
+
+  @action public toggleTransition = (): void => {
+    this.transitionning = !this.transitionning
+  }
+
 
 }
 
