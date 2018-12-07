@@ -3,7 +3,7 @@ import {FunctionComponent} from 'react';
 import {observer} from "mobx-react-lite";
 import DebugButton from "./DebugButton";
 import PauseIcon from "../icons/PauseIcon";
-import {GameDebugTheme} from "../../../utils/interfaces";
+import {GameDebugTheme} from "../../../utils/enums";
 import gameStore from "../../../store/GameStore";
 import PlayIcon from "../icons/PlayIcon";
 import gameManager from "../../../game/manager/GameManager";
