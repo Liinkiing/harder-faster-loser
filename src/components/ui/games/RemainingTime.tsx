@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import gameManager from '../../../game/manager/GameManager'
+import gameManager, { Emitter } from '../../../game/manager/GameManager'
+import { GameEvents } from '../../../utils/enums'
 
 const ProgressOuter = styled.div`
   width: 100%;
@@ -36,6 +37,7 @@ const RemainingTime: FunctionComponent<Props> = props => {
 
   if (remaining >= maxDuration!) {
     gameManager.activeScene!.time.removeAllEvents()
+    Emitter.emit(GameEvents.RemainingTimeOver)
   }
 
   const onClick = () => {

@@ -51,6 +51,7 @@ class GameManager {
         .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(key as GameState)
+      gameStore.regenerateUiKey()
       await disappear(this.gameFader)
       gameStore.stopTransitionning()
       gameStore.resume()
@@ -75,6 +76,13 @@ class GameManager {
     }
     this.activeScene!.scene.resume()
     gameStore.resume()
+  }
+
+  public restartActiveScene = (data?: object): void => {
+    if (this.activeScene) {
+      this.activeScene.scene.restart(data)
+      gameStore.regenerateUiKey()
+    }
   }
 
   public togglePause = (): void => {
