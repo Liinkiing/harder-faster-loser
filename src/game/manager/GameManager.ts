@@ -38,6 +38,31 @@ class GameManager {
     gameStore.changeState(key as GameState)
   }
 
+  public pause = (): void => {
+    this.game.scene.scenes
+      .forEach(scene => scene.scene.pause(scene.scene.key))
+    gameStore.pause()
+  }
+
+  public resume = (): void => {
+    this.game.scene.scenes
+      .forEach(scene => scene.scene.resume(scene.scene.key))
+    gameStore.resume()
+  }
+
+  public togglePause = (): void => {
+    if (gameStore.paused) {
+      this.game.scene.scenes
+        .forEach(scene => scene.scene.resume(scene.scene.key))
+    } else {
+      this.game.scene.scenes
+        .forEach(scene => scene.scene.pause(scene.scene.key))
+    }
+
+    console.log('TOGGLE PAUSE')
+    gameStore.togglePause()
+  }
+
 }
 
 const gameManager = new GameManager()
