@@ -8,6 +8,7 @@
   align-items: center;
   background: white;
   color: #26292d;
+  box-shadow: $debug-element-box-shadow;
   &.is-dark {
     background: #26292d;
     color: whitesmoke;
