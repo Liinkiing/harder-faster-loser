@@ -1,6 +1,6 @@
 export enum GameCategory {
   Action = 'ACTION',
-  Waiting = 'WAITING'
+  Waiting = 'WAITING',
 }
 
 export enum GameState {
@@ -8,7 +8,7 @@ export enum GameState {
   Homescreen = 'HOMESCREEN',
   Minigame = 'MINIGAME',
   PostMinigame = 'POSTMINIGAME',
-  Deathscreen = 'DEATHSCREEN'
+  Deathscreen = 'DEATHSCREEN',
 }
 
 export enum BaseEvents {

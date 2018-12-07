@@ -7,7 +7,6 @@ import {EventEmitter} from "events";
 export const Emitter = new EventEmitter()
 
 class GameManager {
-
   public game: Phaser.Game = new Phaser.Game(gameConfig)
   public activeScene?: Phaser.Scene
 

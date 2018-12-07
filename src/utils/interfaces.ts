@@ -14,10 +14,10 @@ export interface ForceThemeProps {
 }
 
 export interface PositionneableProps {
-  x?: number,
-  y?: number,
-  zIndex?: number,
-  draggable?: boolean,
+  x?: number
+  y?: number
+  zIndex?: number
+  draggable?: boolean
 }
 
 export interface ContainerConstructor {
@@ -29,10 +29,9 @@ export interface ContainerConstructor {
 }
 
 export interface SpriteConstructor {
-  scene: Phaser.Scene,
-  x: number,
-  y: number,
-  texture: string,
+  scene: Phaser.Scene
+  x: number
+  y: number
+  texture: string
   frame?: string | integer
 }
-
