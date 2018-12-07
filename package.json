@@ -1,6 +1,7 @@
 {
   "name": "hfl",
   "version": "0.1.0",
+  "homepage": "http://liinkiing.github.io/harder-faster-looser",
   "private": true,
   "dependencies": {
     "events": "^3.0.0",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
@@ -28,6 +31,7 @@
     "@types/node": "^10.12.10",
     "@types/react": "^16.7.10",
     "@types/react-dom": "^16.0.11",
+    "gh-pages": "^2.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
