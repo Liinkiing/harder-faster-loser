@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import {GameDebugTheme} from "./interfaces";
 import gameDebugStore from "../store/GameDebugStore";
+import {GameDebugTheme} from "./enums";
 
 export const useResize = (): {width: number, height: number} =>  {
   const [size, setSize] = useState({

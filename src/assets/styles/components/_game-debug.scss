@@ -1,5 +1,5 @@
 .game-debug {
-  user-select: none;
+  pointer-events: all;
   z-index: 9999;
   background: rgba(255, 44, 52, 0.22);
   display: flex;

@@ -1,9 +1,10 @@
 import React, {FunctionComponent, MouseEventHandler, ReactNode} from 'react'
 import {observer} from "mobx-react-lite";
 import gameDebugStore from "../../../store/GameDebugStore";
-import {ForceThemeProps, GameDebugTheme, PositionneableProps} from "../../../utils/interfaces";
+import {ForceThemeProps, PositionneableProps} from "../../../utils/interfaces";
 import {useClassTheme} from "../../../utils/hooks";
 import Draggable from "react-draggable";
+import {GameDebugTheme} from "../../../utils/enums";
 
 type RenderProps = (theme: GameDebugTheme) => ReactNode;
 

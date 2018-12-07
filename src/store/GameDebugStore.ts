@@ -1,5 +1,5 @@
 import {action, computed, observable} from "mobx";
-import {GameDebugTheme} from "../utils/interfaces";
+import {GameDebugTheme} from "../utils/enums";
 
 class GameDebugStore {
 

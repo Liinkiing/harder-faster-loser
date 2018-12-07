@@ -10,3 +10,12 @@ export enum GameState {
   PostMinigame = 'POSTMINIGAME',
   Deathscreen = 'DEATHSCREEN'
 }
+
+export enum GameEvents {
+  SpamDestroyed = 'SPAM_DESTROYED'
+}
+
+export enum GameDebugTheme {
+  Light = "LIGHT",
+  Dark = "DARK"
+}

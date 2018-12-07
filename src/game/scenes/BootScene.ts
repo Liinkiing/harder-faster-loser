@@ -11,7 +11,7 @@ export default class BootScene extends BaseScene {
   }
 
   public create(): void {
-    gameManager.loadSplashscreen()
+    gameManager.loadMinigame(scenesKeys.SpamGame)
   }
 
 }

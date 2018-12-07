@@ -15,6 +15,13 @@ export class List<T> extends Array<T> {
     return this.find(item => item === searchedValue) !== undefined
   }
 
+  public remove(searchedValue: T): number {
+    const indexToRemove = this.indexOf(searchedValue)
+    this.splice(indexToRemove, 1)
+
+    return this.length
+  }
+
   public clear(): void {
     this.length = 0
   }
