@@ -11,6 +11,15 @@ export default class Spam extends Phaser.GameObjects.Container  {
   constructor(params: ContainerConstructor) {
     super(params.scene, params.x, params.y, params.children)
 
+    this.spamContent = this.createSpamContent(params.spamTexture)
+    this.add(this.spamContent)
+
+    this.closeIcon = this.createCloseIcon()
+    this.add(this.closeIcon)
+
+    this.width = this.spamContent.width
+    this.height = this.spamContent.height
+
     if (this.x > (window.innerWidth - this.width/gameStore.ratioResolution)) {
       this.x = this.x - this.width/gameStore.ratioResolution
     }
@@ -18,12 +27,6 @@ export default class Spam extends Phaser.GameObjects.Container  {
     if (this.y > (window.innerHeight - this.height/gameStore.ratioResolution)) {
       this.y = this.y - this.height/gameStore.ratioResolution
     }
-
-    this.spamContent = this.createSpamContent(params.spamTexture)
-    this.add(this.spamContent)
-
-    this.closeIcon = this.createCloseIcon()
-    this.add(this.closeIcon)
 
     params.scene.add.existing(this);
   }
