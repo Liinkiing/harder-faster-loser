@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameManager from '../../game/manager/GameManager'
+import { gameConfig } from '../../utils/game'
 
 interface Props {
   color?: string
@@ -40,7 +41,7 @@ const Transition: FunctionComponent<Props> = props => {
 }
 
 Transition.defaultProps = {
-  color: 'black',
+  color: gameConfig.fadeColor,
 }
 
 export default observer(Transition)

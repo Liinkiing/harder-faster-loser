@@ -21,6 +21,10 @@ class GameDebugStore {
     this.debug = this.debugToolbar
   }
 
+  @action public toggleDebug = (): void => {
+    this.debug = !this.debug
+  }
+
   @action public showDebug = (): void => {
     this.debug = true
   }

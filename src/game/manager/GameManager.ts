@@ -40,7 +40,7 @@ class GameManager {
 
   public startScene = async (
     key: string,
-    fade: boolean = false,
+    fade: boolean = gameConfig.fade,
     optionnalData?: any
   ) => {
     Object.keys(GameEvents).forEach(event => {
@@ -90,7 +90,10 @@ class GameManager {
     gameStore.resume()
   }
 
-  public restartActiveScene = (fade: boolean = false, data?: object): void => {
+  public restartActiveScene = (
+    fade: boolean = gameConfig.fade,
+    data?: object
+  ): void => {
     if (this.activeScene) {
       this.startScene(this.activeScene.scene.key, fade, data)
     }
