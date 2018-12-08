@@ -38,12 +38,16 @@ class GameManager {
     await this.startScene(scenesKeys.Deathscreen)
   }
 
-  public startScene = async (key: string, optionnalData?: any) => {
+  public startScene = async (
+    key: string,
+    fade: boolean = true,
+    optionnalData?: any
+  ) => {
     Object.keys(GameEvents).forEach(event => {
       Emitter.removeAllListeners(GameEvents[event])
     })
     console.log('STARTED ' + key)
-    if (this.gameFader) {
+    if (this.gameFader && fade) {
       gameStore.startTransitionning()
       await appear(this.gameFader)
       this.game.scene.scenes
@@ -52,13 +56,18 @@ class GameManager {
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(key as GameState)
       gameStore.regenerateUiKey()
-      await disappear(this.gameFader)
       gameStore.stopTransitionning()
-      gameStore.resume()
+      await disappear(this.gameFader)
+      if (gameStore.paused) {
+        gameStore.resume()
+      }
     } else {
       this.game.scene.start(key, optionnalData)
-      gameStore.resume()
       gameStore.changeState(key as GameState)
+      gameStore.regenerateUiKey()
+      if (gameStore.paused) {
+        gameStore.resume()
+      }
     }
   }
 
@@ -78,10 +87,9 @@ class GameManager {
     gameStore.resume()
   }
 
-  public restartActiveScene = (data?: object): void => {
+  public restartActiveScene = (fade: boolean = true, data?: object): void => {
     if (this.activeScene) {
-      this.activeScene.scene.restart(data)
-      gameStore.regenerateUiKey()
+      this.startScene(this.activeScene.scene.key, fade, data)
     }
   }
 
@@ -91,12 +99,13 @@ class GameManager {
     }
     if (gameStore.paused) {
       this.activeScene!.scene.resume()
+      gameStore.resume()
     } else {
       this.activeScene!.scene.pause()
+      gameStore.pause()
     }
 
     console.log('TOGGLE PAUSE')
-    gameStore.togglePause()
   }
 }
 

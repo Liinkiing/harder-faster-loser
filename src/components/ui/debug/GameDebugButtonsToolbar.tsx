@@ -1,15 +1,33 @@
-import * as React from 'react';
-import {FunctionComponent} from 'react';
-import GameDebugToggleButton from "./GameDebugToggleButton";
-import GameDebugToggleThemeButton from "./GameDebugToggleThemeButton";
-import GameDebugTogglePauseButton from "./GameDebugTogglePauseButton";
+import * as React from 'react'
+import { FunctionComponent } from 'react'
+import GameDebugToggleButton from './GameDebugToggleButton'
+import GameDebugToggleThemeButton from './GameDebugToggleThemeButton'
+import GameDebugTogglePauseButton from './GameDebugTogglePauseButton'
+import { useKeyboardShortcuts } from '../../../utils/hooks'
+import gameDebugStore from '../../../store/GameDebugStore'
+import { observer } from 'mobx-react-lite'
 
-const GameDebugButtonsToolbar: FunctionComponent = () => (
-  <div className="game-debug-buttons-toolbar">
-    <GameDebugTogglePauseButton/>
-    <GameDebugToggleThemeButton />
-    <GameDebugToggleButton />
-  </div>
-)
+const GameDebugButtonsToolbar: FunctionComponent = () => {
+  const { toggleDebugToolbar, debugToolbar } = gameDebugStore
 
-export default GameDebugButtonsToolbar
+  useKeyboardShortcuts([
+    {
+      keys: ['T'],
+      action: toggleDebugToolbar,
+    },
+  ])
+
+  if (!debugToolbar) {
+    return null
+  }
+
+  return (
+    <div className="game-debug-buttons-toolbar">
+      <GameDebugTogglePauseButton />
+      <GameDebugToggleThemeButton />
+      <GameDebugToggleButton />
+    </div>
+  )
+}
+
+export default observer(GameDebugButtonsToolbar)
