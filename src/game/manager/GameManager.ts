@@ -40,7 +40,7 @@ class GameManager {
 
   public startScene = async (
     key: string,
-    fade: boolean = true,
+    fade: boolean = false,
     optionnalData?: any
   ) => {
     Object.keys(GameEvents).forEach(event => {
@@ -62,6 +62,9 @@ class GameManager {
         gameStore.resume()
       }
     } else {
+      this.game.scene.scenes
+        .filter(scene => scene.scene.key !== key)
+        .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(key as GameState)
       gameStore.regenerateUiKey()
@@ -87,7 +90,7 @@ class GameManager {
     gameStore.resume()
   }
 
-  public restartActiveScene = (fade: boolean = true, data?: object): void => {
+  public restartActiveScene = (fade: boolean = false, data?: object): void => {
     if (this.activeScene) {
       this.startScene(this.activeScene.scene.key, fade, data)
     }
