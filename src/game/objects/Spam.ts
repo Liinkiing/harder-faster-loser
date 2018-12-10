@@ -2,6 +2,7 @@ import { ContainerConstructor } from '../../utils/interfaces'
 import gameStore from '../../store/GameStore'
 import { Emitter } from '../manager/GameManager'
 import { GameEvents } from '../../utils/enums'
+import { randomRange } from '../../utils/functions'
 
 export default class Spam extends Phaser.GameObjects.Container {
   private readonly spamContent?: Phaser.GameObjects.Sprite
@@ -16,16 +17,23 @@ export default class Spam extends Phaser.GameObjects.Container {
     this.closeIcon = this.createCloseIcon()
     this.add(this.closeIcon)
 
-    this.width = this.spamContent.width
-    this.height = this.spamContent.height
+    // set X & Y of spam container (80 for UI -> have to be replace)
+    this.x = randomRange(
+      0,
+      window.innerWidth - this.spamContent.width / gameStore.ratioResolution
+    )
+    this.y = randomRange(
+      80,
+      window.innerHeight - this.spamContent.height / gameStore.ratioResolution
+    )
 
-    if (this.x > window.innerWidth - this.width / gameStore.ratioResolution) {
-      this.x = this.x - this.width / gameStore.ratioResolution
-    }
-
-    if (this.y > window.innerHeight - this.height / gameStore.ratioResolution) {
-      this.y = this.y - this.height / gameStore.ratioResolution
-    }
+    // Display only if spam container is out of top screen
+    // if (this.y < 0){
+    //   console.log('WARNING: Out of screen : ' + this.y)
+    //   console.log('Hauteur spam : ' + this.height/gameStore.ratioResolution)
+    //   console.log('Hauteur screen : ' + window.innerHeight)
+    //   console.log(this)
+    // }
 
     params.scene.add.existing(this)
   }
