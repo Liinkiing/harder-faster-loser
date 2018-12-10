@@ -90,12 +90,12 @@ class GameManager {
     gameStore.resume()
   }
 
-  public restartActiveScene = (
+  public restartActiveScene = async (
     fade: boolean = gameConfig.fade,
     data?: object
-  ): void => {
+  ) => {
     if (this.activeScene) {
-      this.startScene(this.activeScene.scene.key, fade, data)
+      await this.startScene(this.activeScene.scene.key, fade, data)
     }
   }
 

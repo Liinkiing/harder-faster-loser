@@ -5,8 +5,9 @@ import { List } from '../../../utils/extensions'
 import { randomRange } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
+import MinigameScene from '../MinigameScene'
 
-export default class SpamGameScene extends BaseScene {
+export default class SpamGameScene extends MinigameScene {
   public spams: List<Spam> = new List<Spam>()
 
   constructor() {
@@ -40,12 +41,23 @@ export default class SpamGameScene extends BaseScene {
 
   public update(time: number, delta: number): void {}
 
+  public onFailure(): void {
+    console.log('you failed')
+    gameManager.restartActiveScene()
+  }
+
+  public onSuccess(): void {
+    console.log('you won')
+    gameManager.restartActiveScene()
+  }
+
   protected initListeners(): void {
-    Emitter.on(GameEvents.RemainingTimeOver, () => {
-      gameManager.restartActiveScene()
-    })
+    Emitter.on(GameEvents.RemainingTimeOver, this.onFailure)
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
+      if (this.spams.length === 0) {
+        this.onSuccess()
+      }
     })
     Emitter.on(GameEvents.SpamClicked, (spam: Spam) => {
       for (let i = 0; i < randomRange(1, 4); i++) {
