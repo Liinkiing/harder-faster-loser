@@ -19,6 +19,7 @@ export enum BaseEvents {
 export enum GameEvents {
   SpamDestroyed = 'SPAM_DESTROYED',
   RemainingTimeOver = 'REMANING_TIME_OVER',
+  SpamClicked = 'SPAM_CLICKED',
 }
 
 export enum GameDebugTheme {

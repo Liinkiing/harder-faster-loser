@@ -37,7 +37,22 @@ export default class SpamGameScene extends BaseScene {
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
     })
+
+    Emitter.on(GameEvents.SpamClicked, (spam: Spam) => {
+      this.spams.push(this.createSpam())
+    })
+
     this.input.setGlobalTopOnly(true)
+
+    this.scene.scene.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: () => {
+        this.spams.push(this.createSpam())
+      },
+    })
+  }
+  private createSpam(): any {
     const availablesSpam = new List<string>([
       'sp_1',
       'sp_2',
@@ -46,21 +61,13 @@ export default class SpamGameScene extends BaseScene {
       'sp_5_1',
       'sp_6_1',
     ])
-    this.scene.scene.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: () => {
-        this.spams.push(
-          new Spam({
-            scene: this,
-            x: randomRange(0, window.innerWidth),
-            y: randomRange(0, window.innerHeight),
-            spamTexture: availablesSpam.random(),
-          })
-        )
-      },
+
+    new Spam({
+      scene: this,
+      x: randomRange(0, window.innerWidth),
+      y: randomRange(0, window.innerHeight),
+      spamTexture: availablesSpam.random(),
     })
   }
-
   public update(time: number, delta: number): void {}
 }
