@@ -31,24 +31,27 @@ export default class SpamGameScene extends BaseScene {
   public create() {
     super.create()
     this.spams = new List<Spam>()
+    this.input.setGlobalTopOnly(true)
+
+    for (let nbrSpam = 0; nbrSpam < 10; nbrSpam++) {
+      this.spams.push(this.createSpam())
+    }
+  }
+
+  public update(time: number, delta: number): void {}
+
+  protected initListeners(): void {
     Emitter.on(GameEvents.RemainingTimeOver, () => {
       gameManager.restartActiveScene()
     })
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
     })
-
     Emitter.on(GameEvents.SpamClicked, (spam: Spam) => {
-      for (let i = 0; i < Math.floor(randomRange(1, 4)); i++) {
+      for (let i = 0; i < randomRange(1, 4); i++) {
         this.spams.push(this.createSpam())
       }
     })
-
-    this.input.setGlobalTopOnly(true)
-
-    for (let nbrSpam = 0; nbrSpam < 10; nbrSpam++) {
-      this.spams.push(this.createSpam())
-    }
   }
 
   private createSpam(): Spam {
@@ -68,5 +71,4 @@ export default class SpamGameScene extends BaseScene {
       spamTexture: availablesSpam.random(),
     })
   }
-  public update(time: number, delta: number): void {}
 }
