@@ -39,7 +39,9 @@ export default class SpamGameScene extends BaseScene {
     })
 
     Emitter.on(GameEvents.SpamClicked, (spam: Spam) => {
-      this.spams.push(this.createSpam())
+      for (let i = 0; i < Math.floor(randomRange(1, 4)); i++) {
+        this.spams.push(this.createSpam())
+      }
     })
 
     this.input.setGlobalTopOnly(true)
