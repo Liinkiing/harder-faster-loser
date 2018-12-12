@@ -5,8 +5,9 @@ import { List } from '../../../utils/extensions'
 import { randomRange } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
+import MinigameScene from '../MinigameScene'
 
-export default class SpamGameScene extends BaseScene {
+export default class SpamGameScene extends MinigameScene {
   public spams: List<Spam> = new List<Spam>()
 
   constructor() {
@@ -31,13 +32,41 @@ export default class SpamGameScene extends BaseScene {
   public create() {
     super.create()
     this.spams = new List<Spam>()
-    Emitter.on(GameEvents.RemainingTimeOver, () => {
-      gameManager.restartActiveScene()
-    })
+    this.input.setGlobalTopOnly(true)
+
+    for (let nbrSpam = 0; nbrSpam < 10; nbrSpam++) {
+      this.spams.push(this.createSpam())
+    }
+  }
+
+  public update(time: number, delta: number): void {}
+
+  public onFailure(): void {
+    console.log('you failed')
+    gameManager.restartActiveScene()
+  }
+
+  public onSuccess(): void {
+    console.log('you won')
+    gameManager.restartActiveScene()
+  }
+
+  protected initListeners(): void {
+    Emitter.on(GameEvents.RemainingTimeOver, this.onFailure)
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
+      if (this.spams.length === 0) {
+        this.onSuccess()
+      }
     })
-    this.input.setGlobalTopOnly(true)
+    Emitter.on(GameEvents.SpamClicked, (spam: Spam) => {
+      for (let i = 0; i < randomRange(1, 4); i++) {
+        this.spams.push(this.createSpam())
+      }
+    })
+  }
+
+  private createSpam(): Spam {
     const availablesSpam = new List<string>([
       'sp_1',
       'sp_2',
@@ -46,21 +75,12 @@ export default class SpamGameScene extends BaseScene {
       'sp_5_1',
       'sp_6_1',
     ])
-    this.scene.scene.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: () => {
-        this.spams.push(
-          new Spam({
-            scene: this,
-            x: randomRange(0, window.innerWidth),
-            y: randomRange(0, window.innerHeight),
-            spamTexture: availablesSpam.random(),
-          })
-        )
-      },
+
+    return new Spam({
+      scene: this,
+      x: 0,
+      y: 0,
+      spamTexture: availablesSpam.random(),
     })
   }
-
-  public update(time: number, delta: number): void {}
 }
