@@ -4,7 +4,7 @@ import Spam from '../../objects/Spam'
 import { List } from '../../../utils/extensions'
 import { randomRange } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
-import { Emitter } from '../../manager/GameManager'
+import gameManager, { Emitter } from '../../manager/GameManager'
 
 export default class SpamGameScene extends BaseScene {
   public spams: List<Spam> = new List<Spam>()
@@ -31,6 +31,9 @@ export default class SpamGameScene extends BaseScene {
   public create() {
     super.create()
     this.spams = new List<Spam>()
+    Emitter.on(GameEvents.RemainingTimeOver, () => {
+      gameManager.restartActiveScene()
+    })
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
     })

@@ -1,9 +1,29 @@
-import {action, computed, observable} from "mobx";
-import {GameDebugTheme} from "../utils/enums";
+import { action, computed, observable } from 'mobx'
+import { GameDebugTheme } from '../utils/enums'
 
 class GameDebugStore {
   @observable public debug: boolean = false
+  @observable public debugToolbar: boolean = true
   @observable public theme: GameDebugTheme = GameDebugTheme.Dark
+
+  @action public showDebugToolbar = (): void => {
+    this.debugToolbar = true
+    this.showDebug()
+  }
+
+  @action public hideDebugToolbar = (): void => {
+    this.debugToolbar = false
+    this.hideDebug()
+  }
+
+  @action public toggleDebugToolbar = (): void => {
+    this.debugToolbar = !this.debugToolbar
+    this.debug = this.debugToolbar
+  }
+
+  @action public toggleDebug = (): void => {
+    this.debug = !this.debug
+  }
 
   @action public showDebug = (): void => {
     this.debug = true

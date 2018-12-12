@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react'
-import gameDebugStore from "../store/GameDebugStore";
-import {GameDebugTheme} from "./enums";
-import {KeyboardShortcut} from "./interfaces";
+import { useEffect, useRef, useState } from 'react'
+import gameDebugStore from '../store/GameDebugStore'
+import { GameDebugTheme } from './enums'
+import { KeyboardShortcut } from './interfaces'
 
 export const useResize = (): { width: number; height: number } => {
   const [size, setSize] = useState({
@@ -41,11 +41,22 @@ export const useKeyboardInput = (listener: (e: KeyboardEvent) => void) => {
 export const useKeyboardShortcuts = (shortcuts: KeyboardShortcut[]) => {
   useKeyboardInput(e => {
     shortcuts.forEach(shortcut => {
-      if(shortcut.keys.some(key => key.toLowerCase() === e.key.toLowerCase())) {
+      if (
+        shortcut.keys.some(key => key.toLowerCase() === e.key.toLowerCase())
+      ) {
         shortcut.action()
       }
     })
   })
+}
+
+export const usePrevious = (value: any) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    ref.current = value
+  })
+
+  return ref.current!
 }
 
 export const useClassTheme = (forceTheme?: GameDebugTheme): string | null => {

@@ -14,7 +14,7 @@ class GameManager {
   public gameFader?: HTMLDivElement
 
   constructor() {
-    Emitter.on(BaseEvents.SceneCreated, (scene: Phaser.Scene) => {
+    Emitter.on(BaseEvents.SceneInit, (scene: Phaser.Scene) => {
       this.activeScene = scene
     })
   }
@@ -36,15 +36,18 @@ class GameManager {
 
   public loadDeathscreen = async () => {
     await this.startScene(scenesKeys.Deathscreen)
-    gameStore.changeState(GameState.Deathscreen)
   }
 
-  public startScene = async (key: string, optionnalData?: any) => {
+  public startScene = async (
+    key: string,
+    fade: boolean = gameConfig.fade,
+    optionnalData?: any
+  ) => {
     Object.keys(GameEvents).forEach(event => {
       Emitter.removeAllListeners(GameEvents[event])
     })
     console.log('STARTED ' + key)
-    if (this.gameFader) {
+    if (this.gameFader && fade) {
       gameStore.startTransitionning()
       await appear(this.gameFader)
       this.game.scene.scenes
@@ -52,35 +55,63 @@ class GameManager {
         .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(key as GameState)
-      await disappear(this.gameFader)
+      gameStore.regenerateUiKey()
       gameStore.stopTransitionning()
-      gameStore.resume()
+      await disappear(this.gameFader)
+      if (gameStore.paused) {
+        gameStore.resume()
+      }
     } else {
+      this.game.scene.scenes
+        .filter(scene => scene.scene.key !== key)
+        .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
-      gameStore.resume()
       gameStore.changeState(key as GameState)
+      gameStore.regenerateUiKey()
+      if (gameStore.paused) {
+        gameStore.resume()
+      }
     }
   }
 
   public pause = (): void => {
+    if (!this.activeScene) {
+      return
+    }
     this.activeScene!.scene.pause()
     gameStore.pause()
   }
 
   public resume = (): void => {
+    if (!this.activeScene) {
+      return
+    }
     this.activeScene!.scene.resume()
     gameStore.resume()
   }
 
+  public restartActiveScene = (
+    fade: boolean = gameConfig.fade,
+    data?: object
+  ): void => {
+    if (this.activeScene) {
+      this.startScene(this.activeScene.scene.key, fade, data)
+    }
+  }
+
   public togglePause = (): void => {
+    if (!this.activeScene) {
+      return
+    }
     if (gameStore.paused) {
       this.activeScene!.scene.resume()
+      gameStore.resume()
     } else {
       this.activeScene!.scene.pause()
+      gameStore.pause()
     }
 
     console.log('TOGGLE PAUSE')
-    gameStore.togglePause()
   }
 }
 
