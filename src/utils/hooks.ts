@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 import gameDebugStore from '../store/GameDebugStore'
 import { GameDebugTheme } from './enums'
 import { KeyboardShortcut } from './interfaces'
@@ -57,6 +57,18 @@ export const usePrevious = (value: any) => {
   })
 
   return ref.current!
+}
+
+export const useInputValue = <T>(initialValue: T) => {
+  const [value, setValue] = useState<T>(initialValue)
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValue((e.target.value as unknown) as T)
+  }, [])
+
+  return {
+    value,
+    onChange,
+  }
 }
 
 export const useClassTheme = (forceTheme?: GameDebugTheme): string | null => {
