@@ -1,4 +1,4 @@
-import { gameConfig } from '../../utils/game'
+import { gameConfig, HFLGameConfig } from '../../utils/game'
 import gameStore from '../../store/GameStore'
 import { BaseEvents, GameEvents, GameState } from '../../utils/enums'
 import { scenesKeys } from '../../utils/constants'
@@ -40,14 +40,14 @@ class GameManager {
 
   public startScene = async (
     key: string,
-    fade: boolean = gameConfig.fade,
+    config: HFLGameConfig = gameStore.config,
     optionnalData?: any
   ) => {
     Object.keys(GameEvents).forEach(event => {
       Emitter.removeAllListeners(GameEvents[event])
     })
     console.log('STARTED ' + key)
-    if (this.gameFader && fade) {
+    if (this.gameFader && config.fade) {
       gameStore.startTransitionning()
       await appear(this.gameFader)
       this.game.scene.scenes
@@ -91,11 +91,11 @@ class GameManager {
   }
 
   public restartActiveScene = async (
-    fade: boolean = gameConfig.fade,
+    config: HFLGameConfig = gameStore.config,
     data?: object
   ) => {
     if (this.activeScene) {
-      await this.startScene(this.activeScene.scene.key, fade, data)
+      await this.startScene(this.activeScene.scene.key, config, data)
     }
   }
 

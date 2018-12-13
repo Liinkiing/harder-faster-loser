@@ -11,12 +11,12 @@ import {
   SplashscreenScene,
 } from '../game/scenes'
 
-interface HFLGameConfig {
+export interface HFLGameConfig {
   fade: boolean
   fadeColor: string
 }
 
-export const gameConfig: GameConfig & HFLGameConfig = {
+export const gameConfig: GameConfig = {
   antialias: false,
   backgroundColor: '#000000',
   input: {
@@ -53,8 +53,6 @@ export const gameConfig: GameConfig & HFLGameConfig = {
     PostMinigameScene,
     DeathscreenScene,
   ],
-  fade: true,
-  fadeColor: 'black',
   type: Phaser.AUTO,
   pixelArt: true,
 }
