@@ -13,6 +13,7 @@ import {
 
 export interface HFLGameConfig {
   fade: boolean
+  minigameDuration: number
   fadeColor: string
 }
 

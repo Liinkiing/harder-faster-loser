@@ -8,7 +8,11 @@ class GameStore {
   @observable public difficulity: number = 1
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
-  @observable public config: HFLGameConfig = { fade: true, fadeColor: 'black' }
+  @observable public config: HFLGameConfig = {
+    fade: true,
+    fadeColor: 'black',
+    minigameDuration: 500,
+  }
   @observable public ratioResolution: number = 3
   @observable public transitionning: boolean = false
   @observable

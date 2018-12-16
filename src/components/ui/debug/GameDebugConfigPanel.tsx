@@ -1,46 +1,19 @@
 import * as React from 'react'
-import { FunctionComponent, useCallback, useState } from 'react'
+import styled from 'styled-components'
+import {
+  KeyboardEvent,
+  FunctionComponent,
+  useCallback,
+  useState,
+  useRef,
+} from 'react'
 import DebugContainer from './DebugContainer'
 import { PositionneableProps, TitledProps } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import { CirclePicker, ColorResult } from 'react-color'
 import Spacer from '../Spacer'
-
-interface FadeInputProps {
-  onFadeChange?: (fade: boolean) => void
-}
-
-const FadeInput = observer((props: FadeInputProps) => {
-  const {
-    config: { fade },
-    changeConfig,
-  } = gameStore
-  const { onFadeChange } = props
-  const handleFadeChange = useCallback(
-    () => {
-      changeConfig({
-        fade: !fade,
-      })
-      if (onFadeChange) {
-        onFadeChange(!fade)
-      }
-    },
-    [fade]
-  )
-
-  return (
-    <label>
-      <input
-        type="checkbox"
-        className="checkbox"
-        checked={fade}
-        onChange={handleFadeChange}
-      />
-      <span>Fade?</span>
-    </label>
-  )
-})
+import ValidatableInput from '../ValidatableInput'
 
 const colors = [
   '#f44336',
@@ -63,20 +36,55 @@ const colors = [
   '#ffffff',
 ]
 
+const MinigameDurationCol = styled.span`
+  width: 100px;
+  display: inline-block;
+  transition: all 0.15s;
+`
+
 const GameDebugConfigPanel: FunctionComponent<
   PositionneableProps & TitledProps
 > = props => {
-  const { changeConfig } = gameStore
-  const [fade, setFade] = useState(true)
+  const {
+    config: { fade, minigameDuration },
+    changeConfig,
+  } = gameStore
+
+  const handleFadeChange = useCallback(
+    () => {
+      changeConfig({
+        fade: !fade,
+      })
+    },
+    [fade]
+  )
+
   const handleFadeColorChange = useCallback((color: ColorResult) => {
     changeConfig({
       fadeColor: color.hex,
     })
   }, [])
 
+  const handleOnValidate = useCallback(
+    (duration: string) => {
+      changeConfig({
+        minigameDuration: Number(duration),
+      })
+    },
+    [minigameDuration]
+  )
+
   return (
     <DebugContainer {...props}>
-      <FadeInput onFadeChange={setFade} />
+      <label>
+        <input
+          type="checkbox"
+          className="checkbox"
+          checked={fade}
+          onChange={handleFadeChange}
+        />
+        <span>Fade?</span>
+      </label>
       {fade && (
         <>
           <Spacer />
@@ -88,8 +96,22 @@ const GameDebugConfigPanel: FunctionComponent<
           />
         </>
       )}
+      <Spacer />
+      <p>
+        Minigame duration :
+        <MinigameDurationCol>
+          <ValidatableInput
+            defaultValue={String(minigameDuration)}
+            onValidate={handleOnValidate}
+            className="input"
+            type="number"
+            max={700}
+            min={200}
+          />
+        </MinigameDurationCol>
+      </p>
     </DebugContainer>
   )
 }
 
-export default GameDebugConfigPanel
+export default observer(GameDebugConfigPanel)
