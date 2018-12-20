@@ -2,6 +2,20 @@
   "preload": {
     "files": [
       {
+        "type": "json",
+        "key": "animations",
+        "url": "/static/assets/sprites/animations.json"
+      },
+      {
+        "type": "spritesheet",
+        "key": "sexy",
+        "url": "/static/assets/sprites/spam-game/sexy.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 1290
+        }
+      },
+      {
         "type": "image",
         "key": "sp_1",
         "url": "/static/assets/sprites/spam-game/sp_1.png"

@@ -7,10 +7,19 @@ import { randomRange } from '../../utils/functions'
 export default class Spam extends Phaser.GameObjects.Container {
   private readonly spamContent?: Phaser.GameObjects.Sprite
   private readonly closeIcon?: Phaser.GameObjects.Sprite
+  private readonly texture: string
+
+  get isAnimated() {
+    return !!(
+      this.spamContent &&
+      this.spamContent.anims &&
+      this.spamContent.anims.animationManager.get(this.texture)
+    )
+  }
 
   constructor(params: ContainerConstructor) {
     super(params.scene, params.x, params.y, params.children)
-
+    this.texture = params.spamTexture
     this.spamContent = this.createSpamContent(params.spamTexture)
     this.add(this.spamContent)
 
@@ -27,15 +36,13 @@ export default class Spam extends Phaser.GameObjects.Container {
       window.innerHeight - this.spamContent.height / gameStore.ratioResolution
     )
 
-    // Display only if spam container is out of top screen
-    // if (this.y < 0){
-    //   console.log('WARNING: Out of screen : ' + this.y)
-    //   console.log('Hauteur spam : ' + this.height/gameStore.ratioResolution)
-    //   console.log('Hauteur screen : ' + window.innerHeight)
-    //   console.log(this)
-    // }
-
     params.scene.add.existing(this)
+  }
+
+  public update(): void {
+    if (this.isAnimated) {
+      this.spamContent!.setOrigin(0.964, 0).anims.play(this.texture, true)
+    }
   }
 
   private createSpamContent = (
@@ -49,11 +56,11 @@ export default class Spam extends Phaser.GameObjects.Container {
     )
 
     sprite.setInteractive()
-
     sprite.on('pointerdown', () => {
       Emitter.emit(GameEvents.SpamClicked, this)
       console.log('EMITED ' + GameEvents.SpamClicked)
     })
+    console.log('attaching pointerdown', sprite)
 
     return sprite
   }
