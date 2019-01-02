@@ -41,7 +41,7 @@ export default class Spam extends Phaser.GameObjects.Container {
 
   public update(): void {
     if (this.isAnimated) {
-      this.spamContent!.setOrigin(0.964, 0).anims.play(this.texture, true)
+      this.spamContent!.setOrigin(0, 0).anims.play(this.texture, true)
     }
   }
 
@@ -49,13 +49,16 @@ export default class Spam extends Phaser.GameObjects.Container {
     spamTexture: string
   ): Phaser.GameObjects.Sprite => {
     const sprite = this.scene.add.sprite(0, 0, spamTexture).setOrigin(0, 0)
-
+    // defining the dimensions of the sprite
+    sprite.width = 854
+    sprite.height = 1290
     sprite.setScale(
       1 / gameStore.ratioResolution,
       1 / gameStore.ratioResolution
     )
 
     sprite.setInteractive()
+    sprite.input.hitArea.setSize(sprite.width, sprite.height) // defining the dimensions of the input hit area
     sprite.on('pointerdown', () => {
       Emitter.emit(GameEvents.SpamClicked, this)
       console.log('EMITED ' + GameEvents.SpamClicked)
