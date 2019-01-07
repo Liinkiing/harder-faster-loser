@@ -78,7 +78,7 @@ export default class SpamGameScene extends MinigameScene {
       scene: this,
       x: 0,
       y: 0,
-      spamTexture: 'sexyAnimation',
+      spamTexture: availablesSpam.random(),
     })
   }
 }
