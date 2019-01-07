@@ -9,7 +9,6 @@ import MinigameScene from '../MinigameScene'
 
 export default class SpamGameScene extends MinigameScene {
   public spams: List<Spam> = new List<Spam>()
-
   constructor() {
     super({
       key: scenesKeys.SpamGame,
@@ -17,11 +16,7 @@ export default class SpamGameScene extends MinigameScene {
   }
 
   public preload(): void {
-    this.load.pack(
-      'preload',
-      '/static/assets/sprites/spam-game/pack.json',
-      'preload'
-    )
+    super.preload()
     this.load.image('close', '/static/assets/sprites/spam-game/CLOSE.png')
     this.load.image(
       'close_active',
@@ -39,7 +34,9 @@ export default class SpamGameScene extends MinigameScene {
     }
   }
 
-  public update(time: number, delta: number): void {}
+  public update(time: number, delta: number): void {
+    this.spams.forEach(spam => spam.update())
+  }
 
   public onFailure(): void {
     console.log('you failed')
@@ -69,6 +66,7 @@ export default class SpamGameScene extends MinigameScene {
   private createSpam(): Spam {
     const availablesSpam = new List<string>([
       'sp_1',
+      'sexyAnimation',
       'sp_2',
       'sp_3',
       'sp_4_1',

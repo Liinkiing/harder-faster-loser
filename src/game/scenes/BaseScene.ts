@@ -1,7 +1,10 @@
 import { Emitter } from '../manager/GameManager'
 import { BaseEvents } from '../../utils/enums'
+import AnimationHelper from '../manager/AnimationManager'
 
 export default class BaseScene extends Phaser.Scene {
+  protected animationHelper?: AnimationHelper
+
   public init(): void {
     console.log(`init (${this.scene.key})`)
     this.game.scene.dump()
@@ -10,6 +13,13 @@ export default class BaseScene extends Phaser.Scene {
 
   public preload(): void {
     console.log(`preload (${this.scene.key})`)
+    this.load.pack('preload', '/static/assets/sprites/pack.json', 'preload')
+    this.load.on('complete', () => {
+      this.animationHelper = new AnimationHelper(
+        this,
+        this.cache.json.get('animations')
+      )
+    })
   }
 
   public create(): void {
