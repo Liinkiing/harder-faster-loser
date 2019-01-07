@@ -49,7 +49,7 @@ export default class SpamGameScene extends MinigameScene {
   }
 
   protected initListeners(): void {
-    Emitter.on(GameEvents.RemainingTimeOver, this.onFailure)
+    super.initListeners()
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
       this.spams.remove(spam)
       if (this.spams.length === 0) {
