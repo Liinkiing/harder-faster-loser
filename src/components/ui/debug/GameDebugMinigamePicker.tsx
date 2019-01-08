@@ -5,10 +5,14 @@ import gameStore from '../../../store/GameStore'
 import DebugContainer from './DebugContainer'
 import gameManager from '../../../game/manager/GameManager'
 import { minigameSuffix } from '../../../utils/constants'
-import { PositionneableProps, TitledProps } from '../../../utils/interfaces'
+import {
+  HideableProps,
+  PositionneableProps,
+  TitledProps,
+} from '../../../utils/interfaces'
 
 const GameDebugMinigamePicker: FunctionComponent<
-  TitledProps & PositionneableProps
+  TitledProps & PositionneableProps & HideableProps
 > = props => {
   const { transitionning } = gameStore
 

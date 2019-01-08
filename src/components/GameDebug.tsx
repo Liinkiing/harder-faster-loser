@@ -2,17 +2,14 @@ import * as React from 'react'
 import GameDebugStateList from './ui/debug/GameDebugStateList'
 import { FunctionComponent } from 'react'
 import GameDebugConfigPanel from './ui/debug/GameDebugConfigPanel'
+import { HideableProps } from '../utils/interfaces'
 
-interface Props {
-  visible?: boolean
-}
-
-const GameDebug: FunctionComponent<Props> = props => {
-  const { visible } = props
+const GameDebug: FunctionComponent<HideableProps> = props => {
+  const { hide } = props
 
   return (
     <div
-      style={{ display: visible ? 'block' : 'none' }}
+      style={{ display: hide ? 'block' : 'none' }}
       className="game-debug game-ui"
     >
       <h1>Debug interface</h1>
@@ -23,7 +20,7 @@ const GameDebug: FunctionComponent<Props> = props => {
 }
 
 GameDebug.defaultProps = {
-  visible: false,
+  hide: false,
 }
 
 export default GameDebug

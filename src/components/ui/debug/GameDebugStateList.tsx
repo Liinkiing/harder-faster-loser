@@ -56,9 +56,11 @@ const GameDebugStateList: FunctionComponent<
           )
         })}
       </DebugContainer>
-      {state === GameState.Minigame && (
-        <GameDebugMinigamePicker title="Minigame picker" x={630} />
-      )}
+      <GameDebugMinigamePicker
+        hide={state && state !== GameState.Minigame}
+        title="Minigame picker"
+        x={630}
+      />
     </>
   )
 }

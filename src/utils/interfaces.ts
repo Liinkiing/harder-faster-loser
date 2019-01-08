@@ -9,6 +9,10 @@ export interface GameSettings {
   volume: number
 }
 
+export interface HideableProps {
+  hide?: boolean
+}
+
 export interface ForceThemeProps {
   forceTheme?: GameDebugTheme
 }
