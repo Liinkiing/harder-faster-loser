@@ -94,12 +94,6 @@ class GameManager {
 
   public changeBackgroundColor = (color: GameBackgroundColor): void => {
     if (this.activeScene) {
-      console.log(
-        'changing bg to ',
-        gameBackgroundColorToCss(color),
-        'for',
-        this.activeScene
-      )
       this.activeScene.cameras.main.setBackgroundColor(
         gameBackgroundColorToCss(color)
       )
