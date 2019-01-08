@@ -26,6 +26,15 @@
       },
       {
         "type": "spritesheet",
+        "key": "toki_win",
+        "url": "/static/assets/sprites/sandwich-game/toki_win_390_855.png",
+        "frameConfig": {
+          "frameWidth": 390,
+          "frameHeight": 855
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "sandwich_flying",
         "url": "/static/assets/sprites/sandwich-game/sandwich_flying_585_540.png",
         "frameConfig": {

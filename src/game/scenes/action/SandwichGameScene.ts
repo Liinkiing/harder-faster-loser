@@ -16,10 +16,12 @@ export default class SandwichGameScene extends MinigameScene {
   private grounds?: Array<Phaser.GameObjects.Sprite> = []
   private lastKeyPressed?: 37 | 39
   private playerTexture: string
+  private playerWinTexture: string
   private sandwichTexture: string
   private player?: Phaser.GameObjects.Sprite
   private sandwich?: Phaser.GameObjects.Sprite
   private currentFrame: integer = 0
+  private isSandwichPicked: Boolean = false
 
   constructor() {
     super({
@@ -27,6 +29,7 @@ export default class SandwichGameScene extends MinigameScene {
     })
 
     this.playerTexture = 'tokiRunAnimation'
+    this.playerWinTexture = 'tokiWinAnimation'
     this.sandwichTexture = 'sandwichFlyingAnimation'
   }
 
@@ -59,7 +62,13 @@ export default class SandwichGameScene extends MinigameScene {
     this.initBackground()
   }
 
-  public update(time: number, delta: number): void {}
+  public update(time: number, delta: number): void {
+    this.physics.add.collider(this.player!, this.sandwich!, () => {
+      if (!this.isSandwichPicked) {
+        Emitter.emit(GameEvents.SandwichPicked, this)
+      }
+    })
+  }
 
   private createPlayer = (playerTexture: string): Phaser.GameObjects.Sprite => {
     const sprite = this.add
@@ -93,7 +102,8 @@ export default class SandwichGameScene extends MinigameScene {
     const sprite = this.add
       .sprite(
         this.grounds![this.grounds!.length - 1].x +
-          this.grounds![1].width / gameStore.ratioResolution,
+          this.grounds![1].width / gameStore.ratioResolution -
+          200,
         Number(this.game.config.height) -
           this.grounds![0].height / gameStore.ratioResolution,
         sandwichTexture
@@ -180,6 +190,17 @@ export default class SandwichGameScene extends MinigameScene {
       .setOrigin(1, 1)
       .setScale(1 / gameStore.ratioResolution)
     this.sandwich!.anims.play(this.sandwichTexture, true, 0)
+
+    /**
+     * Physics stuff
+     */
+    this.physics.world.enable(this.player)
+    this.physics.world.enable(this.sandwich)
+
+    this.player.setDisplaySize(
+      84,
+      this.player.height / gameStore.ratioResolution
+    )
   }
 
   public onFailure(): void {
@@ -190,5 +211,15 @@ export default class SandwichGameScene extends MinigameScene {
   public onSuccess(): void {
     console.log('you won')
     gameManager.restartActiveScene()
+  }
+
+  protected initListeners(): void {
+    super.initListeners()
+    Emitter.on(GameEvents.SandwichPicked, () => {
+      console.log('test')
+      this.isSandwichPicked = true
+      this.player!.anims.play(this.playerWinTexture, true, 0)
+      this.onSuccess()
+    })
   }
 }
