@@ -65,13 +65,22 @@ export default class SpamGameScene extends MinigameScene {
 
   private createSpam(): Spam {
     const availablesSpam = new List<string>([
-      'sp_1',
       'sexyAnimation',
-      'sp_2',
-      'sp_3',
-      'sp_4_1',
-      'sp_5_1',
-      'sp_6_1',
+      'soldAnimation',
+      'pizzaAnimation',
+      'magicBottleAnimation',
+      'musclesAnimation',
+      'playAnimation',
+      'toothAnimation',
+      'hairAnimation',
+      'gamblingAnimation',
+      'yoAnimation',
+      // 'sp_1',
+      // 'sp_2',
+      // 'sp_3',
+      // 'sp_4_1',
+      // 'sp_5_1',
+      // 'sp_6_1',
     ])
 
     return new Spam({

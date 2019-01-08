@@ -17,6 +17,87 @@
       },
       {
         "type": "spritesheet",
+        "key": "sold",
+        "url": "/static/assets/sprites/spam-game/sold.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "pizza",
+        "url": "/static/assets/sprites/spam-game/pizza.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 1290
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "magic-bottle",
+        "url": "/static/assets/sprites/spam-game/magic-bottle.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 914
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "muscles",
+        "url": "/static/assets/sprites/spam-game/muscles.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "play",
+        "url": "/static/assets/sprites/spam-game/play.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 600
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "tooth",
+        "url": "/static/assets/sprites/spam-game/tooth.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "hair",
+        "url": "/static/assets/sprites/spam-game/hair.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 764
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "gambling",
+        "url": "/static/assets/sprites/spam-game/gambling.png",
+        "frameConfig": {
+          "frameWidth": 914,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "yo",
+        "url": "/static/assets/sprites/spam-game/yo.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 1290
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "toki_run",
         "url": "/static/assets/sprites/sandwich-game/toki_run_255_480.png",
         "frameConfig": {
