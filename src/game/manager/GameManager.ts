@@ -56,7 +56,9 @@ class GameManager {
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
-      gameStore.changeState(key as GameState)
+      gameStore.changeState(
+        key.includes('_MINIGAME') ? GameState.Minigame : (key as GameState)
+      )
       gameStore.regenerateUiKey()
       gameStore.stopTransitionning()
       await disappear(this.gameFader)
@@ -68,7 +70,9 @@ class GameManager {
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
-      gameStore.changeState(key as GameState)
+      gameStore.changeState(
+        key.includes('_MINIGAME') ? GameState.Minigame : (key as GameState)
+      )
       gameStore.regenerateUiKey()
       if (gameStore.paused) {
         gameStore.resume()
