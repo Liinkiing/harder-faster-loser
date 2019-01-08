@@ -11,15 +11,8 @@ class MinigameManager {
   private lastGame?: string
 
   private games: IGames = {
-    [GameCategory.Action]: new List<string>([
-      scenesKeys.SpamGame,
-      scenesKeys.ActionSecondGame,
-      scenesKeys.ActionThirdGame,
-    ]),
-    [GameCategory.Waiting]: new List<string>([
-      scenesKeys.ElevatorFirstGame,
-      scenesKeys.ElevatorSecondGame,
-    ]),
+    [GameCategory.Action]: new List<string>([scenesKeys.SpamMinigame]),
+    [GameCategory.Waiting]: new List<string>([]),
   }
 
   private playedGames: IGames = {

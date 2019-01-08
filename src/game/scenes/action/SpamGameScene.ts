@@ -11,7 +11,7 @@ export default class SpamGameScene extends MinigameScene {
   public spams: List<Spam> = new List<Spam>()
   constructor() {
     super({
-      key: scenesKeys.SpamGame,
+      key: scenesKeys.SpamMinigame,
     })
   }
 

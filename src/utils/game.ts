@@ -1,12 +1,8 @@
 import {
   SpamGameScene,
   SandwichGameScene,
-  ActionSecondGameScene,
-  ActionThirdGameScene,
   BootScene,
   DeathscreenScene,
-  ElevatorFirstGameScene,
-  ElevatorSecondGameScene,
   HomescreenScene,
   PostMinigameScene,
   SplashscreenScene,
@@ -50,11 +46,6 @@ export const gameConfig: GameConfig = {
 
     SpamGameScene,
     SandwichGameScene,
-    ActionSecondGameScene,
-    ActionThirdGameScene,
-
-    ElevatorFirstGameScene,
-    ElevatorSecondGameScene,
 
     PostMinigameScene,
     DeathscreenScene,

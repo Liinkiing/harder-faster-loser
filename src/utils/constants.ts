@@ -7,13 +7,8 @@ export const scenesKeys = {
   Splashscreen: 'SPLASHSCREEN',
   Homescreen: 'HOMESCREEN',
 
-  SpamGame: 'SPAM' + minigameSuffix,
-  ActionSecondGame: 'ACTION_SECOND' + minigameSuffix,
-  ActionThirdGame: 'ACTION_THIRD' + minigameSuffix,
   SandwichGame: 'SANDWICH'+ minigameSuffix,
-
-  ElevatorFirstGame: 'ELEVATOR_FIRST' + minigameSuffix,
-  ElevatorSecondGame: 'ELEVATOR_SECOND' + minigameSuffix,
+  SpamMinigame: 'SPAM' + minigameSuffix,
 
   PostMinigameScene: 'POSTMINIGAME',
 
