@@ -29,4 +29,7 @@ export default class KeyboardContainer extends Phaser.GameObjects.Container {
     this.add(this.buttons)
     params.scene.add.existing(this)
   }
+
+  public getButton = (code: Code): KeyboardPasswordButton | undefined =>
+    this.buttons.find(button => button.code === code)
 }

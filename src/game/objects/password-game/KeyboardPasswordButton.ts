@@ -7,6 +7,8 @@ import { Omit } from '../../../utils/types'
 export type Code = '◻' | '▲' | '|||' | '☰' | 'O' | 'U'
 
 export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
+  public code: Code
+
   constructor(
     params: Omit<SpriteConstructor, 'texture'> & {
       code: Code
@@ -36,6 +38,7 @@ export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
         break
     }
     super(params.scene, params.x, params.y, texture, params.frame)
+    this.code = params.code
 
     this.setOrigin(0, 0).setScale(
       1 / gameStore.ratioResolution,
@@ -51,7 +54,7 @@ export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
         this.setTexture(`${texture}`)
       })
       this.on('pointerdown', () => {
-        Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, params.code)
+        Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, this.code)
       })
     }
 
