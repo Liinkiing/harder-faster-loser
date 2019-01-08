@@ -30,7 +30,6 @@ export interface PositionneableProps {
 
 export interface ContainerConstructor {
   scene: Phaser.Scene
-  spamTexture: string
   x?: number
   y?: number
   children?: Phaser.GameObjects.GameObject[]

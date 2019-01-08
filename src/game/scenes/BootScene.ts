@@ -13,7 +13,7 @@ export default class BootScene extends BaseScene {
   public create = async () => {
     super.create()
     gameStore.changeConfig({ fade: false })
-    gameManager.loadNextMinigame()
+    gameManager.loadMinigame(scenesKeys.PasswordMinigame)
     gameStore.changeConfig({ fade: true })
     this.scene.stop(this.scene.key)
   }

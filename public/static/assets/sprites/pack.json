@@ -44,6 +44,116 @@
       },
       {
         "type": "image",
+        "key": "mdp_keyboard_1",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_1.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_1_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_1_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_2",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_2.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_2_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_2_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_3",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_3.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_3_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_3_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_4",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_4.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_4_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_4_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_5",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_5.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_5_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_5_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_6",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_6.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_6_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_6_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_paw",
+        "url": "/static/assets/sprites/password-game/mdp_paw.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_screen_1",
+        "url": "/static/assets/sprites/password-game/mdp_screen_1.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_screen_2",
+        "url": "/static/assets/sprites/password-game/mdp_screen_2.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_star",
+        "url": "/static/assets/sprites/password-game/mdp_star.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_1",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_1.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_2",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_3.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_3",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_3.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_4",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_4.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_5",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_5.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_6",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_6.png"
+      },
+      {
+        "type": "image",
         "key": "sp_1",
         "url": "/static/assets/sprites/spam-game/sp_1.png"
       },
