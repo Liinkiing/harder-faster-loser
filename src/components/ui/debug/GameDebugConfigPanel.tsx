@@ -8,7 +8,11 @@ import {
   useRef,
 } from 'react'
 import DebugContainer from './DebugContainer'
-import { PositionneableProps, TitledProps } from '../../../utils/interfaces'
+import {
+  HideableProps,
+  PositionneableProps,
+  TitledProps,
+} from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import { CirclePicker, ColorResult } from 'react-color'
@@ -23,7 +27,7 @@ const MinigameDurationCol = styled.span`
 `
 
 const GameDebugConfigPanel: FunctionComponent<
-  PositionneableProps & TitledProps
+  PositionneableProps & TitledProps & HideableProps
 > = props => {
   const {
     config: { fade, minigameDuration },

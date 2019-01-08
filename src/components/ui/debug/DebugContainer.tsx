@@ -3,6 +3,7 @@ import Draggable from 'react-draggable'
 import { observer } from 'mobx-react-lite'
 import {
   ForceThemeProps,
+  HideableProps,
   PositionneableProps,
   TitledProps,
 } from '../../../utils/interfaces'
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const DebugContainer: FunctionComponent<
-  Props & ForceThemeProps & PositionneableProps & TitledProps
+  Props & ForceThemeProps & PositionneableProps & TitledProps & HideableProps
 > = props => {
   const {
     title,
@@ -25,6 +26,7 @@ const DebugContainer: FunctionComponent<
     rounded,
     forceTheme,
     x,
+    hide,
     y,
     zIndex,
     draggable,
@@ -55,7 +57,13 @@ const DebugContainer: FunctionComponent<
   const section = (
     <section
       className={classNames.join(' ')}
-      style={{ left: x, top: y, zIndex, position: 'fixed' }}
+      style={{
+        left: x,
+        top: y,
+        zIndex,
+        position: 'fixed',
+        display: hide ? 'none' : 'initial',
+      }}
     >
       {title && title !== '' && <h2 className="title">{title}</h2>}
       {children}
@@ -72,6 +80,7 @@ const DebugContainer: FunctionComponent<
 DebugContainer.defaultProps = {
   center: false,
   draggable: true,
+  hide: false,
   disabled: false,
   rounded: false,
 }
