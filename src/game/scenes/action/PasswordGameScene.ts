@@ -59,13 +59,20 @@ export default class PasswordGameScene extends MinigameScene {
     super.initListeners()
     Emitter.on(GameEvents.KeyboardPasswordButtonClicked, async (code: Code) => {
       this.typedPassword.push(code)
-      if (this.typedPassword.length < this.password.length) {
+      if (this.typedPassword.length <= this.password.length) {
         const button = this.keyboard!.getButton(code)
+        const texture = button!.texture
+        if (!this.game.device.os.desktop) {
+          button!.setTexture(`${texture.key}_hover`)
+        }
         const paw = this.add
           .sprite(button!.getBounds().x, button!.getBounds().y, 'mdp_paw')
           .setScale(1 / gameStore.ratioResolution)
           .setOrigin(-0.5, -0.25)
         await wait(100)
+        if (!this.game.device.os.desktop) {
+          button!.setTexture(`${texture.key}`)
+        }
         paw.destroy()
       }
       if (
