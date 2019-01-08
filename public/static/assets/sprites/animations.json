@@ -10,7 +10,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 4
+      "frameRate": 2.5
     },
     {
       "key": "soldAnimation",
@@ -22,7 +22,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 8
+      "frameRate": 5.75
     },
     {
       "key": "pizzaAnimation",
@@ -34,7 +34,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 5
+      "frameRate": 3.75
     },
     {
       "key": "magicBottleAnimation",
@@ -46,7 +46,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 2
+      "frameRate": 3.75
     },
     {
       "key": "musclesAnimation",
@@ -58,7 +58,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 3
+      "frameRate": 2.25
     },
     {
       "key": "playAnimation",
@@ -70,7 +70,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 1
+      "frameRate": 6
     },
     {
       "key": "toothAnimation",
@@ -82,7 +82,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 5
+      "frameRate": 3.75
     },
     {
       "key": "hairAnimation",
@@ -106,7 +106,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 4
+      "frameRate": 4.75
     },
     {
       "key": "yoAnimation",
@@ -118,7 +118,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 6
+      "frameRate": 3.75
     },
     {
       "key": "tokiRunAnimation",
