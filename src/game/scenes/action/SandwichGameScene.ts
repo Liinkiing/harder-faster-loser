@@ -1,19 +1,16 @@
 import { scenesKeys } from '../../../utils/constants'
-import BaseScene from '../BaseScene'
-import { List } from '../../../utils/extensions'
 import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
-import { gameConfig } from '../../../utils/game'
 import AnimatedSprite from './AnimatedSprite'
 
 export default class SandwichGameScene extends MinigameScene {
-  private sky?: Phaser.GameObjects.Sprite
+  private skies?: Phaser.GameObjects.Sprite[] = []
   private building?: Phaser.GameObjects.Sprite
   private landscape?: Phaser.GameObjects.Sprite
   private streetLights?: Phaser.GameObjects.Sprite
-  private grounds?: Array<Phaser.GameObjects.Sprite> = []
+  private grounds?: Phaser.GameObjects.Sprite[] = []
   private lastKeyPressed?: 37 | 39
   private playerTexture: string
   private playerWinTexture: string
@@ -21,7 +18,7 @@ export default class SandwichGameScene extends MinigameScene {
   private player?: Phaser.GameObjects.Sprite
   private sandwich?: Phaser.GameObjects.Sprite
   private currentFrame: integer = 0
-  private isSandwichPicked: Boolean = false
+  private isSandwichPicked: boolean = false
 
   constructor() {
     super({
@@ -31,6 +28,16 @@ export default class SandwichGameScene extends MinigameScene {
     this.playerTexture = 'tokiRunAnimation'
     this.playerWinTexture = 'tokiWinAnimation'
     this.sandwichTexture = 'sandwichFlyingAnimation'
+  }
+
+  public onFailure(): void {
+    console.log('you failed')
+    gameManager.restartActiveScene()
+  }
+
+  public onSuccess(): void {
+    console.log('you won')
+    gameManager.restartActiveScene()
   }
 
   public preload(): void {
@@ -63,10 +70,38 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
+
+    /**
+     * Need to crop cloud sprite.
+     * For the moment, because of the sprite height, when we add 1 new sky, it masks the whole scene (z-index)
+     */
+    // this.skies!.forEach(sky => {
+    //   sky!.x -= 0.1
+    // });
+    // if (this.skies![this.skies!.length - 1].x + this.skies![this.skies!.length - 1].width / gameStore.ratioResolution < this.game.config.width) {
+    //   this.skies![this.skies!.length + 1] = this.add
+    //     .sprite(
+    //       this.skies![0].width / gameStore.ratioResolution,
+    //       Number(this.game.config.height),
+    //       'sky'
+    //     )
+    //     .setOrigin(0, 1)
+    //     .setScale(1 / gameStore.ratioResolution)
+    // }
+
     this.physics.add.collider(this.player!, this.sandwich!, () => {
       if (!this.isSandwichPicked) {
         Emitter.emit(GameEvents.SandwichPicked, this)
       }
+    })
+  }
+
+  protected initListeners(): void {
+    super.initListeners()
+    Emitter.on(GameEvents.SandwichPicked, () => {
+      this.isSandwichPicked = true
+      this.player!.anims.play(this.playerWinTexture, true, 0)
+      this.onSuccess()
     })
   }
 
@@ -75,7 +110,7 @@ export default class SandwichGameScene extends MinigameScene {
       .sprite(
         50,
         Number(this.game.config.height) -
-          this.grounds![0].height / gameStore.ratioResolution,
+        this.grounds![0].height / gameStore.ratioResolution,
         playerTexture
       )
       .setOrigin(0, 1)
@@ -91,7 +126,7 @@ export default class SandwichGameScene extends MinigameScene {
       sprite.height = height
     }
 
-    sprite.setScale(1 / gameStore.ratioResolution)
+    sprite.setOrigin(0, 1).setScale(1 / gameStore.ratioResolution)
 
     return sprite
   }
@@ -99,16 +134,14 @@ export default class SandwichGameScene extends MinigameScene {
   private createSandwich = (
     sandwichTexture: string
   ): Phaser.GameObjects.Sprite => {
+    const offset = 200
     const sprite = this.add
       .sprite(
-        this.grounds![this.grounds!.length - 1].x +
-          this.grounds![1].width / gameStore.ratioResolution -
-          200,
-        Number(this.game.config.height) -
-          this.grounds![0].height / gameStore.ratioResolution,
+        this.grounds![1].x + this.grounds![1].width / gameStore.ratioResolution - offset,
+        Number(this.game.config.height) - this.grounds![0].height / gameStore.ratioResolution,
         sandwichTexture
       )
-      .setOrigin(1, 1)
+      .setOrigin(1, 1).setScale(1 / gameStore.ratioResolution)
 
     const spriteAnim = sprite.anims.animationManager.get(this.sandwichTexture)
 
@@ -121,14 +154,16 @@ export default class SandwichGameScene extends MinigameScene {
       sprite.height = height
     }
 
-    sprite.setScale(1 / gameStore.ratioResolution)
-
     return sprite
   }
 
-  public animateGame(): void {
-    const speedFactor = 20
-    this.sky!.x -= 2 * speedFactor
+  private animateGame(): void {
+    const speedFactor = 30
+
+    this.skies!.forEach(sky => {
+      sky.x -= 2 * speedFactor
+    });
+
     this.building!.x -= 4 * speedFactor
     this.landscape!.x -= 5 * speedFactor
     this.streetLights!.x -= 6 * speedFactor
@@ -145,10 +180,23 @@ export default class SandwichGameScene extends MinigameScene {
     if (this.currentFrame >= 9) {
       this.currentFrame = 0
     }
+
+    const lastGround = this.grounds![this.grounds!.length - 1]
+
+    // If the right of the last ground is in the viewport, we need to add an other ground to avoid blank ground
+    if (lastGround.x + lastGround.width / gameStore.ratioResolution < this.game.config.width) {
+      this.grounds![this.grounds!.length] = this.add
+        .sprite(
+          this.grounds![0].width / gameStore.ratioResolution,
+          Number(this.game.config.height),
+          'ground'
+        )
+        .setOrigin(0, 1).setScale(1 / gameStore.ratioResolution)
+    }
   }
 
-  public initBackground(): void {
-    Array.from(['sky', 'building', 'landscape', 'streetLights']).forEach(
+  private initBackground(): void {
+    Array.from(['building', 'landscape', 'streetLights']).forEach(
       texture => {
         this[texture] = this.add
           .sprite(0, Number(this.game.config.height), texture)
@@ -157,6 +205,42 @@ export default class SandwichGameScene extends MinigameScene {
       }
     )
 
+    this.createSky()
+    this.createGround()
+
+    Array.from(['keydown_LEFT', 'keydown_RIGHT']).forEach(keyCode => {
+      this.scene.scene.input.keyboard.on(keyCode, (e: KeyboardEvent) => {
+        if (this.lastKeyPressed !== e.keyCode) {
+          this.animateGame()
+          this.lastKeyPressed = e.keyCode as 37 | 39
+        }
+      })
+    })
+
+    this.player = this.createPlayer(this.playerTexture)
+    this.player!.anims.play(this.playerTexture, true, 3)
+    this.player!.anims.stop()
+
+    this.sandwich = this.createSandwich(this.sandwichTexture)
+    this.sandwich!.anims.play(this.sandwichTexture, true, 0)
+
+    this.physics.world.enable(this.player)
+    this.physics.world.enable(this.sandwich)
+
+    this.player.setDisplaySize(
+      this.player.width / gameStore.ratioResolution - 1,
+      this.player.height / gameStore.ratioResolution - 1
+    )
+  }
+
+  private createSky(): void {
+    this.skies![0] = this.add
+    .sprite(0, Number(this.game.config.height), 'sky')
+    .setOrigin(0, 1)
+    .setScale(1 / gameStore.ratioResolution)
+  }
+
+  private createGround(): void {
     this.grounds![0] = this.add
       .sprite(0, Number(this.game.config.height), 'ground')
       .setOrigin(0, 1)
@@ -170,56 +254,5 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
-
-    Array.from(['keydown_LEFT', 'keydown_RIGHT']).forEach(keyCode => {
-      this.scene.scene.input.keyboard.on(keyCode, (e: KeyboardEvent) => {
-        if (this.lastKeyPressed != e.keyCode) {
-          this.animateGame()
-          this.lastKeyPressed = e.keyCode as 37 | 39
-        }
-      })
-    })
-
-    this.player = this.createPlayer(this.playerTexture)
-      .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
-    this.player!.anims.play(this.playerTexture, true, 3)
-    this.player!.anims.stop()
-
-    this.sandwich = this.createSandwich(this.sandwichTexture)
-      .setOrigin(1, 1)
-      .setScale(1 / gameStore.ratioResolution)
-    this.sandwich!.anims.play(this.sandwichTexture, true, 0)
-
-    /**
-     * Physics stuff
-     */
-    this.physics.world.enable(this.player)
-    this.physics.world.enable(this.sandwich)
-
-    this.player.setDisplaySize(
-      84,
-      this.player.height / gameStore.ratioResolution
-    )
-  }
-
-  public onFailure(): void {
-    console.log('you failed')
-    gameManager.restartActiveScene()
-  }
-
-  public onSuccess(): void {
-    console.log('you won')
-    gameManager.restartActiveScene()
-  }
-
-  protected initListeners(): void {
-    super.initListeners()
-    Emitter.on(GameEvents.SandwichPicked, () => {
-      console.log('test')
-      this.isSandwichPicked = true
-      this.player!.anims.play(this.playerWinTexture, true, 0)
-      this.onSuccess()
-    })
   }
 }

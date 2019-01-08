@@ -46,7 +46,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 8
+      "frameRate": 30
     }
   ]
 }
