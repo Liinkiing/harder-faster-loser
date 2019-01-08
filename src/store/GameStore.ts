@@ -11,6 +11,7 @@ class GameStore {
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
+    suspended: false,
     fade: true,
     fadeColor: 'black',
     backgroundColor: green,

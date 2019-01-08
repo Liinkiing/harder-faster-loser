@@ -12,6 +12,7 @@ import { GameBackgroundColor } from './types'
 import { green } from './colors'
 
 export interface HFLGameConfig {
+  suspended: boolean
   fade: boolean
   minigameDuration: number
   backgroundColor: GameBackgroundColor

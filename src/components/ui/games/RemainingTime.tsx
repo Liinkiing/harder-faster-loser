@@ -18,7 +18,7 @@ const ProgressInner = styled.div`
 
 const RemainingTime: FunctionComponent = () => {
   const {
-    config: { minigameDuration },
+    config: { minigameDuration, suspended },
   } = gameStore
   const [remaining, setRemaining] = useState(0)
   const button = useRef<HTMLButtonElement>(null)
@@ -40,7 +40,9 @@ const RemainingTime: FunctionComponent = () => {
   }
 
   const onClick = () => {
-    setRemaining(remaining + 1)
+    if (!suspended) {
+      setRemaining(remaining + 1)
+    }
   }
 
   const progress = 100 - (remaining / minigameDuration) * 100

@@ -57,6 +57,7 @@ export default class PasswordGameScene extends MinigameScene {
           (value, index) => this.typedPassword[index] === value
         )
       ) {
+        gameManager.suspendMinigame()
         this.computerScreen!.screen.anims.play('mdp_valid_animation')
         await wait(2000)
         this.onSuccess()
@@ -66,6 +67,7 @@ export default class PasswordGameScene extends MinigameScene {
           (value, index) => this.typedPassword[index] === value
         )
       ) {
+        gameManager.suspendMinigame()
         this.computerScreen!.screen.anims.play('mdp_nope_animation')
         await wait(2000)
         this.onFailure()
