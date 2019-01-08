@@ -4,6 +4,17 @@ import { GameBackgroundColor } from './types'
 export const wait = (ms: number): Promise<TimerHandler> =>
   new Promise(resolve => setTimeout(resolve, ms))
 
+export const gameWait = (
+  clock: Phaser.Time.Clock,
+  ms: number
+): Promise<Phaser.Time.TimerEvent> =>
+  new Promise(resolve => {
+    return clock.addEvent({
+      callback: resolve,
+      delay: ms,
+    })
+  })
+
 export const randomRange = (min: number, max: number): number => {
   return Math.random() * (max - min) + min
 }

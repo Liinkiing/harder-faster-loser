@@ -3,7 +3,7 @@ import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import KeyboardContainer from '../../objects/password-game/KeyboardContainer'
 import { Code } from '../../objects/password-game/KeyboardPasswordButton'
-import { shuffle, wait } from '../../../utils/functions'
+import { shuffle, gameWait } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import ComputerPasswordScreen from '../../objects/password-game/ComputerPasswordScreen'
 import gameStore from '../../../store/GameStore'
@@ -69,7 +69,7 @@ export default class PasswordGameScene extends MinigameScene {
           .sprite(button!.getBounds().x, button!.getBounds().y, 'mdp_paw')
           .setScale(1 / gameStore.ratioResolution)
           .setOrigin(-0.5, -0.25)
-        await wait(100)
+        await gameWait(this.time, 100)
         if (!this.game.device.os.desktop) {
           button!.setTexture(`${texture.key}`)
         }
@@ -83,7 +83,7 @@ export default class PasswordGameScene extends MinigameScene {
       ) {
         gameManager.suspendMinigame()
         this.computerScreen!.screen.anims.play('mdp_valid_animation')
-        await wait(2000)
+        await gameWait(this.time, 2000)
         this.onSuccess()
       } else if (
         this.typedPassword.length === this.password.length &&
@@ -93,7 +93,7 @@ export default class PasswordGameScene extends MinigameScene {
       ) {
         gameManager.suspendMinigame()
         this.computerScreen!.screen.anims.play('mdp_nope_animation')
-        await wait(2000)
+        await gameWait(this.time, 2000)
         this.onFailure()
       }
     })
@@ -124,7 +124,7 @@ export default class PasswordGameScene extends MinigameScene {
           )
         })
 
-        await wait(PASSWORD_DISPLAY_TIME)
+        await gameWait(this.time, PASSWORD_DISPLAY_TIME)
         animation.destroy()
         buttons.forEach(button => button.destroy())
         resolve()
