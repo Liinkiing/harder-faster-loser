@@ -2,6 +2,7 @@ import { ContainerConstructor } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { Emitter } from '../../manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
+import { List } from '../../../utils/extensions'
 
 const passwordCharMap = {
   1: -100,
@@ -13,15 +14,23 @@ const passwordCharMap = {
 
 export default class ComputerPasswordScreen extends Phaser.GameObjects
   .Container {
-  private passwordCount: number = 0
+  public readonly screen: Phaser.GameObjects.Sprite
+  private stars: List<Phaser.GameObjects.Sprite> = new List()
 
   constructor(params: ContainerConstructor) {
     super(params.scene, params.x, params.y)
+    this.screen = this.createScreenSprite()
+    this.add(this.screen)
 
-    this.add(this.createScreenSprite())
+    let passwordCount = 0
     Emitter.on(GameEvents.KeyboardPasswordButtonClicked, () => {
-      this.passwordCount++
-      this.add(this.createStar(passwordCharMap[this.passwordCount]))
+      passwordCount++
+      if (passwordCount >= 5) {
+        this.remove(this.stars)
+      } else {
+        this.stars.push(this.createStar(passwordCharMap[passwordCount]))
+        this.add(this.stars.last())
+      }
     })
     params.scene.add.existing(this)
   }

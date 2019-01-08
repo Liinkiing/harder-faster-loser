@@ -3,7 +3,7 @@ import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import KeyboardContainer from '../../objects/password-game/KeyboardContainer'
 import { Code } from '../../objects/password-game/KeyboardPasswordButton'
-import { shuffle } from '../../../utils/functions'
+import { shuffle, wait } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import ComputerPasswordScreen from '../../objects/password-game/ComputerPasswordScreen'
 
@@ -49,7 +49,7 @@ export default class PasswordGameScene extends MinigameScene {
 
   protected initListeners(): void {
     super.initListeners()
-    Emitter.on(GameEvents.KeyboardPasswordButtonClicked, (code: Code) => {
+    Emitter.on(GameEvents.KeyboardPasswordButtonClicked, async (code: Code) => {
       this.typedPassword.push(code)
       if (
         this.typedPassword.length === this.password.length &&
@@ -57,6 +57,8 @@ export default class PasswordGameScene extends MinigameScene {
           (value, index) => this.typedPassword[index] === value
         )
       ) {
+        this.computerScreen!.screen.anims.play('mdp_valid_animation')
+        await wait(2000)
         this.onSuccess()
       } else if (
         this.typedPassword.length === this.password.length &&
@@ -64,6 +66,8 @@ export default class PasswordGameScene extends MinigameScene {
           (value, index) => this.typedPassword[index] === value
         )
       ) {
+        this.computerScreen!.screen.anims.play('mdp_nope_animation')
+        await wait(2000)
         this.onFailure()
       }
     })
