@@ -38,8 +38,9 @@ export default class PasswordGameScene extends MinigameScene {
     this.keyboard = new KeyboardContainer({
       scene: this,
       y: window.innerHeight - 220,
-      x: 40,
+      x: window.innerWidth / 2,
     })
+    this.keyboard.x -= this.keyboard.getBounds().width / 2
   }
 
   public onFailure = (): void => {
