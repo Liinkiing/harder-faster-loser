@@ -7,6 +7,7 @@ import DebugContainer from './DebugContainer'
 import gameManager from '../../../game/manager/GameManager'
 import { scenesKeys } from '../../../utils/constants'
 import { PositionneableProps, TitledProps } from '../../../utils/interfaces'
+import GameDebugMinigamePicker from './GameDebugMinigamePicker'
 
 const GameDebugStateList: FunctionComponent<
   TitledProps & PositionneableProps
@@ -55,6 +56,9 @@ const GameDebugStateList: FunctionComponent<
           )
         })}
       </DebugContainer>
+      {state === GameState.Minigame && (
+        <GameDebugMinigamePicker title="Minigame picker" x={630} />
+      )}
     </>
   )
 }

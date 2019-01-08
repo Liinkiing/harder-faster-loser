@@ -1,7 +1,7 @@
 import { gameConfig, HFLGameConfig } from '../../utils/game'
 import gameStore from '../../store/GameStore'
 import { BaseEvents, GameEvents, GameState } from '../../utils/enums'
-import { scenesKeys } from '../../utils/constants'
+import { minigameSuffix, scenesKeys } from '../../utils/constants'
 import { EventEmitter } from 'events'
 import { appear, disappear } from '../../utils/anims'
 import { GameBackgroundColor } from '../../utils/types'
@@ -33,7 +33,6 @@ class GameManager {
 
   public loadMinigame = async (minigameKey: string) => {
     await this.startScene(minigameKey)
-    gameStore.changeState(GameState.Minigame)
   }
 
   public loadDeathscreen = async () => {
@@ -57,7 +56,7 @@ class GameManager {
         .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(
-        key.includes('_MINIGAME') ? GameState.Minigame : (key as GameState)
+        key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
       )
       gameStore.regenerateUiKey()
       gameStore.stopTransitionning()
@@ -69,9 +68,11 @@ class GameManager {
       this.game.scene.scenes
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
+      gameStore.startTransitionning()
       this.game.scene.start(key, optionnalData)
+      gameStore.stopTransitionning()
       gameStore.changeState(
-        key.includes('_MINIGAME') ? GameState.Minigame : (key as GameState)
+        key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
       )
       gameStore.regenerateUiKey()
       if (gameStore.paused) {
