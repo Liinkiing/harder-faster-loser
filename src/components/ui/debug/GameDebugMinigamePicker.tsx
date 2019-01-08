@@ -16,7 +16,6 @@ const GameDebugMinigamePicker: FunctionComponent<
     .filter(scene => scene.scene.key.includes(minigameSuffix))
     .map(scene => scene.scene.key)
 
-  console.log(minigames)
   const handleMinigameChange = (e: ChangeEvent<HTMLInputElement>) => {
     gameManager.loadMinigame(e.target.value)
   }
