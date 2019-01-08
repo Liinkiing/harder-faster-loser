@@ -1,14 +1,15 @@
 import { scenesKeys } from '../../../utils/constants'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
-import gameStore from '../../../store/GameStore'
 import KeyboardContainer from '../../objects/password-game/KeyboardContainer'
 import { Code } from '../../objects/password-game/KeyboardPasswordButton'
 import { shuffle } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
+import ComputerPasswordScreen from '../../objects/password-game/ComputerPasswordScreen'
 
 export default class PasswordGameScene extends MinigameScene {
   private keyboard?: KeyboardContainer
+  private computerScreen?: ComputerPasswordScreen
   private password: Code[] = []
   private typedPassword: Code[] = []
 
@@ -22,10 +23,15 @@ export default class PasswordGameScene extends MinigameScene {
     super.create()
     this.typedPassword = []
     this.password = this.createPassword()
+    this.computerScreen = new ComputerPasswordScreen({
+      scene: this,
+      x: window.innerWidth / 2,
+      y: window.innerHeight - 200,
+    })
     this.keyboard = new KeyboardContainer({
       scene: this,
-      y: 0,
-      x: 20 / gameStore.ratioResolution,
+      y: window.innerHeight - 220,
+      x: 40,
     })
   }
 

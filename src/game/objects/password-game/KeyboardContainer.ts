@@ -19,15 +19,14 @@ export default class KeyboardContainer extends Phaser.GameObjects.Container {
           new KeyboardPasswordButton({
             scene: params.scene,
             code: code as Code,
-            x: ((index % COLUMNS) * 280 + 280) / gameStore.ratioResolution,
-            y: ((index % ROWS) * 260 + 260) / gameStore.ratioResolution,
+            x: ((index % COLUMNS) * 280) / gameStore.ratioResolution,
+            y: ((index % ROWS) * 260) / gameStore.ratioResolution,
           })
         )
       }
     )
 
     this.add(this.buttons)
-
     params.scene.add.existing(this)
   }
 }

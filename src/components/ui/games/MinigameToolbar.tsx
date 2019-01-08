@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import RemainingTime from './RemainingTime'
+import { minigameToolbarHeight } from '../../../utils/constants'
 
 const Div = styled.div`
   background: rgb(55, 63, 71);
-  height: 84px;
+  height: ${minigameToolbarHeight}px;
   top: 0;
   position: absolute;
   z-index: 0;

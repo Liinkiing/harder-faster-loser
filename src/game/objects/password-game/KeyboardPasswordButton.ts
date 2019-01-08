@@ -2,9 +2,9 @@ import { SpriteConstructor } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { Emitter } from '../../manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
+import { Omit } from '../../../utils/types'
 
 export type Code = '◻' | '▲' | '|||' | '☰' | 'O' | 'U'
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
 export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
   constructor(params: Omit<SpriteConstructor, 'texture'> & { code: Code }) {
