@@ -1,6 +1,6 @@
 .game-debug-buttons-toolbar {
   position: absolute;
-  top: $debug-container-margin;
+  bottom: $debug-container-margin;
   right: $debug-container-margin;
   display: flex;
   & > * {
