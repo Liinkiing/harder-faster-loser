@@ -1,9 +1,11 @@
-import { gameConfig } from '../../utils/game'
+import { gameConfig, HFLGameConfig } from '../../utils/game'
 import gameStore from '../../store/GameStore'
 import { BaseEvents, GameEvents, GameState } from '../../utils/enums'
-import { scenesKeys } from '../../utils/constants'
+import { minigameSuffix, scenesKeys } from '../../utils/constants'
 import { EventEmitter } from 'events'
 import { appear, disappear } from '../../utils/anims'
+import { GameBackgroundColor } from '../../utils/types'
+import { gameBackgroundColorToCss } from '../../utils/functions'
 
 export const Emitter = new EventEmitter()
 
@@ -31,7 +33,6 @@ class GameManager {
 
   public loadMinigame = async (minigameKey: string) => {
     await this.startScene(minigameKey)
-    gameStore.changeState(GameState.Minigame)
   }
 
   public loadDeathscreen = async () => {
@@ -40,21 +41,23 @@ class GameManager {
 
   public startScene = async (
     key: string,
-    fade: boolean = gameConfig.fade,
+    config: HFLGameConfig = gameStore.config,
     optionnalData?: any
   ) => {
     Object.keys(GameEvents).forEach(event => {
       Emitter.removeAllListeners(GameEvents[event])
     })
     console.log('STARTED ' + key)
-    if (this.gameFader && fade) {
+    if (this.gameFader && config.fade) {
       gameStore.startTransitionning()
       await appear(this.gameFader)
       this.game.scene.scenes
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
       this.game.scene.start(key, optionnalData)
-      gameStore.changeState(key as GameState)
+      gameStore.changeState(
+        key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
+      )
       gameStore.regenerateUiKey()
       gameStore.stopTransitionning()
       await disappear(this.gameFader)
@@ -65,8 +68,12 @@ class GameManager {
       this.game.scene.scenes
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
+      gameStore.startTransitionning()
       this.game.scene.start(key, optionnalData)
-      gameStore.changeState(key as GameState)
+      gameStore.stopTransitionning()
+      gameStore.changeState(
+        key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
+      )
       gameStore.regenerateUiKey()
       if (gameStore.paused) {
         gameStore.resume()
@@ -90,12 +97,20 @@ class GameManager {
     gameStore.resume()
   }
 
+  public changeBackgroundColor = (color: GameBackgroundColor): void => {
+    if (this.activeScene) {
+      this.activeScene.cameras.main.setBackgroundColor(
+        gameBackgroundColorToCss(color)
+      )
+    }
+  }
+
   public restartActiveScene = async (
-    fade: boolean = gameConfig.fade,
+    config: HFLGameConfig = gameStore.config,
     data?: object
   ) => {
     if (this.activeScene) {
-      await this.startScene(this.activeScene.scene.key, fade, data)
+      await this.startScene(this.activeScene.scene.key, config, data)
     }
   }
 

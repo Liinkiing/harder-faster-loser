@@ -2,11 +2,7 @@ import React, { FunctionComponent, useEffect } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameManager from '../../game/manager/GameManager'
-import { gameConfig } from '../../utils/game'
-
-interface Props {
-  color?: string
-}
+import gameStore from '../../store/GameStore'
 
 const Div = styled.div`
   position: absolute;
@@ -18,6 +14,7 @@ const Div = styled.div`
   opacity: 0;
   &::after {
     content: '';
+    transition: all 0.3s;
     position: absolute;
     top: 0;
     left: 0;
@@ -27,21 +24,22 @@ const Div = styled.div`
   }
 `
 
-const Transition: FunctionComponent<Props> = props => {
+interface Props {
+  color?: string
+}
+
+const Transition: FunctionComponent<Props> = () => {
   const fader = React.createRef<HTMLDivElement>()
-  const color =
-    props.color !== undefined ? props.color : Transition.defaultProps!.color
+  const {
+    config: { fadeColor },
+  } = gameStore
   useEffect(() => {
     if (fader.current) {
       gameManager.gameFader = fader.current
     }
   }, [])
 
-  return <Div color={color} ref={fader} className="transition-fade" />
-}
-
-Transition.defaultProps = {
-  color: gameConfig.fadeColor,
+  return <Div color={fadeColor} ref={fader} className="transition-fade" />
 }
 
 export default observer(Transition)

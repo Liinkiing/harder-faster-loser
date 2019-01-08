@@ -4,7 +4,7 @@ import { GameDebugTheme } from '../utils/enums'
 class GameDebugStore {
   @observable public debug: boolean = false
   @observable public debugToolbar: boolean = true
-  @observable public theme: GameDebugTheme = GameDebugTheme.Dark
+  @observable public theme: GameDebugTheme = GameDebugTheme.Light
 
   @action public showDebugToolbar = (): void => {
     this.debugToolbar = true

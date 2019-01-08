@@ -10,15 +10,19 @@ import {
   PostMinigameScene,
   SplashscreenScene,
 } from '../game/scenes'
+import { GameBackgroundColor } from './types'
+import { green } from './colors'
 
-interface HFLGameConfig {
+export interface HFLGameConfig {
   fade: boolean
+  minigameDuration: number
+  backgroundColor: GameBackgroundColor
   fadeColor: string
 }
 
-export const gameConfig: GameConfig & HFLGameConfig = {
+export const gameConfig: GameConfig = {
   antialias: false,
-  backgroundColor: '#000000',
+  backgroundColor: green,
   input: {
     gamepad: false,
     keyboard: true,
@@ -53,8 +57,6 @@ export const gameConfig: GameConfig & HFLGameConfig = {
     PostMinigameScene,
     DeathscreenScene,
   ],
-  fade: true,
-  fadeColor: 'black',
   type: Phaser.AUTO,
   pixelArt: true,
 }

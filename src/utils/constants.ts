@@ -1,16 +1,18 @@
 import { GameCategory } from './enums'
 
+export const minigameSuffix = '_MINIGAME'
+
 export const scenesKeys = {
   Boot: 'BOOT',
   Splashscreen: 'SPLASHSCREEN',
   Homescreen: 'HOMESCREEN',
 
-  SpamGame: 'MINIGAME',
-  ActionSecondGame: 'ACTION_SECOND_GAME',
-  ActionThirdGame: 'ACTION_THIRD_GAME',
+  SpamGame: 'SPAM' + minigameSuffix,
+  ActionSecondGame: 'ACTION_SECOND' + minigameSuffix,
+  ActionThirdGame: 'ACTION_THIRD' + minigameSuffix,
 
-  ElevatorFirstGame: 'ELEVATOR_FIRST_GAME',
-  ElevatorSecondGame: 'ELEVATOR_SECOND_GAME',
+  ElevatorFirstGame: 'ELEVATOR_FIRST' + minigameSuffix,
+  ElevatorSecondGame: 'ELEVATOR_SECOND' + minigameSuffix,
 
   PostMinigameScene: 'POSTMINIGAME',
 

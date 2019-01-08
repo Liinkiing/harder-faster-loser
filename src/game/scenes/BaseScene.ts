@@ -1,6 +1,7 @@
-import { Emitter } from '../manager/GameManager'
+import gameManager, { Emitter } from '../manager/GameManager'
 import { BaseEvents } from '../../utils/enums'
 import AnimationHelper from '../manager/AnimationManager'
+import gameStore from '../../store/GameStore'
 
 export default class BaseScene extends Phaser.Scene {
   protected animationHelper?: AnimationHelper
@@ -24,6 +25,8 @@ export default class BaseScene extends Phaser.Scene {
 
   public create(): void {
     console.log(`create (${this.scene.key})`)
+    // console.log(gameStore.config.backgroundColor)
+    gameManager.changeBackgroundColor(gameStore.config.backgroundColor)
     Emitter.emit(BaseEvents.SceneCreated, this)
     this.initListeners()
   }

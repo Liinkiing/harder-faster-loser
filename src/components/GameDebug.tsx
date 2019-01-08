@@ -1,6 +1,7 @@
 import * as React from 'react'
 import GameDebugStateList from './ui/debug/GameDebugStateList'
 import { FunctionComponent } from 'react'
+import GameDebugConfigPanel from './ui/debug/GameDebugConfigPanel'
 
 interface Props {
   visible?: boolean
@@ -15,7 +16,8 @@ const GameDebug: FunctionComponent<Props> = props => {
       className="game-debug game-ui"
     >
       <h1>Debug interface</h1>
-      <GameDebugStateList />
+      <GameDebugConfigPanel title="Game config" x={10} y={180} />
+      <GameDebugStateList title="Game state" x={10} y={10} />
     </div>
   )
 }

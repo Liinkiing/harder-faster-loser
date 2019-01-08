@@ -1,7 +1,7 @@
-import {GameDebugTheme} from "./enums";
+import { GameDebugTheme } from './enums'
 
 export interface KeyboardShortcut {
-  keys: string[],
+  keys: string[]
   action: () => void
 }
 
@@ -13,6 +13,10 @@ export interface ForceThemeProps {
   forceTheme?: GameDebugTheme
 }
 
+export interface TitledProps {
+  title?: string
+}
+
 export interface PositionneableProps {
   x?: number
   y?: number
@@ -21,10 +25,10 @@ export interface PositionneableProps {
 }
 
 export interface ContainerConstructor {
-  scene: Phaser.Scene,
-  spamTexture: string,
-  x?: number,
-  y?: number,
+  scene: Phaser.Scene
+  spamTexture: string
+  x?: number
+  y?: number
   children?: Phaser.GameObjects.GameObject[]
 }
 

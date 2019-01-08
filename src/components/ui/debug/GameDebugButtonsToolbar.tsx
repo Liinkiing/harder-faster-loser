@@ -12,7 +12,7 @@ const GameDebugButtonsToolbar: FunctionComponent = () => {
 
   useKeyboardShortcuts([
     {
-      keys: ['T'],
+      keys: ['K'],
       action: toggleDebugToolbar,
     },
   ])

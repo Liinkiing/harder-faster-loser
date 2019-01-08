@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import gameManager, { Emitter } from '../../../game/manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
+import gameStore from '../../../store/GameStore'
 
 const ProgressOuter = styled.div`
   width: 100%;
@@ -15,12 +16,10 @@ const ProgressInner = styled.div`
   background: red;
 `
 
-interface Props {
-  maxDuration?: number
-}
-
-const RemainingTime: FunctionComponent<Props> = props => {
-  const { maxDuration } = props
+const RemainingTime: FunctionComponent = () => {
+  const {
+    config: { minigameDuration },
+  } = gameStore
   const [remaining, setRemaining] = useState(0)
   const button = useRef<HTMLButtonElement>(null)
   useEffect(() => {
@@ -35,7 +34,7 @@ const RemainingTime: FunctionComponent<Props> = props => {
     })
   }, [])
 
-  if (remaining >= maxDuration!) {
+  if (remaining >= minigameDuration!) {
     gameManager.activeScene!.time.removeAllEvents()
     Emitter.emit(GameEvents.RemainingTimeOver)
   }
@@ -43,7 +42,8 @@ const RemainingTime: FunctionComponent<Props> = props => {
   const onClick = () => {
     setRemaining(remaining + 1)
   }
-  const progress = 100 - (remaining / props.maxDuration!) * 100
+
+  const progress = 100 - (remaining / minigameDuration) * 100
 
   return (
     <ProgressOuter className="progress remaining-time">
@@ -62,10 +62,6 @@ const RemainingTime: FunctionComponent<Props> = props => {
       </ProgressInner>
     </ProgressOuter>
   )
-}
-
-RemainingTime.defaultProps = {
-  maxDuration: 500,
 }
 
 export default RemainingTime
