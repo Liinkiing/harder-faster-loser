@@ -1,10 +1,12 @@
 import { SpriteConstructor } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
+import { Emitter } from '../../manager/GameManager'
+import { GameEvents } from '../../../utils/enums'
 
 export type Code = '◻' | '▲' | '|||' | '☰' | 'O' | 'U'
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
-export default class KeyboardButton extends Phaser.GameObjects.Sprite {
+export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
   constructor(params: Omit<SpriteConstructor, 'texture'> & { code: Code }) {
     let texture = 'mdp_keyboard_1'
     switch (params.code) {
@@ -33,6 +35,17 @@ export default class KeyboardButton extends Phaser.GameObjects.Sprite {
       1 / gameStore.ratioResolution,
       1 / gameStore.ratioResolution
     )
+
+    this.setInteractive()
+    this.on('pointerover', () => {
+      this.setTexture(`${texture}_hover`)
+    })
+    this.on('pointerout', () => {
+      this.setTexture(`${texture}`)
+    })
+    this.on('pointerdown', () => {
+      Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, params.code)
+    })
 
     params.scene.add.existing(this)
   }

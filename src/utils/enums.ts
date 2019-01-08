@@ -17,6 +17,7 @@ export enum BaseEvents {
 }
 
 export enum GameEvents {
+  KeyboardPasswordButtonClicked = 'KEYBOARD_PASSWORD_BUTTON_CLICKED',
   SpamDestroyed = 'SPAM_DESTROYED',
   RemainingTimeOver = 'REMANING_TIME_OVER',
   SpamClicked = 'SPAM_CLICKED',
