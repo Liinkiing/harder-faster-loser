@@ -6,6 +6,7 @@ import { EventEmitter } from 'events'
 import { appear, disappear } from '../../utils/anims'
 import { GameBackgroundColor } from '../../utils/types'
 import { gameBackgroundColorToCss } from '../../utils/functions'
+import minigameManager from './MinigameManager'
 
 export const Emitter = new EventEmitter()
 
@@ -33,6 +34,10 @@ class GameManager {
 
   public loadMinigame = async (minigameKey: string) => {
     await this.startScene(minigameKey)
+  }
+
+  public loadNextMinigame = async () => {
+    await this.startScene(minigameManager.pickNextGameKey())
   }
 
   public loadDeathscreen = async () => {

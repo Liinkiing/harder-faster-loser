@@ -9,6 +9,7 @@ export const scenesKeys = {
 
   SandwichGame: 'SANDWICH'+ minigameSuffix,
   SpamMinigame: 'SPAM' + minigameSuffix,
+  PasswordMinigame: 'PASSWORD' + minigameSuffix,
 
   PostMinigameScene: 'POSTMINIGAME',
 

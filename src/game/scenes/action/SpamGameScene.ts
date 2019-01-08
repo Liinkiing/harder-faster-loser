@@ -40,12 +40,12 @@ export default class SpamGameScene extends MinigameScene {
 
   public onFailure(): void {
     console.log('you failed')
-    gameManager.restartActiveScene()
+    gameManager.loadNextMinigame()
   }
 
   public onSuccess(): void {
     console.log('you won')
-    gameManager.restartActiveScene()
+    gameManager.loadNextMinigame()
   }
 
   protected initListeners(): void {

@@ -1,6 +1,7 @@
 import { scenesKeys } from '../../utils/constants'
 import gameManager from '../manager/GameManager'
 import BaseScene from './BaseScene'
+import gameStore from '../../store/GameStore'
 
 export default class BootScene extends BaseScene {
   constructor() {
@@ -9,9 +10,11 @@ export default class BootScene extends BaseScene {
     })
   }
 
-  public create(): void {
+  public create = async () => {
     super.create()
-    gameManager.loadMinigame(scenesKeys.SandwichGame)
+    gameStore.changeConfig({ fade: false })
+    gameManager.loadNextMinigame()
+    gameStore.changeConfig({ fade: true })
     this.scene.stop(this.scene.key)
   }
 }

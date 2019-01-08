@@ -11,7 +11,10 @@ class MinigameManager {
   private lastGame?: string
 
   private games: IGames = {
-    [GameCategory.Action]: new List<string>([scenesKeys.SpamMinigame]),
+    [GameCategory.Action]: new List<string>([
+      scenesKeys.SpamMinigame,
+      scenesKeys.PasswordMinigame,
+    ]),
     [GameCategory.Waiting]: new List<string>([]),
   }
 
@@ -34,6 +37,7 @@ class MinigameManager {
     }
 
     this.currentCategory = selectedCategory
+    console.log(this.currentCategory)
 
     return this.pickGameKey(selectedCategory)
   }
@@ -64,9 +68,13 @@ class MinigameManager {
   }
 
   private pickRandomCategory(random: number): GameCategory {
-    if (random < categoriesProbability[GameCategory.Waiting]) {
+    if (
+      this.games[GameCategory.Waiting].length > 0 &&
+      random < categoriesProbability[GameCategory.Waiting]
+    ) {
       return GameCategory.Waiting
     } else if (
+      this.games[GameCategory.Action].length > 0 &&
       random >= categoriesProbability[GameCategory.Waiting] &&
       categoriesProbability[GameCategory.Action]
     ) {
