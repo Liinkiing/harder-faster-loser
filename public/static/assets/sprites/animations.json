@@ -11,6 +11,30 @@
       "showOnStart": true,
       "repeat": -1,
       "frameRate": 4
+    },
+    {
+      "key": "tokiRunAnimation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "toki_run",
+        "start": 0,
+        "end": 9
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 4
+    },
+    {
+      "key": "sandwichFlyingAnimation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "sandwich_flying",
+        "start": 0,
+        "end": 15
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 4
     }
   ]
 }

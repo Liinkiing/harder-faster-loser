@@ -6,6 +6,7 @@ import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
 import { gameConfig } from '../../../utils/game'
+import AnimatedSprite from './AnimatedSprite'
 
 export default class SandwichGameScene extends MinigameScene {
   private sky?: Phaser.GameObjects.Sprite
@@ -14,11 +15,19 @@ export default class SandwichGameScene extends MinigameScene {
   private streetLights?: Phaser.GameObjects.Sprite
   private grounds?: Array<Phaser.GameObjects.Sprite> = []
   private lastKeyPressed?: 37 | 39
+  private playerTexture: string
+  private sandwichTexture: string
+  private player?: Phaser.GameObjects.Sprite
+  private sandwich?: Phaser.GameObjects.Sprite
+  private currentFrame: integer = 0
 
   constructor() {
     super({
       key: scenesKeys.SandwichGame,
     })
+
+    this.playerTexture = 'tokiRunAnimation'
+    this.sandwichTexture = 'sandwichFlyingAnimation'
   }
 
   public preload(): void {
@@ -52,14 +61,80 @@ export default class SandwichGameScene extends MinigameScene {
 
   public update(time: number, delta: number): void {}
 
-  public animateBackground() {
-    this.sky!.x -= 2
-    this.building!.x -= 4
-    this.landscape!.x -= 5
-    this.streetLights!.x -= 6
+  private createPlayer = (playerTexture: string): Phaser.GameObjects.Sprite => {
+    const sprite = this.add
+      .sprite(
+        50,
+        Number(this.game.config.height) -
+          this.grounds![0].height / gameStore.ratioResolution,
+        playerTexture
+      )
+      .setOrigin(0, 1)
+
+    const spriteAnim = sprite.anims.animationManager.get(this.playerTexture)
+
+    if (!!spriteAnim) {
+      const [width, height] = [
+        spriteAnim.frames[0].frame.width,
+        spriteAnim.frames[0].frame.height,
+      ]
+      sprite.width = width
+      sprite.height = height
+    }
+
+    sprite.setScale(1 / gameStore.ratioResolution)
+
+    return sprite
+  }
+
+  private createSandwich = (
+    sandwichTexture: string
+  ): Phaser.GameObjects.Sprite => {
+    const sprite = this.add
+      .sprite(
+        this.grounds![this.grounds!.length - 1].x +
+          this.grounds![1].width / gameStore.ratioResolution,
+        Number(this.game.config.height) -
+          this.grounds![0].height / gameStore.ratioResolution,
+        sandwichTexture
+      )
+      .setOrigin(1, 1)
+
+    const spriteAnim = sprite.anims.animationManager.get(this.sandwichTexture)
+
+    if (!!spriteAnim) {
+      const [width, height] = [
+        spriteAnim.frames[0].frame.width,
+        spriteAnim.frames[0].frame.height,
+      ]
+      sprite.width = width
+      sprite.height = height
+    }
+
+    sprite.setScale(1 / gameStore.ratioResolution)
+
+    return sprite
+  }
+
+  public animateGame(): void {
+    const speedFactor = 20
+    this.sky!.x -= 2 * speedFactor
+    this.building!.x -= 4 * speedFactor
+    this.landscape!.x -= 5 * speedFactor
+    this.streetLights!.x -= 6 * speedFactor
     this.grounds!.forEach(ground => {
-      ground.x -= 7
+      ground.x -= 7 * speedFactor
     })
+    this.sandwich!.x -= 7 * speedFactor
+
+    this.player!.anims.play(this.playerTexture, true, this.currentFrame)
+    this.player!.anims.stop()
+
+    this.currentFrame += 1
+
+    if (this.currentFrame >= 9) {
+      this.currentFrame = 0
+    }
   }
 
   public initBackground(): void {
@@ -89,12 +164,22 @@ export default class SandwichGameScene extends MinigameScene {
     Array.from(['keydown_LEFT', 'keydown_RIGHT']).forEach(keyCode => {
       this.scene.scene.input.keyboard.on(keyCode, (e: KeyboardEvent) => {
         if (this.lastKeyPressed != e.keyCode) {
-          this.animateBackground()
+          this.animateGame()
           this.lastKeyPressed = e.keyCode as 37 | 39
-          console.log('fdp')
         }
       })
     })
+
+    this.player = this.createPlayer(this.playerTexture)
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+    this.player!.anims.play(this.playerTexture, true, 3)
+    this.player!.anims.stop()
+
+    this.sandwich = this.createSandwich(this.sandwichTexture)
+      .setOrigin(1, 1)
+      .setScale(1 / gameStore.ratioResolution)
+    this.sandwich!.anims.play(this.sandwichTexture, true, 0)
   }
 
   public onFailure(): void {
@@ -107,11 +192,3 @@ export default class SandwichGameScene extends MinigameScene {
     gameManager.restartActiveScene()
   }
 }
-
-/**
- * Mettre background
- * Mettre le sprite animé
- * Mettre les bouton pour faire avancer le perso
- * Ajouter le sandiwch
- * Gerer la colision avec le perso pour determiner l'event de victoire
- */

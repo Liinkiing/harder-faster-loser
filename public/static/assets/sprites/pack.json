@@ -16,6 +16,24 @@
         }
       },
       {
+        "type": "spritesheet",
+        "key": "toki_run",
+        "url": "/static/assets/sprites/sandwich-game/toki_run_255_480.png",
+        "frameConfig": {
+          "frameWidth": 255,
+          "frameHeight": 480
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "sandwich_flying",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_flying_585_540.png",
+        "frameConfig": {
+          "frameWidth": 585,
+          "frameHeight": 540
+        }
+      },
+      {
         "type": "image",
         "key": "sp_1",
         "url": "/static/assets/sprites/spam-game/sp_1.png"
