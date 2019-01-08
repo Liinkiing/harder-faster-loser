@@ -10,16 +10,19 @@ import {
   PostMinigameScene,
   SplashscreenScene,
 } from '../game/scenes'
+import { GameBackgroundColor } from './types'
+import { green } from './colors'
 
 export interface HFLGameConfig {
   fade: boolean
   minigameDuration: number
+  backgroundColor: GameBackgroundColor
   fadeColor: string
 }
 
 export const gameConfig: GameConfig = {
   antialias: false,
-  backgroundColor: '#000000',
+  backgroundColor: green,
   input: {
     gamepad: false,
     keyboard: true,

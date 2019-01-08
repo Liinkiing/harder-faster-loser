@@ -4,6 +4,8 @@ import { BaseEvents, GameEvents, GameState } from '../../utils/enums'
 import { scenesKeys } from '../../utils/constants'
 import { EventEmitter } from 'events'
 import { appear, disappear } from '../../utils/anims'
+import { GameBackgroundColor } from '../../utils/types'
+import { gameBackgroundColorToCss } from '../../utils/functions'
 
 export const Emitter = new EventEmitter()
 
@@ -88,6 +90,20 @@ class GameManager {
     }
     this.activeScene!.scene.resume()
     gameStore.resume()
+  }
+
+  public changeBackgroundColor = (color: GameBackgroundColor): void => {
+    if (this.activeScene) {
+      console.log(
+        'changing bg to ',
+        gameBackgroundColorToCss(color),
+        'for',
+        this.activeScene
+      )
+      this.activeScene.cameras.main.setBackgroundColor(
+        gameBackgroundColorToCss(color)
+      )
+    }
   }
 
   public restartActiveScene = async (

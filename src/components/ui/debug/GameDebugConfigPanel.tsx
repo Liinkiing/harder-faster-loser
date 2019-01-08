@@ -14,27 +14,7 @@ import { observer } from 'mobx-react-lite'
 import { CirclePicker, ColorResult } from 'react-color'
 import Spacer from '../Spacer'
 import ValidatableInput from '../ValidatableInput'
-
-const colors = [
-  '#f44336',
-  '#e91e63',
-  '#9c27b0',
-  '#673ab7',
-  '#3f51b5',
-  '#2196f3',
-  '#03a9f4',
-  '#00bcd4',
-  '#009688',
-  '#4caf50',
-  '#8bc34a',
-  '#cddc39',
-  '#ffeb3b',
-  '#ffc107',
-  '#ff9800',
-  '#ff5722',
-  '#000000',
-  '#ffffff',
-]
+import colors from '../../../utils/colors'
 
 const MinigameDurationCol = styled.span`
   width: 100px;
@@ -62,6 +42,11 @@ const GameDebugConfigPanel: FunctionComponent<
   const handleFadeColorChange = useCallback((color: ColorResult) => {
     changeConfig({
       fadeColor: color.hex,
+    })
+  }, [])
+  const handleGameBackgroundColorChange = useCallback((color: ColorResult) => {
+    changeConfig({
+      backgroundColor: { ...color.rgb, a: 1 },
     })
   }, [])
 
@@ -96,6 +81,13 @@ const GameDebugConfigPanel: FunctionComponent<
           />
         </>
       )}
+      <Spacer />
+      <p>Game background color</p>
+      <Spacer size="small" />
+      <CirclePicker
+        colors={colors}
+        onChangeComplete={handleGameBackgroundColorChange}
+      />
       <Spacer />
       <p>
         Minigame duration :

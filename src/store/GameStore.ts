@@ -2,6 +2,8 @@ import { action, observable } from 'mobx'
 import { GameState } from '../utils/enums'
 import { GameSettings } from '../utils/interfaces'
 import { HFLGameConfig } from '../utils/game'
+import gameManager from '../game/manager/GameManager'
+import { green } from '../utils/colors'
 
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
@@ -11,6 +13,7 @@ class GameStore {
   @observable public config: HFLGameConfig = {
     fade: true,
     fadeColor: 'black',
+    backgroundColor: green,
     minigameDuration: 500,
   }
   @observable public ratioResolution: number = 3
@@ -24,6 +27,9 @@ class GameStore {
 
   @action public changeConfig = (newConfig: Partial<HFLGameConfig>): void => {
     this.config = { ...this.config, ...newConfig }
+    if (newConfig.backgroundColor) {
+      gameManager.changeBackgroundColor(this.config.backgroundColor)
+    }
   }
 
   @action public changeState = (newState: GameState): void => {
