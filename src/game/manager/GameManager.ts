@@ -45,10 +45,12 @@ class GameManager {
   }
 
   public loadMinigame = async (minigameKey: string) => {
-    await this.startScene(minigameKey)
+    gameManager.suspendMinigame()
+    await minigameManager.startGame(minigameKey)
   }
 
   public loadNextMinigame = async () => {
+    gameManager.suspendMinigame()
     await this.startScene(minigameManager.pickNextGameKey())
   }
 

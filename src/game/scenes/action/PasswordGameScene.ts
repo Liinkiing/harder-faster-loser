@@ -6,6 +6,10 @@ import { Code } from '../../objects/password-game/KeyboardPasswordButton'
 import { shuffle, wait } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import ComputerPasswordScreen from '../../objects/password-game/ComputerPasswordScreen'
+import gameStore from '../../../store/GameStore'
+import KeyboardPasswordButton from '../../objects/password-game/KeyboardPasswordButton'
+
+const PASSWORD_DISPLAY_TIME = 3000
 
 export default class PasswordGameScene extends MinigameScene {
   private keyboard?: KeyboardContainer
@@ -19,10 +23,13 @@ export default class PasswordGameScene extends MinigameScene {
     })
   }
 
-  public create = (): void => {
+  public create = async () => {
     super.create()
+    gameManager.suspendMinigame()
     this.typedPassword = []
     this.password = this.createPassword()
+    await this.playIntroduction()
+    gameManager.resumeMinigame()
     this.computerScreen = new ComputerPasswordScreen({
       scene: this,
       x: window.innerWidth / 2,
@@ -37,12 +44,12 @@ export default class PasswordGameScene extends MinigameScene {
 
   public onFailure = (): void => {
     console.log('you failed')
-    gameManager.restartActiveScene()
+    gameManager.loadNextMinigame()
   }
 
   public onSuccess = (): void => {
     console.log('you win')
-    gameManager.restartActiveScene()
+    gameManager.loadNextMinigame()
   }
 
   public update = (time: number, delta: number): void => {}
@@ -72,6 +79,39 @@ export default class PasswordGameScene extends MinigameScene {
         await wait(2000)
         this.onFailure()
       }
+    })
+  }
+
+  private playIntroduction = async () => {
+    return new Promise(resolve => {
+      const buttons: KeyboardPasswordButton[] = []
+      const animation = this.scene.scene.add
+        .sprite(window.innerWidth / 2, window.innerHeight, 'mdp_paper')
+        .setScale(1 / gameStore.ratioResolution)
+        .setOrigin(0.5, 1)
+        .anims.play('mdp_paper_animation')
+
+      animation.on('animationcomplete', async () => {
+        this.password.forEach((code, index) => {
+          buttons.push(
+            new KeyboardPasswordButton({
+              scene: this,
+              style: 'symbol',
+              code: code as Code,
+              x:
+                window.innerWidth / 2 -
+                115 +
+                (index * 160) / gameStore.ratioResolution,
+              y: window.innerHeight - 240,
+            }).setOrigin(0.5, 1)
+          )
+        })
+
+        await wait(PASSWORD_DISPLAY_TIME)
+        animation.destroy()
+        buttons.forEach(button => button.destroy())
+        resolve()
+      })
     })
   }
 

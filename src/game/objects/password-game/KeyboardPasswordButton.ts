@@ -7,26 +7,32 @@ import { Omit } from '../../../utils/types'
 export type Code = '◻' | '▲' | '|||' | '☰' | 'O' | 'U'
 
 export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
-  constructor(params: Omit<SpriteConstructor, 'texture'> & { code: Code }) {
-    let texture = 'mdp_keyboard_1'
+  constructor(
+    params: Omit<SpriteConstructor, 'texture'> & {
+      code: Code
+      style?: 'keyboard' | 'symbol'
+    }
+  ) {
+    params.style = params.style || 'keyboard'
+    let texture = `mdp_${params.style}_1`
     switch (params.code) {
       case '◻':
-        texture = 'mdp_keyboard_1'
+        texture = `mdp_${params.style}_1`
         break
       case '▲':
-        texture = 'mdp_keyboard_2'
+        texture = `mdp_${params.style}_2`
         break
       case '|||':
-        texture = 'mdp_keyboard_3'
+        texture = `mdp_${params.style}_3`
         break
       case '☰':
-        texture = 'mdp_keyboard_4'
+        texture = `mdp_${params.style}_4`
         break
       case 'O':
-        texture = 'mdp_keyboard_5'
+        texture = `mdp_${params.style}_5`
         break
       case 'U':
-        texture = 'mdp_keyboard_6'
+        texture = `mdp_${params.style}_6`
         break
     }
     super(params.scene, params.x, params.y, texture, params.frame)
@@ -36,16 +42,18 @@ export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
       1 / gameStore.ratioResolution
     )
 
-    this.setInteractive()
-    this.on('pointerover', () => {
-      this.setTexture(`${texture}_hover`)
-    })
-    this.on('pointerout', () => {
-      this.setTexture(`${texture}`)
-    })
-    this.on('pointerdown', () => {
-      Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, params.code)
-    })
+    if (params.style === 'keyboard') {
+      this.setInteractive()
+      this.on('pointerover', () => {
+        this.setTexture(`${texture}_hover`)
+      })
+      this.on('pointerout', () => {
+        this.setTexture(`${texture}`)
+      })
+      this.on('pointerdown', () => {
+        Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, params.code)
+      })
+    }
 
     params.scene.add.existing(this)
   }

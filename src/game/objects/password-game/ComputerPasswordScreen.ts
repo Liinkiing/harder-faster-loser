@@ -23,6 +23,9 @@ export default class ComputerPasswordScreen extends Phaser.GameObjects
     this.add(this.screen)
 
     let passwordCount = 0
+    Emitter.once(GameEvents.KeyboardPasswordButtonClicked, () => {
+      this.screen.setTexture('mdp_screen_2')
+    })
     Emitter.on(GameEvents.KeyboardPasswordButtonClicked, () => {
       passwordCount++
       if (passwordCount >= 5) {
@@ -45,7 +48,7 @@ export default class ComputerPasswordScreen extends Phaser.GameObjects
   }
 
   private createScreenSprite = (): Phaser.GameObjects.Sprite => {
-    const sprite = this.scene.add.sprite(0, 0, 'mdp_screen_2')
+    const sprite = this.scene.add.sprite(0, 0, 'mdp_screen_1')
     sprite
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution, 1 / gameStore.ratioResolution)

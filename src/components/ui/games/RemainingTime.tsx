@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import gameManager, { Emitter } from '../../../game/manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
 import gameStore from '../../../store/GameStore'
+import { observer } from 'mobx-react-lite'
 
 const ProgressOuter = styled.div`
   width: 100%;
@@ -37,6 +38,7 @@ const RemainingTime: FunctionComponent = () => {
   if (remaining >= minigameDuration!) {
     gameManager.activeScene!.time.removeAllEvents()
     Emitter.emit(GameEvents.RemainingTimeOver)
+    setRemaining(minigameDuration - 0.00001)
   }
 
   const onClick = () => {
@@ -66,4 +68,4 @@ const RemainingTime: FunctionComponent = () => {
   )
 }
 
-export default RemainingTime
+export default observer(RemainingTime)
