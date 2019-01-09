@@ -3,7 +3,6 @@ import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
-import AnimatedSprite from './AnimatedSprite'
 
 export default class SandwichGameScene extends MinigameScene {
   private skies?: Phaser.GameObjects.Sprite[] = []
