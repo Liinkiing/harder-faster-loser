@@ -7,9 +7,9 @@ import AnimatedSprite from './AnimatedSprite'
 
 export default class SandwichGameScene extends MinigameScene {
   private skies?: Phaser.GameObjects.Sprite[] = []
-  private building?: Phaser.GameObjects.Sprite
-  private landscape?: Phaser.GameObjects.Sprite
-  private streetLights?: Phaser.GameObjects.Sprite
+  private buildings?: Phaser.GameObjects.Sprite[] = []
+  private landscapes?: Phaser.GameObjects.Sprite[] = []
+  private streetLights?: Phaser.GameObjects.Sprite[] = []
   private grounds?: Phaser.GameObjects.Sprite[] = []
   private lastKeyPressed?: 37 | 39
   private playerTexture: string
@@ -19,6 +19,7 @@ export default class SandwichGameScene extends MinigameScene {
   private sandwich?: Phaser.GameObjects.Sprite
   private currentFrame: integer = 0
   private isSandwichPicked: boolean = false
+  private lastGround?: Phaser.GameObjects.Sprite
 
   constructor() {
     super({
@@ -73,6 +74,7 @@ export default class SandwichGameScene extends MinigameScene {
     this.skies!.forEach(sky => {
       sky!.x -= 0.15
     })
+
     if (
       this.skies![this.skies!.length - 1].x +
         this.skies![this.skies!.length - 1].width / gameStore.ratioResolution <
@@ -83,6 +85,23 @@ export default class SandwichGameScene extends MinigameScene {
           this.skies![0].width / gameStore.ratioResolution,
           Number(this.game.config.height),
           'sky'
+        )
+        .setOrigin(0, 1)
+        .setScale(1 / gameStore.ratioResolution)
+    }
+
+    this.lastGround = this.grounds![this.grounds!.length - 1]
+
+    // If the right of the last ground is in the viewport, we need to add an other ground to avoid blank ground
+    if (
+      this.lastGround.x + this.lastGround.width / gameStore.ratioResolution <
+      this.game.config.width
+    ) {
+      this.grounds![this.grounds!.length] = this.add
+        .sprite(
+          this.grounds![0].width / gameStore.ratioResolution,
+          Number(this.game.config.height),
+          'ground'
         )
         .setOrigin(0, 1)
         .setScale(1 / gameStore.ratioResolution)
@@ -136,8 +155,8 @@ export default class SandwichGameScene extends MinigameScene {
     const offset = 200
     const sprite = this.add
       .sprite(
-        this.grounds![1].x +
-          this.grounds![1].width / gameStore.ratioResolution -
+        this.grounds![0].x +
+          this.grounds![0].width / gameStore.ratioResolution -
           offset,
         Number(this.game.config.height) -
           this.grounds![0].height / gameStore.ratioResolution,
@@ -161,18 +180,34 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private animateGame(): void {
-    const speedFactor = 4.2
+    const speedFactor = 2
 
-    this.skies!.forEach(sky => {
-      sky.x -= 2 * speedFactor
+    Array.from([
+      this.skies,
+      this.buildings,
+      this.landscapes,
+      this.streetLights,
+      this.grounds,
+    ]).forEach(element => {
+      let nativeSpeed = 1
+
+      if (element == this.skies) {
+        nativeSpeed = 2
+      } else if (element == this.buildings) {
+        nativeSpeed = 4
+      } else if (element == this.landscapes) {
+        nativeSpeed = 5
+      } else if (element == this.streetLights) {
+        nativeSpeed = 6
+      } else if (element == this.grounds) {
+        nativeSpeed = 7
+      }
+
+      element!.forEach(yo => {
+        yo.x -= nativeSpeed * speedFactor
+      })
     })
 
-    this.building!.x -= 4 * speedFactor
-    this.landscape!.x -= 5 * speedFactor
-    this.streetLights!.x -= 6 * speedFactor
-    this.grounds!.forEach(ground => {
-      ground.x -= 7 * speedFactor
-    })
     this.sandwich!.x -= 7 * speedFactor
 
     this.player!.anims.play(this.playerTexture, true, this.currentFrame)
@@ -183,35 +218,14 @@ export default class SandwichGameScene extends MinigameScene {
     if (this.currentFrame >= this.player!.texture.frameTotal) {
       this.currentFrame = 0
     }
-
-    const lastGround = this.grounds![this.grounds!.length - 1]
-
-    // If the right of the last ground is in the viewport, we need to add an other ground to avoid blank ground
-    if (
-      lastGround.x + lastGround.width / gameStore.ratioResolution <
-      this.game.config.width
-    ) {
-      this.grounds![this.grounds!.length] = this.add
-        .sprite(
-          this.grounds![0].width / gameStore.ratioResolution,
-          Number(this.game.config.height),
-          'ground'
-        )
-        .setOrigin(0, 1)
-        .setScale(1 / gameStore.ratioResolution)
-    }
   }
 
   private initBackground(): void {
-    Array.from(['building', 'landscape', 'streetLights']).forEach(texture => {
-      this[texture] = this.add
-        .sprite(0, Number(this.game.config.height), texture)
-        .setOrigin(0, 1)
-        .setScale(1 / gameStore.ratioResolution)
-    })
-
-    this.createSky()
-    this.createGround()
+    this.createBackgroundElement(this.skies!, 'sky')
+    this.createBackgroundElement(this.grounds!, 'ground')
+    this.createBackgroundElement(this.buildings!, 'building')
+    this.createBackgroundElement(this.landscapes!, 'landscape')
+    this.createBackgroundElement(this.streetLights!, 'streetLights')
 
     Array.from(['keydown_LEFT', 'keydown_RIGHT']).forEach(keyCode => {
       this.scene.scene.input.keyboard.on(keyCode, (e: KeyboardEvent) => {
@@ -229,34 +243,22 @@ export default class SandwichGameScene extends MinigameScene {
     this.sandwich = this.createSandwich(this.sandwichTexture)
     this.sandwich!.anims.play(this.sandwichTexture, true, 0)
 
-    this.physics.world.enable(this.player)
-    this.physics.world.enable(this.sandwich)
+    Array.from([this.player, this.sandwich]).forEach(element => {
+      this.physics.world.enable(element)
 
-    this.player.setDisplaySize(
-      this.player.width / gameStore.ratioResolution - 1,
-      this.player.height / gameStore.ratioResolution - 1
-    )
-  }
-
-  private createSky(): void {
-    this.skies![0] = this.add
-      .sprite(0, Number(this.game.config.height), 'sky')
-      .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
-  }
-
-  private createGround(): void {
-    this.grounds![0] = this.add
-      .sprite(0, Number(this.game.config.height), 'ground')
-      .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
-
-    this.grounds![1] = this.add
-      .sprite(
-        this.grounds![0].width / gameStore.ratioResolution,
-        Number(this.game.config.height),
-        'ground'
+      element.setDisplaySize(
+        element.width / gameStore.ratioResolution - 1,
+        element.height / gameStore.ratioResolution - 1
       )
+    })
+  }
+
+  private createBackgroundElement(
+    array: Phaser.GameObjects.Sprite[],
+    texture: string
+  ): void {
+    array![0] = this.add
+      .sprite(0, Number(this.game.config.height), texture)
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
   }
