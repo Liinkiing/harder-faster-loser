@@ -70,7 +70,6 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-
     /**
      * Need to crop cloud sprite.
      * For the moment, because of the sprite height, when we add 1 new sky, it masks the whole scene (z-index)
@@ -110,7 +109,7 @@ export default class SandwichGameScene extends MinigameScene {
       .sprite(
         50,
         Number(this.game.config.height) -
-        this.grounds![0].height / gameStore.ratioResolution,
+          this.grounds![0].height / gameStore.ratioResolution,
         playerTexture
       )
       .setOrigin(0, 1)
@@ -137,11 +136,15 @@ export default class SandwichGameScene extends MinigameScene {
     const offset = 200
     const sprite = this.add
       .sprite(
-        this.grounds![1].x + this.grounds![1].width / gameStore.ratioResolution - offset,
-        Number(this.game.config.height) - this.grounds![0].height / gameStore.ratioResolution,
+        this.grounds![1].x +
+          this.grounds![1].width / gameStore.ratioResolution -
+          offset,
+        Number(this.game.config.height) -
+          this.grounds![0].height / gameStore.ratioResolution,
         sandwichTexture
       )
-      .setOrigin(1, 1).setScale(1 / gameStore.ratioResolution)
+      .setOrigin(1, 1)
+      .setScale(1 / gameStore.ratioResolution)
 
     const spriteAnim = sprite.anims.animationManager.get(this.sandwichTexture)
 
@@ -162,7 +165,7 @@ export default class SandwichGameScene extends MinigameScene {
 
     this.skies!.forEach(sky => {
       sky.x -= 2 * speedFactor
-    });
+    })
 
     this.building!.x -= 4 * speedFactor
     this.landscape!.x -= 5 * speedFactor
@@ -177,33 +180,35 @@ export default class SandwichGameScene extends MinigameScene {
 
     this.currentFrame += 1
 
-    if (this.currentFrame >= 9) {
+    if (this.currentFrame >= this.player!.texture.frameTotal) {
       this.currentFrame = 0
     }
 
     const lastGround = this.grounds![this.grounds!.length - 1]
 
     // If the right of the last ground is in the viewport, we need to add an other ground to avoid blank ground
-    if (lastGround.x + lastGround.width / gameStore.ratioResolution < this.game.config.width) {
+    if (
+      lastGround.x + lastGround.width / gameStore.ratioResolution <
+      this.game.config.width
+    ) {
       this.grounds![this.grounds!.length] = this.add
         .sprite(
           this.grounds![0].width / gameStore.ratioResolution,
           Number(this.game.config.height),
           'ground'
         )
-        .setOrigin(0, 1).setScale(1 / gameStore.ratioResolution)
+        .setOrigin(0, 1)
+        .setScale(1 / gameStore.ratioResolution)
     }
   }
 
   private initBackground(): void {
-    Array.from(['building', 'landscape', 'streetLights']).forEach(
-      texture => {
-        this[texture] = this.add
-          .sprite(0, Number(this.game.config.height), texture)
-          .setOrigin(0, 1)
-          .setScale(1 / gameStore.ratioResolution)
-      }
-    )
+    Array.from(['building', 'landscape', 'streetLights']).forEach(texture => {
+      this[texture] = this.add
+        .sprite(0, Number(this.game.config.height), texture)
+        .setOrigin(0, 1)
+        .setScale(1 / gameStore.ratioResolution)
+    })
 
     this.createSky()
     this.createGround()
@@ -235,9 +240,9 @@ export default class SandwichGameScene extends MinigameScene {
 
   private createSky(): void {
     this.skies![0] = this.add
-    .sprite(0, Number(this.game.config.height), 'sky')
-    .setOrigin(0, 1)
-    .setScale(1 / gameStore.ratioResolution)
+      .sprite(0, Number(this.game.config.height), 'sky')
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
   }
 
   private createGround(): void {
