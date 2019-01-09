@@ -8,9 +8,9 @@ export const scenesKeys = {
   Splashscreen: 'SPLASHSCREEN',
   Homescreen: 'HOMESCREEN',
 
-  SandwichGame: 'SANDWICH'+ minigameSuffix,
-  SpamMinigame: 'SPAM' + minigameSuffix,
-  PasswordMinigame: 'PASSWORD' + minigameSuffix,
+  SandwichGame: 'SANDWICH' + minigameSuffix,
+  SpamGame: 'SPAM' + minigameSuffix,
+  PasswordGame: 'PASSWORD' + minigameSuffix,
 
   PostMinigameScene: 'POSTMINIGAME',
 

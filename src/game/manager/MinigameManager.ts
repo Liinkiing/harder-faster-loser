@@ -13,8 +13,9 @@ class MinigameManager {
 
   private games: IGames = {
     [GameCategory.Action]: new List<string>([
-      scenesKeys.SpamMinigame,
-      scenesKeys.PasswordMinigame,
+      scenesKeys.SpamGame,
+      scenesKeys.SandwichGame,
+      scenesKeys.PasswordGame,
     ]),
     [GameCategory.Waiting]: new List<string>([]),
   }

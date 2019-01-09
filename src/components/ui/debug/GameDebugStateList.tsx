@@ -29,7 +29,7 @@ const GameDebugStateList: FunctionComponent<
         gameManager.loadDeathscreen()
         break
       case GameState.Minigame:
-        gameManager.loadMinigame(scenesKeys.SpamMinigame)
+        gameManager.loadMinigame(scenesKeys.SpamGame)
         break
       default:
         gameManager.startScene(e.target.value as GameState)

@@ -25,7 +25,7 @@ export default class ComputerPasswordScreen extends Phaser.GameObjects
     this.screen = this.createScreenSprite()
     this.add(this.screen)
     const passwordGame = this.scene.scene.get(
-      scenesKeys.PasswordMinigame
+      scenesKeys.PasswordGame
     ) as PasswordGameScene
 
     Emitter.once(GameEvents.KeyboardPasswordButtonClicked, () => {

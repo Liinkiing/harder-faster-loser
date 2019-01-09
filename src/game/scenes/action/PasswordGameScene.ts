@@ -25,7 +25,7 @@ export default class PasswordGameScene extends MinigameScene {
 
   constructor() {
     super({
-      key: scenesKeys.PasswordMinigame,
+      key: scenesKeys.PasswordGame,
     })
   }
 
