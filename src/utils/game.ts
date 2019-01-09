@@ -1,5 +1,6 @@
 import {
   SpamGameScene,
+  SandwichGameScene,
   ActionSecondGameScene,
   ActionThirdGameScene,
   BootScene,
@@ -32,7 +33,7 @@ export const gameConfig: GameConfig = {
   physics: {
     arcade: {
       debug: true,
-      gravity: { y: 300 },
+      gravity: { y: 0 },
     },
     default: 'arcade',
   },
@@ -48,6 +49,7 @@ export const gameConfig: GameConfig = {
     HomescreenScene,
 
     SpamGameScene,
+    SandwichGameScene,
     ActionSecondGameScene,
     ActionThirdGameScene,
 

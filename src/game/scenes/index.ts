@@ -3,6 +3,7 @@ export { default as SplashscreenScene } from './SplashscreenScene'
 export { default as HomescreenScene } from './HomescreenScene'
 
 export { default as SpamGameScene } from './action/SpamGameScene'
+export { default as SandwichGameScene } from './action/SandwichGameScene'
 export {
   default as ActionSecondGameScene,
 } from './action/ActionSecondGameScene'
