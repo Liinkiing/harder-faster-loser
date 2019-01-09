@@ -70,23 +70,23 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-    /**
-     * Need to crop cloud sprite.
-     * For the moment, because of the sprite height, when we add 1 new sky, it masks the whole scene (z-index)
-     */
-    // this.skies!.forEach(sky => {
-    //   sky!.x -= 0.1
-    // });
-    // if (this.skies![this.skies!.length - 1].x + this.skies![this.skies!.length - 1].width / gameStore.ratioResolution < this.game.config.width) {
-    //   this.skies![this.skies!.length + 1] = this.add
-    //     .sprite(
-    //       this.skies![0].width / gameStore.ratioResolution,
-    //       Number(this.game.config.height),
-    //       'sky'
-    //     )
-    //     .setOrigin(0, 1)
-    //     .setScale(1 / gameStore.ratioResolution)
-    // }
+    this.skies!.forEach(sky => {
+      sky!.x -= 0.15
+    })
+    if (
+      this.skies![this.skies!.length - 1].x +
+        this.skies![this.skies!.length - 1].width / gameStore.ratioResolution <
+      this.game.config.width
+    ) {
+      this.skies![this.skies!.length + 1] = this.add
+        .sprite(
+          this.skies![0].width / gameStore.ratioResolution,
+          Number(this.game.config.height),
+          'sky'
+        )
+        .setOrigin(0, 1)
+        .setScale(1 / gameStore.ratioResolution)
+    }
 
     this.physics.add.collider(this.player!, this.sandwich!, () => {
       if (!this.isSandwichPicked) {
@@ -161,7 +161,7 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private animateGame(): void {
-    const speedFactor = 30
+    const speedFactor = 4.2
 
     this.skies!.forEach(sky => {
       sky.x -= 2 * speedFactor
