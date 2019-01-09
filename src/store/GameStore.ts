@@ -7,7 +7,7 @@ import { green } from '../utils/colors'
 
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
-  @observable public difficulity: number = 1
+  @observable public difficulty: number = 1
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
@@ -37,8 +37,8 @@ class GameStore {
     this.state = newState
   }
 
-  @action public increaseDifficulty = (): void => {
-    this.difficulity++
+  @action public increaseDifficulty = (step: number = 0.5): void => {
+    this.difficulty += step
   }
 
   @action public changeRatioResolution = (innerWidth: number): void => {
