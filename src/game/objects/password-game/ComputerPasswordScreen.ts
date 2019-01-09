@@ -4,9 +4,7 @@ import { Emitter } from '../../manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
 import { List } from '../../../utils/extensions'
 import { scenesKeys } from '../../../utils/constants'
-import PasswordGameScene, {
-  PAW_DISPLAY_TIME,
-} from '../../scenes/action/PasswordGameScene'
+import PasswordGameScene from '../../scenes/action/PasswordGameScene'
 import { gameWait } from '../../../utils/functions'
 
 const passwordCharMap = {
@@ -30,18 +28,18 @@ export default class ComputerPasswordScreen extends Phaser.GameObjects
       scenesKeys.PasswordMinigame
     ) as PasswordGameScene
 
-    let passwordCount = 0
     Emitter.once(GameEvents.KeyboardPasswordButtonClicked, () => {
       this.screen.setTexture('mdp_screen_2')
     })
     Emitter.on(GameEvents.KeyboardPasswordButtonClicked, async () => {
-      passwordCount++
-      if (passwordCount >= passwordGame.password.length) {
-        this.addStarChar(passwordCount)
-        await gameWait(this.scene.time, PAW_DISPLAY_TIME)
+      if (passwordGame.typedPassword.length < passwordGame.password.length) {
+        this.addStarChar(passwordGame.typedPassword.length)
+      } else if (
+        passwordGame.typedPassword.length === passwordGame.password.length
+      ) {
+        this.addStarChar(passwordGame.typedPassword.length)
+        await gameWait(this.scene.time, 30)
         this.remove(this.stars)
-      } else {
-        this.addStarChar(passwordCount)
       }
     })
     params.scene.add.existing(this)

@@ -11,17 +11,17 @@ import ComputerPasswordScreen from '../../objects/password-game/ComputerPassword
 import gameStore from '../../../store/GameStore'
 
 const PASSWORD_DISPLAY_TIME = 3000
-export const PAW_DISPLAY_TIME = 180
+const PAW_DISPLAY_TIME = 180
 
-const EASY_PASSWORD_LENGTH = 2
+const EASY_PASSWORD_LENGTH = 3
 const MEDIUM_PASSWORD_LENGTH = 4
 const HARD_PASSWORD_LENGTH = 5
 
 export default class PasswordGameScene extends MinigameScene {
   public password: Code[] = []
+  public typedPassword: Code[] = []
   private keyboard?: KeyboardContainer
   private computerScreen?: ComputerPasswordScreen
-  private typedPassword: Code[] = []
 
   constructor() {
     super({
@@ -88,7 +88,9 @@ export default class PasswordGameScene extends MinigameScene {
         )
       ) {
         gameManager.suspendMinigame()
-        this.computerScreen!.screen.anims.play('mdp_valid_animation')
+        this.computerScreen!.screen.setDepth(1000).anims.play(
+          'mdp_valid_animation'
+        )
         await gameWait(this.time, 2000)
         this.onSuccess()
       } else if (
@@ -98,7 +100,9 @@ export default class PasswordGameScene extends MinigameScene {
         )
       ) {
         gameManager.suspendMinigame()
-        this.computerScreen!.screen.anims.play('mdp_nope_animation')
+        this.computerScreen!.screen.setDepth(1000).anims.play(
+          'mdp_nope_animation'
+        )
         await gameWait(this.time, 2000)
         this.onFailure()
       }
