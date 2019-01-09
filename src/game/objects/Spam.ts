@@ -17,10 +17,10 @@ export default class Spam extends Phaser.GameObjects.Container {
     )
   }
 
-  constructor(params: ContainerConstructor) {
+  constructor(params: ContainerConstructor & { texture: string }) {
     super(params.scene, params.x, params.y, params.children)
-    this.texture = params.spamTexture
-    this.spamContent = this.createSpamContent(params.spamTexture)
+    this.texture = params.texture
+    this.spamContent = this.createSpamContent(params.texture)
     this.add(this.spamContent)
 
     this.closeIcon = this.createCloseIcon()

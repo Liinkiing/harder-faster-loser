@@ -1,12 +1,9 @@
 import {
   SpamGameScene,
+  PasswordGameScene,
   SandwichGameScene,
-  ActionSecondGameScene,
-  ActionThirdGameScene,
   BootScene,
   DeathscreenScene,
-  ElevatorFirstGameScene,
-  ElevatorSecondGameScene,
   HomescreenScene,
   PostMinigameScene,
   SplashscreenScene,
@@ -15,6 +12,7 @@ import { GameBackgroundColor } from './types'
 import { green } from './colors'
 
 export interface HFLGameConfig {
+  suspended: boolean
   fade: boolean
   minigameDuration: number
   backgroundColor: GameBackgroundColor
@@ -50,11 +48,7 @@ export const gameConfig: GameConfig = {
 
     SpamGameScene,
     SandwichGameScene,
-    ActionSecondGameScene,
-    ActionThirdGameScene,
-
-    ElevatorFirstGameScene,
-    ElevatorSecondGameScene,
+    PasswordGameScene,
 
     PostMinigameScene,
     DeathscreenScene,

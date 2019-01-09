@@ -6,6 +6,7 @@ import { EventEmitter } from 'events'
 import { appear, disappear } from '../../utils/anims'
 import { GameBackgroundColor } from '../../utils/types'
 import { gameBackgroundColorToCss } from '../../utils/functions'
+import minigameManager from './MinigameManager'
 
 export const Emitter = new EventEmitter()
 
@@ -21,6 +22,18 @@ class GameManager {
     })
   }
 
+  public suspendMinigame = (): void => {
+    gameStore.changeConfig({
+      suspended: true,
+    })
+  }
+
+  public resumeMinigame = (): void => {
+    gameStore.changeConfig({
+      suspended: false,
+    })
+  }
+
   public loadSplashscreen = async () => {
     await this.startScene(scenesKeys.Splashscreen)
     gameStore.changeState(GameState.Splashscreen)
@@ -32,7 +45,13 @@ class GameManager {
   }
 
   public loadMinigame = async (minigameKey: string) => {
-    await this.startScene(minigameKey)
+    gameManager.suspendMinigame()
+    await minigameManager.startGame(minigameKey)
+  }
+
+  public loadNextMinigame = async () => {
+    gameManager.suspendMinigame()
+    await this.startScene(minigameManager.pickNextGameKey())
   }
 
   public loadDeathscreen = async () => {
@@ -54,6 +73,7 @@ class GameManager {
       this.game.scene.scenes
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
+      gameManager.resumeMinigame()
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(
         key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
@@ -69,6 +89,7 @@ class GameManager {
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => scene.scene.stop(scene.scene.key))
       gameStore.startTransitionning()
+      gameManager.resumeMinigame()
       this.game.scene.start(key, optionnalData)
       gameStore.stopTransitionning()
       gameStore.changeState(

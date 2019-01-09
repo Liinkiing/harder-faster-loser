@@ -4,6 +4,17 @@ import { GameBackgroundColor } from './types'
 export const wait = (ms: number): Promise<TimerHandler> =>
   new Promise(resolve => setTimeout(resolve, ms))
 
+export const gameWait = (
+  clock: Phaser.Time.Clock,
+  ms: number
+): Promise<Phaser.Time.TimerEvent> =>
+  new Promise(resolve => {
+    return clock.addEvent({
+      callback: resolve,
+      delay: ms,
+    })
+  })
+
 export const randomRange = (min: number, max: number): number => {
   return Math.random() * (max - min) + min
 }
@@ -14,6 +25,15 @@ export const promiseAnimation = (animation: TweenLite | gsap.Animation) => {
       resolve()
     })
   )
+}
+
+export const shuffle = <T>(a: T[]): T[] => {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+
+  return a
 }
 
 export const gameBackgroundColorToCss = (
