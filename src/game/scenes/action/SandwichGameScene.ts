@@ -18,7 +18,6 @@ export default class SandwichGameScene extends MinigameScene {
   private player?: Phaser.GameObjects.Sprite
   private sandwich?: Phaser.GameObjects.Sprite
   private currentFrame: integer = 0
-  private isSandwichPicked: boolean = false
   private lastGround?: Phaser.GameObjects.Sprite
 
   constructor() {
@@ -67,6 +66,7 @@ export default class SandwichGameScene extends MinigameScene {
 
   public create() {
     super.create()
+    this.resetClassVariables()
     this.initBackground()
   }
 
@@ -106,21 +106,22 @@ export default class SandwichGameScene extends MinigameScene {
         .setOrigin(0, 1)
         .setScale(1 / gameStore.ratioResolution)
     }
-
-    this.physics.add.collider(this.player!, this.sandwich!, () => {
-      if (!this.isSandwichPicked) {
-        Emitter.emit(GameEvents.SandwichPicked, this)
-      }
-    })
   }
 
   protected initListeners(): void {
     super.initListeners()
     Emitter.on(GameEvents.SandwichPicked, () => {
-      this.isSandwichPicked = true
       this.player!.anims.play(this.playerWinTexture, true, 0)
       this.onSuccess()
     })
+  }
+
+  private resetClassVariables(): void {
+    this.skies = []
+    this.buildings = []
+    this.landscapes = []
+    this.streetLights = []
+    this.grounds = []
   }
 
   private createPlayer = (playerTexture: string): Phaser.GameObjects.Sprite => {
@@ -180,7 +181,7 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private animateGame(): void {
-    const speedFactor = 2
+    const speedFactor = 3
 
     Array.from([
       this.skies,
@@ -203,8 +204,8 @@ export default class SandwichGameScene extends MinigameScene {
         nativeSpeed = 7
       }
 
-      element!.forEach(yo => {
-        yo.x -= nativeSpeed * speedFactor
+      element!.forEach(props => {
+        props.x -= nativeSpeed * speedFactor
       })
     })
 
@@ -251,6 +252,15 @@ export default class SandwichGameScene extends MinigameScene {
         element.height / gameStore.ratioResolution - 1
       )
     })
+
+    const collider = this.physics.add.overlap(
+      this.player!,
+      this.sandwich,
+      () => {
+        Emitter.emit(GameEvents.SandwichPicked, this)
+        this.physics.world.removeCollider(collider)
+      }
+    )
   }
 
   private createBackgroundElement(
