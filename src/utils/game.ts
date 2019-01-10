@@ -2,6 +2,7 @@ import {
   SpamGameScene,
   PasswordGameScene,
   SandwichGameScene,
+  TrafficGameScene,
   BootScene,
   DeathscreenScene,
   HomescreenScene,
@@ -49,6 +50,7 @@ export const gameConfig: GameConfig = {
     SpamGameScene,
     SandwichGameScene,
     PasswordGameScene,
+    TrafficGameScene,
 
     PostMinigameScene,
     DeathscreenScene,
