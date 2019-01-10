@@ -281,6 +281,15 @@
         "url": "/static/assets/sprites/password-game/mdp_symbol_6.png"
       },
       {
+        "type": "image",
+        "key": "toki_whistle",
+        "url": "/static/assets/sprites/elevator-game/toki_whistle.png",
+        "frameConfig": {
+          "frameWidth": 300,
+          "frameHeight": 1185
+        }
+      },
+      {
         "type": "spritesheet",
         "key": "life_1",
         "url": "/static/assets/sprites/post-minigame/life_1_285_270.png",
