@@ -141,8 +141,9 @@
         "end": 1
       },
       "showOnStart": true,
-      "repeat": -1,
-      "frameRate": 4
+      "repeat": 1,
+      "frameRate": 4,
+      "yoyo": true
     },
     {
       "key": "sandwichFlyingAnimation",
