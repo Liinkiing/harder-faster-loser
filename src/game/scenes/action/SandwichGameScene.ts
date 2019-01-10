@@ -114,7 +114,8 @@ export default class SandwichGameScene extends MinigameScene {
     super.initListeners()
     Emitter.on(GameEvents.SandwichPicked, () => {
       this.playWinAnimation()
-      this.removeSandwich()
+      this.sandwich!.destroy()
+      this.disableMobileControls()
       this.isControlsEnabled = false
     })
   }
@@ -125,6 +126,7 @@ export default class SandwichGameScene extends MinigameScene {
     this.landscapes = []
     this.streetLights = []
     this.grounds = []
+    this.isControlsEnabled = true
   }
 
   private createPlayer = (playerTexture: string): Phaser.GameObjects.Sprite => {
@@ -328,11 +330,8 @@ export default class SandwichGameScene extends MinigameScene {
             this.leftBtn!.setTexture('btn_left_on')
             this.rightBtn!.setTexture('btn_right_off')
           }
-        } else {
-          this.leftBtn!.setTexture('btn_left_off')
-          this.rightBtn!.setTexture('btn_right_off')
+          this.animateGame()
         }
-        this.animateGame()
       })
     })
   }
@@ -349,7 +348,8 @@ export default class SandwichGameScene extends MinigameScene {
     })
   }
 
-  private removeSandwich(): void {
-    this.sandwich!.destroy()
+  private disableMobileControls(): void {
+    this.leftBtn!.setTexture('btn_left_off')
+    this.rightBtn!.setTexture('btn_right_off')
   }
 }
