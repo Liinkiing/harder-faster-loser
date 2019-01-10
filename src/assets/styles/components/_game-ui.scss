@@ -9,6 +9,11 @@
   display: flex;
   z-index: 10;
   color: whitesmoke;
+  transition: all 0.15s;
+  &.paused {
+    filter: blur(20px) grayscale(80%);
+    transform: scale(1.2);
+  }
 }
 
 h1 {
