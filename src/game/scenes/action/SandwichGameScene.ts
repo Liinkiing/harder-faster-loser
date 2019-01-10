@@ -3,6 +3,7 @@ import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
+import { element } from 'prop-types'
 
 export default class SandwichGameScene extends MinigameScene {
   private skies?: Phaser.GameObjects.Sprite[] = []
@@ -74,37 +75,32 @@ export default class SandwichGameScene extends MinigameScene {
       sky!.x -= 0.15
     })
 
-    if (
-      this.skies![this.skies!.length - 1].x +
-        this.skies![this.skies!.length - 1].width / gameStore.ratioResolution <
-      this.game.config.width
-    ) {
-      this.skies![this.skies!.length + 1] = this.add
-        .sprite(
-          this.skies![0].width / gameStore.ratioResolution,
-          Number(this.game.config.height),
-          'sky'
-        )
-        .setOrigin(0, 1)
-        .setScale(1 / gameStore.ratioResolution)
-    }
-
-    this.lastGround = this.grounds![this.grounds!.length - 1]
-
-    // If the right of the last ground is in the viewport, we need to add an other ground to avoid blank ground
-    if (
-      this.lastGround.x + this.lastGround.width / gameStore.ratioResolution <
-      this.game.config.width
-    ) {
-      this.grounds![this.grounds!.length] = this.add
-        .sprite(
-          this.grounds![0].width / gameStore.ratioResolution,
-          Number(this.game.config.height),
-          'ground'
-        )
-        .setOrigin(0, 1)
-        .setScale(1 / gameStore.ratioResolution)
-    }
+    Array.from([
+      this.skies,
+      this.buildings,
+      this.landscapes,
+      this.streetLights,
+      this.grounds,
+    ]).forEach(element => {
+      // Loop through props sprites to determine if we have to clone a props to avoid blank
+      if (
+        element![element!.length - 1].x +
+          element![element!.length - 1].width / gameStore.ratioResolution <
+        this.game.config.width
+      ) {
+        if (element == this.skies) {
+          this.createCloneBackgroundElement(element!, 'sky')
+        } else if (element == this.buildings) {
+          this.createCloneBackgroundElement(element!, 'building')
+        } else if (element == this.landscapes) {
+          this.createCloneBackgroundElement(element!, 'landscape')
+        } else if (element == this.streetLights) {
+          this.createCloneBackgroundElement(element!, 'streetLights')
+        } else if (element == this.grounds) {
+          this.createCloneBackgroundElement(element!, 'ground')
+        }
+      }
+    })
   }
 
   protected initListeners(): void {
@@ -215,7 +211,7 @@ export default class SandwichGameScene extends MinigameScene {
 
     this.currentFrame += 1
 
-    if (this.currentFrame >= this.player!.texture.frameTotal) {
+    if (this.currentFrame >= 8) {
       this.currentFrame = 0
     }
   }
@@ -268,6 +264,20 @@ export default class SandwichGameScene extends MinigameScene {
   ): void {
     array![0] = this.add
       .sprite(0, Number(this.game.config.height), texture)
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+  }
+
+  private createCloneBackgroundElement(
+    array: Phaser.GameObjects.Sprite[],
+    texture: string
+  ): void {
+    array[array.length + 1] = this.add
+      .sprite(
+        array[0].width / gameStore.ratioResolution,
+        Number(this.game.config.height),
+        texture
+      )
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
   }
