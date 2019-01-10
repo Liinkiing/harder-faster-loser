@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import gameStore from '../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import { gameBackgroundColorToCss } from '../../utils/functions'
@@ -10,6 +10,18 @@ interface StyledProps {
   backgroundColor?: string
 }
 
+const show = keyframes`
+  0% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
 const PostMinigameUIInner = styled.div<StyledProps>`
   background: ${(props: StyledProps) => props.backgroundColor};
   position: fixed;
@@ -18,6 +30,7 @@ const PostMinigameUIInner = styled.div<StyledProps>`
   width: 100%;
   height: 100%;
   display: flex;
+  animation: ${show} 0.1s;
   flex-direction: column;
   justify-content: center;
   align-items: center;

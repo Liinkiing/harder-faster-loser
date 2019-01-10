@@ -34,12 +34,12 @@ export default class SandwichGameScene extends MinigameScene {
 
   public onFailure(): void {
     console.log('you failed')
-    gameManager.loadNextMinigame()
+    gameManager.loadPostMinigame()
   }
 
   public onSuccess(): void {
     console.log('you won')
-    gameManager.loadNextMinigame()
+    gameManager.loadPostMinigame()
   }
 
   public preload(): void {

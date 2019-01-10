@@ -51,12 +51,12 @@ export default class PasswordGameScene extends MinigameScene {
 
   public onFailure = (): void => {
     console.log('you failed')
-    gameManager.loadNextMinigame()
+    gameManager.loadPostMinigame()
   }
 
   public onSuccess = (): void => {
     console.log('you win')
-    gameManager.loadNextMinigame()
+    gameManager.loadPostMinigame()
   }
 
   public update = (time: number, delta: number): void => {}

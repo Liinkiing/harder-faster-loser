@@ -54,6 +54,11 @@ class GameManager {
     await this.startScene(minigameManager.pickNextGameKey())
   }
 
+  public loadPostMinigame = async () => {
+    gameManager.suspendMinigame()
+    await this.startScene(scenesKeys.PostMinigameScene)
+  }
+
   public loadDeathscreen = async () => {
     await this.startScene(scenesKeys.Deathscreen)
   }
