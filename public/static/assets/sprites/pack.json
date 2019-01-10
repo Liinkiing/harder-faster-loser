@@ -152,6 +152,26 @@
       },
       {
         "type": "image",
+        "key": "btn_left_on",
+        "url": "/static/assets/sprites/sandwich-game/btn_left_on.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_left_off",
+        "url": "/static/assets/sprites/sandwich-game/btn_left_off.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_right_on",
+        "url": "/static/assets/sprites/sandwich-game/btn_right_on.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_right_off",
+        "url": "/static/assets/sprites/sandwich-game/btn_right_off.png"
+      },
+      {
+        "type": "image",
         "key": "mdp_keyboard_1",
         "url": "/static/assets/sprites/password-game/mdp_keyboard_1.png"
       },
