@@ -75,12 +75,6 @@ export default class SpamGameScene extends MinigameScene {
       'hairAnimation',
       'gamblingAnimation',
       'yoAnimation',
-      // 'sp_1',
-      // 'sp_2',
-      // 'sp_3',
-      // 'sp_4_1',
-      // 'sp_5_1',
-      // 'sp_6_1',
     ])
 
     return new Spam({
