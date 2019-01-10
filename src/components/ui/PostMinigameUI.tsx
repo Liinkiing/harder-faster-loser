@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import gameStore from '../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import { gameBackgroundColorToCss } from '../../utils/functions'
+import LivesContainer from './post-minigame/LivesList'
+import { black } from '../../utils/colors'
 
 interface StyledProps {
   backgroundColor?: string
@@ -16,17 +18,28 @@ const PostMinigameUIInner = styled.div<StyledProps>`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const Score = styled.h2`
+  margin-bottom: 40px;
+  font-size: 36px;
+  color: ${black};
 `
 
 const PostMinigameUI: FunctionComponent = () => {
   const {
+    timeElapsed,
     config: { backgroundColor },
   } = gameStore
   return (
     <PostMinigameUIInner
       backgroundColor={gameBackgroundColorToCss(backgroundColor)}
     >
-      <h1>Je suis l'ui du postmini game</h1>
+      <Score>{timeElapsed}</Score>
+      <LivesContainer />
     </PostMinigameUIInner>
   )
 }

@@ -8,11 +8,13 @@ import { green } from '../utils/colors'
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
+  @observable public lives: number = 3
+  @observable public elapsed: number = 0
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
     suspended: false,
-    fade: true,
+    fade: false,
     fadeColor: 'black',
     backgroundColor: green,
     minigameDuration: 500,
@@ -21,6 +23,10 @@ class GameStore {
   @observable public transitionning: boolean = false
   @observable
   public uiKey: string = new Phaser.Math.RandomDataGenerator().uuid()
+
+  @action public increaseElapsed = (delta: number = 1): void => {
+    this.elapsed += delta
+  }
 
   @action public regenerateUiKey = (): void => {
     this.uiKey = new Phaser.Math.RandomDataGenerator().uuid()
@@ -31,6 +37,10 @@ class GameStore {
     if (newConfig.backgroundColor) {
       gameManager.changeBackgroundColor(this.config.backgroundColor)
     }
+  }
+
+  public decreaseLife = (step: number = 1): void => {
+    this.lives -= step
   }
 
   @action public changeState = (newState: GameState): void => {
@@ -76,6 +86,17 @@ class GameStore {
 
   @action public toggleTransition = (): void => {
     this.transitionning = !this.transitionning
+  }
+
+  get secondsElapsed() {
+    return (this.elapsed / 1000) * 16
+  }
+
+  get timeElapsed() {
+    return new Date(this.secondsElapsed * 1000).toLocaleTimeString('fr', {
+      minute: '2-digit',
+      second: '2-digit',
+    })
   }
 }
 

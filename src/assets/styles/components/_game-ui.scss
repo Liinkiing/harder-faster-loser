@@ -9,12 +9,14 @@
   display: flex;
   z-index: 10;
   color: whitesmoke;
-  & h1 {
-    font-size: 2rem;
-    margin: .5rem;
-  }
-  & h2 {
-    font-size: 1.5rem;
-    margin: .25rem;
-  }
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0.25rem;
 }

@@ -12,9 +12,10 @@ export default class BootScene extends BaseScene {
 
   public create = async () => {
     super.create()
+    const initial = gameStore.config.fade
     gameStore.changeConfig({ fade: false })
     gameManager.startScene(scenesKeys.PostMinigameScene)
-    gameStore.changeConfig({ fade: true })
+    gameStore.changeConfig({ fade: initial })
     this.scene.stop(this.scene.key)
   }
 }
