@@ -46,3 +46,8 @@ export const gameBackgroundColorToCss = (
 
   return String(backgroundColor)
 }
+
+export const randomString = (length: number) =>
+  Math.random()
+    .toString(36)
+    .substring(length)
