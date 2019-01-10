@@ -14,8 +14,8 @@ class GameStore {
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
     suspended: false,
-    fade: false,
-    fadeColor: 'black',
+    fade: true,
+    fadeColor: green,
     backgroundColor: green,
     minigameDuration: 500,
   }
