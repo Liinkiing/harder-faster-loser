@@ -10,6 +10,7 @@ interface Props {
   repeat?: number
   isResponsive?: boolean
   steps: number
+  scale?: number
   fps: number
   direction?: string
   timeout?: number
@@ -61,8 +62,9 @@ class Spritesheet extends Component<Props> {
     isResponsive: true,
     direction: 'forward',
     timeout: 0,
+    scale: 1,
     autoplay: true,
-    loop: false,
+    loop: true,
     startAt: 0,
     endAt: false,
     background: '',
@@ -111,7 +113,15 @@ class Spritesheet extends Component<Props> {
   constructor(props: Props) {
     super(props)
 
-    const { isResponsive, startAt, endAt, fps, steps, direction } = this.props
+    const {
+      isResponsive,
+      startAt,
+      endAt,
+      fps,
+      steps,
+      direction,
+      scale,
+    } = this.props
 
     this.id = `spritesheet--${randomString(8)}`
     this.spriteEl = this.spriteElContainer = this.spriteElMove = this.imageSprite = this.cols = this.rows = null
@@ -126,7 +136,7 @@ class Spritesheet extends Component<Props> {
     this.steps = steps
     this.completeLoopCicles = 0
     this.isPlaying = false
-    this.spriteScale = 1
+    this.spriteScale = scale!
     this.direction = this.setDirection(direction as Direction)
     this.frame = this.startAt
       ? this.startAt
@@ -287,11 +297,11 @@ class Spritesheet extends Component<Props> {
   }
 
   public resize = (callback = true) => {
-    const { widthFrame, onResize } = this.props
+    const { widthFrame, onResize, scale } = this.props
 
     if (this.isResponsive) {
       this.spriteScale =
-        (this.spriteEl! as HTMLElement).offsetWidth / widthFrame
+        ((this.spriteEl! as HTMLElement).offsetWidth / widthFrame) * scale!
       this.spriteElContainer.style.transform = `scale(${this.spriteScale})`
       this.spriteElContainer.style.imageRendering = 'pixelated'
       ;(this.spriteEl! as HTMLElement).style.height = `${this.getInfo(
@@ -396,7 +406,7 @@ class Spritesheet extends Component<Props> {
               : this.direction === 'rewind'
               ? this.steps - 1
               : 0
-            if (this.completeLoopCicles === repeat! + 1) {
+            if (this.completeLoopCicles === repeat!) {
               this.pause()
             }
           }
