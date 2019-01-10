@@ -3,7 +3,6 @@ import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
-import { resolve } from 'url'
 import { gameWait } from '../../../utils/functions'
 
 export default class SandwichGameScene extends MinigameScene {
@@ -298,6 +297,7 @@ export default class SandwichGameScene extends MinigameScene {
         Number(this.game.config.height) - 50,
         'btn_left_on'
       )
+      .setDepth(1000)
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
     this.leftBtn.x =
@@ -309,6 +309,7 @@ export default class SandwichGameScene extends MinigameScene {
         Number(this.game.config.height) - 50,
         'btn_right_on'
       )
+      .setDepth(1000)
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
     this.rightBtn.x =
