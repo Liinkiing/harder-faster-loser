@@ -294,6 +294,7 @@ export default class SandwichGameScene extends MinigameScene {
         Number(this.game.config.height) - 50,
         'btn_left_on'
       )
+      .setDepth(1000)
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
     leftBtn.x = leftBtn.x - leftBtn.width / gameStore.ratioResolution
@@ -304,6 +305,7 @@ export default class SandwichGameScene extends MinigameScene {
         Number(this.game.config.height) - 50,
         'btn_right_on'
       )
+      .setDepth(1000)
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
     rightBtn.x = rightBtn.x + rightBtn.width / gameStore.ratioResolution
