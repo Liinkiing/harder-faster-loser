@@ -62,12 +62,17 @@ export default class SandwichGameScene extends MinigameScene {
       'ground',
       '/static/assets/sprites/sandwich-game/sandwich_plan_ground.png'
     )
+    this.load.image(
+      'btn_left_on',
+      '/static/assets/sprites/sandwich-game/btn_left_on.png'
+    )
   }
 
   public create() {
     super.create()
     this.resetClassVariables()
     this.initBackground()
+    this.createControls()
   }
 
   public update(time: number, delta: number): void {
@@ -280,5 +285,44 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
+  }
+
+  private createControls(): void {
+    const leftBtn = this.add
+      .sprite(
+        Number(this.game.config.width) / 2,
+        Number(this.game.config.height) - 50,
+        'btn_left_on'
+      )
+      .setOrigin(0.5, 1)
+      .setScale(1 / gameStore.ratioResolution)
+    leftBtn.x = leftBtn.x - leftBtn.width / gameStore.ratioResolution
+
+    const rightBtn = this.add
+      .sprite(
+        Number(this.game.config.width) / 2,
+        Number(this.game.config.height) - 50,
+        'btn_right_on'
+      )
+      .setOrigin(0.5, 1)
+      .setScale(1 / gameStore.ratioResolution)
+    rightBtn.x = rightBtn.x + rightBtn.width / gameStore.ratioResolution
+
+    Array.from([leftBtn, rightBtn]).forEach(btn => {
+      btn.setInteractive()
+      btn.input.hitArea.setSize(btn.width, btn.height)
+
+      btn.on('pointerdown', () => {
+        if (btn == leftBtn) {
+          leftBtn.setTexture('btn_left_off')
+          rightBtn.setTexture('btn_right_on')
+        } else {
+          leftBtn.setTexture('btn_left_on')
+          rightBtn.setTexture('btn_right_off')
+        }
+
+        this.animateGame()
+      })
+    })
   }
 }
