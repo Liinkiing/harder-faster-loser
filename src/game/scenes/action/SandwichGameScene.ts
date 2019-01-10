@@ -3,7 +3,8 @@ import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
-import { element } from 'prop-types'
+import { resolve } from 'url'
+import { gameWait } from '../../../utils/functions'
 
 export default class SandwichGameScene extends MinigameScene {
   private skies?: Phaser.GameObjects.Sprite[] = []
@@ -18,7 +19,9 @@ export default class SandwichGameScene extends MinigameScene {
   private player?: Phaser.GameObjects.Sprite
   private sandwich?: Phaser.GameObjects.Sprite
   private currentFrame: integer = 0
-  private lastGround?: Phaser.GameObjects.Sprite
+  private leftBtn?: Phaser.GameObjects.Sprite
+  private rightBtn?: Phaser.GameObjects.Sprite
+  private isControlsEnabled?: boolean = true
 
   constructor() {
     super({
@@ -111,8 +114,9 @@ export default class SandwichGameScene extends MinigameScene {
   protected initListeners(): void {
     super.initListeners()
     Emitter.on(GameEvents.SandwichPicked, () => {
-      this.player!.anims.play(this.playerWinTexture, true, 0)
-      this.onSuccess()
+      this.playWinAnimation()
+      this.removeSandwich()
+      this.isControlsEnabled = false
     })
   }
 
@@ -230,7 +234,7 @@ export default class SandwichGameScene extends MinigameScene {
 
     Array.from(['keydown_LEFT', 'keydown_RIGHT']).forEach(keyCode => {
       this.scene.scene.input.keyboard.on(keyCode, (e: KeyboardEvent) => {
-        if (this.lastKeyPressed !== e.keyCode) {
+        if (this.lastKeyPressed !== e.keyCode && this.isControlsEnabled) {
           this.animateGame()
           this.lastKeyPressed = e.keyCode as 37 | 39
         }
@@ -288,7 +292,7 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private createControls(): void {
-    const leftBtn = this.add
+    this.leftBtn = this.add
       .sprite(
         Number(this.game.config.width) / 2,
         Number(this.game.config.height) - 50,
@@ -296,9 +300,10 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
-    leftBtn.x = leftBtn.x - leftBtn.width / gameStore.ratioResolution
+    this.leftBtn.x =
+      this.leftBtn.x - this.leftBtn.width / gameStore.ratioResolution
 
-    const rightBtn = this.add
+    this.rightBtn = this.add
       .sprite(
         Number(this.game.config.width) / 2,
         Number(this.game.config.height) - 50,
@@ -306,23 +311,44 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
-    rightBtn.x = rightBtn.x + rightBtn.width / gameStore.ratioResolution
+    this.rightBtn.x =
+      this.rightBtn.x + this.rightBtn.width / gameStore.ratioResolution
 
-    Array.from([leftBtn, rightBtn]).forEach(btn => {
+    Array.from([this.leftBtn, this.rightBtn]).forEach(btn => {
       btn.setInteractive()
       btn.input.hitArea.setSize(btn.width, btn.height)
 
       btn.on('pointerdown', () => {
-        if (btn == leftBtn) {
-          leftBtn.setTexture('btn_left_off')
-          rightBtn.setTexture('btn_right_on')
+        if (this.isControlsEnabled) {
+          if (btn == this.leftBtn) {
+            this.leftBtn.setTexture('btn_left_off')
+            this.rightBtn!.setTexture('btn_right_on')
+          } else {
+            this.leftBtn!.setTexture('btn_left_on')
+            this.rightBtn!.setTexture('btn_right_off')
+          }
         } else {
-          leftBtn.setTexture('btn_left_on')
-          rightBtn.setTexture('btn_right_off')
+          this.leftBtn!.setTexture('btn_left_off')
+          this.rightBtn!.setTexture('btn_right_off')
         }
-
         this.animateGame()
       })
     })
+  }
+
+  private playWinAnimation = async () => {
+    return new Promise(resolve => {
+      const animation = this.player!.anims.play(this.playerWinTexture, true, 0)
+
+      animation.on('animationcomplete', async () => {
+        await gameWait(this.time, 500)
+        this.onSuccess()
+        resolve()
+      })
+    })
+  }
+
+  private removeSandwich(): void {
+    this.sandwich!.destroy()
   }
 }
