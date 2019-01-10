@@ -1,6 +1,6 @@
 # Harder, Faster, Looser
 
-A game made with **Typescript** and **PhaserJS**
+A game made with **Typescript**, **React** (with _hooks_) and **PhaserJS**
 
 ## Useful links :
 - 📅 [Backlog](https://github.com/Liinkiing/harder-faster-looser/projects/1)
