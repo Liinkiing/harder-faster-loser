@@ -12,6 +12,7 @@ export const scenesKeys = {
   SpamGame: 'SPAM' + minigameSuffix,
   PasswordGame: 'PASSWORD' + minigameSuffix,
   ElevatorGame: 'ELEVATOR' + minigameSuffix,
+  TrafficGame: 'TRAFFIC' + minigameSuffix,
 
   PostMinigameScene: 'POSTMINIGAME',
 
