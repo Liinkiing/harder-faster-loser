@@ -147,7 +147,7 @@ export class GameManager {
       return
     }
     if (gameStore.paused) {
-      this.activeScene!.sound.setDetune(-50)
+      this.activeScene!.sound.setDetune(0)
       this.activeScene!.scene.resume()
       gameStore.resume()
     } else {
