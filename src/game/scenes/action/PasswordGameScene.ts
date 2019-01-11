@@ -49,16 +49,6 @@ export default class PasswordGameScene extends MinigameScene {
     this.keyboard.x -= this.keyboard.getBounds().width / 2
   }
 
-  public onFailure = (): void => {
-    console.log('you failed')
-    gameManager.loadPostMinigame()
-  }
-
-  public onSuccess = (): void => {
-    console.log('you win')
-    gameManager.loadPostMinigame()
-  }
-
   public update = (time: number, delta: number): void => {}
 
   protected initListeners(): void {

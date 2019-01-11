@@ -5,10 +5,27 @@ import { HFLGameConfig } from '../utils/game'
 import gameManager from '../game/manager/GameManager'
 import { green } from '../utils/colors'
 
+interface TokiStatus {
+  hasStress: boolean
+  hasJustStress: boolean
+  hasBrain: boolean
+  hasJustBrain: boolean
+  hasHeart: boolean
+  hasJustHeart: boolean
+}
+
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
-  @observable public lives: number = 3
+  @observable public status: TokiStatus = {
+    hasStress: false,
+    hasBrain: true,
+    hasHeart: true,
+    hasJustStress: true,
+    hasJustBrain: false,
+    hasJustHeart: false,
+  }
+
   @observable public elapsed: number = 0
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
@@ -39,8 +56,24 @@ class GameStore {
     }
   }
 
-  public decreaseLife = (step: number = 1): void => {
-    this.lives -= step
+  @action public looseLife = (): void => {
+    if (!this.status.hasStress) {
+      this.status.hasStress = true
+      this.status.hasJustStress = true
+      this.status.hasJustBrain = false
+      this.status.hasJustHeart = false
+      this.status.hasJustStress = true
+    } else if (this.status.hasBrain) {
+      this.status.hasBrain = false
+      this.status.hasJustStress = false
+      this.status.hasJustBrain = true
+      this.status.hasJustHeart = false
+    } else if (this.status.hasHeart) {
+      this.status.hasHeart = false
+      this.status.hasJustStress = false
+      this.status.hasJustBrain = false
+      this.status.hasJustHeart = true
+    }
   }
 
   @action public changeState = (newState: GameState): void => {
@@ -86,6 +119,30 @@ class GameStore {
 
   @action public toggleTransition = (): void => {
     this.transitionning = !this.transitionning
+  }
+
+  get hasStress() {
+    return this.status.hasStress
+  }
+
+  get hasLoosedBrain() {
+    return !this.status.hasBrain
+  }
+
+  get hasLoosedHeart() {
+    return !this.status.hasHeart
+  }
+
+  get hasJustStress() {
+    return this.status.hasStress
+  }
+
+  get hasJustLoosedBrain() {
+    return !this.status.hasBrain
+  }
+
+  get hasJustLoosedHeart() {
+    return this.status.hasJustHeart
   }
 
   get secondsElapsed() {

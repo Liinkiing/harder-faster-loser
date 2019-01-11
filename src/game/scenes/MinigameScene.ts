@@ -1,11 +1,18 @@
 import BaseScene from './BaseScene'
-import { Emitter } from '../manager/GameManager'
+import gameManager, { Emitter } from '../manager/GameManager'
 import { GameEvents } from '../../utils/enums'
 
 export default abstract class MinigameScene extends BaseScene {
-  public abstract onSuccess(): void
+  protected onSuccess(): void {
+    console.log('you won')
+    gameManager.loadPostMinigame()
+  }
 
-  public abstract onFailure(): void
+  protected onFailure(): void {
+    console.log('you fail')
+    gameManager.looseLife()
+    gameManager.loadPostMinigame()
+  }
 
   protected initListeners(): void {
     super.initListeners()

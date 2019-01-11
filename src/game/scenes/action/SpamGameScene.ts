@@ -38,16 +38,6 @@ export default class SpamGameScene extends MinigameScene {
     this.spams.forEach(spam => spam.update())
   }
 
-  public onFailure(): void {
-    console.log('you failed')
-    gameManager.loadPostMinigame()
-  }
-
-  public onSuccess(): void {
-    console.log('you won')
-    gameManager.loadPostMinigame()
-  }
-
   protected initListeners(): void {
     super.initListeners()
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {

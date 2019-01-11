@@ -154,6 +154,10 @@ class GameManager {
 
     console.log('TOGGLE PAUSE')
   }
+
+  public looseLife = (): void => {
+    gameStore.looseLife()
+  }
 }
 
 const gameManager = new GameManager()
