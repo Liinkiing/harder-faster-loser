@@ -21,7 +21,7 @@ class GameStore {
     hasStress: false,
     hasBrain: true,
     hasHeart: true,
-    hasJustStress: true,
+    hasJustStress: false,
     hasJustBrain: false,
     hasJustHeart: false,
   }
@@ -121,6 +121,12 @@ class GameStore {
     this.transitionning = !this.transitionning
   }
 
+  @action public resetTokiStatus = (): void => {
+    this.status.hasJustStress = false
+    this.status.hasJustBrain = false
+    this.status.hasJustHeart = false
+  }
+
   get hasStress() {
     return this.status.hasStress
   }
@@ -134,11 +140,11 @@ class GameStore {
   }
 
   get hasJustStress() {
-    return this.status.hasStress
+    return this.status.hasJustStress
   }
 
   get hasJustLoosedBrain() {
-    return !this.status.hasBrain
+    return this.status.hasJustBrain
   }
 
   get hasJustLoosedHeart() {

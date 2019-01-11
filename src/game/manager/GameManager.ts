@@ -155,6 +155,10 @@ class GameManager {
     console.log('TOGGLE PAUSE')
   }
 
+  public resetTokiStatus = (): void => {
+    gameStore.resetTokiStatus()
+  }
+
   public looseLife = (): void => {
     gameStore.looseLife()
   }

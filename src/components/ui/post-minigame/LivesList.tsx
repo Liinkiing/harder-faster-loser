@@ -37,8 +37,8 @@ const LivesList: FunctionComponent = () => {
           widthFrame={FRAME_WIDTH}
           heightFrame={FRAME_HEIGHT}
           steps={8}
-          autoplay={hasStress && hasJustStress}
-          startAt={hasJustStress ? 8 : 0}
+          autoplay={hasJustStress}
+          startAt={hasStress && !hasJustStress ? 8 : 0}
           fps={FPS}
           repeat={0}
         />
@@ -49,8 +49,8 @@ const LivesList: FunctionComponent = () => {
           widthFrame={FRAME_WIDTH}
           heightFrame={FRAME_HEIGHT}
           steps={20}
-          autoplay={hasLoosedBrain && hasJustLoosedBrain}
-          startAt={hasJustLoosedBrain ? 8 : 0}
+          autoplay={hasJustLoosedBrain}
+          startAt={hasLoosedBrain && !hasJustLoosedBrain ? 20 : 0}
           fps={FPS}
           repeat={0}
         />
@@ -61,8 +61,8 @@ const LivesList: FunctionComponent = () => {
           widthFrame={FRAME_WIDTH}
           heightFrame={FRAME_HEIGHT}
           steps={9}
-          autoplay={hasLoosedHeart && hasJustLoosedHeart}
-          startAt={hasJustLoosedHeart ? 8 : 0}
+          autoplay={hasJustLoosedHeart}
+          startAt={hasLoosedHeart && !hasJustLoosedHeart ? 9 : 0}
           fps={FPS}
           repeat={0}
         />

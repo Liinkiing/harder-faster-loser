@@ -20,6 +20,7 @@ export default class PostMinigameScene extends BaseScene {
     graphics.fillRect(100, 100, 100, 100)
     this.add.text(-100, -100, this.scene.key)
     await gameWait(this.time, DISPLAY_TIME)
+    gameManager.resetTokiStatus()
     gameManager.loadNextMinigame()
   }
 }
