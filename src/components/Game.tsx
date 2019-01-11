@@ -17,10 +17,7 @@ const Game: FunctionComponent = () => {
 
   if (gameManager.game.canvas) {
     gameManager.game.canvas.style.transition = 'all 0.15s'
-    gameManager.game.canvas.width = width
-    gameManager.game.canvas.height = height
-    gameManager.game.canvas.style.width = `${width}px`
-    gameManager.game.canvas.style.height = `${height}px`
+    gameManager.game.resize(width, height)
     gameManager.game.canvas.style.filter = paused
       ? 'blur(20px) grayscale(80%)'
       : null

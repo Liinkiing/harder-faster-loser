@@ -5,15 +5,34 @@ import { HFLGameConfig } from '../utils/game'
 import gameManager from '../game/manager/GameManager'
 import { green } from '../utils/colors'
 
+interface TokiStatus {
+  hasStress: boolean
+  hasJustStress: boolean
+  hasBrain: boolean
+  hasJustBrain: boolean
+  hasHeart: boolean
+  hasJustHeart: boolean
+}
+
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
+  @observable public status: TokiStatus = {
+    hasStress: false,
+    hasBrain: true,
+    hasHeart: true,
+    hasJustStress: false,
+    hasJustBrain: false,
+    hasJustHeart: false,
+  }
+
+  @observable public elapsed: number = 0
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
     suspended: false,
     fade: true,
-    fadeColor: 'black',
+    fadeColor: green,
     backgroundColor: green,
     minigameDuration: 500,
   }
@@ -21,6 +40,10 @@ class GameStore {
   @observable public transitionning: boolean = false
   @observable
   public uiKey: string = new Phaser.Math.RandomDataGenerator().uuid()
+
+  @action public increaseElapsed = (delta: number = 1): void => {
+    this.elapsed += delta
+  }
 
   @action public regenerateUiKey = (): void => {
     this.uiKey = new Phaser.Math.RandomDataGenerator().uuid()
@@ -30,6 +53,26 @@ class GameStore {
     this.config = { ...this.config, ...newConfig }
     if (newConfig.backgroundColor) {
       gameManager.changeBackgroundColor(this.config.backgroundColor)
+    }
+  }
+
+  @action public looseLife = (): void => {
+    if (!this.status.hasStress) {
+      this.status.hasStress = true
+      this.status.hasJustStress = true
+      this.status.hasJustBrain = false
+      this.status.hasJustHeart = false
+      this.status.hasJustStress = true
+    } else if (this.status.hasBrain) {
+      this.status.hasBrain = false
+      this.status.hasJustStress = false
+      this.status.hasJustBrain = true
+      this.status.hasJustHeart = false
+    } else if (this.status.hasHeart) {
+      this.status.hasHeart = false
+      this.status.hasJustStress = false
+      this.status.hasJustBrain = false
+      this.status.hasJustHeart = true
     }
   }
 
@@ -76,6 +119,47 @@ class GameStore {
 
   @action public toggleTransition = (): void => {
     this.transitionning = !this.transitionning
+  }
+
+  @action public resetTokiStatus = (): void => {
+    this.status.hasJustStress = false
+    this.status.hasJustBrain = false
+    this.status.hasJustHeart = false
+  }
+
+  get hasStress() {
+    return this.status.hasStress
+  }
+
+  get hasLoosedBrain() {
+    return !this.status.hasBrain
+  }
+
+  get hasLoosedHeart() {
+    return !this.status.hasHeart
+  }
+
+  get hasJustStress() {
+    return this.status.hasJustStress
+  }
+
+  get hasJustLoosedBrain() {
+    return this.status.hasJustBrain
+  }
+
+  get hasJustLoosedHeart() {
+    return this.status.hasJustHeart
+  }
+
+  get secondsElapsed() {
+    return (this.elapsed / 1000) * 16
+  }
+
+  get timeElapsed() {
+    return new Date(this.secondsElapsed * 1000).toLocaleTimeString('fr', {
+      minute: '2-digit',
+      second: '2-digit',
+    })
   }
 }
 

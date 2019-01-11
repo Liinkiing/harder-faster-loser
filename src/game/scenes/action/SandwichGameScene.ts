@@ -32,16 +32,6 @@ export default class SandwichGameScene extends MinigameScene {
     this.sandwichTexture = 'sandwichFlyingAnimation'
   }
 
-  public onFailure(): void {
-    console.log('you failed')
-    gameManager.loadNextMinigame()
-  }
-
-  public onSuccess(): void {
-    console.log('you won')
-    gameManager.loadNextMinigame()
-  }
-
   public preload(): void {
     super.preload()
     this.load.image(

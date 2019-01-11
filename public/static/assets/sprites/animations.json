@@ -192,6 +192,42 @@
       "showOnStart": true,
       "repeat": 0,
       "frameRate": 4
+    },
+    {
+      "key": "life_1_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "life_1",
+        "start": 0,
+        "end": 7
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 4
+    },
+    {
+      "key": "life_2_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "life_2",
+        "start": 0,
+        "end": 19
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 4
+    },
+    {
+      "key": "life_3_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "life_3",
+        "start": 0,
+        "end": 8
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 4
     }
   ]
 }

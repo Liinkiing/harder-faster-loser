@@ -281,34 +281,31 @@
         "url": "/static/assets/sprites/password-game/mdp_symbol_6.png"
       },
       {
-        "type": "image",
-        "key": "sp_1",
-        "url": "/static/assets/sprites/spam-game/sp_1.png"
+        "type": "spritesheet",
+        "key": "life_1",
+        "url": "/static/assets/sprites/post-minigame/life_1.png",
+        "frameConfig": {
+          "frameWidth": 285,
+          "frameHeight": 270
+        }
       },
       {
-        "type": "image",
-        "key": "sp_2",
-        "url": "/static/assets/sprites/spam-game/sp_2.png"
+        "type": "spritesheet",
+        "key": "life_2",
+        "url": "/static/assets/sprites/post-minigame/life_2.png",
+        "frameConfig": {
+          "frameWidth": 285,
+          "frameHeight": 270
+        }
       },
       {
-        "type": "image",
-        "key": "sp_3",
-        "url": "/static/assets/sprites/spam-game/sp_3.png"
-      },
-      {
-        "type": "image",
-        "key": "sp_4_1",
-        "url": "/static/assets/sprites/spam-game/sp_4_1.png"
-      },
-      {
-        "type": "image",
-        "key": "sp_5_1",
-        "url": "/static/assets/sprites/spam-game/sp_5_1.png"
-      },
-      {
-        "type": "image",
-        "key": "sp_6_1",
-        "url": "/static/assets/sprites/spam-game/sp_6_1.png"
+        "type": "spritesheet",
+        "key": "life_3",
+        "url": "/static/assets/sprites/post-minigame/life_3.png",
+        "frameConfig": {
+          "frameWidth": 285,
+          "frameHeight": 270
+        }
       }
     ]
   }

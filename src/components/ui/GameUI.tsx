@@ -11,7 +11,8 @@ import Transition from './Transition'
 import gameManager from '../../game/manager/GameManager'
 
 const GameUI: FunctionComponent = () => {
-  const { state, uiKey } = gameStore
+  const { state, uiKey, paused } = gameStore
+  const classNames = ['game-ui']
   const gameUI = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (gameUI.current) {
@@ -39,8 +40,12 @@ const GameUI: FunctionComponent = () => {
       break
   }
 
+  if (paused) {
+    classNames.push('paused')
+  }
+
   return (
-    <div ref={gameUI} className="game-ui">
+    <div ref={gameUI} className={classNames.join(' ')}>
       <Transition />
       {gameManager.activeScene !== undefined && <UIComponent key={uiKey} />}
     </div>

@@ -43,6 +43,7 @@ const RemainingTime: FunctionComponent = () => {
 
   const onClick = () => {
     if (!suspended) {
+      gameStore.increaseElapsed()
       setRemaining(remaining + 1)
     }
   }
