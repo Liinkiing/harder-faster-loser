@@ -159,6 +159,14 @@ export class GameManager {
     console.log('TOGGLE PAUSE')
   }
 
+  get hasTokiJustLost(): boolean {
+    return (
+      gameStore.hasJustLoosedBrain ||
+      gameStore.hasJustLoosedHeart ||
+      gameStore.hasJustStress
+    )
+  }
+
   public resetTokiStatus = (): void => {
     gameStore.resetTokiStatus()
   }

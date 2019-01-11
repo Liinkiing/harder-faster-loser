@@ -326,6 +326,11 @@
         "type": "audio",
         "key": "tada",
         "url": "/static/assets/sounds/tada.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "hit",
+        "url": "/static/assets/sounds/hit.ogg"
       }
     ]
   }
