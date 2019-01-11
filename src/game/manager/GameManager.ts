@@ -162,6 +162,10 @@ class GameManager {
   public looseLife = (): void => {
     gameStore.looseLife()
   }
+
+  get isTokiDead() {
+    return !gameStore.status.hasHeart
+  }
 }
 
 const gameManager = new GameManager()
