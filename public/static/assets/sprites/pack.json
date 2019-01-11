@@ -309,6 +309,21 @@
         "type": "image",
         "key": "sp_6_1",
         "url": "/static/assets/sprites/spam-game/sp_6_1.png"
+      },
+      {
+        "type": "image",
+        "key": "horn_on",
+        "url": "/static/assets/sprites/traffic-game/horn_on.png"
+      },
+      {
+        "type": "image",
+        "key": "rage_bar",
+        "url": "/static/assets/sprites/traffic-game/rage_bar.png"
+      },
+      {
+        "type": "image",
+        "key": "rage_cursor",
+        "url": "/static/assets/sprites/traffic-game/rage_cursor.png"
       }
     ]
   }
