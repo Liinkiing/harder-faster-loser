@@ -281,12 +281,66 @@
         "url": "/static/assets/sprites/password-game/mdp_symbol_6.png"
       },
       {
-        "type": "image",
+        "type": "spritesheet",
         "key": "toki_whistle",
-        "url": "/static/assets/sprites/elevator-game/toki_whistle.png",
+        "url": "/static/assets/sprites/elevator-game/toki_whistle_300_1185.png",
         "frameConfig": {
           "frameWidth": 300,
           "frameHeight": 1185
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_irritated",
+        "url": "/static/assets/sprites/elevator-game/toki_irrite_315_1185.png",
+        "frameConfig": {
+          "frameWidth": 315,
+          "frameHeight": 1185
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_arms",
+        "url": "/static/assets/sprites/elevator-game/bras_elevator_240_345.png",
+        "frameConfig": {
+          "frameWidth": 240,
+          "frameHeight": 345
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_water",
+        "url": "/static/assets/sprites/elevator-game/goutte_blase_45_135.png",
+        "frameConfig": {
+          "frameWidth": 45,
+          "frameHeight": 135
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_music_note",
+        "url": "/static/assets/sprites/elevator-game/music_note_195_120.png",
+        "frameConfig": {
+          "frameWidth": 195,
+          "frameHeight": 120
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "floors",
+        "url": "/static/assets/sprites/elevator-game/floors.png",
+        "frameConfig": {
+          "frameWidth": 525,
+          "frameHeight": 255
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "case_call_elevator",
+        "url": "/static/assets/sprites/elevator-game/case_call_elevator_450_480.png",
+        "frameConfig": {
+          "frameWidth": 450,
+          "frameHeight": 480
         }
       },
       {
