@@ -1,0 +1,347 @@
+{
+  "preload": {
+    "files": [
+      {
+        "type": "json",
+        "key": "animations",
+        "url": "/static/assets/sprites/animations.json"
+      },
+      {
+        "type": "spritesheet",
+        "key": "sexy",
+        "url": "/static/assets/sprites/spam-game/sexy.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 1290
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "sold",
+        "url": "/static/assets/sprites/spam-game/sold.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "pizza",
+        "url": "/static/assets/sprites/spam-game/pizza.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 1290
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "magic-bottle",
+        "url": "/static/assets/sprites/spam-game/magic-bottle.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 914
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "muscles",
+        "url": "/static/assets/sprites/spam-game/muscles.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "play",
+        "url": "/static/assets/sprites/spam-game/play.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 600
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "tooth",
+        "url": "/static/assets/sprites/spam-game/tooth.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "hair",
+        "url": "/static/assets/sprites/spam-game/hair.png",
+        "frameConfig": {
+          "frameWidth": 794,
+          "frameHeight": 764
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "gambling",
+        "url": "/static/assets/sprites/spam-game/gambling.png",
+        "frameConfig": {
+          "frameWidth": 914,
+          "frameHeight": 1020
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "yo",
+        "url": "/static/assets/sprites/spam-game/yo.png",
+        "frameConfig": {
+          "frameWidth": 854,
+          "frameHeight": 1290
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_run",
+        "url": "/static/assets/sprites/sandwich-game/toki_run_255_480.png",
+        "frameConfig": {
+          "frameWidth": 255,
+          "frameHeight": 480
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_win",
+        "url": "/static/assets/sprites/sandwich-game/toki_win_390_855.png",
+        "frameConfig": {
+          "frameWidth": 390,
+          "frameHeight": 855
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "sandwich_flying",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_flying_585_540.png",
+        "frameConfig": {
+          "frameWidth": 585,
+          "frameHeight": 540
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "mdp_nope",
+        "url": "/static/assets/sprites/password-game/spritesheets/mdp_nope_870x975.png",
+        "frameConfig": {
+          "frameWidth": 870,
+          "frameHeight": 975
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "mdp_paper",
+        "url": "/static/assets/sprites/password-game/spritesheets/MDP_Paper_915x1215.png",
+        "frameConfig": {
+          "frameWidth": 915,
+          "frameHeight": 1215
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "mdp_valid",
+        "url": "/static/assets/sprites/password-game/spritesheets/mdp_valid_870x975.png",
+        "frameConfig": {
+          "frameWidth": 870,
+          "frameHeight": 975
+        }
+      },
+      {
+        "type": "image",
+        "key": "btn_left_on",
+        "url": "/static/assets/sprites/sandwich-game/btn_left_on.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_left_off",
+        "url": "/static/assets/sprites/sandwich-game/btn_left_off.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_right_on",
+        "url": "/static/assets/sprites/sandwich-game/btn_right_on.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_right_off",
+        "url": "/static/assets/sprites/sandwich-game/btn_right_off.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_1",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_1.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_1_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_1_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_2",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_2.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_2_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_2_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_3",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_3.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_3_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_3_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_4",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_4.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_4_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_4_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_5",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_5.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_5_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_5_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_6",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_6.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_keyboard_6_hover",
+        "url": "/static/assets/sprites/password-game/mdp_keyboard_6_hover.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_paw",
+        "url": "/static/assets/sprites/password-game/mdp_paw.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_screen_1",
+        "url": "/static/assets/sprites/password-game/mdp_screen_1.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_screen_2",
+        "url": "/static/assets/sprites/password-game/mdp_screen_2.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_star",
+        "url": "/static/assets/sprites/password-game/mdp_star.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_1",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_1.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_2",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_2.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_3",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_3.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_4",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_4.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_5",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_5.png"
+      },
+      {
+        "type": "image",
+        "key": "mdp_symbol_6",
+        "url": "/static/assets/sprites/password-game/mdp_symbol_6.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "life_1",
+        "url": "/static/assets/sprites/post-minigame/life_1.png",
+        "frameConfig": {
+          "frameWidth": 285,
+          "frameHeight": 270
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "life_2",
+        "url": "/static/assets/sprites/post-minigame/life_2.png",
+        "frameConfig": {
+          "frameWidth": 285,
+          "frameHeight": 270
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "life_3",
+        "url": "/static/assets/sprites/post-minigame/life_3.png",
+        "frameConfig": {
+          "frameWidth": 285,
+          "frameHeight": 270
+        }
+      },
+      {
+        "type": "audio",
+        "key": "bg",
+        "url": "/static/assets/sounds/bg.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "beep",
+        "url": "/static/assets/sounds/beep.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "explosion",
+        "url": "/static/assets/sounds/explosion.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "tada",
+        "url": "/static/assets/sounds/tada.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "hit",
+        "url": "/static/assets/sounds/hit.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "success",
+        "url": "/static/assets/sounds/success.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "error",
+        "url": "/static/assets/sounds/error.ogg"
+      }
+    ]
+  }
+}
