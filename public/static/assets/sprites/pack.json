@@ -341,6 +341,36 @@
         "type": "audio",
         "key": "error",
         "url": "/static/assets/sounds/error.ogg"
+      },
+      {
+        "type": "image",
+        "key": "sky",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_plan_sky.png"
+      },
+      {
+        "type": "image",
+        "key": "building",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_plan_building.png"
+      },
+      {
+        "type": "image",
+        "key": "landscape",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_plan_landscape.png"
+      },
+      {
+        "type": "image",
+        "key": "streetLights",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_plan_street-lights.png"
+      },
+      {
+        "type": "image",
+        "key": "ground",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_plan_ground.png"
+      },
+      {
+        "type": "image",
+        "key": "btn_left_on",
+        "url": "/static/assets/sprites/sandwich-game/btn_left_on.png"
       }
     ]
   }

@@ -10,6 +10,11 @@ export default class BootScene extends BaseScene {
     })
   }
 
+  public preload(): void {
+    super.preload()
+    this.load.pack('preload', '/static/assets/sprites/pack.json', 'preload')
+  }
+
   public create = async () => {
     super.create()
     gameManager.audio.playBg()

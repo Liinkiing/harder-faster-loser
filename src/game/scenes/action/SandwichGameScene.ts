@@ -35,34 +35,6 @@ export default class SandwichGameScene extends MinigameScene {
     this.sandwichTexture = 'sandwichFlyingAnimation'
   }
 
-  public preload(): void {
-    super.preload()
-    this.load.image(
-      'sky',
-      '/static/assets/sprites/sandwich-game/sandwich_plan_sky.png'
-    )
-    this.load.image(
-      'building',
-      '/static/assets/sprites/sandwich-game/sandwich_plan_building.png'
-    )
-    this.load.image(
-      'landscape',
-      '/static/assets/sprites/sandwich-game/sandwich_plan_landscape.png'
-    )
-    this.load.image(
-      'streetLights',
-      '/static/assets/sprites/sandwich-game/sandwich_plan_street-lights.png'
-    )
-    this.load.image(
-      'ground',
-      '/static/assets/sprites/sandwich-game/sandwich_plan_ground.png'
-    )
-    this.load.image(
-      'btn_left_on',
-      '/static/assets/sprites/sandwich-game/btn_left_on.png'
-    )
-  }
-
   public create() {
     super.create()
     this.resetClassVariables()
