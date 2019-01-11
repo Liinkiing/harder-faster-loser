@@ -1,11 +1,13 @@
 import { scenesKeys } from '../../../utils/constants'
-import BaseScene from '../BaseScene'
 import Spam from '../../objects/Spam'
 import { List } from '../../../utils/extensions'
 import { randomRange } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
+
+const SOUND_SPAM_DESTROYED = 'explosion'
+const SOUND_CLOSE_CLICK = 'beep'
 
 export default class SpamGameScene extends MinigameScene {
   public spams: List<Spam> = new List<Spam>()
@@ -41,12 +43,16 @@ export default class SpamGameScene extends MinigameScene {
   protected initListeners(): void {
     super.initListeners()
     Emitter.on(GameEvents.SpamDestroyed, (spam: Spam) => {
+      gameManager.audio.playSfx(SOUND_SPAM_DESTROYED)
       this.spams.remove(spam)
       if (this.spams.length === 0) {
         this.onSuccess()
       }
     })
     Emitter.on(GameEvents.SpamClicked, (spam: Spam) => {
+      gameManager.audio.playSfx(SOUND_CLOSE_CLICK, {
+        detune: randomRange(-100, 100),
+      })
       for (let i = 0; i < randomRange(1, 4); i++) {
         this.spams.push(this.createSpam())
       }

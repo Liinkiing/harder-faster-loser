@@ -7,11 +7,13 @@ import { appear, disappear } from '../../utils/anims'
 import { GameBackgroundColor } from '../../utils/types'
 import { gameBackgroundColorToCss } from '../../utils/functions'
 import minigameManager from './MinigameManager'
+import AudioManager from './AudioManager'
 
 export const Emitter = new EventEmitter()
 
-class GameManager {
+export class GameManager {
   public game: Phaser.Game = new Phaser.Game(gameConfig)
+  public audio: AudioManager = new AudioManager(this)
   public activeScene?: Phaser.Scene
   public gameUI?: HTMLDivElement
   public gameFader?: HTMLDivElement
@@ -145,9 +147,11 @@ class GameManager {
       return
     }
     if (gameStore.paused) {
+      this.activeScene!.sound.setDetune(-50)
       this.activeScene!.scene.resume()
       gameStore.resume()
     } else {
+      this.activeScene!.sound.setDetune(-1200)
       this.activeScene!.scene.pause()
       gameStore.pause()
     }

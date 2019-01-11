@@ -12,6 +12,7 @@ export default class BootScene extends BaseScene {
 
   public create = async () => {
     super.create()
+    gameManager.audio.playBg()
     const initial = gameStore.config.fade
     gameStore.changeConfig({ fade: false })
     gameManager.startScene(scenesKeys.PostMinigameScene)
