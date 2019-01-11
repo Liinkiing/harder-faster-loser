@@ -135,7 +135,7 @@
       {
         "type": "spritesheet",
         "key": "mdp_paper",
-        "url": "/static/assets/sprites/password-game/spritesheets/MDP_Paper_915x1215.png",
+        "url": "/static/assets/sprites/password-game/spritesheets/mdp_paper_915x1215.png",
         "frameConfig": {
           "frameWidth": 915,
           "frameHeight": 1215

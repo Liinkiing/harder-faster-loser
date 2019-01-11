@@ -19,10 +19,10 @@ export default class SpamGameScene extends MinigameScene {
 
   public preload(): void {
     super.preload()
-    this.load.image('close', '/static/assets/sprites/spam-game/CLOSE.png')
+    this.load.image('close', '/static/assets/sprites/spam-game/close.png')
     this.load.image(
       'close_active',
-      '/static/assets/sprites/spam-game/CLOSE_active.png'
+      '/static/assets/sprites/spam-game/close_active.png'
     )
   }
 
