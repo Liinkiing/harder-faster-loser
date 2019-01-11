@@ -55,3 +55,4 @@ const PostMinigameUI: FunctionComponent = () => {
 }
 
 export default observer(PostMinigameUI)
+

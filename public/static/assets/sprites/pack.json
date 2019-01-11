@@ -306,6 +306,41 @@
           "frameWidth": 285,
           "frameHeight": 270
         }
+      },
+      {
+        "type": "audio",
+        "key": "bg",
+        "url": "/static/assets/sounds/bg.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "beep",
+        "url": "/static/assets/sounds/beep.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "explosion",
+        "url": "/static/assets/sounds/explosion.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "tada",
+        "url": "/static/assets/sounds/tada.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "hit",
+        "url": "/static/assets/sounds/hit.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "success",
+        "url": "/static/assets/sounds/success.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "error",
+        "url": "/static/assets/sounds/error.ogg"
       }
     ]
   }

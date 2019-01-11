@@ -3,7 +3,10 @@ import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
-import { gameWait } from '../../../utils/functions'
+import { gameWait, randomRange } from '../../../utils/functions'
+
+const SOUND_WALK = 'beep'
+const SOUND_GET_SANDWICH = 'tada'
 
 export default class SandwichGameScene extends MinigameScene {
   private skies?: Phaser.GameObjects.Sprite[] = []
@@ -177,6 +180,9 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private animateGame(): void {
+    gameManager.audio.playSfx(SOUND_WALK, {
+      detune: randomRange(-500, 500),
+    })
     const speedFactor = 3
 
     Array.from([
@@ -328,9 +334,9 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private playWinAnimation = async () => {
+    gameManager.audio.playSfx(SOUND_GET_SANDWICH, { volume: 0.2, delay: 0.3 })
     return new Promise(resolve => {
       const animation = this.player!.anims.play(this.playerWinTexture, true, 0)
-
       animation.on('animationcomplete', async () => {
         await gameWait(this.time, 500)
         this.onSuccess()

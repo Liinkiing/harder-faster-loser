@@ -17,6 +17,9 @@ const EASY_PASSWORD_LENGTH = 3
 const MEDIUM_PASSWORD_LENGTH = 4
 const HARD_PASSWORD_LENGTH = 5
 
+const SOUND_PASSWORD_INVALID = 'error'
+const SOUND_KEYBOARD_BUTTON = 'beep'
+
 export default class PasswordGameScene extends MinigameScene {
   public password: Code[] = []
   public typedPassword: Code[] = []
@@ -57,6 +60,7 @@ export default class PasswordGameScene extends MinigameScene {
       if (this.typedPassword.length === this.password.length) {
         return
       }
+      gameManager.audio.playSfx(SOUND_KEYBOARD_BUTTON)
       this.typedPassword.push(code)
       if (this.typedPassword.length <= this.password.length) {
         const button = this.keyboard!.getButton(code)
@@ -97,6 +101,10 @@ export default class PasswordGameScene extends MinigameScene {
         this.computerScreen!.screen.setDepth(1000).anims.play(
           'mdp_nope_animation'
         )
+        gameManager.audio.playSfx(SOUND_PASSWORD_INVALID, {
+          volume: 0.4,
+          delay: 0.1,
+        })
         gameWait(this.time, 2000).then(() => {
           this.onFailure()
         })
