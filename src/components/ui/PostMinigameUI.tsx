@@ -30,7 +30,7 @@ const PostMinigameUIInner = styled.div<StyledProps>`
   width: 100%;
   height: 100%;
   display: flex;
-  animation: ${show} 0.1s;
+  animation: ${show} 0.5s;
   flex-direction: column;
   justify-content: center;
   align-items: center;
