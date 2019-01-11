@@ -371,6 +371,16 @@
         "type": "image",
         "key": "btn_left_on",
         "url": "/static/assets/sprites/sandwich-game/btn_left_on.png"
+      },
+      {
+        "type": "image",
+        "key": "close",
+        "url": "/static/assets/sprites/spam-game/close.png"
+      },
+      {
+        "type": "image",
+        "key": "close_active",
+        "url": "/static/assets/sprites/spam-game/close_active.png"
       }
     ]
   }
