@@ -54,6 +54,9 @@ export default class PasswordGameScene extends MinigameScene {
   protected initListeners(): void {
     super.initListeners()
     Emitter.on(GameEvents.KeyboardPasswordButtonClicked, async (code: Code) => {
+      if (this.typedPassword.length === this.password.length) {
+        return
+      }
       this.typedPassword.push(code)
       if (this.typedPassword.length <= this.password.length) {
         const button = this.keyboard!.getButton(code)
@@ -65,11 +68,12 @@ export default class PasswordGameScene extends MinigameScene {
           .sprite(button!.getBounds().x, button!.getBounds().y, 'mdp_paw')
           .setScale(1 / gameStore.ratioResolution)
           .setOrigin(-0.5, -0.25)
-        await gameWait(this.time, PAW_DISPLAY_TIME)
-        if (!this.game.device.os.desktop) {
-          button!.setTexture(`${texture.key}`)
-        }
-        paw.destroy()
+        gameWait(this.time, PAW_DISPLAY_TIME).then(() => {
+          if (!this.game.device.os.desktop) {
+            button!.setTexture(`${texture.key}`)
+          }
+          paw.destroy()
+        })
       }
       if (
         this.typedPassword.length === this.password.length &&
@@ -93,8 +97,9 @@ export default class PasswordGameScene extends MinigameScene {
         this.computerScreen!.screen.setDepth(1000).anims.play(
           'mdp_nope_animation'
         )
-        await gameWait(this.time, 2000)
-        this.onFailure()
+        gameWait(this.time, 2000).then(() => {
+          this.onFailure()
+        })
       }
     })
   }
