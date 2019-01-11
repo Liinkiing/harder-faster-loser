@@ -331,6 +331,16 @@
         "type": "audio",
         "key": "hit",
         "url": "/static/assets/sounds/hit.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "success",
+        "url": "/static/assets/sounds/success.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "error",
+        "url": "/static/assets/sounds/error.ogg"
       }
     ]
   }

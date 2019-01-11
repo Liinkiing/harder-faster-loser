@@ -4,6 +4,7 @@ import { gameWait } from '../../utils/functions'
 import gameManager from '../manager/GameManager'
 
 const SOUND_LOST = 'hit'
+const SOUND_WIN = 'success'
 const DISPLAY_TIME = 3000
 
 export default class PostMinigameScene extends BaseScene {
@@ -19,9 +20,9 @@ export default class PostMinigameScene extends BaseScene {
     const { hasTokiJustLost, isTokiDead } = gameManager
 
     if (hasTokiJustLost) {
-      gameWait(this.time, 700).then(() => {
-        gameManager.audio.playSfx(SOUND_LOST, { volume: 0.2 })
-      })
+      gameManager.audio.playSfx(SOUND_LOST, { volume: 0.2, delay: 0.5 })
+    } else {
+      gameManager.audio.playSfx(SOUND_WIN, { volume: 0.2, delay: 0.3 })
     }
 
     await gameWait(this.time, DISPLAY_TIME)

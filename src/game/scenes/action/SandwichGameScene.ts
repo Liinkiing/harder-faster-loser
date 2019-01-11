@@ -334,9 +334,7 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private playWinAnimation = async () => {
-    gameWait(this.time, 300).then(() => {
-      gameManager.audio.playSfx(SOUND_GET_SANDWICH, { volume: 0.2 })
-    })
+    gameManager.audio.playSfx(SOUND_GET_SANDWICH, { volume: 0.2, delay: 0.3 })
     return new Promise(resolve => {
       const animation = this.player!.anims.play(this.playerWinTexture, true, 0)
       animation.on('animationcomplete', async () => {
