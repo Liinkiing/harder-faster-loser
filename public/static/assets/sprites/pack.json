@@ -283,7 +283,7 @@
       {
         "type": "spritesheet",
         "key": "life_1",
-        "url": "/static/assets/sprites/post-minigame/life_1.png",
+        "url": "/static/assets/sprites/post-minigame/life_1_285_270.png",
         "frameConfig": {
           "frameWidth": 285,
           "frameHeight": 270
@@ -292,7 +292,7 @@
       {
         "type": "spritesheet",
         "key": "life_2",
-        "url": "/static/assets/sprites/post-minigame/life_2.png",
+        "url": "/static/assets/sprites/post-minigame/life_2_285_270.png",
         "frameConfig": {
           "frameWidth": 285,
           "frameHeight": 270
@@ -301,7 +301,7 @@
       {
         "type": "spritesheet",
         "key": "life_3",
-        "url": "/static/assets/sprites/post-minigame/life_3.png",
+        "url": "/static/assets/sprites/post-minigame/life_3_285_270.png",
         "frameConfig": {
           "frameWidth": 285,
           "frameHeight": 270
