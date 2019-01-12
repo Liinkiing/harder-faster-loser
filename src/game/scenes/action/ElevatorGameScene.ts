@@ -68,10 +68,7 @@ export default class ElevatorGameScene extends MinigameScene {
 
   public update(time: number, delta: number): void {
     if (this.currentFrame > 14) {
-      console.log(this.currentFrame)
-      this.player!.anims.play(this.playerIrritatedTexture, true, 0)
-      this.playerMusicNote!.anims.stop()
-      this.playerWaterDrop!.play(this.playerWaterDropTexture, true, 0)
+      this.makeTokiIrritated()
     }
   }
 
@@ -106,19 +103,25 @@ export default class ElevatorGameScene extends MinigameScene {
     this.playerWaterDrop = this.add
       .sprite(
         85,
-        -this.player.height / gameStore.ratioResolution + 25,
+        -this.player!.height / gameStore.ratioResolution + 25,
         this.playerWaterDropTexture
       )
       .setOrigin(0, 0)
       .setScale(1 / gameStore.ratioResolution)
-    this.playerWaterDrop.anims.play(this.playerWaterDropTexture, true, 0)
-    this.playerWaterDrop.anims.stop()
+    this.playerWaterDrop.setVisible(false)
 
     this.playerContainer = this.add.container(
       Number(this.game.config.width) / 2,
       Number(this.game.config.height),
       [this.player, this.playerArms, this.playerMusicNote, this.playerWaterDrop]
     )
+  }
+
+  private makeTokiIrritated(): void {
+    this.player!.anims.play(this.playerIrritatedTexture, true, 0)
+    this.playerWaterDrop!.anims.play(this.playerWaterDropTexture, true, 0)
+    this.playerMusicNote!.destroy()
+    this.playerWaterDrop!.setVisible(true)
   }
 
   private createElevatorContent(): void {
@@ -153,7 +156,6 @@ export default class ElevatorGameScene extends MinigameScene {
 
     const onPointerDown = () => {
       this.hitCaseCallElevator++
-
       if (this.hitCaseCallElevator === this.nbrHitCaseCall) {
         this.currentFrame++
         this.hitCaseCallElevator = 0
@@ -177,11 +179,8 @@ export default class ElevatorGameScene extends MinigameScene {
 
       this.playerArms!.anims.play(this.playerArmsTexture, false, 1)
       this.playerArms!.anims.stop()
-
-      // if (this.currentFrame < 12) {
-      //
-      // }
     }
+
     const onPointerUp = () => {
       this.caseCallElevator!.anims.play(this.caseCallElevatorTexture, false, 0)
       this.caseCallElevator!.anims.stop()
@@ -194,7 +193,7 @@ export default class ElevatorGameScene extends MinigameScene {
     this.caseCallElevator.input.hitArea.setSize(
       this.caseCallElevator.width,
       this.caseCallElevator.height
-    ) // defining the dimensions of the input hit area
+    )
     this.caseCallElevator.on('pointerdown', onPointerDown)
     this.caseCallElevator.on('pointerup', onPointerUp)
   }
