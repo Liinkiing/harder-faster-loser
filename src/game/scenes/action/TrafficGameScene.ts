@@ -14,8 +14,9 @@ export default class TraficGameScene extends MinigameScene {
   ["traffic_cars_02_animation", "traffic_cars_03_animation"]
   private widthLastCar: number = 0
   private positionXLastCar: number = 0
-  private positionYLastCar: number = 0
   private isTokiInScene: boolean = false
+
+  private hornSprite?: Phaser.GameObjects.Sprite
 
   constructor() {
     super({
@@ -76,11 +77,14 @@ export default class TraficGameScene extends MinigameScene {
 
     horn.on('pointerdown', () => {
       console.log('Horn activated')
+      this.hornSprite!.alpha = 1
       this.cursorRageBar!.x += 10
-    })
+      this.hornSprite!.anims.play("traffic_horn_animation", true)
 
-    // this.physics.world.enable(horn)
-    // this.physics.world.enable(rageBar)
+      this.hornSprite!.on('animationcomplete', () => {
+        this.hornSprite!.alpha = 0
+      })
+    })
 
     controlsContainer.setDepth(1001)
 
@@ -207,7 +211,17 @@ export default class TraficGameScene extends MinigameScene {
     
         this.widthLastCar = car.width/gameStore.ratioResolution
         this.positionXLastCar = car.x
-        this.positionYLastCar = car.y
+
+        if (carKey === "traffic_toki_animation") {
+          this.hornSprite = this.add.sprite(
+            car.x + (car.width / gameStore.ratioResolution) / 2 + 15,
+            car.y - 25,
+              "traffic_horn_animation"
+          )
+          .setScale(1 / gameStore.ratioResolution)
+          .setOrigin(0.5, 1)
+          .setDepth(998)
+        }
 
         xCounter += 1
       }
