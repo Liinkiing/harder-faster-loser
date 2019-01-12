@@ -30,9 +30,10 @@ export default class TraficGameScene extends MinigameScene {
   public create() {
     super.create()
 
-    this.controls = this.createControls()
+    
     this.createRoad()
     this.createCars()
+    this.controls = this.createControls()
   }
 
   public onFailure = (): void => {
@@ -80,6 +81,8 @@ export default class TraficGameScene extends MinigameScene {
 
     // this.physics.world.enable(horn)
     // this.physics.world.enable(rageBar)
+
+    controlsContainer.setDepth(1001)
 
     return controlsContainer
   }
