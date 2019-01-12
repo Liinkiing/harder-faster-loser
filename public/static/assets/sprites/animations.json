@@ -398,6 +398,18 @@
       "showOnStart": true,
       "repeat": -1,
       "frameRate": 4
+    },
+    {
+      "key": "traffic_horn_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "traffic_horn",
+        "start": 0,
+        "end": 2
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 4
     }
   ]
 }

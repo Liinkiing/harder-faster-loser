@@ -554,6 +554,15 @@
           "frameWidth": 1200,
           "frameHeight": 495
         }
+      },
+      {
+        "type": "spritesheet",
+        "key": "traffic_horn",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_horn_465_375.png",
+        "frameConfig": {
+          "frameWidth": 465,
+          "frameHeight": 375
+        }
       }
     ]
   }
