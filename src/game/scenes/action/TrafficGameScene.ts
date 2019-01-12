@@ -101,15 +101,15 @@ export default class TraficGameScene extends MinigameScene {
     safeRageBarArea.fillStyle(0x6adeb8, 1)
     safeRageBarArea.fillRect(
       this.rageBar.width / gameStore.ratioResolution / 2 - 50,
-      -(this.rageBar.height / gameStore.ratioResolution) / 2 + 5,
+      -(this.rageBar.height / gameStore.ratioResolution) / 2 + 4,
       100,
-      this.rageBar.height / gameStore.ratioResolution - 15
+      this.rageBar.height / gameStore.ratioResolution - 16
     )
 
     this.cursorRageBar = this.add
       .sprite(
         this.rageBar.width / gameStore.ratioResolution / 2,
-        -2,
+        -3,
         'rage_cursor'
       )
       .setScale(1 / gameStore.ratioResolution)
