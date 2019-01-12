@@ -6,10 +6,18 @@ import { Key } from 'ts-key-enum'
 import gameDebugStore from '../../../store/GameDebugStore'
 import DebugButton from './DebugButton'
 import { GameDebugTheme } from '../../../utils/enums'
+import styled from 'styled-components'
+import debugIcon from '../../../assets/images/icons/debug.png'
+
+const GameDebugToggleButtonIcon = styled.i`
+  background: url(${debugIcon}) no-repeat;
+  height: 50px;
+  width: 50px;
+`
 
 const GameDebugToggleButton: FunctionComponent = () => {
   const { debug, toggleDebug, hideDebug } = gameDebugStore
-
+  console.log(process.env.PUBLIC_URL)
   useKeyboardShortcuts([
     {
       keys: [Key.Escape],
@@ -23,7 +31,7 @@ const GameDebugToggleButton: FunctionComponent = () => {
 
   return (
     <DebugButton onClick={toggleDebug} forceTheme={GameDebugTheme.Light}>
-      {debug ? <i className="icon close" /> : <i className="icon debug" />}
+      {debug ? <i className="icon close" /> : <GameDebugToggleButtonIcon />}
     </DebugButton>
   )
 }

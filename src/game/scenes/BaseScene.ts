@@ -14,7 +14,6 @@ export default class BaseScene extends Phaser.Scene {
 
   public preload(): void {
     console.log(`preload (${this.scene.key})`)
-    this.load.pack('preload', '/static/assets/sprites/pack.json', 'preload')
     this.load.on('complete', () => {
       this.animationHelper = new AnimationHelper(
         this,
@@ -25,7 +24,6 @@ export default class BaseScene extends Phaser.Scene {
 
   public create(): void {
     console.log(`create (${this.scene.key})`)
-    // console.log(gameStore.config.backgroundColor)
     gameManager.changeBackgroundColor(gameStore.config.backgroundColor)
     Emitter.emit(BaseEvents.SceneCreated, this)
     this.initListeners()
