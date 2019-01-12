@@ -41,6 +41,10 @@ export class GameManager {
     ;(this.game.scene.getScene(scenesKeys.Boot) as BootScene).startGame()
   }
 
+  public resizeCamera = (width: number, height: number): void => {
+    this.activeScene!.cameras.resize(width, height)
+  }
+
   public loadSplashscreen = async () => {
     await this.startScene(scenesKeys.Splashscreen)
     gameStore.changeState(GameState.Splashscreen)

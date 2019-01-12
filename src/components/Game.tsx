@@ -13,11 +13,12 @@ import gameStore from '../store/GameStore'
 const Game: FunctionComponent = () => {
   const { width, height } = useResize()
   const { debug } = gameDebugStore
-  const { paused } = gameStore
+  const { paused, started } = gameStore
 
   if (gameManager.game.canvas) {
     gameManager.game.canvas.style.transition = 'all 0.15s'
     gameManager.game.resize(width, height)
+    gameManager.resizeCamera(width, height)
     gameManager.game.canvas.style.filter = paused
       ? 'blur(20px) grayscale(80%)'
       : null
@@ -26,9 +27,9 @@ const Game: FunctionComponent = () => {
 
   return (
     <div id="game" className="game">
-      <GameDebugButtonsToolbar />
-      <GameDebug hide={debug} />
-      <GameUI />
+      {started && <GameDebugButtonsToolbar />}
+      {started && <GameDebug hide={debug} />}
+      {started && <GameUI />}
     </div>
   )
 }

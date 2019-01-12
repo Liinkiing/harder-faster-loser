@@ -24,6 +24,7 @@ export default class BaseScene extends Phaser.Scene {
 
   public create(): void {
     console.log(`create (${this.scene.key})`)
+    gameManager.resizeCamera(window.innerWidth, window.innerHeight)
     gameManager.changeBackgroundColor(gameStore.config.backgroundColor)
     Emitter.emit(BaseEvents.SceneCreated, this)
     this.initListeners()
