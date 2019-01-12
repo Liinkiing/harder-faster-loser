@@ -8,6 +8,7 @@ import { GameBackgroundColor } from '../../utils/types'
 import { gameBackgroundColorToCss } from '../../utils/functions'
 import minigameManager from './MinigameManager'
 import AudioManager from './AudioManager'
+import { BootScene } from '../scenes'
 
 export const Emitter = new EventEmitter()
 
@@ -34,6 +35,10 @@ export class GameManager {
     gameStore.changeConfig({
       suspended: false,
     })
+  }
+
+  public startGame = (): void => {
+    ;(this.game.scene.getScene(scenesKeys.Boot) as BootScene).startGame()
   }
 
   public loadSplashscreen = async () => {

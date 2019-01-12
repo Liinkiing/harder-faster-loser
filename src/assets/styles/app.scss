@@ -1,6 +1,11 @@
-@import "~nes.css/css/nes.css";
-@import "./bootstrap";
+@import '~nes.css/css/nes.css';
+@import './bootstrap';
 
 body {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
