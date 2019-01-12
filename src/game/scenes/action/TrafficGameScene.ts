@@ -15,6 +15,7 @@ export default class TraficGameScene extends MinigameScene {
   private widthLastCar: number = 0
   private positionXLastCar: number = 0
   private positionYLastCar: number = 0
+  private isTokiInScene: boolean = false
 
   constructor() {
     super({
@@ -179,18 +180,20 @@ export default class TraficGameScene extends MinigameScene {
         }
       }
 
-      
-
       while (this.positionXLastCar + this.widthLastCar < Number(this.game.config.width)) {
-        console.log('test')
         if (direction === "right") {
-          carKey = this.availableRightCars[Math.floor(randomRange(0,this.availableRightCars.length - 1))]
+          carKey = this.availableRightCars[Math.floor(randomRange(0,this.availableRightCars.length))]
         } else {
-          carKey = this.availableLeftCars[Math.floor(randomRange(0,this.availableLeftCars.length - 1))]
+          carKey = this.availableLeftCars[Math.floor(randomRange(0,this.availableLeftCars.length))]
+        }
+
+        if (this.isTokiInScene === false && direction === "right" && this.positionXLastCar === 0) {
+          carKey = "traffic_toki_animation"
+          this.isTokiInScene = true
         }
 
         const car = this.add.sprite(
-          this.positionXLastCar + this.widthLastCar,
+          this.positionXLastCar + this.widthLastCar + 10,
             Number(this.game.config.height) - (heightRoad / gameStore.ratioResolution * yCounter),
             carKey
         )
