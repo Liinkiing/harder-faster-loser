@@ -13,7 +13,11 @@ import gameStore from '../store/GameStore'
 const Game: FunctionComponent = () => {
   const { width, height } = useResize()
   const { debug } = gameDebugStore
-  const { paused, started } = gameStore
+  const {
+    paused,
+    started,
+    config: { dev },
+  } = gameStore
 
   if (gameManager.game.canvas) {
     gameManager.game.canvas.style.transition = 'all 0.15s'
@@ -27,8 +31,8 @@ const Game: FunctionComponent = () => {
 
   return (
     <div id="game" className="game">
-      {started && <GameDebugButtonsToolbar />}
-      {started && <GameDebug hide={debug} />}
+      {started && dev && <GameDebugButtonsToolbar />}
+      {started && dev && <GameDebug hide={debug} />}
       {started && <GameUI />}
     </div>
   )
