@@ -21,6 +21,9 @@ export default class BootScene extends BaseScene {
   public create = async () => {
     super.create()
     gameStore.stopLoading()
+    if (gameStore.config.dev) {
+      this.startGame()
+    }
   }
 
   public startGame = (): void => {
