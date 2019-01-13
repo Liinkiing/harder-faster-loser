@@ -98,9 +98,6 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
           volume: 0.15,
         })
         wait(SHOW_DURATION).then(() => {
-          gameManager.audio.playSfx(LEAVE_SOUND, {
-            volume: 0.15,
-          })
           setIsLeaving(true)
         })
       }
@@ -108,6 +105,9 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
         if (onLeft) {
           onLeft()
         }
+        gameManager.audio.playSfx(LEAVE_SOUND, {
+          volume: 0.15,
+        })
         gameManager.activeScene!.scene.resume()
         setDisplay(false)
       }

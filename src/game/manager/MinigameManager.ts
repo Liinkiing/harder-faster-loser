@@ -1,4 +1,4 @@
-import { GameCategory } from '../../utils/enums'
+import { GameCategory, GameState } from '../../utils/enums'
 import { categoriesProbability, scenesKeys } from '../../utils/constants'
 import { List } from '../../utils/extensions'
 import gameManager from './GameManager'
@@ -10,6 +10,8 @@ interface IGames {
 
 class MinigameManager {
   public currentCategory: GameCategory = GameCategory.Action
+  public allPlayedGames: Set<string> = new Set()
+
   private lastGame?: string
 
   private games: IGames = {
@@ -24,6 +26,20 @@ class MinigameManager {
   private playedGames: IGames = {
     [GameCategory.Action]: new List<string>(),
     [GameCategory.Waiting]: new List<string>(),
+  }
+
+  public addCurrentMinigameToPlayedGames = (): void => {
+    if (gameStore.state === GameState.Minigame) {
+      this.allPlayedGames.add(gameManager.activeScene!.scene.key)
+    }
+  }
+
+  public get hasPlayedCurrentMinigame(): boolean {
+    if (gameStore.state === GameState.Minigame) {
+      return this.allPlayedGames.has(gameManager.activeScene!.scene.key)
+    }
+
+    throw new Error('Current scene is not a minigame!')
   }
 
   public pickNextGameKey(): string {
