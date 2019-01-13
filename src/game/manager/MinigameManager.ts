@@ -2,6 +2,7 @@ import { GameCategory } from '../../utils/enums'
 import { categoriesProbability, scenesKeys } from '../../utils/constants'
 import { List } from '../../utils/extensions'
 import gameManager from './GameManager'
+import gameStore from '../../store/GameStore'
 
 interface IGames {
   [category: string]: List<string>
@@ -75,6 +76,7 @@ class MinigameManager {
       }
 
       this.lastGame = key
+      gameStore.regenerateUiKey()
 
       await gameManager.startScene(key)
     }
@@ -101,6 +103,7 @@ class MinigameManager {
     }
 
     this.lastGame = game
+    gameStore.regenerateUiKey()
 
     return game
   }
