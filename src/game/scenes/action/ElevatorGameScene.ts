@@ -3,6 +3,7 @@ import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { GameEvents } from '../../../utils/enums'
+import { gameWait } from '../../../utils/functions'
 
 export default class ElevatorGameScene extends MinigameScene {
   // Texture
@@ -25,7 +26,7 @@ export default class ElevatorGameScene extends MinigameScene {
   private playerWaterDrop?: Phaser.GameObjects.Sprite
   private caseCallElevator?: Phaser.GameObjects.Sprite
   private playerContainer?: Phaser.GameObjects.Container
-  // Var
+  // Variable
   private currentFrame: integer = 1
   private hitCaseCallElevator: integer = 0
   private nbrHitCaseCall: integer = 2
@@ -126,7 +127,6 @@ export default class ElevatorGameScene extends MinigameScene {
 
     this.playerMusicNote!.destroy()
     this.playerWaterDrop!.setVisible(true)
-    // this.elevatorDoors!.setVisible(true)
   }
 
   private createElevatorContent(): void {
@@ -141,10 +141,7 @@ export default class ElevatorGameScene extends MinigameScene {
       .sprite(0, 0, this.elevatorWinTexture)
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
-
-    // this.elevatorDoors.anims.play(this.elevatorWinTexture, false, 0)
     this.elevatorDoors.setVisible(false)
-    // this.elevatorDoors.anims.stop()
 
     this.floorsElevator = this.add
       .sprite(
@@ -192,9 +189,19 @@ export default class ElevatorGameScene extends MinigameScene {
         this.caseCallElevator!.removeAllListeners('pointerup')
         this.caseCallElevator!.removeAllListeners('pointerdown')
 
-        this.elevatorDoors!.anims.play(this.elevatorWinTexture, true, 0)
-        this.elevatorDoors!.setVisible(true)
-        // this.onSuccess() -------------------------------------------------------------
+        new Promise(resolve => {
+          this.elevatorDoors!.setVisible(true)
+          const animation = this.elevatorDoors!.anims.play(
+            this.elevatorWinTexture,
+            true,
+            0
+          )
+          animation.on('animationcomplete', async () => {
+            await gameWait(this.time, 500)
+            this.onSuccess()
+            resolve()
+          })
+        })
       }
 
       this.caseCallElevator!.anims.play(this.caseCallElevatorTexture, false, 1)
