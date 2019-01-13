@@ -7,14 +7,13 @@ import brain from '../../../assets/sprites/post-minigame/life_2_285_270.png'
 import heart from '../../../assets/sprites/post-minigame/life_3_285_270.png'
 import Spritesheet from '../Spritesheet'
 
-const FRAME_WIDTH = 285
-const FRAME_HEIGHT = 270
+const FRAME_WIDTH = 95
+const FRAME_HEIGHT = 90
 const FPS = 8
 
 const LivesListInner = styled.ul`
   display: flex;
   flex-direction: column;
-  width: ${FRAME_WIDTH / 3}px;
   & li {
     margin-bottom: 20px;
   }
