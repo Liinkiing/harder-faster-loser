@@ -8,15 +8,22 @@ export default class TraficGameScene extends MinigameScene {
   private rageBar?: Phaser.GameObjects.Sprite
   private cursorRageBar?: Phaser.GameObjects.Sprite
   private roads?: Phaser.GameObjects.Sprite[] = []
-  private availableRightCars: string[] = 
-  ["traffic_blue_car_animation", "traffic_cars_01_animation", "traffic_cars_04_animation"]
-  private availableLeftCars: string[] = 
-  ["traffic_cars_02_animation", "traffic_cars_03_animation"]
+  private availableRightCars: string[] =
+    ["traffic_blue_car_animation", "traffic_cars_01_animation", "traffic_cars_04_animation"]
+  private availableLeftCars: string[] =
+    ["traffic_cars_02_animation", "traffic_cars_03_animation"]
   private widthLastCar: number = 0
   private positionXLastCar: number = 0
   private isTokiInScene: boolean = false
+  private isInSafeArea: boolean = true
+  private firstRow?: Phaser.GameObjects.Container
+  private roadFirstRow: Phaser.GameObjects.Sprite[] = []
+  private carsFirstRow: Phaser.GameObjects.Sprite[] = []
+  private safeRageBarArea?: Phaser.GameObjects.Graphics
 
   private hornSprite?: Phaser.GameObjects.Sprite
+
+  private isCursorInSafeArea: boolean = true
 
   constructor() {
     super({
@@ -31,10 +38,11 @@ export default class TraficGameScene extends MinigameScene {
   public create() {
     super.create()
 
-    
     this.createRoad()
     this.createCars()
     this.controls = this.createControls()
+
+    this.firstRow = this.add.container(0,0, this.carsFirstRow)
   }
 
   public onFailure = (): void => {
@@ -50,7 +58,17 @@ export default class TraficGameScene extends MinigameScene {
       this.cursorRageBar!.x >
       10 + this.cursorRageBar!.width / gameStore.ratioResolution
     ) {
-      this.cursorRageBar!.x -= 0.1
+      this.cursorRageBar!.x -= 0.5
+    }
+
+    if (this.cursorRageBar!.x < (this.rageBar!.width / gameStore.ratioResolution / 2 - 50) || this.cursorRageBar!.x > (this.rageBar!.width / gameStore.ratioResolution / 2 + 50)) {
+      this.isCursorInSafeArea = false
+    } else {
+      this.isCursorInSafeArea = true
+    }
+
+    if (this.isCursorInSafeArea) {
+      this.firstRow!.x += 0.1
     }
   }
 
@@ -97,9 +115,9 @@ export default class TraficGameScene extends MinigameScene {
       .setScale(1 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
-    const safeRageBarArea = this.add.graphics()
-    safeRageBarArea.fillStyle(0x6adeb8, 1)
-    safeRageBarArea.fillRect(
+    this.safeRageBarArea = this.add.graphics()
+    this.safeRageBarArea.fillStyle(0x6adeb8, 1)
+    this.safeRageBarArea.fillRect(
       this.rageBar.width / gameStore.ratioResolution / 2 - 50,
       -(this.rageBar.height / gameStore.ratioResolution) / 2 + 4,
       100,
@@ -114,7 +132,7 @@ export default class TraficGameScene extends MinigameScene {
       )
       .setScale(1 / gameStore.ratioResolution)
 
-    return [this.rageBar, safeRageBarArea, this.cursorRageBar]
+    return [this.rageBar, this.safeRageBarArea, this.cursorRageBar]
   }
 
   private createRoad(): void {
@@ -127,10 +145,10 @@ export default class TraficGameScene extends MinigameScene {
     let yCounter = 0
     const windowWidth = Number(this.game.config.width)
     const windowHeight = Number(this.game.config.height)
-    const widthRoadT = this.roads![0].width/gameStore.ratioResolution
-    const heightRoadT = this.roads![0].height/gameStore.ratioResolution
-    const xRepeatCount = Math.ceil(windowWidth/widthRoadT)
-    const yRepeatCount = Math.ceil(windowHeight/heightRoadT)
+    const widthRoadT = this.roads![0].width / gameStore.ratioResolution
+    const heightRoadT = this.roads![0].height / gameStore.ratioResolution
+    const xRepeatCount = Math.ceil(windowWidth / widthRoadT)
+    const yRepeatCount = Math.ceil(windowHeight / heightRoadT)
 
     const heightRoad = this.roads![0].height
     const widthRoad = this.roads![0].width
@@ -144,15 +162,18 @@ export default class TraficGameScene extends MinigameScene {
          */
 
         // Spawn de la route d'une ligne
-        this.roads![this.roads!.length] = this.add
+        const road = this.add
           .sprite(
             widthRoad / gameStore.ratioResolution * xCounter,
             Number(this.game.config.height) - (heightRoad / gameStore.ratioResolution * yCounter),
             'road')
           .setScale(1 / gameStore.ratioResolution)
           .setOrigin(0, 1)
+
+        this.roads![this.roads!.length] = road
         xCounter += 1
       }
+
       yCounter += 1
     }
   }
@@ -163,10 +184,10 @@ export default class TraficGameScene extends MinigameScene {
 
     const windowWidth = Number(this.game.config.width)
     const windowHeight = Number(this.game.config.height)
-    const widthRoadT = this.roads![0].width/gameStore.ratioResolution
-    const heightRoadT = this.roads![0].height/gameStore.ratioResolution
-    const xRepeatCount = Math.ceil(windowWidth/widthRoadT)
-    const yRepeatCount = Math.ceil(windowHeight/heightRoadT)
+    const widthRoadT = this.roads![0].width / gameStore.ratioResolution
+    const heightRoadT = this.roads![0].height / gameStore.ratioResolution
+    const xRepeatCount = Math.ceil(windowWidth / widthRoadT)
+    const yRepeatCount = Math.ceil(windowHeight / heightRoadT)
 
     const heightRoad = this.roads![0].height
 
@@ -179,7 +200,7 @@ export default class TraficGameScene extends MinigameScene {
       this.widthLastCar = 0
       this.positionXLastCar = 0
 
-      if (yCounter%2 === 0) {
+      if (yCounter % 2 === 0) {
         if (direction === "left") {
           direction = "right"
         } else {
@@ -189,38 +210,45 @@ export default class TraficGameScene extends MinigameScene {
 
       while (this.positionXLastCar + this.widthLastCar < Number(this.game.config.width)) {
         if (direction === "right") {
-          carKey = this.availableRightCars[Math.floor(randomRange(0,this.availableRightCars.length))]
+          carKey = this.availableRightCars[Math.floor(randomRange(0, this.availableRightCars.length))]
         } else {
-          carKey = this.availableLeftCars[Math.floor(randomRange(0,this.availableLeftCars.length))]
+          carKey = this.availableLeftCars[Math.floor(randomRange(0, this.availableLeftCars.length))]
         }
 
         if (this.isTokiInScene === false && direction === "right" && this.positionXLastCar === 0) {
           carKey = "traffic_toki_animation"
           this.isTokiInScene = true
-        }
+        } 
 
         const car = this.add.sprite(
           this.positionXLastCar + this.widthLastCar + 10,
-            Number(this.game.config.height) - (heightRoad / gameStore.ratioResolution * yCounter),
-            carKey
+          Number(this.game.config.height) - (heightRoad / gameStore.ratioResolution * yCounter),
+          carKey
         )
-        .setScale(1 / gameStore.ratioResolution)
-        .setOrigin(0, 1)
-        .setDepth(1000 - yCounter)
+          .setScale(1 / gameStore.ratioResolution)
+          .setOrigin(0, 1)
+          .setDepth(1000 - yCounter)
         car.anims.play(carKey, true)
-    
-        this.widthLastCar = car.width/gameStore.ratioResolution
+
+        this.widthLastCar = car.width / gameStore.ratioResolution
         this.positionXLastCar = car.x
 
         if (carKey === "traffic_toki_animation") {
           this.hornSprite = this.add.sprite(
             car.x + (car.width / gameStore.ratioResolution) / 2 + 15,
             car.y - 25,
-              "traffic_horn_animation"
+            "traffic_horn_animation"
           )
-          .setScale(1 / gameStore.ratioResolution)
-          .setOrigin(0.5, 1)
-          .setDepth(998)
+            .setScale(1 / gameStore.ratioResolution)
+            .setOrigin(0.5, 1)
+            .setDepth(10)
+        }
+
+        if (yCounter === 0 && carKey !== "traffic_toki_animation") {
+          this.carsFirstRow.push(car)
+        } else if (yCounter === 0 && carKey === "traffic_toki_animation") {
+          this.carsFirstRow.push(this.hornSprite!)
+          this.carsFirstRow.push(car)
         }
 
         xCounter += 1
