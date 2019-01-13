@@ -3,12 +3,14 @@ import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { randomRange } from '../../../utils/functions';
 import gameManager from '../../manager/GameManager';
+import RoadsContainer from '../../objects/traffic-game/RoadsContainer';
+import CarsContainer from '../../objects/traffic-game/CarsContainer';
 
 export default class TraficGameScene extends MinigameScene {
   private controls?: Phaser.GameObjects.Container
   private rageBar?: Phaser.GameObjects.Sprite
   private cursorRageBar?: Phaser.GameObjects.Sprite
-  private roads?: Phaser.GameObjects.Sprite[] = []
+  private roads?: Phaser.GameObjects.Container
   private availableRightCars: string[] =
     ["traffic_blue_car_animation", "traffic_cars_01_animation", "traffic_cars_04_animation"]
   private availableLeftCars: string[] =
@@ -19,6 +21,8 @@ export default class TraficGameScene extends MinigameScene {
   private firstRow?: Phaser.GameObjects.Container
   private carsFirstRow: Phaser.GameObjects.Sprite[] = []
   private safeRageBarArea?: Phaser.GameObjects.Graphics
+
+  private cars?: CarsContainer
 
   private hornSprite?: Phaser.GameObjects.Sprite
 
@@ -39,11 +43,18 @@ export default class TraficGameScene extends MinigameScene {
   public create() {
     super.create()
 
-    this.createRoad()
-    this.createCars()
-    this.controls = this.createControls()
+    this.roads = new RoadsContainer({
+      scene: this,
+      x: 0,
+      y: 0
+    })
 
-    this.firstRow = this.add.container(0,0, this.carsFirstRow)
+    this.cars = new CarsContainer()
+
+    // this.createCars()
+    // this.controls = this.createControls()
+
+    // this.firstRow = this.add.container(0,0, this.carsFirstRow)
   }
 
   public onFailure = (): void => {
@@ -56,32 +67,32 @@ export default class TraficGameScene extends MinigameScene {
   }
 
   public update = (time: number, delta: number): void => {
-    if (
-      this.cursorRageBar!.x >
-      10 + this.cursorRageBar!.width / gameStore.ratioResolution
-    ) {
-      this.cursorRageBar!.x -= 1
-    }
+    // if (
+    //   this.cursorRageBar!.x >
+    //   10 + this.cursorRageBar!.width / gameStore.ratioResolution
+    // ) {
+    //   this.cursorRageBar!.x -= 1
+    // }
 
-    if (this.cursorRageBar!.x < (this.rageBar!.width / gameStore.ratioResolution / 2 - 50) || this.cursorRageBar!.x > (this.rageBar!.width / gameStore.ratioResolution / 2 + 50)) {
-      this.isCursorInSafeArea = false
-    } else {
-      this.isCursorInSafeArea = true
-    }
+    // if (this.cursorRageBar!.x < (this.rageBar!.width / gameStore.ratioResolution / 2 - 50) || this.cursorRageBar!.x > (this.rageBar!.width / gameStore.ratioResolution / 2 + 50)) {
+    //   this.isCursorInSafeArea = false
+    // } else {
+    //   this.isCursorInSafeArea = true
+    // }
 
-    if (this.isCursorInSafeArea) {
+    // if (this.isCursorInSafeArea) {
       
-      // There we determine how much px the first line need to move on each frame depending of the game width
-      // 500 = minigameDuration
-      this.firstRow!.x += ((Number(this.game.config.width) / 500) + 0.01)
-    }
+    //   // There we determine how much px the first line need to move on each frame depending of the game width
+    //   // 500 = minigameDuration
+    //   this.firstRow!.x += ((Number(this.game.config.width) / 500) + 0.01)
+    // }
 
-    if (this.firstRow!.x > Number(this.game.config.width) && this.isTokiFree === false) {
-      console.log('yolo')
-      this.onSuccess()
+    // if (this.firstRow!.x > Number(this.game.config.width) && this.isTokiFree === false) {
+    //   console.log('yolo')
+    //   this.onSuccess()
       
-      this.isTokiFree = true
-    }
+    //   this.isTokiFree = true
+    // }
   }
 
   private createControls(): Phaser.GameObjects.Container {
@@ -148,42 +159,7 @@ export default class TraficGameScene extends MinigameScene {
   }
 
   private createRoad(): void {
-    this.roads![this.roads!.length] = this.add
-      .sprite(0, Number(this.game.config.height), 'road')
-      .setScale(1 / gameStore.ratioResolution)
-      .setOrigin(0, 1)
 
-    let xCounter = 0
-    let yCounter = 0
-    const windowWidth = Number(this.game.config.width)
-    const windowHeight = Number(this.game.config.height)
-    const widthRoadT = this.roads![0].width / gameStore.ratioResolution
-    const heightRoadT = this.roads![0].height / gameStore.ratioResolution
-    const xRepeatCount = Math.ceil(windowWidth / widthRoadT)
-    const yRepeatCount = Math.ceil(windowHeight / heightRoadT)
-
-    const heightRoad = this.roads![0].height
-    const widthRoad = this.roads![0].width
-
-    while (yCounter < yRepeatCount) {
-      xCounter = 0
-
-      while (xCounter < xRepeatCount) {
-        // Spawn de la route d'une ligne
-        const road = this.add
-          .sprite(
-            widthRoad / gameStore.ratioResolution * xCounter,
-            Number(this.game.config.height) - (heightRoad / gameStore.ratioResolution * yCounter),
-            'road')
-          .setScale(1 / gameStore.ratioResolution)
-          .setOrigin(0, 1)
-
-        this.roads![this.roads!.length] = road
-        xCounter += 1
-      }
-
-      yCounter += 1
-    }
   }
 
   private createCars(): void {
