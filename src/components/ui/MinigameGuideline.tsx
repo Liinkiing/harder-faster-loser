@@ -22,6 +22,8 @@ interface StyledProps {
 }
 
 const SHOW_DURATION = 2000
+const APPEAR_SOUND = 'guideline_appear'
+const LEAVE_SOUND = 'guideline_leave'
 
 const MinigameGuidelineOverlay = styled.div`
   position: fixed;
@@ -88,12 +90,17 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
   useEffect(() => {
     gameManager.activeScene!.scene.pause()
     const handler = (evt: AnimationEvent) => {
-      console.log(evt)
       if (evt.animationName === guidelineContainerAppear.getName()) {
         if (onAppeared) {
           onAppeared()
         }
+        gameManager.audio.playSfx(APPEAR_SOUND, {
+          volume: 0.15,
+        })
         wait(SHOW_DURATION).then(() => {
+          gameManager.audio.playSfx(LEAVE_SOUND, {
+            volume: 0.15,
+          })
           setIsLeaving(true)
         })
       }
