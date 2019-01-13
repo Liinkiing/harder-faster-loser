@@ -391,6 +391,11 @@
         "type": "audio",
         "key": "guideline_leave",
         "url": "/static/assets/sounds/guideline_leave.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "yeah",
+        "url": "/static/assets/sounds/yeah.ogg"
       }
     ]
   }

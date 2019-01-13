@@ -19,6 +19,7 @@ const MEDIUM_PASSWORD_LENGTH = 4
 const HARD_PASSWORD_LENGTH = 5
 
 const SOUND_PASSWORD_INVALID = 'error'
+const SOUND_PASSWORD_VALID = 'yeah'
 const SOUND_KEYBOARD_BUTTON = 'beep'
 
 export default class PasswordGameScene extends MinigameScene {
@@ -93,6 +94,10 @@ export default class PasswordGameScene extends MinigameScene {
         this.computerScreen!.screen.setDepth(1000).anims.play(
           'mdp_valid_animation'
         )
+        gameManager.audio.playSfx(SOUND_PASSWORD_VALID, {
+          volume: 0.4,
+          delay: 0.1,
+        })
         await gameWait(this.time, 2000)
         this.onSuccess()
       } else if (
