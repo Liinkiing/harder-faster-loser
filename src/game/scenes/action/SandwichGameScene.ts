@@ -95,15 +95,15 @@ export default class SandwichGameScene extends MinigameScene {
           element![element!.length - 1].width / gameStore.ratioResolution <
         this.game.config.width
       ) {
-        if (element == this.skies) {
+        if (element === this.skies) {
           this.createCloneBackgroundElement(element!, 'sky')
-        } else if (element == this.buildings) {
+        } else if (element === this.buildings) {
           this.createCloneBackgroundElement(element!, 'building')
-        } else if (element == this.landscapes) {
+        } else if (element === this.landscapes) {
           this.createCloneBackgroundElement(element!, 'landscape')
-        } else if (element == this.streetLights) {
+        } else if (element === this.streetLights) {
           this.createCloneBackgroundElement(element!, 'streetLights')
-        } else if (element == this.grounds) {
+        } else if (element === this.grounds) {
           this.createCloneBackgroundElement(element!, 'ground')
         }
       }
@@ -199,13 +199,13 @@ export default class SandwichGameScene extends MinigameScene {
 
       if (element == this.skies) {
         nativeSpeed = 2
-      } else if (element == this.buildings) {
+      } else if (element === this.buildings) {
         nativeSpeed = 4
-      } else if (element == this.landscapes) {
+      } else if (element === this.landscapes) {
         nativeSpeed = 5
-      } else if (element == this.streetLights) {
+      } else if (element === this.streetLights) {
         nativeSpeed = 6
-      } else if (element == this.grounds) {
+      } else if (element === this.grounds) {
         nativeSpeed = 7
       }
 

@@ -2,6 +2,7 @@ import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { randomRange } from '../../../utils/functions';
+import gameManager from '../../manager/GameManager';
 
 export default class TraficGameScene extends MinigameScene {
   private controls?: Phaser.GameObjects.Container
@@ -20,10 +21,13 @@ export default class TraficGameScene extends MinigameScene {
   private roadFirstRow: Phaser.GameObjects.Sprite[] = []
   private carsFirstRow: Phaser.GameObjects.Sprite[] = []
   private safeRageBarArea?: Phaser.GameObjects.Graphics
+  private tokisCar?: Phaser.GameObjects.Sprite
 
   private hornSprite?: Phaser.GameObjects.Sprite
 
   private isCursorInSafeArea: boolean = true
+
+  private isTokiFree: boolean = false
 
   constructor() {
     super({
@@ -50,6 +54,7 @@ export default class TraficGameScene extends MinigameScene {
   }
 
   public onSuccess = (): void => {
+    gameManager.loadNextMinigame()
     console.log('you win')
   }
 
@@ -58,7 +63,7 @@ export default class TraficGameScene extends MinigameScene {
       this.cursorRageBar!.x >
       10 + this.cursorRageBar!.width / gameStore.ratioResolution
     ) {
-      this.cursorRageBar!.x -= 0.5
+      this.cursorRageBar!.x -= 1
     }
 
     if (this.cursorRageBar!.x < (this.rageBar!.width / gameStore.ratioResolution / 2 - 50) || this.cursorRageBar!.x > (this.rageBar!.width / gameStore.ratioResolution / 2 + 50)) {
@@ -68,7 +73,17 @@ export default class TraficGameScene extends MinigameScene {
     }
 
     if (this.isCursorInSafeArea) {
-      this.firstRow!.x += 0.1
+      
+      // There we determine how much px the first line need to move on each frame depending of the game width
+      // 500 = minigameDuration
+      this.firstRow!.x += ((Number(this.game.config.width) / 500) + 0.1)
+    }
+
+    if (this.firstRow!.x > Number(this.game.config.width) && this.isTokiFree === false) {
+      console.log('yolo')
+      this.onSuccess()
+      
+      this.isTokiFree = true
     }
   }
 
@@ -157,10 +172,6 @@ export default class TraficGameScene extends MinigameScene {
       xCounter = 0
 
       while (xCounter < xRepeatCount) {
-        /**
-         * Contenu d'une ligne
-         */
-
         // Spawn de la route d'une ligne
         const road = this.add
           .sprite(
@@ -249,6 +260,8 @@ export default class TraficGameScene extends MinigameScene {
         } else if (yCounter === 0 && carKey === "traffic_toki_animation") {
           this.carsFirstRow.push(this.hornSprite!)
           this.carsFirstRow.push(car)
+
+          this.tokisCar = car
         }
 
         xCounter += 1

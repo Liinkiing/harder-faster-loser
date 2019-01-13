@@ -43,7 +43,7 @@ const RemainingTime: FunctionComponent = () => {
 
   const onClick = () => {
     if (!suspended) {
-      setRemaining(1000000)
+      setRemaining(remaining + 1)
     }
   }
 
