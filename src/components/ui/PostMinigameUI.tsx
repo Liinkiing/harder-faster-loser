@@ -27,7 +27,6 @@ const PostMinigameUIInner = styled.div<StyledProps>`
   width: 100%;
   height: 100%;
   display: flex;
-  animation: ${show} 0.8s;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -55,4 +54,3 @@ const PostMinigameUI: FunctionComponent = () => {
 }
 
 export default observer(PostMinigameUI)
-
