@@ -16,12 +16,9 @@ export default class TraficGameScene extends MinigameScene {
   private widthLastCar: number = 0
   private positionXLastCar: number = 0
   private isTokiInScene: boolean = false
-  private isInSafeArea: boolean = true
   private firstRow?: Phaser.GameObjects.Container
-  private roadFirstRow: Phaser.GameObjects.Sprite[] = []
   private carsFirstRow: Phaser.GameObjects.Sprite[] = []
   private safeRageBarArea?: Phaser.GameObjects.Graphics
-  private tokisCar?: Phaser.GameObjects.Sprite
 
   private hornSprite?: Phaser.GameObjects.Sprite
 
@@ -76,7 +73,7 @@ export default class TraficGameScene extends MinigameScene {
       
       // There we determine how much px the first line need to move on each frame depending of the game width
       // 500 = minigameDuration
-      this.firstRow!.x += ((Number(this.game.config.width) / 500) + 0.1)
+      this.firstRow!.x += ((Number(this.game.config.width) / 500) + 0.01)
     }
 
     if (this.firstRow!.x > Number(this.game.config.width) && this.isTokiFree === false) {
@@ -260,8 +257,6 @@ export default class TraficGameScene extends MinigameScene {
         } else if (yCounter === 0 && carKey === "traffic_toki_animation") {
           this.carsFirstRow.push(this.hornSprite!)
           this.carsFirstRow.push(car)
-
-          this.tokisCar = car
         }
 
         xCounter += 1
