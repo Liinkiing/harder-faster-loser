@@ -21,7 +21,7 @@ interface StyledProps {
   isLeaving: boolean
 }
 
-const SHOW_DURATION = 2000
+const SHOW_DURATION = 2500
 const APPEAR_SOUND = 'guideline_appear'
 const LEAVE_SOUND = 'guideline_leave'
 
@@ -85,8 +85,28 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
     onAppeared,
   } = props
   const [isLeaving, setIsLeaving] = useState(false)
+  const [time, setTime] = useState(0)
   const [display, setDisplay] = useState(true)
   const container = useRef<HTMLDivElement>(null)
+  useEffect(
+    () => {
+      const handler = () => {
+        setTime(time + 10)
+      }
+      let interval: undefined | NodeJS.Timeout
+      if (time !== -1 && time <= SHOW_DURATION) {
+        interval = setInterval(handler, 1)
+      }
+
+      return () => {
+        if (interval) {
+          clearInterval(interval)
+        }
+      }
+    },
+    [time]
+  )
+
   useEffect(() => {
     gameManager.activeScene!.scene.pause()
     const handler = (evt: AnimationEvent) => {
@@ -96,9 +116,6 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
         }
         gameManager.audio.playSfx(APPEAR_SOUND, {
           volume: 0.15,
-        })
-        wait(SHOW_DURATION).then(() => {
-          setIsLeaving(true)
         })
       }
       if (evt.animationName === guidelineContainerLeaving.getName()) {
@@ -125,6 +142,11 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
 
   if (!display) {
     return null
+  }
+
+  if (time === SHOW_DURATION) {
+    setIsLeaving(true)
+    setTime(-1)
   }
 
   return (

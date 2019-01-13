@@ -21,7 +21,7 @@ const GameDebugMinigamePicker: FunctionComponent<
     .map(scene => scene.scene.key)
 
   const handleMinigameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    gameManager.loadMinigame(e.target.value)
+    gameManager.forceLoadMinigame(e.target.value)
   }
 
   return (

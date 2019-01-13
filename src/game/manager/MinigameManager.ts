@@ -61,10 +61,16 @@ class MinigameManager {
     return this.pickGameKey(selectedCategory)
   }
 
-  public startGame = async (key: string) => {
+  public startGame = async (key: string, force: boolean = false) => {
     console.log('picking ' + key)
     let game: string | undefined
     let category: string | undefined
+
+    if (force) {
+      this.lastGame = key
+      return gameManager.startScene(key)
+    }
+
     for (const gameCategory in this.games) {
       if (this.games.hasOwnProperty(gameCategory)) {
         game = this.games[gameCategory].find(gameKey => gameKey === key)
@@ -92,7 +98,6 @@ class MinigameManager {
       }
 
       this.lastGame = key
-      gameStore.regenerateUiKey()
 
       await gameManager.startScene(key)
     }
@@ -119,8 +124,6 @@ class MinigameManager {
     }
 
     this.lastGame = game
-    gameStore.regenerateUiKey()
-
     return game
   }
 
