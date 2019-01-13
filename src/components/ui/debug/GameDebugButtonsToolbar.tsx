@@ -6,6 +6,7 @@ import GameDebugTogglePauseButton from './GameDebugTogglePauseButton'
 import { useKeyboardShortcuts } from '../../../utils/hooks'
 import gameDebugStore from '../../../store/GameDebugStore'
 import { observer } from 'mobx-react-lite'
+import GameDebugToggleSoundsButton from './GameDebugToggleSoundsButton'
 
 const GameDebugButtonsToolbar: FunctionComponent = () => {
   const { toggleDebugToolbar, debugToolbar } = gameDebugStore
@@ -23,6 +24,7 @@ const GameDebugButtonsToolbar: FunctionComponent = () => {
 
   return (
     <div className="game-debug-buttons-toolbar">
+      <GameDebugToggleSoundsButton />
       <GameDebugTogglePauseButton />
       <GameDebugToggleThemeButton />
       <GameDebugToggleButton />

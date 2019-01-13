@@ -49,6 +49,12 @@ class GameStore {
     this.uiKey = new Phaser.Math.RandomDataGenerator().uuid()
   }
 
+  @action public changeSettings = (
+    newSettings: Partial<GameSettings>
+  ): void => {
+    this.settings = { ...this.settings, ...newSettings }
+  }
+
   @action public changeConfig = (newConfig: Partial<HFLGameConfig>): void => {
     this.config = { ...this.config, ...newConfig }
     if (newConfig.backgroundColor) {
