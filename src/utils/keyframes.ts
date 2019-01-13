@@ -14,28 +14,34 @@ export const guidelineContainerLeaving = keyframes`
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 `
 
 export const guidelineAppear = keyframes`
-  from {
-    transform: translateX(calc(100% * 4));
+  0% {
+    transform: translateX(100%);
     opacity: 0;
   }
-  to {
+  70% {
+    opacity: 1;
+  }
+  100% {
     transform: translateX(0);
     opacity: 1;
   }
 `
 
 export const guidelineLeaving = keyframes`
-  from {
+  0% {
     transform: translateX(0);
     opacity: 1;
   }
-  to {
-    transform: translateX(calc(100% * 4));
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-100%);
     opacity: 0;
   }
 `

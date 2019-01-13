@@ -8,7 +8,6 @@ import {
   guidelineContainerLeaving,
   guidelineLeaving,
 } from '../../utils/keyframes'
-import { wait } from '../../utils/functions'
 import gameManager from '../../game/manager/GameManager'
 
 interface Props {
@@ -61,7 +60,7 @@ const GuidelineContainer = styled.div<StyledProps>`
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.43);
     animation: ${props =>
         props.isLeaving ? guidelineContainerLeaving : guidelineContainerAppear}
-      0.3s;
+      0.5s forwards;
   }
 `
 
@@ -70,12 +69,12 @@ const GuidelineTitle = styled.h2<StyledProps>`
   font-size: 26px;
   margin-bottom: 20px;
   animation: ${props => (props.isLeaving ? guidelineLeaving : guidelineAppear)}
-    0.4s;
+    0.6s forwards;
 `
 
 const GuidelineSubtitle = styled.p<StyledProps>`
   animation: ${props => (props.isLeaving ? guidelineLeaving : guidelineAppear)}
-    0.4s;
+    0.6s forwards;
 `
 
 const MinigameGuideline: FunctionComponent<Props> = props => {
@@ -109,33 +108,43 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
 
   useEffect(() => {
     gameManager.activeScene!.scene.pause()
-    const handler = (evt: AnimationEvent) => {
-      if (evt.animationName === guidelineContainerAppear.getName()) {
+    const endHandler = (evt: AnimationEvent) => {
+      if (evt.animationName === guidelineAppear.getName()) {
         if (onAppeared) {
           onAppeared()
         }
-        gameManager.audio.playSfx(APPEAR_SOUND, {
-          volume: 0.15,
-        })
       }
-      if (evt.animationName === guidelineContainerLeaving.getName()) {
+      if (evt.animationName === guidelineLeaving.getName()) {
         if (onLeft) {
           onLeft()
         }
-        gameManager.audio.playSfx(LEAVE_SOUND, {
-          volume: 0.15,
-        })
         gameManager.activeScene!.scene.resume()
         setDisplay(false)
       }
     }
+    const startHandler = (evt: AnimationEvent) => {
+      if (evt.animationName === guidelineAppear.getName()) {
+        gameManager.audio.playSfx(APPEAR_SOUND, {
+          volume: 0.15,
+          delay: 0.25,
+        })
+      }
+      if (evt.animationName === guidelineLeaving.getName()) {
+        gameManager.audio.playSfx(LEAVE_SOUND, {
+          volume: 0.15,
+          delay: 0.25,
+        })
+      }
+    }
     if (container.current) {
-      container.current.addEventListener('animationend', handler)
+      container.current.addEventListener('animationstart', startHandler)
+      container.current.addEventListener('animationend', endHandler)
     }
 
     return () => {
       if (container.current) {
-        container.current.removeEventListener('animationend', handler)
+        container.current.removeEventListener('animationstart', startHandler)
+        container.current.removeEventListener('animationend', endHandler)
       }
     }
   }, [])
