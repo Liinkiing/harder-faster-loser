@@ -291,6 +291,18 @@
       "frameRate": 5
     },
     {
+      "key": "elevatorWinAnimation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "elevator_win",
+        "start": 0,
+        "end": 12
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 5
+    },
+    {
       "key": "floorsAnimation",
       "frames": {
         "typeOfGeneration": "generateFrameNumbers",

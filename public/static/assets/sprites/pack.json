@@ -327,6 +327,15 @@
       },
       {
         "type": "spritesheet",
+        "key": "elevator_win",
+        "url": "/static/assets/sprites/elevator-game/door_opening_915_1350.png",
+        "frameConfig": {
+          "frameWidth": 915,
+          "frameHeight": 1350
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "floors",
         "url": "/static/assets/sprites/elevator-game/floors.png",
         "frameConfig": {
