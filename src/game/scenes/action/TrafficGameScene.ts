@@ -5,8 +5,14 @@ import { randomRange } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
 import RoadsContainer from '../../objects/traffic-game/RoadsContainer'
 import CarsContainer from '../../objects/traffic-game/CarsContainer'
+import { MinigameGuideline } from '../../../utils/interfaces'
+import minigameManager from '../../manager/MinigameManager'
 
 export default class TraficGameScene extends MinigameScene {
+  public guideline: MinigameGuideline = {
+    title: 'Honk !',
+    subtitle: 'to get out off the traffic jam',
+  }
   private controls?: Phaser.GameObjects.Container
   private rageBar?: Phaser.GameObjects.Sprite
   private cursorRageBar?: Phaser.GameObjects.Sprite
@@ -66,13 +72,17 @@ export default class TraficGameScene extends MinigameScene {
     this.firstRow = this.add.container(0, 0, this.carsFirstRow)
   }
 
-  public onFailure = (): void => {
-    console.log('you failed')
+  public onSuccess = (): void => {
+    console.log('you win')
+    minigameManager.addCurrentMinigameToPlayedGames()
+    gameManager.loadPostMinigame()
   }
 
-  public onSuccess = (): void => {
-    gameManager.loadNextMinigame()
-    console.log('you win')
+  public onFailure = (): void => {
+    console.log('you failed')
+    minigameManager.addCurrentMinigameToPlayedGames()
+    gameManager.looseLife()
+    gameManager.loadPostMinigame()
   }
 
   public update = (time: number, delta: number): void => {

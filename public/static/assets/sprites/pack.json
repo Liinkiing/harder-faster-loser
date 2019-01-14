@@ -478,8 +478,6 @@
         "type": "audio",
         "key": "yeah",
         "url": "/static/assets/sounds/yeah.ogg"
-        "key": "sp_6_1",
-        "url": "/static/assets/sprites/spam-game/sp_6_1.png"
       },
       {
         "type": "image",
