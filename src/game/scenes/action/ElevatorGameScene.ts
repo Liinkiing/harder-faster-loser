@@ -137,18 +137,18 @@ export default class ElevatorGameScene extends MinigameScene {
     this.elevator = this.add
       .sprite(0, 0, this.elevatorTexture)
       .setOrigin(0.5, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(3 / gameStore.ratioResolution)
     this.elevator.anims.play(this.elevatorTexture, true, 0)
     this.elevator.anims.stop()
 
     this.floorsElevator = this.add
       .sprite(
         0,
-        -this.elevator.height / gameStore.ratioResolution + 34,
+        (-this.elevator.height * 3) / gameStore.ratioResolution + 34,
         this.floorsTexture
       )
       .setOrigin(0.5, 0)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(3 / gameStore.ratioResolution)
     this.floorsElevator.anims.play(this.floorsTexture, false, 0)
     this.floorsElevator.anims.stop()
 
@@ -197,7 +197,7 @@ export default class ElevatorGameScene extends MinigameScene {
       )
       this.floorsElevator!.anims.stop()
 
-      if (this.currentFrame >= this.floorsElevator!.texture.frameTotal - 2) {
+      if (this.currentFrame >= this.floorsElevator!.texture.frameTotal - 3) {
         this.caseCallElevator!.removeAllListeners('pointerup')
         this.caseCallElevator!.removeAllListeners('pointerdown')
 
