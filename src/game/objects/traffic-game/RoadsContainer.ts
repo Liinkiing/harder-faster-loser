@@ -1,18 +1,15 @@
-import { ContainerConstructor } from '../../../utils/interfaces';
-import gameStore from '../../../store/GameStore';
+import { ContainerConstructor } from '../../../utils/interfaces'
+import gameStore from '../../../store/GameStore'
 
 export default class RoadsContainer extends Phaser.GameObjects.Container {
-
-  private roads: Phaser.GameObjects.Sprite[] = []
+  public roads: Phaser.GameObjects.Sprite[] = []
   private widthRoad?: number
-  private heightRoad?: number
+  public heightRoad?: number
 
   constructor(params: ContainerConstructor) {
     super(params.scene, params.x, params.y)
 
     this.createRoads()
-    
-
     params.scene.add.existing(this)
   }
 
@@ -31,7 +28,7 @@ export default class RoadsContainer extends Phaser.GameObjects.Container {
     const xRepeatCount = Math.ceil(windowWidth / widthRoadT)
     const yRepeatCount = Math.ceil(windowHeight / heightRoadT)
 
-    const heightRoad = this.roads![0].height
+    this.heightRoad = this.roads![0].height
     const widthRoad = this.roads![0].width
 
     while (yCounter < yRepeatCount) {
@@ -41,9 +38,11 @@ export default class RoadsContainer extends Phaser.GameObjects.Container {
         // Spawn de la route d'une ligne
         const road = this.scene.add
           .sprite(
-            widthRoad / gameStore.ratioResolution * xCounter,
-            Number(this.scene.game.config.height) - (heightRoad / gameStore.ratioResolution * yCounter),
-            'road')
+            (widthRoad / gameStore.ratioResolution) * xCounter,
+            Number(this.scene.game.config.height) -
+              (this.heightRoad / gameStore.ratioResolution) * yCounter,
+            'road'
+          )
           .setScale(1 / gameStore.ratioResolution)
           .setOrigin(0, 1)
 
