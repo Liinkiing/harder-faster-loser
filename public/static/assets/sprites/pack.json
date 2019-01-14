@@ -282,6 +282,83 @@
       },
       {
         "type": "spritesheet",
+        "key": "toki_whistle",
+        "url": "/static/assets/sprites/elevator-game/toki_whistle_300_1185.png",
+        "frameConfig": {
+          "frameWidth": 300,
+          "frameHeight": 1185
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_irritated",
+        "url": "/static/assets/sprites/elevator-game/toki_irrite_315_1185.png",
+        "frameConfig": {
+          "frameWidth": 315,
+          "frameHeight": 1185
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_arms",
+        "url": "/static/assets/sprites/elevator-game/bras_elevator_240_345.png",
+        "frameConfig": {
+          "frameWidth": 240,
+          "frameHeight": 345
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_water",
+        "url": "/static/assets/sprites/elevator-game/goutte_blase_45_135.png",
+        "frameConfig": {
+          "frameWidth": 45,
+          "frameHeight": 135
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_music_note",
+        "url": "/static/assets/sprites/elevator-game/music_note_195_120.png",
+        "frameConfig": {
+          "frameWidth": 195,
+          "frameHeight": 120
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "elevator",
+        "url": "/static/assets/sprites/elevator-game/elevator_bkg_335_600.png",
+        "frameConfig": {
+          "frameWidth": 335,
+          "frameHeight": 600
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "floors",
+        "url": "/static/assets/sprites/elevator-game/floors_175_85.png",
+        "frameConfig": {
+          "frameWidth": 175,
+          "frameHeight": 85
+        }
+      },
+      {
+        "type": "image",
+        "key": "plant",
+        "url": "/static/assets/sprites/elevator-game/plante.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "case_call_elevator",
+        "url": "/static/assets/sprites/elevator-game/case_call_elevator_450_480.png",
+        "frameConfig": {
+          "frameWidth": 450,
+          "frameHeight": 480
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "life_1",
         "url": "/static/assets/sprites/post-minigame/life_1_285_270.png",
         "frameConfig": {
@@ -341,6 +418,11 @@
         "type": "audio",
         "key": "error",
         "url": "/static/assets/sounds/error.ogg"
+      },
+      {
+        "type": "image",
+        "key": "case_irritated",
+        "url": "/static/assets/sprites/elevator-game/case_blase_elevator.png"
       },
       {
         "type": "image",

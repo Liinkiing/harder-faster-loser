@@ -7,6 +7,7 @@ import {
   HomescreenScene,
   PostMinigameScene,
   SplashscreenScene,
+  ElevatorGameScene,
 } from '../game/scenes'
 import { GameBackgroundColor } from './types'
 import { green } from './colors'
@@ -50,6 +51,7 @@ export const gameConfig: GameConfig = {
     SpamGameScene,
     SandwichGameScene,
     PasswordGameScene,
+    ElevatorGameScene,
 
     PostMinigameScene,
     DeathscreenScene,

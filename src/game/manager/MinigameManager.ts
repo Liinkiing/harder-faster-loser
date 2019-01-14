@@ -19,6 +19,7 @@ class MinigameManager {
       scenesKeys.SpamGame,
       scenesKeys.SandwichGame,
       scenesKeys.PasswordGame,
+      scenesKeys.ElevatorGame,
     ]),
     [GameCategory.Waiting]: new List<string>([]),
   }
