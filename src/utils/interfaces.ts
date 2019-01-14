@@ -29,6 +29,8 @@ export interface TitledProps {
 export interface PositionneableProps {
   x?: number
   y?: number
+  width?: number
+  height?: number
   zIndex?: number
   draggable?: boolean
 }
