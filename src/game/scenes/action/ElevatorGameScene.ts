@@ -1,30 +1,32 @@
-import gameManager, { Emitter } from '../../manager/GameManager'
+import gameManager from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
-import { GameEvents } from '../../../utils/enums'
 import { gameWait } from '../../../utils/functions'
 
 export default class ElevatorGameScene extends MinigameScene {
   // Texture
-  private elevatorWinTexture: string
+  private elevatorTexture: string
   private floorsTexture: string
   private playerTexture: string
   private playerIrritatedTexture: string
   private playerArmsTexture: string
   private playerMusicNoteTexture: string
   private playerWaterDropTexture: string
+  private caseWaterDropTexture: string
   private caseCallElevatorTexture: string
+  private caseIrritatedTexture: string
   // Sprite
   private elevator?: Phaser.GameObjects.Sprite
-  private elevatorDoors?: Phaser.GameObjects.Sprite
   private floorsElevator?: Phaser.GameObjects.Sprite
   private elevatorContainer?: Phaser.GameObjects.Container
   private player?: Phaser.GameObjects.Sprite
   private playerArms?: Phaser.GameObjects.Sprite
   private playerMusicNote?: Phaser.GameObjects.Sprite
   private playerWaterDrop?: Phaser.GameObjects.Sprite
+  private caseWaterDrop?: Phaser.GameObjects.Sprite
   private caseCallElevator?: Phaser.GameObjects.Sprite
+  private caseIrritated?: Phaser.GameObjects.Sprite
   private playerContainer?: Phaser.GameObjects.Container
   // Variable
   private currentFrame: integer = 1
@@ -36,13 +38,15 @@ export default class ElevatorGameScene extends MinigameScene {
       key: scenesKeys.ElevatorGame,
     })
 
-    this.elevatorWinTexture = 'elevatorWinAnimation'
+    this.elevatorTexture = 'elevatorAnimation'
     this.floorsTexture = 'floorsAnimation'
     this.playerTexture = 'tokiWhistleAnimation'
     this.playerArmsTexture = 'tokiArmsAnimation'
     this.playerMusicNoteTexture = 'tokiMusicNoteAnimation'
     this.playerWaterDropTexture = 'tokiWaterDropAnimation'
+    this.caseWaterDropTexture = 'tokiWaterDropAnimation'
     this.caseCallElevatorTexture = 'caseCallElevatorAnimation'
+    this.caseIrritatedTexture = 'case_irritated'
     this.playerIrritatedTexture = 'tokiIrritatedAnimation'
   }
 
@@ -58,10 +62,6 @@ export default class ElevatorGameScene extends MinigameScene {
 
   public preload(): void {
     super.preload()
-    this.load.image(
-      'elevator_bkg',
-      '/static/assets/sprites/elevator-game/elevator_bkg.png'
-    )
   }
 
   public create() {
@@ -71,7 +71,7 @@ export default class ElevatorGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-    if (this.currentFrame > 14) {
+    if (this.currentFrame === 14) {
       this.makeTokiIrritated()
     }
   }
@@ -124,24 +124,22 @@ export default class ElevatorGameScene extends MinigameScene {
   private makeTokiIrritated(): void {
     this.player!.anims.play(this.playerIrritatedTexture, true, 0)
     this.playerWaterDrop!.anims.play(this.playerWaterDropTexture, true, 0)
-
-    this.playerMusicNote!.destroy()
     this.playerWaterDrop!.setVisible(true)
+    this.caseIrritated!.setVisible(true)
+    this.caseWaterDrop!.anims.play(this.caseWaterDropTexture, true, 0)
+    this.caseWaterDrop!.setVisible(true)
+    this.playerMusicNote!.destroy()
   }
 
   private createElevatorContent(): void {
     this.currentFrame = 1
 
     this.elevator = this.add
-      .sprite(0, 0, 'elevator_bkg')
+      .sprite(0, 0, this.elevatorTexture)
       .setOrigin(0.5, 1)
       .setScale(1 / gameStore.ratioResolution)
-
-    this.elevatorDoors = this.add
-      .sprite(0, 0, this.elevatorWinTexture)
-      .setOrigin(0.5, 1)
-      .setScale(1 / gameStore.ratioResolution)
-    this.elevatorDoors.setVisible(false)
+    this.elevator.anims.play(this.elevatorTexture, true, 0)
+    this.elevator.anims.stop()
 
     this.floorsElevator = this.add
       .sprite(
@@ -160,14 +158,28 @@ export default class ElevatorGameScene extends MinigameScene {
       .setScale(1 / gameStore.ratioResolution)
     this.caseCallElevator.anims.play(this.caseCallElevatorTexture, true, 0)
     this.caseCallElevator.anims.stop()
+
+    this.caseIrritated = this.add
+      .sprite(13, -240, this.caseIrritatedTexture)
+      .setOrigin(1, 1)
+      .setScale(1 / gameStore.ratioResolution)
+    this.caseIrritated.setVisible(false)
+
+    this.caseWaterDrop = this.add
+      .sprite(-85, -325, this.caseWaterDropTexture)
+      .setOrigin(0.5, 0.5)
+      .setScale(-1 / gameStore.ratioResolution, 1 / gameStore.ratioResolution)
+    this.caseWaterDrop.setVisible(false)
+
     this.elevatorContainer = this.add.container(
       Number(this.game.config.width) / 2,
       Number(this.game.config.height),
       [
         this.elevator,
-        this.elevatorDoors,
         this.floorsElevator,
         this.caseCallElevator,
+        this.caseIrritated,
+        this.caseWaterDrop,
       ]
     )
 
@@ -190,9 +202,11 @@ export default class ElevatorGameScene extends MinigameScene {
         this.caseCallElevator!.removeAllListeners('pointerdown')
 
         new Promise(resolve => {
-          this.elevatorDoors!.setVisible(true)
-          const animation = this.elevatorDoors!.anims.play(
-            this.elevatorWinTexture,
+          this.caseWaterDrop!.setVisible(false)
+          this.caseIrritated!.setVisible(false)
+
+          const animation = this.elevator!.anims.play(
+            this.elevatorTexture,
             true,
             0
           )

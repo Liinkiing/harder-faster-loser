@@ -327,11 +327,11 @@
       },
       {
         "type": "spritesheet",
-        "key": "elevator_win",
-        "url": "/static/assets/sprites/elevator-game/door_opening_915_1350.png",
+        "key": "elevator",
+        "url": "/static/assets/sprites/elevator-game/elevator_bkg_1005_1800.png",
         "frameConfig": {
-          "frameWidth": 915,
-          "frameHeight": 1350
+          "frameWidth": 1005,
+          "frameHeight": 1800
         }
       },
       {
@@ -342,6 +342,11 @@
           "frameWidth": 525,
           "frameHeight": 255
         }
+      },
+      {
+        "type": "image",
+        "key": "plant",
+        "url": "/static/assets/sprites/elevator-game/plante.png"
       },
       {
         "type": "spritesheet",
@@ -413,6 +418,11 @@
         "type": "audio",
         "key": "error",
         "url": "/static/assets/sounds/error.ogg"
+      },
+      {
+        "type": "image",
+        "key": "case_irritated",
+        "url": "/static/assets/sprites/elevator-game/case_blase_elevator.png"
       },
       {
         "type": "image",
