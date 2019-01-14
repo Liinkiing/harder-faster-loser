@@ -15,21 +15,6 @@ interface TokiStatus {
 }
 
 class GameStore {
-  constructor() {
-    reaction(
-      () => this.difficulty,
-      difficulty => {
-        console.log(difficulty)
-        const computed = difficulty / 3.2
-        gameManager.audio.detuneBg = computed * 125
-        const duration = Math.exp(computed) + 500 - Math.exp(computed) * 2
-        this.changeConfig({
-          minigameDuration: Phaser.Math.Clamp(duration, 25, 500),
-        })
-      }
-    )
-  }
-
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
   @observable public loading: boolean = true
@@ -58,6 +43,20 @@ class GameStore {
   @observable public transitionning: boolean = false
   @observable
   public uiKey: string = new Phaser.Math.RandomDataGenerator().uuid()
+
+  constructor() {
+    reaction(
+      () => this.difficulty,
+      difficulty => {
+        const computed = difficulty / 3.2
+        gameManager.audio.detuneBg = computed * 125
+        const duration = Math.exp(computed) + 500 - Math.exp(computed) * 2
+        this.changeConfig({
+          minigameDuration: Phaser.Math.Clamp(duration, 25, 500),
+        })
+      }
+    )
+  }
 
   @action public increaseElapsed = (delta: number = 1): void => {
     this.elapsed += delta
