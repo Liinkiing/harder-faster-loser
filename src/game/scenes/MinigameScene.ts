@@ -14,11 +14,14 @@ export default abstract class MinigameScene extends BaseScene {
 
   protected onSuccess(): void {
     console.log('you won')
+    gameStore.increaseDifficulty()
     gameManager.loadPostMinigame()
   }
 
   protected onFailure(): void {
     console.log('you fail')
+    gameStore.increaseDifficulty()
+    // gameManager.looseLife()
     gameManager.loadPostMinigame()
   }
 

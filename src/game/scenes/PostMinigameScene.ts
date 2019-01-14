@@ -2,6 +2,7 @@ import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
 import { gameWait } from '../../utils/functions'
 import gameManager from '../manager/GameManager'
+import gameStore from '../../store/GameStore'
 
 const SOUND_LOST = 'hit'
 const SOUND_WIN = 'success'
@@ -17,6 +18,7 @@ export default class PostMinigameScene extends BaseScene {
   public create = async () => {
     super.create()
     this.createFillerGraphics()
+    gameStore.increaseDifficulty()
     const { hasTokiJustLost, isTokiDead } = gameManager
 
     if (hasTokiJustLost) {
