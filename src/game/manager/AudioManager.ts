@@ -9,6 +9,7 @@ type ExtraConfig = Partial<SoundConfig & SoundMarker>
 
 export default class AudioManager {
   private sound: Phaser.Sound.BaseSoundManager
+  private bg?: Phaser.Sound.BaseSound
 
   get muted() {
     return this.sound.mute
@@ -17,6 +18,15 @@ export default class AudioManager {
   constructor(private gm: GameManager) {
     this.sound = gm.game.sound
     this.sound.pauseOnBlur = true
+  }
+
+  set detuneBg(value: number) {
+    if (this.bg) {
+      this.bg.play('', {
+        detune: value,
+        seek: (this.bg as Phaser.Sound.WebAudioSound).seek,
+      })
+    }
   }
 
   public toggleSounds = (): void => {
@@ -34,10 +44,11 @@ export default class AudioManager {
   }
 
   public playBg = (extra?: ExtraConfig): void => {
-    this.sound.play(BG_MUSIC, {
+    this.bg = this.sound.add(BG_MUSIC, {
       ...extra,
       volume: (extra && extra.volume) || BG_VOLUME,
       loop: true,
     })
+    this.bg.play()
   }
 }

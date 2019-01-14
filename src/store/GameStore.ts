@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx'
+import { action, observable, reaction } from 'mobx'
 import { GameState } from '../utils/enums'
 import { GameSettings } from '../utils/interfaces'
 import { HFLGameConfig } from '../utils/game'
@@ -15,6 +15,21 @@ interface TokiStatus {
 }
 
 class GameStore {
+  constructor() {
+    reaction(
+      () => this.difficulty,
+      difficulty => {
+        console.log(difficulty)
+        const computed = difficulty / 3.2
+        gameManager.audio.detuneBg = computed * 125
+        const duration = Math.exp(computed) + 500 - Math.exp(computed) * 2
+        this.changeConfig({
+          minigameDuration: Phaser.Math.Clamp(duration, 25, 500),
+        })
+      }
+    )
+  }
+
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
   @observable public loading: boolean = true
@@ -105,8 +120,12 @@ class GameStore {
     this.state = newState
   }
 
-  @action public increaseDifficulty = (step: number = 0.5): void => {
-    this.difficulty += step
+  @action public increaseDifficulty = (step: number = 1): void => {
+    this.difficulty = Phaser.Math.Clamp(this.difficulty + step, 1, 20)
+  }
+
+  @action public setDifficulty = (difficulty: number): void => {
+    this.difficulty = Phaser.Math.Clamp(difficulty, 1, 20)
   }
 
   @action public changeRatioResolution = (innerWidth: number): void => {
