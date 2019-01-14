@@ -3,8 +3,14 @@ import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { gameWait } from '../../../utils/functions'
+import { MinigameGuideline } from '../../../utils/interfaces'
 
 export default class ElevatorGameScene extends MinigameScene {
+  public guideline: MinigameGuideline = {
+    title: 'Call !',
+    subtitle: 'the elevator',
+  }
+
   // Texture
   private elevatorTexture: string
   private floorsTexture: string
@@ -48,16 +54,6 @@ export default class ElevatorGameScene extends MinigameScene {
     this.caseCallElevatorTexture = 'caseCallElevatorAnimation'
     this.caseIrritatedTexture = 'case_irritated'
     this.playerIrritatedTexture = 'tokiIrritatedAnimation'
-  }
-
-  public onFailure(): void {
-    console.log('you failed')
-    gameManager.loadNextMinigame()
-  }
-
-  public onSuccess(): void {
-    console.log('you won')
-    gameManager.loadNextMinigame()
   }
 
   public preload(): void {
