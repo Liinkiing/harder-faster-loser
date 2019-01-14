@@ -8,6 +8,8 @@ import { GameBackgroundColor } from '../../utils/types'
 import { gameBackgroundColorToCss } from '../../utils/functions'
 import minigameManager from './MinigameManager'
 import AudioManager from './AudioManager'
+import { MinigameGuideline } from '../../utils/interfaces'
+import MinigameScene from '../scenes/MinigameScene'
 import { BootScene } from '../scenes'
 
 export const Emitter = new EventEmitter()
@@ -23,6 +25,16 @@ export class GameManager {
     Emitter.on(BaseEvents.SceneInit, (scene: Phaser.Scene) => {
       this.activeScene = scene
     })
+  }
+
+  public get minigameGuideline(): MinigameGuideline {
+    if (gameStore.state === GameState.Minigame && this.activeScene) {
+      return (this.activeScene as MinigameScene).guideline
+    } else {
+      throw new Error(
+        'Could not get minigame guideline. Are you trying to access it outside a Minigame?'
+      )
+    }
   }
 
   public suspendMinigame = (): void => {
@@ -60,6 +72,11 @@ export class GameManager {
     await minigameManager.startGame(minigameKey)
   }
 
+  public forceLoadMinigame = async (minigameKey: string) => {
+    gameManager.suspendMinigame()
+    await minigameManager.startGame(minigameKey, true)
+  }
+
   public loadNextMinigame = async () => {
     gameManager.suspendMinigame()
     await this.startScene(minigameManager.pickNextGameKey())
@@ -94,7 +111,6 @@ export class GameManager {
       gameStore.changeState(
         key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
       )
-      gameStore.regenerateUiKey()
       gameStore.stopTransitionning()
       await disappear(this.gameFader)
       if (gameStore.paused) {
@@ -111,7 +127,6 @@ export class GameManager {
       gameStore.changeState(
         key.includes(minigameSuffix) ? GameState.Minigame : (key as GameState)
       )
-      gameStore.regenerateUiKey()
       if (gameStore.paused) {
         gameStore.resume()
       }

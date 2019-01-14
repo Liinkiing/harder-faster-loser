@@ -5,11 +5,16 @@ import { randomRange } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
+import { MinigameGuideline } from '../../../utils/interfaces'
 
 const SOUND_SPAM_DESTROYED = 'explosion'
 const SOUND_CLOSE_CLICK = 'beep'
 
 export default class SpamGameScene extends MinigameScene {
+  public guideline: MinigameGuideline = {
+    title: 'Click !',
+    subtitle: 'to close the spams',
+  }
   public spams: List<Spam> = new List<Spam>()
   constructor() {
     super({
@@ -20,7 +25,6 @@ export default class SpamGameScene extends MinigameScene {
   public create() {
     super.create()
     this.spams = new List<Spam>()
-    this.input.setGlobalTopOnly(true)
 
     for (let nbrSpam = 0; nbrSpam < 10; nbrSpam++) {
       this.spams.push(this.createSpam())

@@ -9,6 +9,7 @@ import { gameWait, shuffle } from '../../../utils/functions'
 import { GameEvents } from '../../../utils/enums'
 import ComputerPasswordScreen from '../../objects/password-game/ComputerPasswordScreen'
 import gameStore from '../../../store/GameStore'
+import { MinigameGuideline } from '../../../utils/interfaces'
 
 const PASSWORD_DISPLAY_TIME = 3000
 const PAW_DISPLAY_TIME = 180
@@ -18,9 +19,14 @@ const MEDIUM_PASSWORD_LENGTH = 4
 const HARD_PASSWORD_LENGTH = 5
 
 const SOUND_PASSWORD_INVALID = 'error'
+const SOUND_PASSWORD_VALID = 'yeah'
 const SOUND_KEYBOARD_BUTTON = 'beep'
 
 export default class PasswordGameScene extends MinigameScene {
+  public guideline: MinigameGuideline = {
+    title: 'Memorise !',
+    subtitle: 'to enter password',
+  }
   public password: Code[] = []
   public typedPassword: Code[] = []
   private keyboard?: KeyboardContainer
@@ -31,7 +37,6 @@ export default class PasswordGameScene extends MinigameScene {
       key: scenesKeys.PasswordGame,
     })
   }
-
   public create = async () => {
     super.create()
     gameManager.suspendMinigame()
@@ -89,6 +94,10 @@ export default class PasswordGameScene extends MinigameScene {
         this.computerScreen!.screen.setDepth(1000).anims.play(
           'mdp_valid_animation'
         )
+        gameManager.audio.playSfx(SOUND_PASSWORD_VALID, {
+          volume: 0.4,
+          delay: 0.1,
+        })
         await gameWait(this.time, 2000)
         this.onSuccess()
       } else if (

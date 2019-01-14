@@ -1,5 +1,10 @@
 import { GameDebugTheme } from './enums'
 
+export interface MinigameGuideline {
+  title: string
+  subtitle: string
+}
+
 export interface KeyboardShortcut {
   keys: string[]
   action: () => void

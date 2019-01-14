@@ -381,6 +381,21 @@
         "type": "image",
         "key": "close_active",
         "url": "/static/assets/sprites/spam-game/close_active.png"
+      },
+      {
+        "type": "audio",
+        "key": "guideline_appear",
+        "url": "/static/assets/sounds/guideline_appear.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "guideline_leave",
+        "url": "/static/assets/sounds/guideline_leave.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "yeah",
+        "url": "/static/assets/sounds/yeah.ogg"
       }
     ]
   }

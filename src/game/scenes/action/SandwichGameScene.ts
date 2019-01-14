@@ -4,11 +4,16 @@ import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
+import { MinigameGuideline } from '../../../utils/interfaces'
 
 const SOUND_WALK = 'beep'
 const SOUND_GET_SANDWICH = 'tada'
 
 export default class SandwichGameScene extends MinigameScene {
+  public guideline: MinigameGuideline = {
+    title: 'Run !',
+    subtitle: 'to get your food',
+  }
   private skies?: Phaser.GameObjects.Sprite[] = []
   private buildings?: Phaser.GameObjects.Sprite[] = []
   private landscapes?: Phaser.GameObjects.Sprite[] = []
