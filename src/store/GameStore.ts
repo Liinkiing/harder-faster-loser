@@ -17,6 +17,8 @@ interface TokiStatus {
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
+  @observable public loading: boolean = true
+  @observable public started: boolean = false
   @observable public status: TokiStatus = {
     hasStress: false,
     hasBrain: true,
@@ -30,6 +32,7 @@ class GameStore {
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
+    dev: process.env.NODE_ENV === 'development',
     suspended: false,
     fade: true,
     fadeColor: green,
@@ -43,6 +46,14 @@ class GameStore {
 
   @action public increaseElapsed = (delta: number = 1): void => {
     this.elapsed += delta
+  }
+
+  @action public startGame = (): void => {
+    this.started = true
+  }
+
+  @action public stopGame = (): void => {
+    this.started = false
   }
 
   @action public regenerateUiKey = (): void => {
@@ -80,6 +91,14 @@ class GameStore {
       this.status.hasJustBrain = false
       this.status.hasJustHeart = true
     }
+  }
+
+  @action public startLoading = (): void => {
+    this.loading = true
+  }
+
+  @action public stopLoading = (): void => {
+    this.loading = false
   }
 
   @action public changeState = (newState: GameState): void => {

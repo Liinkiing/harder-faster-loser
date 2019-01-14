@@ -16,8 +16,18 @@ export default class BootScene extends BaseScene {
     this.load.pack('preload', '/static/assets/sprites/pack.json', 'preload')
   }
 
+  public update(time: number, delta: number): void {}
+
   public create = async () => {
     super.create()
+    gameStore.stopLoading()
+    if (gameStore.config.dev) {
+      this.startGame()
+    }
+  }
+
+  public startGame = (): void => {
+    gameStore.startGame()
     gameManager.audio.playBg()
     const initial = gameStore.config.fade
     gameStore.changeConfig({ fade: false })

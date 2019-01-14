@@ -17,7 +17,6 @@ const GameDebugToggleButtonIcon = styled.i`
 
 const GameDebugToggleButton: FunctionComponent = () => {
   const { debug, toggleDebug, hideDebug } = gameDebugStore
-  console.log(process.env.PUBLIC_URL)
   useKeyboardShortcuts([
     {
       keys: [Key.Escape],
