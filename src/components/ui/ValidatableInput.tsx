@@ -4,6 +4,8 @@ import {
   KeyboardEventHandler,
   KeyboardEvent,
   useRef,
+  ChangeEventHandler,
+  CSSProperties,
 } from 'react'
 import { useCallback } from 'react'
 import { Key } from 'ts-key-enum'
@@ -13,6 +15,8 @@ interface Props {
   validationFeedbackDelay?: number
   children?: ReactNode | string
   onValidate?: (value: string) => void
+  style?: CSSProperties
+  onChange?: ChangeEventHandler<HTMLInputElement>
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>
   max?: number
   min?: number
@@ -22,7 +26,7 @@ interface Props {
 type HTMLInputProps = Partial<
   Pick<
     HTMLInputElement,
-    'type' | 'checked' | 'defaultValue' | 'value' | 'className'
+    'type' | 'checked' | 'defaultValue' | 'value' | 'className' | 'step'
   >
 >
 
@@ -31,12 +35,29 @@ const ValidatableInput: FunctionComponent<Props & HTMLInputProps> = props => {
     validationClassname,
     validationFeedbackDelay,
     onValidate,
+    onChange,
     onKeyDown,
     ...rest
   } = props
   const input = useRef<HTMLInputElement>(null)
 
   let last: number
+  const onChangeHandler: ChangeEventHandler<HTMLInputElement> = evt => {
+    if (input.current && !input.current.classList.contains('is-success')) {
+      input.current.classList.add('is-success')
+    }
+    if (last) {
+      clearTimeout(last)
+    }
+    last = setTimeout(() => {
+      if (input.current && validationClassname) {
+        input.current.classList.remove(validationClassname)
+      }
+    }, validationFeedbackDelay)
+    if (onChange) {
+      onChange(evt)
+    }
+  }
   const handleOnKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === Key.Enter) {
       if (input.current && !input.current.classList.contains('is-success')) {
@@ -59,7 +80,14 @@ const ValidatableInput: FunctionComponent<Props & HTMLInputProps> = props => {
     }
   }, [])
 
-  return <input {...rest} onKeyDown={handleOnKeyDown} ref={input} />
+  return (
+    <input
+      {...rest}
+      onChange={onChangeHandler}
+      onKeyDown={handleOnKeyDown}
+      ref={input}
+    />
+  )
 }
 
 ValidatableInput.defaultProps = {

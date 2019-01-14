@@ -156,9 +156,9 @@ export default class PasswordGameScene extends MinigameScene {
 
   private createPassword = (): Code[] => {
     let password = shuffle(['◻', '▲', '|||', '☰', 'O', 'U'])
-    if (gameStore.difficulty <= 3) {
+    if (gameStore.difficulty <= 6) {
       password = password.slice(0, EASY_PASSWORD_LENGTH)
-    } else if (gameStore.difficulty <= 6) {
+    } else if (gameStore.difficulty <= 12) {
       password = password.slice(0, MEDIUM_PASSWORD_LENGTH)
     } else {
       password = password.slice(0, HARD_PASSWORD_LENGTH)

@@ -37,8 +37,6 @@ export default class ComputerPasswordScreen extends Phaser.GameObjects
       } else if (
         passwordGame.typedPassword.length === passwordGame.password.length
       ) {
-        this.addStarChar(passwordGame.typedPassword.length)
-        await gameWait(this.scene.time, 30)
         this.remove(this.stars)
       }
     })

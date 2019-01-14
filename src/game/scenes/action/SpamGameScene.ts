@@ -6,6 +6,7 @@ import { GameEvents } from '../../../utils/enums'
 import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import { MinigameGuideline } from '../../../utils/interfaces'
+import gameStore from '../../../store/GameStore'
 
 const SOUND_SPAM_DESTROYED = 'explosion'
 const SOUND_CLOSE_CLICK = 'beep'
@@ -25,8 +26,9 @@ export default class SpamGameScene extends MinigameScene {
   public create() {
     super.create()
     this.spams = new List<Spam>()
-
-    for (let nbrSpam = 0; nbrSpam < 10; nbrSpam++) {
+    this.input.setGlobalTopOnly(true)
+    const max = gameStore.difficulty * 1.25 + 10
+    for (let nbrSpam = 0; nbrSpam < max; nbrSpam++) {
       this.spams.push(this.createSpam())
     }
   }

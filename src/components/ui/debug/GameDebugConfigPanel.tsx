@@ -1,12 +1,5 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import {
-  KeyboardEvent,
-  FunctionComponent,
-  useCallback,
-  useState,
-  useRef,
-} from 'react'
+import { FunctionComponent, useCallback, ChangeEventHandler } from 'react'
 import DebugContainer from './DebugContainer'
 import {
   HideableProps,
@@ -20,16 +13,12 @@ import Spacer from '../Spacer'
 import ValidatableInput from '../ValidatableInput'
 import colors from '../../../utils/colors'
 
-const MinigameDurationCol = styled.span`
-  width: 100px;
-  display: inline-block;
-  transition: all 0.15s;
-`
-
 const GameDebugConfigPanel: FunctionComponent<
   PositionneableProps & TitledProps & HideableProps
 > = props => {
   const {
+    difficulty,
+    setDifficulty,
     config: { fade, minigameDuration },
     changeConfig,
   } = gameStore
@@ -54,17 +43,44 @@ const GameDebugConfigPanel: FunctionComponent<
     })
   }, [])
 
-  const handleOnValidate = useCallback(
-    (duration: string) => {
-      changeConfig({
-        minigameDuration: Number(duration),
-      })
-    },
-    [minigameDuration]
-  )
+  const handleOnValidate = useCallback((duration: string) => {
+    changeConfig({
+      minigameDuration: Number(duration),
+    })
+  }, [])
+
+  const handleOnValidateDifficulty = useCallback((value: string) => {
+    setDifficulty(Number(value))
+  }, [])
+
+  const onChangeDifficultyInput: ChangeEventHandler<HTMLInputElement> = evt => {
+    setDifficulty(Number(evt.target.value))
+  }
+
+  const onChangeMinigameDurationInput: ChangeEventHandler<
+    HTMLInputElement
+  > = evt => {
+    changeConfig({
+      minigameDuration: Number(evt.target.value),
+    })
+  }
 
   return (
     <DebugContainer {...props}>
+      <label>
+        <span>Difficulty : </span>
+        <ValidatableInput
+          value={String(difficulty)}
+          onChange={onChangeDifficultyInput}
+          onValidate={handleOnValidateDifficulty}
+          className="input"
+          type="number"
+          step="1"
+          max={20}
+          min={1}
+        />
+      </label>
+      <Spacer />
       <label>
         <input
           type="checkbox"
@@ -93,19 +109,26 @@ const GameDebugConfigPanel: FunctionComponent<
         onChangeComplete={handleGameBackgroundColorChange}
       />
       <Spacer />
-      <p>
+      <div
+        style={{
+          width: '100%',
+        }}
+      >
         Minigame duration :
-        <MinigameDurationCol>
-          <ValidatableInput
-            defaultValue={String(minigameDuration)}
-            onValidate={handleOnValidate}
-            className="input"
-            type="number"
-            max={700}
-            min={200}
-          />
-        </MinigameDurationCol>
-      </p>
+        <Spacer size="small" />
+        <ValidatableInput
+          style={{
+            width: '100%',
+          }}
+          value={String(minigameDuration)}
+          onChange={onChangeMinigameDurationInput}
+          onValidate={handleOnValidate}
+          className="input"
+          type="number"
+          max={700}
+          min={200}
+        />
+      </div>
     </DebugContainer>
   )
 }
