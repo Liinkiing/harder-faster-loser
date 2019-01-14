@@ -200,7 +200,7 @@ export default class ElevatorGameScene extends MinigameScene {
       if (this.currentFrame >= this.floorsElevator!.texture.frameTotal - 3) {
         this.caseCallElevator!.removeAllListeners('pointerup')
         this.caseCallElevator!.removeAllListeners('pointerdown')
-
+        gameManager.suspendMinigame()
         new Promise(resolve => {
           this.caseWaterDrop!.setVisible(false)
           this.caseIrritated!.setVisible(false)
