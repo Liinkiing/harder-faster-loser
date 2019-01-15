@@ -13,8 +13,6 @@ export const mediumGray = '#948d9b'
 export const darkGray = '#4d4851'
 export const black = '#28252a'
 
-export const boxShadow = `box-shadow: 4px 4px 0 ${lightRed}`
-
 export const hexToRgba = (hex: string, alpha: number): string => {
   const test = hex.replace(
     /^#?([a-f\d])([a-f\d])([a-f\d])$/i,

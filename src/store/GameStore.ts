@@ -37,7 +37,7 @@ class GameStore {
     fade: true,
     fadeColor: green,
     backgroundColor: green,
-    minigameDuration: 500,
+    minigameDuration: 50000,
   }
   @observable public ratioResolution: number = 3
   @observable public transitionning: boolean = false

@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import {
   black,
-  boxShadow,
   green,
   lightGray,
   lightRed,
@@ -13,6 +12,7 @@ import PauseIcon from '../icons/PauseIcon'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import gameManager from '../../../game/manager/GameManager'
+import { border, boxShadow } from '../../../utils/css'
 
 interface StyledProps {
   paused: boolean
@@ -25,7 +25,7 @@ const Button = styled.button<StyledProps>`
   align-items: center;
   background: ${green};
   outline: none;
-  border: 4px solid ${black};
+  ${border};
   color: ${white};
   line-height: 100px;
   height: 70px;

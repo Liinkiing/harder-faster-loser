@@ -4,14 +4,15 @@ import gameManager, { Emitter } from '../../../game/manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
-import { black, boxShadow, yellow } from '../../../utils/colors'
+import { black, yellow } from '../../../utils/colors'
+import { border, boxShadow } from '../../../utils/css'
 
 const ProgressOuter = styled.div`
   position: relative;
   right: -4px;
   width: 100%;
   height: 40px;
-  border: 4px solid ${black};
+  ${border};
   ${boxShadow};
   background: white;
 `

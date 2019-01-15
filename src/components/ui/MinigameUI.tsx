@@ -3,6 +3,7 @@ import MinigameToolbar from './games/MinigameToolbar'
 import gameManager from '../../game/manager/GameManager'
 import MinigameGuideline from './MinigameGuideline'
 import minigameManager from '../../game/manager/MinigameManager'
+import PauseModal from './modals/PauseModal'
 
 const MinigameUI: FunctionComponent = () => {
   const { minigameGuideline } = gameManager
@@ -14,6 +15,7 @@ const MinigameUI: FunctionComponent = () => {
       {!hasPlayedCurrentMinigame && (
         <MinigameGuideline guideline={minigameGuideline} />
       )}
+      <PauseModal />
     </div>
   )
 }
