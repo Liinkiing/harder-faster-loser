@@ -83,7 +83,7 @@ export default class SubwayGameScene extends MinigameScene {
 
       const currentLineContainer = this.add.container(
         30,
-        this.windowHeight - 50 - yCounter * 100,
+        this.windowHeight - 80 - yCounter * 100,
         this.spriteLine
       )
 
