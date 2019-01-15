@@ -22,8 +22,8 @@ const Button = styled.button<StyledProps>`
   color: ${white};
   line-height: 100px;
   height: 70px;
+  user-select: none;
   ${boxShadow};
-  user-select: all;
   &:hover:not(:disabled),
   :active:not(:disabled) {
     cursor: pointer;

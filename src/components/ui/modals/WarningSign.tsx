@@ -16,11 +16,14 @@ const WarningSignInner = styled.div`
   z-index: 1000;
   content: '';
   left: calc(50% - ${WARNING_SIGN_SIZE / 2}px);
-  top: -11%;
+  top: -3%;
   width: ${WARNING_SIGN_SIZE}px;
   height: ${WARNING_SIGN_SIZE}px;
   background: url(${warningSign}) no-repeat center;
   background-size: contain;
+  @media screen and (min-width: 340px) {
+    top: -11%;
+  }
 `
 
 const RemainingTime = styled.h2`
