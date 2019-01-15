@@ -9,11 +9,13 @@ import styled from 'styled-components'
 import Spritesheet from '../Spritesheet'
 import GameButton from '../GameButton'
 import gameManager from '../../../game/manager/GameManager'
+import { slideInUp } from '../../../utils/keyframes'
 
 const WARNING_SIGN_SIZE = 120
 
 const PauseModalContainer = styled.div`
   display: flex;
+  animation: ${slideInUp} 0.3s forwards;
   flex-direction: column;
   position: relative;
   width: 80%;
@@ -51,12 +53,16 @@ const SpritesheetContainer = styled.div`
 
 const PauseModal: FunctionComponent = props => {
   const { resume } = gameManager
+  const [rnd, setRnd] = useState<boolean | undefined>(undefined)
+  useEffect(() => {
+    setRnd(Math.random() >= 0.5)
+  }, [])
 
   return (
     <ModalsContainer>
       <PauseModalContainer>
         <SpritesheetContainer>
-          {Math.random() >= 0.5 ? (
+          {rnd !== undefined && rnd ? (
             <Spritesheet
               image={cigaretteSpritesheet}
               widthFrame={150}

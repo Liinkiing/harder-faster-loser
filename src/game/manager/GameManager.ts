@@ -138,6 +138,7 @@ export class GameManager {
     if (!this.activeScene) {
       return
     }
+    this.audio.detuneBg = -1200
     this.activeScene!.scene.pause()
     gameStore.pause()
   }
@@ -146,6 +147,7 @@ export class GameManager {
     if (!this.activeScene) {
       return
     }
+    this.audio.untuneBg()
     this.activeScene!.scene.resume()
     gameStore.resume()
   }
@@ -172,13 +174,9 @@ export class GameManager {
       return
     }
     if (gameStore.paused) {
-      this.activeScene!.sound.setDetune(0)
-      this.activeScene!.scene.resume()
-      gameStore.resume()
+      this.resume()
     } else {
-      this.activeScene!.sound.setDetune(-1200)
-      this.activeScene!.scene.pause()
-      gameStore.pause()
+      this.pause()
     }
 
     console.log('TOGGLE PAUSE')
