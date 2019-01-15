@@ -508,6 +508,34 @@
       {
         "type": "audio",
         "key": "yeah",
+        "url": "/static/assets/sounds/yeah.ogg"
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_character_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 285
+        }
+      },
+      {
+        "type": "image",
+        "key": "subway_grey_square",
+        "url": "/static/assets/sprites/subway-game/subway_grey_square.png"
+      },
+      {
+        "type": "audio",
+        "key": "yeah",
         "url": [
           "/static/assets/sounds/yeah.ogg",
           "/static/assets/sounds/yeah.m4a",
