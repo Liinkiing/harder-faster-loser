@@ -48,13 +48,18 @@ export default class SubwayGameScene extends MinigameScene {
         }
 
         if (xCounter !== 3) {
+          let characterTextureKey = ''
+          xCounter === 2 && yCounter == 0
+            ? (characterTextureKey = 'subwayTokiTimeAnimation')
+            : (characterTextureKey = 'subwayCharacterTimeAnimation')
+
           const character = this.add
-            .sprite(xCounter * 100, 50, 'subwayCharacterTimeAnimation')
+            .sprite(xCounter * 100, 50, characterTextureKey)
             .setOrigin(0, 1)
             .setScale(1 / gameStore.ratioResolution)
             .setDepth(2)
 
-          character.anims.play('subwayCharacterTimeAnimation', true)
+          character.anims.play(characterTextureKey, true)
 
           this.spriteLine[this.spriteLine.length] = character
         }
