@@ -84,7 +84,6 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
     onLeft,
     onAppeared,
   } = props
-  const { changeConfig } = gameStore
   const [isLeaving, setIsLeaving] = useState(false)
   const [time, setTime] = useState(0)
   const [display, setDisplay] = useState(true)
@@ -109,10 +108,8 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
   )
 
   useEffect(() => {
+    gameStore.showGuideline()
     gameManager.activeScene!.scene.pause()
-    changeConfig({
-      suspended: true,
-    })
     const endHandler = (evt: AnimationEvent) => {
       if (evt.animationName === guidelineAppear.getName()) {
         if (onAppeared) {
@@ -124,9 +121,6 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
           onLeft()
         }
         gameManager.activeScene!.scene.resume()
-        changeConfig({
-          suspended: false,
-        })
         setDisplay(false)
       }
     }
@@ -158,6 +152,7 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
   }, [])
 
   if (!display) {
+    gameStore.hideGuideline()
     return null
   }
 

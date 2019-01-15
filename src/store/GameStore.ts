@@ -20,6 +20,7 @@ class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
   @observable public loading: boolean = true
+  @observable public showingGuideline: boolean = false
   @observable public started: boolean = false
   @observable public status: TokiStatus = {
     hasStress: false,
@@ -59,6 +60,14 @@ class GameStore {
         })
       }
     )
+  }
+
+  @action public showGuideline = (): void => {
+    this.showingGuideline = true
+  }
+
+  @action public hideGuideline = (): void => {
+    this.showingGuideline = false
   }
 
   @action public decreasePauseRemaining = (): void => {
