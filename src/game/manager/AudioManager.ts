@@ -8,6 +8,7 @@ const SFX_VOLUME = 0.05
 type ExtraConfig = Partial<SoundConfig & SoundMarker>
 
 export default class AudioManager {
+  private previousDetune: number
   private sound: Phaser.Sound.BaseSoundManager
   private bg?: Phaser.Sound.BaseSound
 
@@ -17,13 +18,24 @@ export default class AudioManager {
 
   constructor(private gm: GameManager) {
     this.sound = gm.game.sound
+    this.previousDetune = this.sound.detune
     this.sound.pauseOnBlur = true
   }
 
   set detuneBg(value: number) {
     if (this.bg) {
+      this.previousDetune = (this.bg as Phaser.Sound.WebAudioSound).detune
       this.bg.play('', {
         detune: value,
+        seek: (this.bg as Phaser.Sound.WebAudioSound).seek,
+      })
+    }
+  }
+
+  public untuneBg = (): void => {
+    if (this.bg) {
+      this.bg.play('', {
+        detune: this.previousDetune,
         seek: (this.bg as Phaser.Sound.WebAudioSound).seek,
       })
     }

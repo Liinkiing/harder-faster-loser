@@ -3,6 +3,7 @@ import { GameDebugTheme } from '../utils/enums'
 
 class GameDebugStore {
   @observable public debug: boolean = false
+  @observable public paused: boolean = false
   @observable public debugToolbar: boolean = true
   @observable public theme: GameDebugTheme = GameDebugTheme.Light
 
@@ -14,6 +15,18 @@ class GameDebugStore {
   @action public hideDebugToolbar = (): void => {
     this.debugToolbar = false
     this.hideDebug()
+  }
+
+  @action public togglePause = (): void => {
+    this.paused = !this.paused
+  }
+
+  @action public pause = (): void => {
+    this.paused = true
+  }
+
+  @action public resume = (): void => {
+    this.paused = false
   }
 
   @action public toggleDebugToolbar = (): void => {

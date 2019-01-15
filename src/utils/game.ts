@@ -18,6 +18,7 @@ export interface HFLGameConfig {
   suspended: boolean
   fade: boolean
   minigameDuration: number
+  remainingPause: number
   backgroundColor: GameBackgroundColor
   fadeColor: string
 }

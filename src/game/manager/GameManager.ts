@@ -11,6 +11,7 @@ import AudioManager from './AudioManager'
 import { MinigameGuideline } from '../../utils/interfaces'
 import MinigameScene from '../scenes/MinigameScene'
 import { BootScene } from '../scenes'
+import gameDebugStore from '../../store/GameDebugStore'
 
 export const Emitter = new EventEmitter()
 
@@ -137,6 +138,7 @@ export class GameManager {
     if (!this.activeScene) {
       return
     }
+    this.audio.detuneBg = -1200
     this.activeScene!.scene.pause()
     gameStore.pause()
   }
@@ -145,6 +147,7 @@ export class GameManager {
     if (!this.activeScene) {
       return
     }
+    this.audio.untuneBg()
     this.activeScene!.scene.resume()
     gameStore.resume()
   }
@@ -167,17 +170,30 @@ export class GameManager {
   }
 
   public togglePause = (): void => {
-    if (!this.activeScene) {
+    if (!this.activeScene || !gameStore.canPause) {
       return
     }
     if (gameStore.paused) {
+      this.resume()
+    } else {
+      this.pause()
+    }
+
+    console.log('TOGGLE PAUSE')
+  }
+
+  public toggleDebugPause = (): void => {
+    if (!this.activeScene) {
+      return
+    }
+    if (gameDebugStore.paused) {
       this.activeScene!.sound.setDetune(0)
       this.activeScene!.scene.resume()
-      gameStore.resume()
+      gameDebugStore.resume()
     } else {
       this.activeScene!.sound.setDetune(-1200)
       this.activeScene!.scene.pause()
-      gameStore.pause()
+      gameDebugStore.pause()
     }
 
     console.log('TOGGLE PAUSE')
