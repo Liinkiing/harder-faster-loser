@@ -150,13 +150,24 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private createBackground(): void {
-    const graphics = this.add.graphics()
-    graphics.fillStyle(0x948d9b, 1)
-    graphics.fillRect(
-      0,
-      this.windowHeight! - this.windowHeight! * (2 / 3),
-      this.windowWidth!,
-      this.windowHeight! * (2 / 3)
-    )
+    const platform = this.add
+      .graphics()
+      .fillStyle(0x948d9b, 1)
+      .fillRect(
+        0,
+        this.windowHeight! - this.windowHeight! * (2 / 3),
+        this.windowWidth!,
+        this.windowHeight! * (2 / 3)
+      )
+
+    const warningLinePlatform = this.add
+      .graphics()
+      .fillStyle(0xfcdb73, 1)
+      .fillRect(
+        0,
+        this.windowHeight! - this.windowHeight! * (2 / 3) + 15,
+        this.windowWidth!,
+        15
+      )
   }
 }
