@@ -16,6 +16,8 @@ export default class SubwayGameScene extends MinigameScene {
   private spriteLine: Phaser.GameObjects.Sprite[] = []
   private emptySlabs: Phaser.GameObjects.Sprite[] = []
   private toki?: Phaser.GameObjects.Sprite
+  private toggleTokiRun: boolean = false
+  private currentRow: number = -1
 
   constructor() {
     super({
@@ -95,7 +97,9 @@ export default class SubwayGameScene extends MinigameScene {
       this.input.setDraggable(currentLineContainer)
 
       currentLineContainer.on('pointerdown', () => {
-        this.toki!.anims.play('subwayTokiRunAnimation', false)
+        this.toki!.anims.play('subwayTokiRunAnimation', true)
+        this.currentRow += 1
+        this.toggleTokiRun = true
       })
 
       currentLineContainer.on(
@@ -106,6 +110,8 @@ export default class SubwayGameScene extends MinigameScene {
       )
 
       this.physics.world.enable(currentLineContainer)
+
+      this.lineContainers[this.lineContainers.length] = currentLineContainer
 
       yCounter += 1
     }
@@ -132,7 +138,16 @@ export default class SubwayGameScene extends MinigameScene {
     })
   }
 
-  public update(time: number, delta: number): void {}
+  public update(time: number, delta: number): void {
+    if (
+      this.toggleTokiRun == true &&
+      this.toki!.y > -50 - 100 * this.currentRow
+    ) {
+      this.toki!.y -= 1
+    } else {
+      this.toggleTokiRun = false
+    }
+  }
 
   private createBackground(): void {
     const graphics = this.add.graphics()

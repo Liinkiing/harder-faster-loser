@@ -456,7 +456,7 @@
         "end": 8
       },
       "showOnStart": true,
-      "repeat": -1,
+      "repeat": 0,
       "frameRate": 8
     }
   ]
