@@ -70,7 +70,7 @@ export class GameManager {
 
   public loadMinigame = async (minigameKey: string) => {
     gameManager.suspendMinigame()
-    await minigameManager.startGame(minigameKey)
+    await minigameManager.startGame('SUBWAY_MINIGAME')
   }
 
   public forceLoadMinigame = async (minigameKey: string) => {
@@ -80,7 +80,7 @@ export class GameManager {
 
   public loadNextMinigame = async () => {
     gameManager.suspendMinigame()
-    await this.startScene(minigameManager.pickNextGameKey())
+    await this.startScene('SUBWAY_MINIGAME')
   }
 
   public loadPostMinigame = async () => {
