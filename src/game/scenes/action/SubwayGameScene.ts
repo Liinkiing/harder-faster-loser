@@ -14,6 +14,7 @@ export default class SubwayGameScene extends MinigameScene {
   private lineContainers: Phaser.GameObjects.Container[] = []
   private lineContainer?: Phaser.GameObjects.Container
   private spriteLine: Phaser.GameObjects.Sprite[] = []
+  private emptySlabs: Phaser.GameObjects.Sprite[] = []
 
   constructor() {
     super({
@@ -34,14 +35,6 @@ export default class SubwayGameScene extends MinigameScene {
       this.spriteLine = []
 
       while (xCounter < 4) {
-        const character = this.add
-          .sprite(xCounter * 100, 50, 'subwayCharacterTimeAnimation')
-          .setOrigin(0, 1)
-          .setScale(1 / gameStore.ratioResolution)
-          .setDepth(2)
-
-        character.anims.play('subwayCharacterTimeAnimation', true)
-
         const slab = this.add
           .sprite(xCounter * 100, 50, 'subway_grey_square')
           .setOrigin(0, 1)
@@ -49,7 +42,22 @@ export default class SubwayGameScene extends MinigameScene {
           .setDepth(1)
 
         this.spriteLine[this.spriteLine.length] = slab
-        this.spriteLine[this.spriteLine.length] = character
+
+        if (xCounter === 3) {
+          this.emptySlabs[this.emptySlabs.length] = slab
+        }
+
+        if (xCounter !== 3) {
+          const character = this.add
+            .sprite(xCounter * 100, 50, 'subwayCharacterTimeAnimation')
+            .setOrigin(0, 1)
+            .setScale(1 / gameStore.ratioResolution)
+            .setDepth(2)
+
+          character.anims.play('subwayCharacterTimeAnimation', true)
+
+          this.spriteLine[this.spriteLine.length] = character
+        }
 
         xCounter += 1
       }
@@ -69,18 +77,38 @@ export default class SubwayGameScene extends MinigameScene {
       currentLineContainer.setInteractive({ draggable: true })
       this.input.setDraggable(currentLineContainer)
 
-      currentLineContainer.on('drag', function(
-        pointer: any,
-        dragX: number,
-        dragY: number
-      ) {
-        currentLineContainer.x = dragX
-      })
+      currentLineContainer.on(
+        'drag',
+        (pointer: any, dragX: number, dragY: number) => {
+          currentLineContainer.x = dragX
+        }
+      )
 
       this.physics.world.enable(currentLineContainer)
 
       yCounter += 1
     }
+
+    const goalZone = this.add
+      .rectangle(
+        this.windowWidth / 2 + 22,
+        0,
+        56,
+        this.windowHeight,
+        0xcecdd0,
+        0.5
+      )
+      .setOrigin(0, 0)
+
+    this.physics.world.enable(goalZone)
+
+    this.emptySlabs.forEach(slab => {
+      this.physics.world.enable(slab)
+    })
+
+    const collider = this.physics.add.overlap(this.emptySlabs, goalZone, () => {
+      console.log('A slab is colliding with the goalZone')
+    })
   }
 
   public update(time: number, delta: number): void {}
