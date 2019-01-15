@@ -4,8 +4,11 @@ import gameManager from '../../game/manager/GameManager'
 import MinigameGuideline from './MinigameGuideline'
 import minigameManager from '../../game/manager/MinigameManager'
 import PauseModal from './modals/PauseModal'
+import { observer } from 'mobx-react-lite'
+import gameStore from '../../store/GameStore'
 
 const MinigameUI: FunctionComponent = () => {
+  const { paused } = gameStore
   const { minigameGuideline } = gameManager
   const { hasPlayedCurrentMinigame } = minigameManager
 
@@ -15,9 +18,9 @@ const MinigameUI: FunctionComponent = () => {
       {!hasPlayedCurrentMinigame && (
         <MinigameGuideline guideline={minigameGuideline} />
       )}
-      <PauseModal />
+      {paused && <PauseModal />}
     </div>
   )
 }
 
-export default MinigameUI
+export default observer(MinigameUI)

@@ -1,20 +1,24 @@
 import * as React from 'react'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import ModalsContainer from '../ModalsContainer'
 import pauseBg from '../../../assets/sprites/pause/pause_bg.png'
-import cigaretteSpritesheet from '../../../assets/sprites/pause/cigarette_450_330.png'
-import mugSpritesheet from '../../../assets/sprites/pause/mug_255_465.png'
+import cigaretteSpritesheet from '../../../assets/sprites/pause/cigarette_150_110.png'
+import mugSpritesheet from '../../../assets/sprites/pause/mug_85_115.png'
 import warningSign from '../../../assets/sprites/pause/warning_sign.png'
 import styled from 'styled-components'
 import Spritesheet from '../Spritesheet'
+import GameButton from '../GameButton'
+import gameManager from '../../../game/manager/GameManager'
 
 const WARNING_SIGN_SIZE = 120
 
 const PauseModalContainer = styled.div`
   display: flex;
+  flex-direction: column;
   position: relative;
   width: 80%;
   height: 80%;
+  max-width: 340px;
   background: url(${pauseBg}) no-repeat center;
   background-size: contain;
   image-rendering: pixelated;
@@ -29,12 +33,50 @@ const PauseModalContainer = styled.div`
     background: url(${warningSign}) no-repeat center;
     background-size: contain;
   }
+
+  ${GameButton} {
+    text-transform: uppercase;
+    margin: 20px auto;
+    font-size: 20px;
+  }
+`
+
+const SpritesheetContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
 `
 
 const PauseModal: FunctionComponent = props => {
+  const { resume } = gameManager
+
   return (
     <ModalsContainer>
-      <PauseModalContainer>salut</PauseModalContainer>
+      <PauseModalContainer>
+        <SpritesheetContainer>
+          {Math.random() >= 0.5 ? (
+            <Spritesheet
+              image={cigaretteSpritesheet}
+              widthFrame={150}
+              heightFrame={110}
+              steps={15}
+              fps={4}
+            />
+          ) : (
+            <Spritesheet
+              image={mugSpritesheet}
+              widthFrame={85}
+              heightFrame={155}
+              steps={5}
+              fps={4}
+            />
+          )}
+        </SpritesheetContainer>
+        <GameButton onClick={resume}>Resume</GameButton>
+        <GameButton>Quit</GameButton>
+      </PauseModalContainer>
     </ModalsContainer>
   )
 }

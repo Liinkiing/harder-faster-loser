@@ -1,13 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import {
-  black,
-  green,
-  lightGray,
-  lightRed,
-  red,
-  white,
-} from '../../../utils/colors'
+import { green, lightGray, white } from '../../../utils/colors'
 import PauseIcon from '../icons/PauseIcon'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
@@ -31,7 +24,8 @@ const Button = styled.button<StyledProps>`
   height: 70px;
   ${boxShadow};
   user-select: all;
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled),
+  :active:not(:disabled) {
     cursor: pointer;
     background: ${white};
     & .pause-icon .bar {
