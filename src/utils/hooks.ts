@@ -98,14 +98,17 @@ export const useClassTheme = (forceTheme?: GameDebugTheme): string | null => {
   return null
 }
 
-export const useGameloop = (onLoop: () => void): void => {
+export const useGameloop = (
+  onLoop: () => void,
+  inputs: InputIdentityList = []
+): void => {
   useEffect(() => {
     gameManager.activeScene!.time.addEvent({
       callback: onLoop,
       delay: 16,
       repeat: -1,
     })
-  }, [])
+  }, inputs)
 }
 
 export const useInterval = (
