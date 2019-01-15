@@ -153,21 +153,16 @@ export default class SubwayGameScene extends MinigameScene {
     const platform = this.add
       .graphics()
       .fillStyle(0x948d9b, 1)
-      .fillRect(
-        0,
-        this.windowHeight! - this.windowHeight! * (2 / 3),
-        this.windowWidth!,
-        this.windowHeight! * (2 / 3)
-      )
-
+      .fillRect(0, 0, this.windowWidth!, this.windowHeight! * (6.6 / 10))
     const warningLinePlatform = this.add
       .graphics()
       .fillStyle(0xfcdb73, 1)
-      .fillRect(
-        0,
-        this.windowHeight! - this.windowHeight! * (2 / 3) + 15,
-        this.windowWidth!,
-        15
-      )
+      .fillRect(0, 15, this.windowWidth!, 15)
+
+    this.add.container(
+      0,
+      this.windowHeight! - this.windowHeight! * (6.6 / 10),
+      [platform, warningLinePlatform]
+    )
   }
 }
