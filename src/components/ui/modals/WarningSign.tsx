@@ -16,7 +16,7 @@ const WarningSignInner = styled.div`
   z-index: 1000;
   content: '';
   left: calc(50% - ${WARNING_SIGN_SIZE / 2}px);
-  top: -${WARNING_SIGN_SIZE / 2 - 10}px;
+  top: -11%;
   width: ${WARNING_SIGN_SIZE}px;
   height: ${WARNING_SIGN_SIZE}px;
   background: url(${warningSign}) no-repeat center;

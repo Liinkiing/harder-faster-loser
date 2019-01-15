@@ -21,6 +21,7 @@ const PauseModalContainer = styled.div`
   width: 80%;
   height: 80%;
   max-width: 340px;
+  max-height: 518px;
   background: url(${pauseBg}) no-repeat center;
   background-size: contain;
   image-rendering: pixelated;
