@@ -4,17 +4,22 @@ import gameManager, { Emitter } from '../../../game/manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
+import { black, boxShadow, yellow } from '../../../utils/colors'
 
 const ProgressOuter = styled.div`
+  position: relative;
+  right: -4px;
   width: 100%;
   height: 40px;
+  border: 4px solid ${black};
+  ${boxShadow};
   background: white;
 `
 
 const ProgressInner = styled.div`
-  height: 40px;
+  height: 100%;
   will-change: width;
-  background: red;
+  background: ${yellow};
 `
 
 const RemainingTime: FunctionComponent = () => {

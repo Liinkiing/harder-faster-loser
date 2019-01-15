@@ -9,9 +9,11 @@ import PostMinigameUI from './PostMinigameUI'
 import DeathscreenUI from './DeathscreenUI'
 import Transition from './Transition'
 import gameManager from '../../game/manager/GameManager'
+import gameDebugStore from '../../store/GameDebugStore'
 
 const GameUI: FunctionComponent = () => {
-  const { state, uiKey, paused } = gameStore
+  const { state, uiKey } = gameStore
+  const { paused } = gameDebugStore
   const classNames = ['game-ui']
   const gameUI = useRef<HTMLDivElement>(null)
   useEffect(() => {
