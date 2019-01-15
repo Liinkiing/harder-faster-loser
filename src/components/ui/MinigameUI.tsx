@@ -8,17 +8,17 @@ import { observer } from 'mobx-react-lite'
 import gameStore from '../../store/GameStore'
 
 const MinigameUI: FunctionComponent = () => {
-  const { paused } = gameStore
+  const { paused, canPause } = gameStore
   const { minigameGuideline } = gameManager
   const { hasPlayedCurrentMinigame } = minigameManager
 
   return (
     <div className="minigame-ui">
       <MinigameToolbar />
-      {!hasPlayedCurrentMinigame && (
+      {!hasPlayedCurrentMinigame && minigameGuideline && (
         <MinigameGuideline guideline={minigameGuideline} />
       )}
-      {paused && <PauseModal />}
+      {canPause && paused && <PauseModal />}
     </div>
   )
 }

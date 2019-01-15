@@ -170,7 +170,7 @@ export class GameManager {
   }
 
   public togglePause = (): void => {
-    if (!this.activeScene) {
+    if (!this.activeScene || !gameStore.canPause) {
       return
     }
     if (gameStore.paused) {

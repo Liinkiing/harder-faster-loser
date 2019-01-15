@@ -14,6 +14,8 @@ interface TokiStatus {
   hasJustHeart: boolean
 }
 
+const PAUSE_MIN_THRESHOLD = 0.2
+
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
@@ -35,9 +37,10 @@ class GameStore {
     dev: process.env.NODE_ENV === 'development',
     suspended: false,
     fade: true,
+    remainingPause: 10,
     fadeColor: green,
     backgroundColor: green,
-    minigameDuration: 50000,
+    minigameDuration: 500,
   }
   @observable public ratioResolution: number = 3
   @observable public transitionning: boolean = false
@@ -56,6 +59,13 @@ class GameStore {
         })
       }
     )
+  }
+
+  @action public decreasePauseRemaining = (): void => {
+    if (this.config.remainingPause <= 0.02) {
+      return
+    }
+    this.config.remainingPause -= 0.02
   }
 
   @action public increaseElapsed = (delta: number = 1): void => {
@@ -168,6 +178,10 @@ class GameStore {
     this.status.hasJustStress = false
     this.status.hasJustBrain = false
     this.status.hasJustHeart = false
+  }
+
+  get canPause() {
+    return this.config.remainingPause >= PAUSE_MIN_THRESHOLD
   }
 
   get hasStress() {

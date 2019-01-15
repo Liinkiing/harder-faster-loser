@@ -51,12 +51,17 @@ const Button = styled.button<StyledProps>`
 const GamePauseButton: FunctionComponent = () => {
   const {
     paused,
+    canPause,
     config: { suspended },
   } = gameStore
   const { togglePause } = gameManager
 
   return (
-    <Button disabled={suspended} paused={paused} onClick={togglePause}>
+    <Button
+      disabled={suspended || !canPause}
+      paused={paused}
+      onClick={togglePause}
+    >
       <PauseIcon />
     </Button>
   )

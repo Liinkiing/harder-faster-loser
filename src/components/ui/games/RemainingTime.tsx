@@ -4,8 +4,9 @@ import gameManager, { Emitter } from '../../../game/manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
 import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
-import { black, yellow } from '../../../utils/colors'
+import { yellow } from '../../../utils/colors'
 import { border, boxShadow } from '../../../utils/css'
+import { useGameloop } from '../../../utils/hooks'
 
 const ProgressOuter = styled.div`
   position: relative;
@@ -29,17 +30,11 @@ const RemainingTime: FunctionComponent = () => {
   } = gameStore
   const [remaining, setRemaining] = useState(0)
   const button = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    gameManager.activeScene!.time.addEvent({
-      callback: () => {
-        if (button.current) {
-          button.current.click()
-        }
-      },
-      delay: 16,
-      repeat: -1,
-    })
-  }, [])
+  useGameloop(() => {
+    if (button.current) {
+      button.current.click()
+    }
+  })
 
   if (remaining >= minigameDuration!) {
     gameManager.activeScene!.time.removeAllEvents()
