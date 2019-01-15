@@ -344,11 +344,6 @@
         }
       },
       {
-        "type": "image",
-        "key": "plant",
-        "url": "/static/assets/sprites/elevator-game/plante.png"
-      },
-      {
         "type": "spritesheet",
         "key": "case_call_elevator",
         "url": "/static/assets/sprites/elevator-game/case_call_elevator_450_480.png",
