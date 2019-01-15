@@ -41,6 +41,7 @@ export const gameConfig: GameConfig = {
   },
   title: 'Harder, Faster, Looser',
   version: '1.0',
+  disableContextMenu: true,
   width: window.innerWidth,
   height: window.innerHeight,
   zoom: 3,
