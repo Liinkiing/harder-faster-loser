@@ -15,6 +15,7 @@ export default class SubwayGameScene extends MinigameScene {
   private lineContainer?: Phaser.GameObjects.Container
   private spriteLine: Phaser.GameObjects.Sprite[] = []
   private emptySlabs: Phaser.GameObjects.Sprite[] = []
+  private toki?: Phaser.GameObjects.Sprite
 
   constructor() {
     super({
@@ -49,6 +50,7 @@ export default class SubwayGameScene extends MinigameScene {
 
         if (xCounter !== 3) {
           let characterTextureKey = ''
+
           xCounter === 2 && yCounter == 0
             ? (characterTextureKey = 'subwayTokiTimeAnimation')
             : (characterTextureKey = 'subwayCharacterTimeAnimation')
@@ -62,6 +64,10 @@ export default class SubwayGameScene extends MinigameScene {
           character.anims.play(characterTextureKey, true)
 
           this.spriteLine[this.spriteLine.length] = character
+
+          if (xCounter === 2 && yCounter == 0) {
+            this.toki = character
+          }
         }
 
         xCounter += 1
@@ -81,6 +87,10 @@ export default class SubwayGameScene extends MinigameScene {
       )
       currentLineContainer.setInteractive({ draggable: true })
       this.input.setDraggable(currentLineContainer)
+
+      currentLineContainer.on('pointerdown', () => {
+        this.toki!.anims.play('subwayTokiRunAnimation', false)
+      })
 
       currentLineContainer.on(
         'drag',

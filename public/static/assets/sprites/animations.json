@@ -431,10 +431,9 @@
         "start": 0,
         "end": 19
       },
-      "yoyo": false,
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 4
+      "frameRate": 8
     },
     {
       "key": "subwayTokiTimeAnimation",
@@ -444,10 +443,21 @@
         "start": 0,
         "end": 19
       },
-      "yoyo": false,
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 4
+      "frameRate": 8
+    },
+    {
+      "key": "subwayTokiRunAnimation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "subway_toki_run",
+        "start": 0,
+        "end": 8
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 8
     }
   ]
 }
