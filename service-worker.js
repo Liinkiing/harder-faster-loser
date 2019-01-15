@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/harder-faster-looser/precache-manifest.b8909f658c15ad515e140668d5964ec2.js"
+  "/harder-faster-looser/precache-manifest.b19622f0f8ef07c9f10d220ba53a8b05.js"
 );
 
 workbox.clientsClaim();
