@@ -14,10 +14,10 @@ const Game: FunctionComponent = () => {
   const { width, height } = useResize()
   const { debug } = gameDebugStore
   const {
-    paused,
     started,
     config: { dev },
   } = gameStore
+  const { paused } = gameDebugStore
 
   if (gameManager.game.canvas) {
     gameManager.game.canvas.style.transition = 'all 0.15s'
