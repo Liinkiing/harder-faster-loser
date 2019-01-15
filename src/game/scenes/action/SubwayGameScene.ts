@@ -31,43 +31,56 @@ export default class SubwayGameScene extends MinigameScene {
 
     while (yCounter < 4) {
       xCounter = 0
+      this.spriteLine = []
 
       while (xCounter < 4) {
-        this.spriteLine = this.createCharacter(xCounter, yCounter)
+        const character = this.add
+          .sprite(xCounter * 100, 50, 'subwayCharacterTimeAnimation')
+          .setOrigin(0, 1)
+          .setScale(1 / gameStore.ratioResolution)
+          .setDepth(2)
+
+        character.anims.play('subwayCharacterTimeAnimation', true)
+
+        const slab = this.add
+          .sprite(xCounter * 100, 50, 'subway_grey_square')
+          .setOrigin(0, 1)
+          .setScale(1 / gameStore.ratioResolution)
+          .setDepth(1)
+
+        this.spriteLine[this.spriteLine.length] = slab
+        this.spriteLine[this.spriteLine.length] = character
 
         xCounter += 1
       }
 
-      let currentLineContainer = this.lineContainers[this.lineContainers.length]
-      currentLineContainer = this.add.container(
-        this.windowWidth / 2,
-        this.windowHeight - 100 - yCounter * 110,
+      const currentLineContainer = this.add.container(
+        30,
+        this.windowHeight - 50 - yCounter * 100,
         this.spriteLine
       )
 
-      currentLineContainer.setSize(this.windowWidth, 80)
+      currentLineContainer.setSize(this.windowWidth * 2, 80)
+      const hitArea = new Phaser.Geom.Rectangle(0, 0, this.windowWidth * 2, 100)
+      currentLineContainer.setInteractive(
+        hitArea,
+        Phaser.Geom.Rectangle.Contains
+      )
+      currentLineContainer.setInteractive({ draggable: true })
+      this.input.setDraggable(currentLineContainer)
 
-      // const hitArea = new Phaser.Geom.Rectangle(0, 0, this.windowWidth, 100)
-      // currentLineContainer.setInteractive(hitArea, Phaser.Geom.Rectangle.Contains)
-
-      // currentLineContainer.setInteractive({ draggable: true });
-      // this.input.setDraggable(currentLineContainer);
-
-      // currentLineContainer.on('drag', function (pointer: any, dragX: number, dragY: number) {
-      //     currentLineContainer.x = dragX
-      //     console.log(pointer)
-      //     console.log(dragX)
-      //     console.log(dragY)
-      // });
+      currentLineContainer.on('drag', function(
+        pointer: any,
+        dragX: number,
+        dragY: number
+      ) {
+        currentLineContainer.x = dragX
+      })
 
       this.physics.world.enable(currentLineContainer)
 
       yCounter += 1
     }
-
-    // const goalZone = this.add.rectangle(this.windowWidth/2 + 22, 0, 56, this.windowHeight, 0xcecdd0, 0.3)
-    //     .setOrigin(0,0)
-    // this.physics.world.enable(goalZone)
   }
 
   public update(time: number, delta: number): void {}
@@ -82,39 +95,4 @@ export default class SubwayGameScene extends MinigameScene {
       this.windowHeight! * (2 / 3)
     )
   }
-
-  private createCharacter(
-    xCounter: number,
-    yCounter: number
-  ): Phaser.GameObjects.Sprite[] {
-    const offset = xCounter * 100
-
-    const character = this.add
-      .sprite(0, 0, 'subwayCharacterTimeAnimation')
-      .setOrigin(0, 0)
-      .setScale(1 / gameStore.ratioResolution)
-      .setDepth(2)
-
-    character.anims.play('subwayCharacterTimeAnimation', true)
-
-    console.log(offset)
-    const slab = this.add
-      .sprite(0, 0, 'subway_grey_square')
-      .setOrigin(0, 0)
-      .setScale(1 / gameStore.ratioResolution)
-      .setDepth(1)
-
-    slab.y = slab.height / gameStore.ratioResolution
-
-    // if (xCounter === 3) {
-    //     this.physics.world.enable(slab)
-    // }
-
-    return [slab, character]
-  }
-
-  /**
-   * Line = Container[]
-   * PersoContainer = Container
-   */
 }
