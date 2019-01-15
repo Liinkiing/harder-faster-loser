@@ -36,8 +36,14 @@ export default class SubwayGameScene extends MinigameScene {
       this.spriteLine = []
 
       while (xCounter < 4) {
+        let slabTextureKey = ''
+
+        xCounter === 3
+          ? (slabTextureKey = 'subway_yellow_border_square')
+          : (slabTextureKey = 'subway_grey_square')
+
         const slab = this.add
-          .sprite(xCounter * 100, 50, 'subway_grey_square')
+          .sprite(xCounter * 100, 50, slabTextureKey)
           .setOrigin(0, 1)
           .setScale(1 / gameStore.ratioResolution)
           .setDepth(1)
