@@ -11,7 +11,7 @@ const App: FunctionComponent = () => {
   const { started } = gameStore
   const onLaunchGame = useCallback(async () => {
     await document.body.requestFullscreen()
-    await wait(50)
+    await wait(150)
     gameManager.startGame()
   }, [])
 
