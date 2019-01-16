@@ -35,6 +35,7 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.createPlatform()
     this.createRailRoad()
+    this.createTram()
 
     let xCounter = 0
     let yCounter = 0
@@ -187,15 +188,16 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private createRailRoad(): void {
-    const railRoadthis = this.add
-      .sprite(
-        0,
-        this.windowHeight! - this.windowHeight! * (6.6 / 10),
-        'subway_railroad'
-      )
-      .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
+    // const railRoadthis = this.add.sprite(
+    //   0,
+    //   this.windowHeight! - this.windowHeight! * (6.6 / 10),
+    //   "subway_railroad"
+    // )
+    //   .setOrigin(0, 1)
+    //   .setScale(1 / gameStore.ratioResolution)
   }
+
+  private createTram(): void {}
 
   private createPlatform(): void {
     const platform = this.add
