@@ -133,6 +133,29 @@ export default class SubwayGameScene extends MinigameScene {
     this.initListenerOnCurrentLineContainer()
   }
 
+  public update(time: number, delta: number): void {
+    if (
+      this.toggleTokiRun == true &&
+      this.toki!.y > -50 - 110 * (this.indexCurrentRow - 1)
+    ) {
+      this.toki!.y -= 5
+    } else if (
+      this.toki!.y <= -50 - 110 * (this.indexCurrentRow - 1) &&
+      this.lastLineReached == false
+    ) {
+      this.toggleTokiRun = false
+    }
+
+    if (
+      this.toggleTokiRun &&
+      this.lastLineReached &&
+      this.toki!.y > -60 - 110 * this.indexCurrentRow
+    ) {
+      this.toki!.y -= 5
+      this.toki!.x -= 1.3
+    }
+  }
+
   private initListenerOnCurrentLineContainer(): void {
     if (this.indexNextRow < this.lineContainers!.length) {
       this.lineContainers[this.indexNextRow].on(
@@ -168,7 +191,11 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerRunAnimation(): void {
-    this.toki!.anims.play('subwayTokiRunAnimation', true)
+    const animation = this.toki!.anims.play('subwayTokiRunAnimation', true)
+
+    animation.on('animationcomplete', () => {
+      this.toki!.anims.play('subwayTokiTimeAnimation', true)
+    })
   }
 
   private updateActiveRows(): void {
@@ -348,28 +375,5 @@ export default class SubwayGameScene extends MinigameScene {
       this.windowHeight! - this.windowHeight! * (6.6 / 10),
       [platform, warningLinePlatform]
     )
-  }
-
-  public update(time: number, delta: number): void {
-    if (
-      this.toggleTokiRun == true &&
-      this.toki!.y > -50 - 110 * (this.indexCurrentRow - 1)
-    ) {
-      this.toki!.y -= 5
-    } else if (
-      this.toki!.y <= -50 - 110 * (this.indexCurrentRow - 1) &&
-      this.lastLineReached == false
-    ) {
-      this.toggleTokiRun = false
-    }
-
-    if (
-      this.toggleTokiRun &&
-      this.lastLineReached &&
-      this.toki!.y > -60 - 110 * this.indexCurrentRow
-    ) {
-      this.toki!.y -= 5
-      this.toki!.x -= 1.3
-    }
   }
 }
