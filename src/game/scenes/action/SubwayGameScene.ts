@@ -167,13 +167,8 @@ export default class SubwayGameScene extends MinigameScene {
       this.lineContainers[this.indexNextRow].on(
         'drag',
         (pointer: any, dragX: number, dragY: number) => {
-          console.log(this.lineContainers[this.indexNextRow].x)
-          if (
-            this.lineContainers[this.indexNextRow].x > -688 &&
-            this.lineContainers[this.indexNextRow].x < 30
-          ) {
-            this.lineContainers[this.indexNextRow].x = dragX
-          }
+          let translateValue = Phaser.Math.Clamp(dragX, -688, 30)
+          this.lineContainers[this.indexNextRow].x = translateValue
         }
       )
 
