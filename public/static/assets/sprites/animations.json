@@ -469,7 +469,7 @@
       },
       "showOnStart": true,
       "repeat": 0,
-      "frameRate": 30
+      "frameRate": 25
     },
     {
       "key": "subwayTrainInsideAnimation",

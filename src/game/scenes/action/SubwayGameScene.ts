@@ -12,27 +12,26 @@ export default class SubwayGameScene extends MinigameScene {
 
   private windowHeight?: number
   private windowWidth?: number
+  private normalizedYOffset: number = 0
+
   private lineContainers: Phaser.GameObjects.Container[] = []
   private spriteLine: Phaser.GameObjects.Sprite[] = []
   private emptySlabs: Phaser.GameObjects.Sprite[] = []
   private toki?: Phaser.GameObjects.Sprite
-  private toggleTokiRun: boolean = false
   private indexCurrentRow: number = 0
   private indexNextRow: number = 1
+
+  private toggleTokiRun: boolean = false
   private isOverlapping: boolean = false
 
   private currentRow?: Phaser.GameObjects.Container
   private nextRow?: Phaser.GameObjects.Container
-
-  private train: Phaser.GameObjects.Sprite[] = []
-
-  private firstTrain?: Phaser.GameObjects.Sprite
-
   private lastLineReached: boolean = false
 
+  private train: Phaser.GameObjects.Sprite[] = []
+  private firstTrain?: Phaser.GameObjects.Sprite
+  private doorsActiveTrain?: Phaser.GameObjects.Sprite
   private activeTrainContainer?: Phaser.GameObjects.Container
-
-  private normalizedYOffset: number = 0
 
   constructor() {
     super({
@@ -126,8 +125,10 @@ export default class SubwayGameScene extends MinigameScene {
       yCounter += 1
     }
 
-    const yolo = this.lineContainers[this.indexNextRow].getByName('empty_slab')
-    this.physics.world.enable(yolo)
+    const nextEmptySlab = this.lineContainers[this.indexNextRow].getByName(
+      'empty_slab'
+    )
+    this.physics.world.enable(nextEmptySlab)
 
     this.initColliderOnCurrentSlab()
     this.initListenerOnCurrentLineContainer()
@@ -136,11 +137,11 @@ export default class SubwayGameScene extends MinigameScene {
   public update(time: number, delta: number): void {
     if (
       this.toggleTokiRun == true &&
-      this.toki!.y > -50 - 110 * (this.indexCurrentRow - 1)
+      this.toki!.y > -80 - 105 * (this.indexCurrentRow - 1)
     ) {
       this.toki!.y -= 5
     } else if (
-      this.toki!.y <= -50 - 110 * (this.indexCurrentRow - 1) &&
+      this.toki!.y <= -80 - 105 * (this.indexCurrentRow - 1) &&
       this.lastLineReached == false
     ) {
       this.toggleTokiRun = false
@@ -149,7 +150,7 @@ export default class SubwayGameScene extends MinigameScene {
     if (
       this.toggleTokiRun &&
       this.lastLineReached &&
-      this.toki!.y > -60 - 110 * this.indexCurrentRow
+      this.toki!.y > -80 - 105 * this.indexCurrentRow
     ) {
       this.toki!.y -= 5
       this.toki!.x -= 1.3
@@ -180,7 +181,7 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerEndTokiAnimation = async () => {
-    await gameWait(this.time, 3000)
+    await gameWait(this.time, 2000)
     this.lastLineReached = true
     this.toggleTokiRun = true
     const animation = this.toki!.anims.play('subwayTokiWinAnimation', true)
@@ -194,7 +195,14 @@ export default class SubwayGameScene extends MinigameScene {
     const animation = this.toki!.anims.play('subwayTokiRunAnimation', true)
 
     animation.on('animationcomplete', () => {
-      this.toki!.anims.play('subwayTokiTimeAnimation', true)
+      if (!this.lastLineReached) {
+        this.toki!.anims.play('subwayTokiTimeAnimation', true)
+      } else {
+        const test = this.doorsActiveTrain!.anims.playReverse(
+          'subwayTrainDoorAnimation',
+          true
+        )
+      }
     })
   }
 
@@ -280,12 +288,12 @@ export default class SubwayGameScene extends MinigameScene {
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
 
-    const doorsActiveTrain = this.add
+    this.doorsActiveTrain = this.add
       .sprite(0, -25, 'subwayTrainDoorAnimation')
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
 
-    doorsActiveTrain.anims.play('subwayTrainDoorAnimation', true)
+    this.doorsActiveTrain.anims.play('subwayTrainDoorAnimation', true)
 
     const insideActiveTrain = this.add
       .sprite(5, -25, 'subwayTrainInsideAnimation')
@@ -297,7 +305,7 @@ export default class SubwayGameScene extends MinigameScene {
     this.activeTrainContainer = this.add.container(
       train2.x + train2.width / gameStore.ratioResolution,
       this.normalizedYOffset,
-      [insideActiveTrain, doorsActiveTrain, bodyActiveTrain]
+      [insideActiveTrain, this.doorsActiveTrain, bodyActiveTrain]
     )
 
     this.activeTrainContainer.setSize(
