@@ -468,8 +468,8 @@
         "end": 5
       },
       "showOnStart": true,
-      "repeat": -1,
-      "frameRate": 8
+      "repeat": 0,
+      "frameRate": 30
     },
     {
       "key": "subwayTrainInsideAnimation",
@@ -481,7 +481,7 @@
       },
       "showOnStart": true,
       "repeat": -1,
-      "frameRate": 8
+      "frameRate": 5
     }
   ]
 }

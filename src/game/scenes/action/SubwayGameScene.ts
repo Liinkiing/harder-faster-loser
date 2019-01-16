@@ -211,7 +211,7 @@ export default class SubwayGameScene extends MinigameScene {
 
     //firstTrain.x = Number(this.windowWidth)
 
-    this.firstTrain.x = 200
+    this.firstTrain.x = -800
 
     const train1 = this.add
       .sprite(
