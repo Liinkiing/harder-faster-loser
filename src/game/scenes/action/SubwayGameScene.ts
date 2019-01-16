@@ -56,7 +56,7 @@ export default class SubwayGameScene extends MinigameScene {
       xCounter = 0
       this.spriteLine = []
 
-      while (xCounter < 4) {
+      while (xCounter < 12) {
         let slabTextureKey = ''
         let isEmptySlab = false
 
@@ -84,7 +84,7 @@ export default class SubwayGameScene extends MinigameScene {
         if (!isEmptySlab) {
           let characterTextureKey = ''
 
-          xCounter === 2 && yCounter == 0
+          xCounter === 6 && yCounter == 0
             ? (characterTextureKey = 'subwayTokiTimeAnimation')
             : (characterTextureKey = 'subwayCharacterTimeAnimation')
 
@@ -98,7 +98,7 @@ export default class SubwayGameScene extends MinigameScene {
 
           this.spriteLine[this.spriteLine.length] = character
 
-          if (xCounter === 2 && yCounter == 0) {
+          if (characterTextureKey === 'subwayTokiTimeAnimation') {
             this.toki = character
           }
         }
@@ -107,13 +107,18 @@ export default class SubwayGameScene extends MinigameScene {
       }
 
       const currentLineContainer = this.add.container(
-        30,
+        -this.windowWidth + 45,
         this.windowHeight - 80 - yCounter * 105,
         this.spriteLine
       )
 
-      currentLineContainer.setSize(this.windowWidth * 2, 80)
-      const hitArea = new Phaser.Geom.Rectangle(0, 0, this.windowWidth * 2, 100)
+      currentLineContainer.setSize(this.windowWidth * 6, 80)
+      const hitArea = new Phaser.Geom.Rectangle(
+        -this.windowWidth,
+        0,
+        this.windowWidth * 10,
+        100
+      )
       currentLineContainer.setInteractive(
         hitArea,
         Phaser.Geom.Rectangle.Contains
@@ -167,6 +172,7 @@ export default class SubwayGameScene extends MinigameScene {
       )
 
       this.lineContainers[this.indexNextRow].on('pointerup', () => {
+        console.log(this.toki!)
         if (this.isOverlapping) {
           this.triggerRunAnimation()
           this.updateActiveRows()
