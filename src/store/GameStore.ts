@@ -4,6 +4,7 @@ import { GameSettings } from '../utils/interfaces'
 import { HFLGameConfig } from '../utils/game'
 import gameManager from '../game/manager/GameManager'
 import { green } from '../utils/colors'
+import HFLApiClient from '../client/HFLApiClient'
 
 interface TokiStatus {
   hasStress: boolean
@@ -51,7 +52,7 @@ class GameStore {
   @observable
   public uiKey: string = new Phaser.Math.RandomDataGenerator().uuid()
 
-  constructor() {
+  constructor(private client: HFLApiClient) {
     reaction(
       () => this.difficulty,
       difficulty => {
@@ -105,6 +106,8 @@ class GameStore {
 
   @action public startGame = (): void => {
     this.started = true
+    // Just used to make sure we call the API on start game to wake up my free Heroku dyno
+    this.client.checkStatus()
   }
 
   @action public stopGame = (): void => {
@@ -257,5 +260,5 @@ class GameStore {
     })
 }
 
-const gameStore = new GameStore()
+const gameStore = new GameStore(new HFLApiClient())
 export default gameStore

@@ -59,6 +59,9 @@ export default class HFLApiClient {
   ): Promise<PlayerNewResponse> =>
     (await this.post('/player/new', { username, score })).json()
 
+  public checkStatus = async (): Promise<{ status: 'online' }> =>
+    (await this.get('/status/check')).json()
+
   private prepare = (request: Request): this => {
     request.headers.set('Accept', 'application/json')
     request.headers.set('Content-Type', 'application/json')
