@@ -23,7 +23,9 @@ export default class SubwayGameScene extends MinigameScene {
   private currentRow?: Phaser.GameObjects.Container
   private nextRow?: Phaser.GameObjects.Container
 
-  private train: any = []
+  private train: Phaser.GameObjects.Sprite[] = []
+
+  private firstTrain?: Phaser.GameObjects.Sprite
 
   constructor() {
     super({
@@ -202,14 +204,18 @@ export default class SubwayGameScene extends MinigameScene {
   private createTrain(): void {
     const normalizedYOffset =
       this.windowHeight! - this.windowHeight! * (6.6 / 10)
-    const firstTrain = this.add
+    this.firstTrain = this.add
       .sprite(0, normalizedYOffset, 'subway_first_train')
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
 
+    //firstTrain.x = Number(this.windowWidth)
+
+    this.firstTrain.x = 200
+
     const train1 = this.add
       .sprite(
-        firstTrain.x + firstTrain.width / gameStore.ratioResolution,
+        this.firstTrain.x + this.firstTrain.width / gameStore.ratioResolution,
         normalizedYOffset,
         'subway_train'
       )
@@ -278,9 +284,31 @@ export default class SubwayGameScene extends MinigameScene {
       )
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
+
+    this.addToTrainArray(this.firstTrain)
+
+    // this.firstTrain.setInteractive()
+
+    // this.firstTrain.on('pointerdown', () => {
+    //   let tween = this.tweens.add({
+    //     targets: [this.firstTrain],
+    //     ease: 'Sine.easeInOut',
+    //     x: "-= 200",
+    //     duration: 5,
+    //     repeat: 2,
+    //     onComplete: () => {
+    //       console.log('Coming train animation completed')
+    //     },
+    //     onUpdate: () => {
+    //       console.log("ca update un max")
+    //     }
+    //   })
+
+    //   tween.play(true)
+    // })
   }
 
-  private addToTrainArray(element: any): void {
+  private addToTrainArray(element: Phaser.GameObjects.Sprite): void {
     this.train[this.train.length] = element
   }
 
