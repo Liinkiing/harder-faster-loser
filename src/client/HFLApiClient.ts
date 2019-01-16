@@ -8,17 +8,25 @@ type LeaderboardsAllResponse = Array<{
   rank: number
 }>
 
-export type Leaderboards = LeaderboardsAllResponse
+export type Leaderboards = Array<
+  LeaderboardsAllResponse[0] & { local: boolean }
+>
 
 export type LeaderboardsEntry = Leaderboards[0]
 
-type PlayerNewResponse = Array<{
+interface PlayerNewResponse {
   score: number
   username: string
   rank: number
-}>
+}
 
 export type Player = PlayerNewResponse
+
+interface LeaderboardsRankResponse {
+  rank: number
+}
+
+export type LeaderboardsRank = LeaderboardsRankResponse
 
 export default class HFLApiClient {
   private baseUri: string = process.env.REACT_APP_API_URL || ''
@@ -37,18 +45,19 @@ export default class HFLApiClient {
     }
   }
 
+  public getRankForScore = async (score: number): Promise<LeaderboardsRank> =>
+    (await this.get(`/leaderboards/rank/${score}`)).json()
+
   public getAllLeaderboards = async (
     first: number = 10
-  ): Promise<LeaderboardsAllResponse> => {
-    return (await this.get('/leaderboards/all', { first })).json()
-  }
+  ): Promise<LeaderboardsAllResponse> =>
+    (await this.get('/leaderboards/all', { first })).json()
 
   public createNewPlayer = async (
     username: string,
     score: number
-  ): Promise<PlayerNewResponse> => {
-    return (await this.post('/player/new', { username, score })).json()
-  }
+  ): Promise<PlayerNewResponse> =>
+    (await this.post('/player/new', { username, score })).json()
 
   private prepare = (request: Request): this => {
     request.headers.set('Accept', 'application/json')

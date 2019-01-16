@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite'
 import gameStore from '../../store/GameStore'
 
 const MinigameUI: FunctionComponent = () => {
-  const { paused, canPause } = gameStore
+  const { paused, canPause, elapsed } = gameStore
   const { minigameGuideline } = gameManager
   const { hasPlayedCurrentMinigame } = minigameManager
 

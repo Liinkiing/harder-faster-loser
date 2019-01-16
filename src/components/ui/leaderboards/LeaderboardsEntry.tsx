@@ -3,20 +3,25 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { LeaderboardsEntry as Entry } from '../../../client/HFLApiClient'
 import gameStore from '../../../store/GameStore'
+import { red } from '../../../utils/colors'
 
 interface Props {
-  entry: Entry
+  entry: Entry & { local: boolean }
 }
 
-const LeaderboardsEntryInner = styled.tr``
+const LeaderboardsEntryInner = styled.tr<Props>`
+  ${({ entry }) => entry.local && `color: ${red};`}
+`
 
 const LeaderboardsEntry: FunctionComponent<Props> = props => {
-  const { entry } = props
+  const {
+    entry: { rank, score, username },
+  } = props
   return (
-    <LeaderboardsEntryInner>
-      <td>{entry.rank}</td>
-      <td>{entry.username}</td>
-      <td>{gameStore.getTimeElapsedForSeconds(entry.score)}</td>
+    <LeaderboardsEntryInner {...props}>
+      <td>{rank}</td>
+      <td>{username}</td>
+      <td>{gameStore.getTimeElapsedForSeconds(score)}</td>
     </LeaderboardsEntryInner>
   )
 }

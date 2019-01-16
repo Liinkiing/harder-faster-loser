@@ -1,17 +1,31 @@
 import * as React from 'react'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import styled from 'styled-components'
 import { Leaderboards } from '../../../client/HFLApiClient'
 import LeaderboardsEntry from './LeaderboardsEntry'
+import leaderboardsStore from '../../../store/LeaderboardsStore'
+import { observer } from 'mobx-react-lite'
+import gameStore from '../../../store/GameStore'
 
 interface Props {
   readonly leaderboards: Leaderboards
+  readonly userRank?: number
 }
 
 const LeaderboardsTableInner = styled.table``
 
 const LeaderboardsTable: FunctionComponent<Props> = props => {
-  const { leaderboards } = props
+  const { addUserToLeaderboards } = leaderboardsStore
+  const { secondsElapsed } = gameStore
+  const { leaderboards, userRank } = props
+  useEffect(
+    () => {
+      if (userRank) {
+        addUserToLeaderboards(userRank, secondsElapsed)
+      }
+    },
+    [userRank, secondsElapsed]
+  )
 
   return (
     <LeaderboardsTableInner>
@@ -23,12 +37,12 @@ const LeaderboardsTable: FunctionComponent<Props> = props => {
         </tr>
       </thead>
       <tbody>
-        {leaderboards.map(entry => (
-          <LeaderboardsEntry key={entry.rank} entry={entry} />
+        {leaderboards.map((entry, index) => (
+          <LeaderboardsEntry key={index} entry={entry} />
         ))}
       </tbody>
     </LeaderboardsTableInner>
   )
 }
 
-export default LeaderboardsTable
+export default observer(LeaderboardsTable)

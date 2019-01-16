@@ -10,9 +10,9 @@ const LeaderboardsUsernameInputInner = styled.div`
 const LeaderboardsUsernameInput: FunctionComponent = props => {
   return (
     <LeaderboardsUsernameInputInner>
-      <LeaderboardsUsernameInputBlock />
-      <LeaderboardsUsernameInputBlock />
-      <LeaderboardsUsernameInputBlock />
+      <LeaderboardsUsernameInputBlock usernameIndex={0} />
+      <LeaderboardsUsernameInputBlock usernameIndex={1} />
+      <LeaderboardsUsernameInputBlock usernameIndex={2} />
     </LeaderboardsUsernameInputInner>
   )
 }
