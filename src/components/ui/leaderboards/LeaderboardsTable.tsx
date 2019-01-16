@@ -24,7 +24,7 @@ const LeaderboardsTable: FunctionComponent<Props> = props => {
         addUserToLeaderboards(userRank, secondsElapsed)
       }
     },
-    [userRank, secondsElapsed]
+    [userRank]
   )
 
   return (

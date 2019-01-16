@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import styled from 'styled-components'
 import { black } from '../../utils/colors'
 import LeaderboardsTable from './leaderboards/LeaderboardsTable'
@@ -41,30 +46,67 @@ const LeaderboardsUI: FunctionComponent = () => {
     rank,
   } = leaderboardsStore
   const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    setLoading(true)
-    fetchRankForScore(secondsElapsed)
-      .then(fetchLeaderboards)
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false))
-  }, [])
+  const [error, setError] = useState<string | null>(null)
+  const fetchResults = useCallback(
+    () => {
+      setLoading(true)
+      fetchRankForScore(secondsElapsed)
+        .then(fetchLeaderboards)
+        .then(() => {
+          setLoading(false)
+          setError(null)
+        })
+        .catch(() => {
+          setLoading(false)
+          setError('Could not fetch leaderboards!')
+        })
+    },
+    [secondsElapsed]
+  )
 
-  const onSubmit = async () => {
+  useEffect(fetchResults)
+
+  const onSubmit = () => {
     setLoading(true)
-    await postHighscore(username.join(''), secondsElapsed)
-    gameManager.restartGame()
+    postHighscore(username.join(''), secondsElapsed)
+      .then(() => {
+        gameManager.restartGame()
+      })
+      .catch(() => {
+        setLoading(false)
+        setError('Could not submit your highscore!')
+      })
   }
 
-  return (
-    <LeaderboardsUIInner>
-      <LeaderboardsTable userRank={rank} leaderboards={leaderboards} />
-      <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
-      <LeaderboardsUsernameInput />
-      <GameButton disabled={loading} onClick={onSubmit}>
-        Submit
-      </GameButton>
-    </LeaderboardsUIInner>
-  )
+  const render = () => {
+    if (!loading && error) {
+      return (
+        <>
+          <div>{error}</div>
+          <GameButton disabled={loading} onClick={fetchResults}>
+            Retry
+          </GameButton>
+        </>
+      )
+    } else if (loading) {
+      return <div>Loading...</div>
+    } else if (!loading && !error) {
+      return (
+        <>
+          <LeaderboardsTable userRank={rank} leaderboards={leaderboards} />
+          <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
+          <LeaderboardsUsernameInput />
+          <GameButton disabled={loading} onClick={onSubmit}>
+            Submit
+          </GameButton>
+        </>
+      )
+    }
+
+    return null
+  }
+
+  return <LeaderboardsUIInner>{render()}</LeaderboardsUIInner>
 }
 
 export default observer(LeaderboardsUI)
