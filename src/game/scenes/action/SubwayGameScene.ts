@@ -60,7 +60,7 @@ export default class SubwayGameScene extends MinigameScene {
         let slabTextureKey = ''
         let isEmptySlab = false
 
-        if (xCounter === 3 && yCounter > 0) {
+        if (xCounter === 11 && yCounter > 0) {
           slabTextureKey = 'subway_yellow_border_square'
           isEmptySlab = true
         } else {
@@ -167,12 +167,17 @@ export default class SubwayGameScene extends MinigameScene {
       this.lineContainers[this.indexNextRow].on(
         'drag',
         (pointer: any, dragX: number, dragY: number) => {
-          this.lineContainers[this.indexNextRow].x = dragX
+          console.log(this.lineContainers[this.indexNextRow].x)
+          if (
+            this.lineContainers[this.indexNextRow].x > -688 &&
+            this.lineContainers[this.indexNextRow].x < 30
+          ) {
+            this.lineContainers[this.indexNextRow].x = dragX
+          }
         }
       )
 
       this.lineContainers[this.indexNextRow].on('pointerup', () => {
-        console.log(this.toki!)
         if (this.isOverlapping) {
           this.triggerRunAnimation()
           this.updateActiveRows()
