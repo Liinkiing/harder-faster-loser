@@ -23,6 +23,8 @@ export default class SubwayGameScene extends MinigameScene {
   private currentRow?: Phaser.GameObjects.Container
   private nextRow?: Phaser.GameObjects.Container
 
+  private train: any = []
+
   constructor() {
     super({
       key: scenesKeys.SubwayGame,
@@ -35,7 +37,7 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.createPlatform()
     this.createRailRoad()
-    this.createTram()
+    this.createTrain()
 
     let xCounter = 0
     let yCounter = 0
@@ -173,7 +175,7 @@ export default class SubwayGameScene extends MinigameScene {
         56,
         this.windowHeight,
         0xcecdd0,
-        0.5
+        0
       )
       .setOrigin(0, 0)
 
@@ -197,7 +199,90 @@ export default class SubwayGameScene extends MinigameScene {
     //   .setScale(1 / gameStore.ratioResolution)
   }
 
-  private createTram(): void {}
+  private createTrain(): void {
+    const normalizedYOffset =
+      this.windowHeight! - this.windowHeight! * (6.6 / 10)
+    const firstTrain = this.add
+      .sprite(0, normalizedYOffset, 'subway_first_train')
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    const train1 = this.add
+      .sprite(
+        firstTrain.x + firstTrain.width / gameStore.ratioResolution,
+        normalizedYOffset,
+        'subway_train'
+      )
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    const train2 = this.add
+      .sprite(
+        train1.x + train1.width / gameStore.ratioResolution,
+        normalizedYOffset,
+        'subway_train'
+      )
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    const bodyActiveTrain = this.add
+      .sprite(0, 0, 'subway_active_train')
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    const doorsActiveTrain = this.add
+      .sprite(0, -25, 'subwayTrainDoorAnimation')
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    doorsActiveTrain.anims.play('subwayTrainDoorAnimation', true)
+
+    const insideActiveTrain = this.add
+      .sprite(5, -25, 'subwayTrainInsideAnimation')
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    insideActiveTrain.anims.play('subwayTrainInsideAnimation', true)
+
+    const trainContainer = this.add.container(
+      train2.x + train2.width / gameStore.ratioResolution,
+      normalizedYOffset,
+      [insideActiveTrain, doorsActiveTrain, bodyActiveTrain]
+    )
+
+    trainContainer.setSize(bodyActiveTrain.width, bodyActiveTrain.height)
+
+    const train3 = this.add
+      .sprite(
+        trainContainer.x + trainContainer.width / gameStore.ratioResolution,
+        normalizedYOffset,
+        'subway_train'
+      )
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    const train4 = this.add
+      .sprite(
+        train3.x + train3.width / gameStore.ratioResolution,
+        normalizedYOffset,
+        'subway_train'
+      )
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+
+    const lastTrain = this.add
+      .sprite(
+        train4.x + train4.width / gameStore.ratioResolution,
+        normalizedYOffset,
+        'subway_last_train'
+      )
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
+  }
+
+  private addToTrainArray(element: any): void {
+    this.train[this.train.length] = element
+  }
 
   private createPlatform(): void {
     const platform = this.add
