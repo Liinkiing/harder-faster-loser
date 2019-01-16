@@ -33,6 +33,7 @@ export default styled(GameButton)`
   text-align: center;
   width: fit-content;
   user-select: none;
+  pointer-events: all;
   ${boxShadow};
   &:hover,
   :active {

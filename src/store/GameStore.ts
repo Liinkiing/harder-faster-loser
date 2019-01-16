@@ -31,7 +31,7 @@ class GameStore {
     hasJustHeart: false,
   }
 
-  @observable public elapsed: number = 0
+  @observable public elapsed: number = 11275
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {

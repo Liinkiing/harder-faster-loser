@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite'
 import leaderboardsStore from '../../store/LeaderboardsStore'
 import LeaderboardsUsernameInput from './leaderboards/LeaderboardsUsernameInput'
 import gameStore from '../../store/GameStore'
+import GameButton from './GameButton'
 
 const LeaderboardsUIInner = styled.div`
   background: ${black};
@@ -18,9 +19,13 @@ const LeaderboardsUIInner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  ${GameButton} {
+    margin-top: 30px;
+  }
 `
 
 const LeaderboardsScore = styled.h2`
+  margin-top: 30px;
   font-size: 50px;
 `
 
@@ -43,10 +48,10 @@ const LeaderboardsUI: FunctionComponent = () => {
 
   return (
     <LeaderboardsUIInner>
-      <h1>Je suis l'ui du leaderboard</h1>
       <LeaderboardsTable userRank={rank} leaderboards={leaderboards} />
       <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
       <LeaderboardsUsernameInput />
+      <GameButton>Submit</GameButton>
     </LeaderboardsUIInner>
   )
 }
