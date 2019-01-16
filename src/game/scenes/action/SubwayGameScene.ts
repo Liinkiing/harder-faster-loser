@@ -181,13 +181,26 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerEndTokiAnimation = async () => {
-    await gameWait(this.time, 2000)
+    await gameWait(this.time, 1000)
     this.lastLineReached = true
     this.toggleTokiRun = true
     const animation = this.toki!.anims.play('subwayTokiWinAnimation', true)
 
     animation.on('animationcomplete', () => {
-      console.log('toki run animation finished')
+      console.log('toki win animation finished')
+
+      this.toggleTokiRun = false
+      this.toki!.x =
+        this.activeTrainContainer!.width / gameStore.ratioResolution / 2
+      this.toki!.y = -25
+      this.toki!.setOrigin(0.5, 1)
+      this.activeTrainContainer!.addAt(this.toki!, 1)
+
+      const yolo = this.doorsActiveTrain!.anims.playReverse(
+        'subwayTrainDoorAnimation',
+        true
+      )
+      this.activeTrainContainer!.add(yolo)
     })
   }
 
@@ -197,11 +210,6 @@ export default class SubwayGameScene extends MinigameScene {
     animation.on('animationcomplete', () => {
       if (!this.lastLineReached) {
         this.toki!.anims.play('subwayTokiTimeAnimation', true)
-      } else {
-        const test = this.doorsActiveTrain!.anims.playReverse(
-          'subwayTrainDoorAnimation',
-          true
-        )
       }
     })
   }
