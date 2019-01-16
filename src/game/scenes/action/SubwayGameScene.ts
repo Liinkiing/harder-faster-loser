@@ -18,6 +18,7 @@ export default class SubwayGameScene extends MinigameScene {
   private toki?: Phaser.GameObjects.Sprite
   private toggleTokiRun: boolean = false
   private currentRow: number = -1
+  private nextRow: number = 1
 
   constructor() {
     super({
@@ -96,25 +97,30 @@ export default class SubwayGameScene extends MinigameScene {
       currentLineContainer.setInteractive({ draggable: true })
       this.input.setDraggable(currentLineContainer)
 
-      currentLineContainer.on('pointerdown', () => {
-        this.toki!.anims.play('subwayTokiRunAnimation', true)
-        this.currentRow += 1
-        this.toggleTokiRun = true
-      })
+      // currentLineContainer.on('pointerdown', () => {
+      //   this.toki!.anims.play('subwayTokiRunAnimation', true)
+      //   this.currentRow += 1
+      //   this.toggleTokiRun = true
+      // })
 
-      currentLineContainer.on(
-        'drag',
-        (pointer: any, dragX: number, dragY: number) => {
-          currentLineContainer.x = dragX
-        }
-      )
-
-      this.physics.world.enable(currentLineContainer)
+      // currentLineContainer.on(
+      //   'drag',
+      //   (pointer: any, dragX: number, dragY: number) => {
+      //     currentLineContainer.x = dragX
+      //   }
+      // )
 
       this.lineContainers[this.lineContainers.length] = currentLineContainer
 
       yCounter += 1
     }
+
+    this.lineContainers[this.nextRow].on(
+      'drag',
+      (pointer: any, dragX: number, dragY: number) => {
+        this.lineContainers[this.nextRow].x = dragX
+      }
+    )
 
     const goalZone = this.add
       .rectangle(

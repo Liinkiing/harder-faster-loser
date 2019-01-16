@@ -525,7 +525,7 @@
         "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
         "frameConfig": {
           "frameWidth": 135,
-          "frameHeight": 285
+          "frameHeight": 300
         }
       },
       {
