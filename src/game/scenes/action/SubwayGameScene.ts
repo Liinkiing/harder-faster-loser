@@ -60,7 +60,7 @@ export default class SubwayGameScene extends MinigameScene {
         let slabTextureKey = ''
         let isEmptySlab = false
 
-        if (xCounter === 11 && yCounter > 0) {
+        if (xCounter === 10 && yCounter > 0) {
           slabTextureKey = 'subway_yellow_border_square'
           isEmptySlab = true
         } else {
@@ -167,7 +167,7 @@ export default class SubwayGameScene extends MinigameScene {
       this.lineContainers[this.indexNextRow].on(
         'drag',
         (pointer: any, dragX: number, dragY: number) => {
-          let translateValue = Phaser.Math.Clamp(dragX, -688, 30)
+          let translateValue = Phaser.Math.Clamp(dragX, -689, 30)
           this.lineContainers[this.indexNextRow].x = translateValue
         }
       )
