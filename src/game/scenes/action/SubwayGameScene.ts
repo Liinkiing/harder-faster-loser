@@ -40,10 +40,15 @@ export default class SubwayGameScene extends MinigameScene {
 
       while (xCounter < 4) {
         let slabTextureKey = ''
+        let isEmptySlab = false
 
-        xCounter === 3
-          ? (slabTextureKey = 'subway_yellow_border_square')
-          : (slabTextureKey = 'subway_grey_square')
+        if (xCounter === 3 && yCounter > 0) {
+          slabTextureKey = 'subway_yellow_border_square'
+          isEmptySlab = true
+        } else {
+          slabTextureKey = 'subway_grey_square'
+          isEmptySlab = false
+        }
 
         const slab = this.add
           .sprite(xCounter * 100, 50, slabTextureKey)
@@ -53,11 +58,11 @@ export default class SubwayGameScene extends MinigameScene {
 
         this.spriteLine[this.spriteLine.length] = slab
 
-        if (xCounter === 3) {
+        if (isEmptySlab) {
           this.emptySlabs[this.emptySlabs.length] = slab
         }
 
-        if (xCounter !== 3) {
+        if (!isEmptySlab) {
           let characterTextureKey = ''
 
           xCounter === 2 && yCounter == 0
