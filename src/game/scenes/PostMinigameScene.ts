@@ -31,7 +31,7 @@ export default class PostMinigameScene extends BaseScene {
     gameManager.resetTokiStatus()
 
     if (isTokiDead) {
-      gameManager.loadDeathscreen()
+      gameManager.loadLeaderboards()
     } else {
       gameManager.loadNextMinigame()
     }

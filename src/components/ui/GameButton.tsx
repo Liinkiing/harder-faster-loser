@@ -5,7 +5,8 @@ import { white, yellow } from '../../utils/colors'
 import { boxShadow } from '../../utils/css'
 import gameManager from '../../game/manager/GameManager'
 
-type Props = HTMLAttributes<HTMLButtonElement>
+type Props = HTMLAttributes<HTMLButtonElement> &
+  Partial<Pick<HTMLButtonElement, 'disabled'>>
 
 const GameButton: FunctionComponent<Props> = props => {
   const { onClick } = props
@@ -40,5 +41,9 @@ export default styled(GameButton)`
     cursor: pointer;
     background: ${white};
     color: ${yellow};
+  }
+  &:disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
   }
 `

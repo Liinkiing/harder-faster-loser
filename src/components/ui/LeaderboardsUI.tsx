@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { black } from '../../utils/colors'
 import LeaderboardsTable from './leaderboards/LeaderboardsTable'
@@ -7,6 +7,7 @@ import leaderboardsStore from '../../store/LeaderboardsStore'
 import LeaderboardsUsernameInput from './leaderboards/LeaderboardsUsernameInput'
 import gameStore from '../../store/GameStore'
 import GameButton from './GameButton'
+import gameManager from '../../game/manager/GameManager'
 
 const LeaderboardsUIInner = styled.div`
   background: ${black};
@@ -34,24 +35,34 @@ const LeaderboardsUI: FunctionComponent = () => {
   const {
     fetchLeaderboards,
     fetchRankForScore,
+    postHighscore,
+    username,
     leaderboards,
     rank,
   } = leaderboardsStore
-  useEffect(
-    () => {
-      fetchRankForScore(secondsElapsed)
-        .then(fetchLeaderboards)
-        .catch(err => console.error(err))
-    },
-    [secondsElapsed]
-  )
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    setLoading(true)
+    fetchRankForScore(secondsElapsed)
+      .then(fetchLeaderboards)
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false))
+  }, [])
+
+  const onSubmit = async () => {
+    setLoading(true)
+    await postHighscore(username.join(''), secondsElapsed)
+    gameManager.restartGame()
+  }
 
   return (
     <LeaderboardsUIInner>
       <LeaderboardsTable userRank={rank} leaderboards={leaderboards} />
       <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
       <LeaderboardsUsernameInput />
-      <GameButton>Submit</GameButton>
+      <GameButton disabled={loading} onClick={onSubmit}>
+        Submit
+      </GameButton>
     </LeaderboardsUIInner>
   )
 }

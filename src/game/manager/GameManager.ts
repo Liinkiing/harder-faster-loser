@@ -211,6 +211,11 @@ export class GameManager {
     )
   }
 
+  public restartGame = async () => {
+    gameStore.resetGame()
+    await this.loadNextMinigame()
+  }
+
   public resetTokiStatus = (): void => {
     gameStore.resetTokiStatus()
   }

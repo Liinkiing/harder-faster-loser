@@ -14,6 +14,9 @@ interface TokiStatus {
   hasJustHeart: boolean
 }
 
+const MINIGAME_DURATION = 500
+const REMAINING_PAUSE = 10
+
 const PAUSE_MIN_THRESHOLD = 0.2
 
 class GameStore {
@@ -31,17 +34,17 @@ class GameStore {
     hasJustHeart: false,
   }
 
-  @observable public elapsed: number = 11275
+  @observable public elapsed: number = 0
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
     dev: process.env.NODE_ENV === 'development',
     suspended: false,
     fade: true,
-    remainingPause: 10,
+    remainingPause: REMAINING_PAUSE,
     fadeColor: green,
     backgroundColor: green,
-    minigameDuration: 500,
+    minigameDuration: MINIGAME_DURATION,
   }
   @observable public ratioResolution: number = 3
   @observable public transitionning: boolean = false
@@ -60,6 +63,25 @@ class GameStore {
         })
       }
     )
+  }
+
+  @action public resetGame = (): void => {
+    this.changeConfig({
+      minigameDuration: MINIGAME_DURATION,
+      remainingPause: REMAINING_PAUSE,
+      suspended: false,
+    })
+    this.elapsed = 0
+    this.status = {
+      hasStress: false,
+      hasBrain: true,
+      hasHeart: true,
+      hasJustStress: false,
+      hasJustBrain: false,
+      hasJustHeart: false,
+    }
+    this.difficulty = 1
+    this.startGame()
   }
 
   @action public showGuideline = (): void => {

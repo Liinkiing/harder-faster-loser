@@ -1,4 +1,4 @@
-import { action, observable, reaction } from 'mobx'
+import { action, observable } from 'mobx'
 import HFLApiClient, { Leaderboards } from '../client/HFLApiClient'
 
 const MAX_ITEMS = 10
@@ -60,6 +60,10 @@ class LeaderboardStore {
     this.rank = (await this.client.getRankForScore(
       Number(score.toFixed(0))
     )).rank
+  }
+
+  @action public postHighscore = async (username: string, score: number) => {
+    await this.client.createNewPlayer(username, score)
   }
 }
 
