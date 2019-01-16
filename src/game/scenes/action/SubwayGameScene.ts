@@ -184,9 +184,12 @@ export default class SubwayGameScene extends MinigameScene {
     await gameWait(this.time, 1000)
     this.lastLineReached = true
     this.toggleTokiRun = true
-    const animation = this.toki!.anims.play('subwayTokiWinAnimation', true)
+    const tokiWinAnimation = this.toki!.anims.play(
+      'subwayTokiWinAnimation',
+      true
+    )
 
-    animation.on('animationcomplete', () => {
+    tokiWinAnimation.on('animationcomplete', () => {
       console.log('toki win animation finished')
 
       this.toggleTokiRun = false
@@ -196,11 +199,11 @@ export default class SubwayGameScene extends MinigameScene {
       this.toki!.setOrigin(0.5, 1)
       this.activeTrainContainer!.addAt(this.toki!, 1)
 
-      const yolo = this.doorsActiveTrain!.anims.playReverse(
+      const closeDoorsAnimation = this.doorsActiveTrain!.anims.playReverse(
         'subwayTrainDoorAnimation',
         true
       )
-      this.activeTrainContainer!.add(yolo)
+      this.activeTrainContainer!.add(closeDoorsAnimation)
     })
   }
 
