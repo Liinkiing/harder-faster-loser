@@ -4,6 +4,7 @@ import { black } from '../../utils/colors'
 import LeaderboardsTable from './leaderboards/LeaderboardsTable'
 import { observer } from 'mobx-react-lite'
 import leaderboardsStore from '../../store/LeaderboardsStore'
+import LeaderboardsUsernameInput from './leaderboards/LeaderboardsUsernameInput'
 
 const LeaderboardsUIInner = styled.div`
   background: ${black};
@@ -28,6 +29,7 @@ const LeaderboardsUI: FunctionComponent = () => {
     <LeaderboardsUIInner>
       <h1>Je suis l'ui du leaderboard</h1>
       <LeaderboardsTable leaderboards={leaderboards} />
+      <LeaderboardsUsernameInput />
     </LeaderboardsUIInner>
   )
 }
