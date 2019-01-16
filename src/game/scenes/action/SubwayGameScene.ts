@@ -12,13 +12,16 @@ export default class SubwayGameScene extends MinigameScene {
   private windowHeight?: number
   private windowWidth?: number
   private lineContainers: Phaser.GameObjects.Container[] = []
-  private lineContainer?: Phaser.GameObjects.Container
   private spriteLine: Phaser.GameObjects.Sprite[] = []
   private emptySlabs: Phaser.GameObjects.Sprite[] = []
   private toki?: Phaser.GameObjects.Sprite
   private toggleTokiRun: boolean = false
-  private currentRow: number = 0
-  private nextRow: number = 1
+  private indexCurrentRow: number = 0
+  private indexNextRow: number = 1
+  private isOverlapping: boolean = false
+
+  private currentRow?: Phaser.GameObjects.Container
+  private nextRow?: Phaser.GameObjects.Container
 
   constructor() {
     super({
@@ -102,48 +105,67 @@ export default class SubwayGameScene extends MinigameScene {
       )
       currentLineContainer.setInteractive({ draggable: true })
       this.input.setDraggable(currentLineContainer)
-
-      currentLineContainer.on('pointerdown', () => {
-        this.toki!.anims.play('subwayTokiRunAnimation', true)
-        this.currentRow += 1
-        this.nextRow += 1
-
-        const nextRow = this.lineContainers[this.nextRow]
-        const currentRow = this.lineContainers[this.currentRow]
-
-        if (nextRow) {
-          this.physics.world.enable(nextRow.getByName('empty_slab'))
-        }
-
-        if (currentRow) {
-          this.physics.world.disable(currentRow.getByName('empty_slab'))
-        }
-
-        this.toggleTokiRun = true
-      })
-
-      // currentLineContainer.on(
-      //   'drag',
-      //   (pointer: any, dragX: number, dragY: number) => {
-      //     currentLineContainer.x = dragX
-      //   }
-      // )
-
       this.lineContainers[this.lineContainers.length] = currentLineContainer
 
       yCounter += 1
     }
 
-    this.lineContainers[this.nextRow].on(
-      'drag',
-      (pointer: any, dragX: number, dragY: number) => {
-        this.lineContainers[this.nextRow].x = dragX
-      }
-    )
+    const yolo = this.lineContainers[this.indexNextRow].getByName('empty_slab')
+    this.physics.world.enable(yolo)
 
+    this.initColliderOnCurrentSlab()
+    this.initListenerOnCurrentLineContainer()
+  }
+
+  private initListenerOnCurrentLineContainer(): void {
+    if (this.indexNextRow < this.lineContainers!.length) {
+      this.lineContainers[this.indexNextRow].on(
+        'drag',
+        (pointer: any, dragX: number, dragY: number) => {
+          this.lineContainers[this.indexNextRow].x = dragX
+        }
+      )
+
+      this.lineContainers[this.indexNextRow].on('pointerup', () => {
+        if (this.isOverlapping) {
+          this.triggerRunAnimation()
+          this.updateActiveRows()
+          this.initListenerOnCurrentLineContainer()
+          this.initColliderOnCurrentSlab()
+        }
+      })
+    } else {
+      this.lineContainers![this.indexCurrentRow].input.draggable = false
+    }
+  }
+
+  private triggerRunAnimation(): void {
+    this.toki!.anims.play('subwayTokiRunAnimation', true)
+  }
+
+  private updateActiveRows(): void {
+    this.indexCurrentRow += 1
+    this.indexNextRow += 1
+
+    this.nextRow = this.lineContainers[this.indexNextRow]
+    this.currentRow = this.lineContainers[this.indexCurrentRow]
+
+    if (this.nextRow) {
+      this.physics.world.enable(this.nextRow.getByName('empty_slab'))
+    }
+
+    if (this.currentRow && this.indexCurrentRow > 0) {
+      this.physics.world.disable(this.currentRow.getByName('empty_slab'))
+    }
+
+    this.toggleTokiRun = true
+    this.isOverlapping = false
+  }
+
+  private initColliderOnCurrentSlab(): void {
     const goalZone = this.add
       .rectangle(
-        this.windowWidth / 2 + 22,
+        this.windowWidth! / 2 + 22,
         0,
         56,
         this.windowHeight,
@@ -154,18 +176,18 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.physics.world.enable(goalZone)
 
-    const yolo = this.lineContainers[this.nextRow].getByName('empty_slab')
-    this.physics.world.enable(yolo)
-
     const collider = this.physics.add.overlap(this.emptySlabs, goalZone, () => {
       console.log('A slab is colliding with the goalZone')
+
+      this.isOverlapping = true
+      this.physics.world.removeCollider(collider)
     })
   }
 
   public update(time: number, delta: number): void {
     if (
       this.toggleTokiRun == true &&
-      this.toki!.y > -50 - 100 * (this.currentRow - 1)
+      this.toki!.y > -50 - 100 * (this.indexCurrentRow - 1)
     ) {
       this.toki!.y -= 1
     } else {
