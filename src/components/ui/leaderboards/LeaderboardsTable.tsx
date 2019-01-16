@@ -20,7 +20,7 @@ const LeaderboardsTable: FunctionComponent<Props> = props => {
   const { leaderboards, userRank } = props
   useEffect(
     () => {
-      if (userRank) {
+      if (userRank && userRank !== 0) {
         addUserToLeaderboards(userRank, secondsElapsed)
       }
     },

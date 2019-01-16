@@ -49,17 +49,19 @@ const LeaderboardsUI: FunctionComponent = () => {
   const [error, setError] = useState<string | null>(null)
   const fetchResults = useCallback(
     () => {
-      setLoading(true)
-      fetchRankForScore(secondsElapsed)
-        .then(fetchLeaderboards)
-        .then(() => {
-          setLoading(false)
-          setError(null)
-        })
-        .catch(() => {
-          setLoading(false)
-          setError('Could not fetch leaderboards!')
-        })
+      if (secondsElapsed > 0) {
+        setLoading(true)
+        fetchRankForScore(secondsElapsed)
+          .then(fetchLeaderboards)
+          .then(() => {
+            setLoading(false)
+            setError(null)
+          })
+          .catch(() => {
+            setLoading(false)
+            setError('Could not fetch leaderboards!')
+          })
+      }
     },
     [secondsElapsed]
   )
