@@ -1,7 +1,6 @@
 {
   "name": "hfl",
   "version": "0.1.0",
-  "homepage": "http://liinkiing.github.io/harder-faster-looser",
   "private": true,
   "dependencies": {
     "@types/gsap": "^1.20.0",
