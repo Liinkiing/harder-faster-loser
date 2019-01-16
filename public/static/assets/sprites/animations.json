@@ -457,7 +457,7 @@
       },
       "showOnStart": true,
       "repeat": 0,
-      "frameRate": 8
+      "frameRate": 30
     },
     {
       "key": "subwayTrainDoorAnimation",
@@ -482,6 +482,18 @@
       "showOnStart": true,
       "repeat": -1,
       "frameRate": 5
+    },
+    {
+      "key": "subwayTokiWinAnimation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "subway_toki_win",
+        "start": 0,
+        "end": 32
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 24
     }
   ]
 }

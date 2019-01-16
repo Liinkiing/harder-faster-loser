@@ -32,6 +32,8 @@ export default class SubwayGameScene extends MinigameScene {
 
   private activeTrainContainer?: Phaser.GameObjects.Container
 
+  private normalizedYOffset: number = 0
+
   constructor() {
     super({
       key: scenesKeys.SubwayGame,
@@ -41,6 +43,8 @@ export default class SubwayGameScene extends MinigameScene {
   public create() {
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
+    this.normalizedYOffset =
+      this.windowHeight! - this.windowHeight! * (6.6 / 10)
 
     this.createPlatform()
     this.createRailRoad()
@@ -66,7 +70,7 @@ export default class SubwayGameScene extends MinigameScene {
         }
 
         const slab = this.add
-          .sprite(xCounter * 100, 50, slabTextureKey)
+          .sprite(xCounter * 90, 50, slabTextureKey)
           .setOrigin(0, 1)
           .setScale(1 / gameStore.ratioResolution)
           .setDepth(1)
@@ -86,7 +90,7 @@ export default class SubwayGameScene extends MinigameScene {
             : (characterTextureKey = 'subwayCharacterTimeAnimation')
 
           const character = this.add
-            .sprite(xCounter * 100, 50, characterTextureKey)
+            .sprite(xCounter * 90, 50, characterTextureKey)
             .setOrigin(0, 1)
             .setScale(1 / gameStore.ratioResolution)
             .setDepth(2)
@@ -105,7 +109,7 @@ export default class SubwayGameScene extends MinigameScene {
 
       const currentLineContainer = this.add.container(
         30,
-        this.windowHeight - 80 - yCounter * 100,
+        this.windowHeight - 80 - yCounter * 105,
         this.spriteLine
       )
 
@@ -148,19 +152,15 @@ export default class SubwayGameScene extends MinigameScene {
       })
     } else {
       this.lineContainers![this.indexCurrentRow].input.draggable = false
-
-      console.log('test')
-
       this.triggerEndTokiAnimation()
     }
   }
 
   private triggerEndTokiAnimation = async () => {
     await gameWait(this.time, 3000)
-    console.log('yolo')
     this.lastLineReached = true
     this.toggleTokiRun = true
-    const animation = this.toki!.anims.play('subwayTokiRunAnimation', true)
+    const animation = this.toki!.anims.play('subwayTokiWinAnimation', true)
 
     animation.on('animationcomplete', () => {
       console.log('toki run animation finished')
@@ -223,21 +223,17 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private createTrain(): void {
-    const normalizedYOffset =
-      this.windowHeight! - this.windowHeight! * (6.6 / 10)
     this.firstTrain = this.add
-      .sprite(0, normalizedYOffset, 'subway_first_train')
+      .sprite(0, this.normalizedYOffset, 'subway_first_train')
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
-
-    //firstTrain.x = Number(this.windowWidth)
 
     this.firstTrain.x = -800
 
     const train1 = this.add
       .sprite(
         this.firstTrain.x + this.firstTrain.width / gameStore.ratioResolution,
-        normalizedYOffset,
+        this.normalizedYOffset,
         'subway_train'
       )
       .setOrigin(0, 1)
@@ -246,7 +242,7 @@ export default class SubwayGameScene extends MinigameScene {
     const train2 = this.add
       .sprite(
         train1.x + train1.width / gameStore.ratioResolution,
-        normalizedYOffset,
+        this.normalizedYOffset,
         'subway_train'
       )
       .setOrigin(0, 1)
@@ -273,7 +269,7 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.activeTrainContainer = this.add.container(
       train2.x + train2.width / gameStore.ratioResolution,
-      normalizedYOffset,
+      this.normalizedYOffset,
       [insideActiveTrain, doorsActiveTrain, bodyActiveTrain]
     )
 
@@ -286,7 +282,7 @@ export default class SubwayGameScene extends MinigameScene {
       .sprite(
         this.activeTrainContainer.x +
           this.activeTrainContainer.width / gameStore.ratioResolution,
-        normalizedYOffset,
+        this.normalizedYOffset,
         'subway_train'
       )
       .setOrigin(0, 1)
@@ -295,7 +291,7 @@ export default class SubwayGameScene extends MinigameScene {
     const train4 = this.add
       .sprite(
         train3.x + train3.width / gameStore.ratioResolution,
-        normalizedYOffset,
+        this.normalizedYOffset,
         'subway_train'
       )
       .setOrigin(0, 1)
@@ -304,7 +300,7 @@ export default class SubwayGameScene extends MinigameScene {
     const lastTrain = this.add
       .sprite(
         train4.x + train4.width / gameStore.ratioResolution,
-        normalizedYOffset,
+        this.normalizedYOffset,
         'subway_last_train'
       )
       .setOrigin(0, 1)
@@ -357,11 +353,11 @@ export default class SubwayGameScene extends MinigameScene {
   public update(time: number, delta: number): void {
     if (
       this.toggleTokiRun == true &&
-      this.toki!.y > -50 - 100 * (this.indexCurrentRow - 1)
+      this.toki!.y > -50 - 110 * (this.indexCurrentRow - 1)
     ) {
-      this.toki!.y -= 1
+      this.toki!.y -= 5
     } else if (
-      this.toki!.y <= -50 - 100 * (this.indexCurrentRow - 1) &&
+      this.toki!.y <= -50 - 110 * (this.indexCurrentRow - 1) &&
       this.lastLineReached == false
     ) {
       this.toggleTokiRun = false
@@ -370,10 +366,10 @@ export default class SubwayGameScene extends MinigameScene {
     if (
       this.toggleTokiRun &&
       this.lastLineReached &&
-      this.toki!.y > -50 - 100 * this.indexCurrentRow
+      this.toki!.y > -60 - 110 * this.indexCurrentRow
     ) {
-      console.log(this.indexCurrentRow)
-      this.toki!.y -= 1.5
+      this.toki!.y -= 5
+      this.toki!.x -= 1.3
     }
   }
 }
