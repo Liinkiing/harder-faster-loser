@@ -32,7 +32,9 @@ export default class SubwayGameScene extends MinigameScene {
   public create() {
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
-    this.createBackground()
+
+    this.createPlatform()
+    this.createRailRoad()
 
     let xCounter = 0
     let yCounter = 0
@@ -184,18 +186,18 @@ export default class SubwayGameScene extends MinigameScene {
     })
   }
 
-  public update(time: number, delta: number): void {
-    if (
-      this.toggleTokiRun == true &&
-      this.toki!.y > -50 - 100 * (this.indexCurrentRow - 1)
-    ) {
-      this.toki!.y -= 1
-    } else {
-      this.toggleTokiRun = false
-    }
+  private createRailRoad(): void {
+    const railRoadthis = this.add
+      .sprite(
+        0,
+        this.windowHeight! - this.windowHeight! * (6.6 / 10),
+        'subway_railroad'
+      )
+      .setOrigin(0, 1)
+      .setScale(1 / gameStore.ratioResolution)
   }
 
-  private createBackground(): void {
+  private createPlatform(): void {
     const platform = this.add
       .graphics()
       .fillStyle(0x948d9b, 1)
@@ -210,5 +212,16 @@ export default class SubwayGameScene extends MinigameScene {
       this.windowHeight! - this.windowHeight! * (6.6 / 10),
       [platform, warningLinePlatform]
     )
+  }
+
+  public update(time: number, delta: number): void {
+    if (
+      this.toggleTokiRun == true &&
+      this.toki!.y > -50 - 100 * (this.indexCurrentRow - 1)
+    ) {
+      this.toki!.y -= 1
+    } else {
+      this.toggleTokiRun = false
+    }
   }
 }
