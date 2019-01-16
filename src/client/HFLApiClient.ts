@@ -5,13 +5,17 @@ const AUTH_HEADER = 'X-AUTH-TOKEN'
 type LeaderboardsAllResponse = Array<{
   score: number
   username: string
+  rank: number
 }>
 
 export type Leaderboards = LeaderboardsAllResponse
 
+export type LeaderboardsEntry = Leaderboards[0]
+
 type PlayerNewResponse = Array<{
   score: number
   username: string
+  rank: number
 }>
 
 export type Player = PlayerNewResponse

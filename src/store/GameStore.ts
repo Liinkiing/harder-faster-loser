@@ -227,6 +227,12 @@ class GameStore {
       second: '2-digit',
     })
   }
+
+  public getTimeElapsedForSeconds = (seconds: number): string =>
+    new Date(seconds * 1000).toLocaleTimeString('fr', {
+      minute: '2-digit',
+      second: '2-digit',
+    })
 }
 
 const gameStore = new GameStore()

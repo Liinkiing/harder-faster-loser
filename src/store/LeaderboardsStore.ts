@@ -11,5 +11,5 @@ class LeaderboardStore {
   }
 }
 
-const leaderboardStore = new LeaderboardStore(new HFLApiClient())
-export default leaderboardStore
+const leaderboardsStore = new LeaderboardStore(new HFLApiClient())
+export default leaderboardsStore

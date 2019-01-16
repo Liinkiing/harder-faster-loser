@@ -8,6 +8,8 @@ export default class LeaderboardsScene extends BaseScene {
     })
   }
 
+  public update(time: number, delta: number): void {}
+
   public create(): void {
     super.create()
     const graphics = this.add.graphics()
