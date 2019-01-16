@@ -17,7 +17,7 @@ export default class SubwayGameScene extends MinigameScene {
   private emptySlabs: Phaser.GameObjects.Sprite[] = []
   private toki?: Phaser.GameObjects.Sprite
   private toggleTokiRun: boolean = false
-  private currentRow: number = -1
+  private currentRow: number = 0
   private nextRow: number = 1
 
   constructor() {
@@ -59,6 +59,7 @@ export default class SubwayGameScene extends MinigameScene {
         this.spriteLine[this.spriteLine.length] = slab
 
         if (isEmptySlab) {
+          slab.name = 'empty_slab'
           this.emptySlabs[this.emptySlabs.length] = slab
         }
 
@@ -102,11 +103,24 @@ export default class SubwayGameScene extends MinigameScene {
       currentLineContainer.setInteractive({ draggable: true })
       this.input.setDraggable(currentLineContainer)
 
-      // currentLineContainer.on('pointerdown', () => {
-      //   this.toki!.anims.play('subwayTokiRunAnimation', true)
-      //   this.currentRow += 1
-      //   this.toggleTokiRun = true
-      // })
+      currentLineContainer.on('pointerdown', () => {
+        this.toki!.anims.play('subwayTokiRunAnimation', true)
+        this.currentRow += 1
+        this.nextRow += 1
+
+        const nextRow = this.lineContainers[this.nextRow]
+        const currentRow = this.lineContainers[this.currentRow]
+
+        if (nextRow) {
+          this.physics.world.enable(nextRow.getByName('empty_slab'))
+        }
+
+        if (currentRow) {
+          this.physics.world.disable(currentRow.getByName('empty_slab'))
+        }
+
+        this.toggleTokiRun = true
+      })
 
       // currentLineContainer.on(
       //   'drag',
@@ -140,9 +154,8 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.physics.world.enable(goalZone)
 
-    this.emptySlabs.forEach(slab => {
-      this.physics.world.enable(slab)
-    })
+    const yolo = this.lineContainers[this.nextRow].getByName('empty_slab')
+    this.physics.world.enable(yolo)
 
     const collider = this.physics.add.overlap(this.emptySlabs, goalZone, () => {
       console.log('A slab is colliding with the goalZone')
@@ -152,7 +165,7 @@ export default class SubwayGameScene extends MinigameScene {
   public update(time: number, delta: number): void {
     if (
       this.toggleTokiRun == true &&
-      this.toki!.y > -50 - 100 * this.currentRow
+      this.toki!.y > -50 - 100 * (this.currentRow - 1)
     ) {
       this.toki!.y -= 1
     } else {
