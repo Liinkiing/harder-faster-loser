@@ -92,6 +92,10 @@ export class GameManager {
     await this.startScene(scenesKeys.Deathscreen)
   }
 
+  public loadLeaderboards = async () => {
+    await this.startScene(scenesKeys.Leaderboards)
+  }
+
   public startScene = async (
     key: string,
     config: HFLGameConfig = gameStore.config,

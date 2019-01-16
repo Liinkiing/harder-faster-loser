@@ -9,6 +9,7 @@ import {
   PostMinigameScene,
   SplashscreenScene,
   ElevatorGameScene,
+  LeaderboardsScene,
 } from '../game/scenes'
 import { GameBackgroundColor } from './types'
 import { green } from './colors'
@@ -59,6 +60,7 @@ export const gameConfig: GameConfig = {
 
     PostMinigameScene,
     DeathscreenScene,
+    LeaderboardsScene,
   ],
   type: Phaser.AUTO,
   pixelArt: true,

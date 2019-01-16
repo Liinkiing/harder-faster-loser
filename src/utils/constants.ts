@@ -17,6 +17,7 @@ export const scenesKeys = {
   PostMinigameScene: 'POSTMINIGAME',
 
   Deathscreen: 'DEATHSCREEN',
+  Leaderboards: 'LEADERBOARDS',
 }
 
 export const categoriesProbability = {

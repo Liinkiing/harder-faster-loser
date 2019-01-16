@@ -11,3 +11,4 @@ export { default as ElevatorGameScene } from './action/ElevatorGameScene'
 export { default as PostMinigameScene } from './PostMinigameScene'
 
 export { default as DeathscreenScene } from './DeathscreenScene'
+export { default as LeaderboardsScene } from './LeaderboardsScene'

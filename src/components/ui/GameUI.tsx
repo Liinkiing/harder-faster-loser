@@ -10,6 +10,7 @@ import DeathscreenUI from './DeathscreenUI'
 import Transition from './Transition'
 import gameManager from '../../game/manager/GameManager'
 import gameDebugStore from '../../store/GameDebugStore'
+import LeaderboardsUI from './LeaderboardsUI'
 
 const GameUI: FunctionComponent = () => {
   const { state, uiKey } = gameStore
@@ -39,6 +40,9 @@ const GameUI: FunctionComponent = () => {
       break
     case GameState.Deathscreen:
       UIComponent = DeathscreenUI
+      break
+    case GameState.Leaderboards:
+      UIComponent = LeaderboardsUI
       break
   }
 
