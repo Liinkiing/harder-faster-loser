@@ -72,7 +72,7 @@ export default class SubwayGameScene extends MinigameScene {
           .sprite(xCounter * 90, 50, slabTextureKey)
           .setOrigin(0, 1)
           .setScale(1 / gameStore.ratioResolution)
-          .setDepth(1)
+          .setDepth(-1)
 
         this.spriteLine[this.spriteLine.length] = slab
 
@@ -92,7 +92,7 @@ export default class SubwayGameScene extends MinigameScene {
             .sprite(xCounter * 90, 50, characterTextureKey)
             .setOrigin(0, 1)
             .setScale(1 / gameStore.ratioResolution)
-            .setDepth(2)
+            .setDepth(-1)
 
           character.anims.play(characterTextureKey, true)
 
@@ -129,6 +129,8 @@ export default class SubwayGameScene extends MinigameScene {
 
       yCounter += 1
     }
+
+    this.lineContainers[0].setDepth(1)
 
     const nextEmptySlab = this.lineContainers[this.indexNextRow].getByName(
       'empty_slab'
