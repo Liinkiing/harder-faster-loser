@@ -1,5 +1,8 @@
 import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
+import gameStore from '../../store/GameStore'
+import gameManager from '../manager/GameManager'
+import { darkBlue } from '../../utils/colors'
 
 export default class HomescreenScene extends BaseScene {
   constructor() {
@@ -10,11 +13,16 @@ export default class HomescreenScene extends BaseScene {
 
   public create(): void {
     super.create()
-    const graphics = this.add.graphics()
-    graphics.fillStyle(0xff9933, 1)
-    graphics.fillRect(100, 200, 600, 300)
-    graphics.fillRect(200, 100, 100, 100)
-    this.add.text(220, 110, this.scene.key)
+    gameManager.changeBackgroundColor(darkBlue)
+    this.add
+      .sprite(
+        window.innerWidth / 2,
+        window.innerHeight / 2,
+        'intro_sleep_animation'
+      )
+      .setOrigin(0.5, 0.5)
+      .setScale(18 / gameStore.ratioResolution)
+      .play('intro_sleep_animation')
   }
 
   public update(time: number, delta: number): void {}

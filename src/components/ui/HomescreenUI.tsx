@@ -1,10 +1,30 @@
 import React, { FunctionComponent } from 'react'
+import styled from 'styled-components'
+import GameButton from './GameButton'
+import gameManager from '../../game/manager/GameManager'
+
+const HomescreenUIInner = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ${GameButton} {
+    position: absolute;
+    bottom: 40px;
+  }
+`
 
 const HomescreenUI: FunctionComponent = () => {
+  const { loadNextMinigame } = gameManager
   return (
-    <div className="homescreen-ui">
-      <h1>Je suis l'ui du homescreen</h1>
-    </div>
+    <HomescreenUIInner>
+      <GameButton onClick={loadNextMinigame}>Wake up</GameButton>
+    </HomescreenUIInner>
   )
 }
 
