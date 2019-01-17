@@ -105,21 +105,10 @@ export default class SandwichGameScene extends MinigameScene {
       .sprite(
         50,
         Number(this.game.config.height) -
-          this.grounds![0].height / gameStore.ratioResolution,
+          (this.grounds![0].height * 3) / gameStore.ratioResolution,
         playerTexture
       )
       .setOrigin(0, 1)
-
-    const spriteAnim = sprite.anims.animationManager.get(this.playerTexture)
-
-    if (!!spriteAnim) {
-      const [width, height] = [
-        spriteAnim.frames[0].frame.width,
-        spriteAnim.frames[0].frame.height,
-      ]
-      sprite.width = width
-      sprite.height = height
-    }
 
     sprite.setOrigin(0, 1).setScale(1 / gameStore.ratioResolution)
 
@@ -129,29 +118,15 @@ export default class SandwichGameScene extends MinigameScene {
   private createSandwich = (
     sandwichTexture: string
   ): Phaser.GameObjects.Sprite => {
-    const offset = 200
     const sprite = this.add
       .sprite(
-        this.grounds![0].x +
-          this.grounds![0].width / gameStore.ratioResolution -
-          offset,
+        900,
         Number(this.game.config.height) -
-          this.grounds![0].height / gameStore.ratioResolution,
+          (this.grounds![0].height * 3) / gameStore.ratioResolution,
         sandwichTexture
       )
       .setOrigin(1, 1)
-      .setScale(1 / gameStore.ratioResolution)
-
-    const spriteAnim = sprite.anims.animationManager.get(this.sandwichTexture)
-
-    if (!!spriteAnim) {
-      const [width, height] = [
-        spriteAnim.frames[0].frame.width,
-        spriteAnim.frames[0].frame.height,
-      ]
-      sprite.width = width
-      sprite.height = height
-    }
+      .setScale(3 / gameStore.ratioResolution)
 
     return sprite
   }
@@ -246,10 +221,10 @@ export default class SandwichGameScene extends MinigameScene {
     array: Phaser.GameObjects.Sprite[],
     texture: string
   ): void {
-    array![0] = this.add
+    array[0] = this.add
       .sprite(0, Number(this.game.config.height), texture)
       .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(3 / gameStore.ratioResolution)
   }
 
   private createCloneBackgroundElement(
@@ -263,7 +238,7 @@ export default class SandwichGameScene extends MinigameScene {
         texture
       )
       .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(3 / gameStore.ratioResolution)
   }
 
   private createControls(): void {
