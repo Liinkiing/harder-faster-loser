@@ -30,8 +30,8 @@ export default class TraficGameScene extends MinigameScene {
   private widthLastCar: number = 0
   private positionXLastCar: number = 0
   private isTokiInScene: boolean = false
-  private firstRow?: Phaser.GameObjects.Container
-  private carsFirstRow: Phaser.GameObjects.Sprite[] = []
+  private tokisRow?: Phaser.GameObjects.Container
+  private carsTokisRow: Phaser.GameObjects.Sprite[] = []
   private safeRageBarArea?: Phaser.GameObjects.Graphics
 
   private heightRoad: number = 0
@@ -69,7 +69,7 @@ export default class TraficGameScene extends MinigameScene {
     this.createCars()
     this.controls = this.createControls()
 
-    this.firstRow = this.add.container(0, 0, this.carsFirstRow)
+    this.tokisRow = this.add.container(0, 0, this.carsTokisRow)
   }
 
   public onSuccess = (): void => {
@@ -108,11 +108,11 @@ export default class TraficGameScene extends MinigameScene {
       // There we determine how much px the first line need to move on each frame depending of the game width
       // 500 = minigameDuration
       // To win, the user need to always stay in the safe area
-      this.firstRow!.x += Number(this.game.config.width) / 500 + 0.01
+      this.tokisRow!.x += Number(this.game.config.width) / 500 + 0.01
     }
 
     if (
-      this.firstRow!.x > Number(this.game.config.width) &&
+      this.tokisRow!.x > Number(this.game.config.width) &&
       this.isTokiFree === false
     ) {
       this.onSuccess()
@@ -234,17 +234,17 @@ export default class TraficGameScene extends MinigameScene {
     const heightRoad = 390
 
     let carKey = ''
-    let direction = 'left'
+    let direction = 'right'
 
     while (yCounter < yRepeatCount) {
       this.widthLastCar = 0
       this.positionXLastCar = 0
 
       if (yCounter % 2 === 0) {
-        if (direction === 'left') {
-          direction = 'right'
-        } else {
+        if (direction === 'right') {
           direction = 'left'
+        } else {
+          direction = 'right'
         }
       }
 
@@ -267,7 +267,8 @@ export default class TraficGameScene extends MinigameScene {
         if (
           this.isTokiInScene === false &&
           direction === 'right' &&
-          this.positionXLastCar === 0
+          this.positionXLastCar === 0 &&
+          yCounter == 2
         ) {
           carKey = 'traffic_toki_animation'
           this.isTokiInScene = true
@@ -302,11 +303,11 @@ export default class TraficGameScene extends MinigameScene {
         }
 
         // Ajout de la voiture dans le tableau de sprite de la 1ere ligne
-        if (yCounter === 0 && carKey !== 'traffic_toki_animation') {
-          this.carsFirstRow.push(car)
-        } else if (yCounter === 0 && carKey === 'traffic_toki_animation') {
-          this.carsFirstRow.push(this.hornSprite!)
-          this.carsFirstRow.push(car)
+        if (yCounter === 2 && carKey !== 'traffic_toki_animation') {
+          this.carsTokisRow.push(car)
+        } else if (yCounter === 2 && carKey === 'traffic_toki_animation') {
+          this.carsTokisRow.push(this.hornSprite!)
+          this.carsTokisRow.push(car)
         }
       }
       yCounter += 1
