@@ -153,7 +153,6 @@ export default class TraficGameScene extends MinigameScene {
       this.horn!.setTexture('traffic_horn_on')
       this.hornSprite!.alpha = 1
       this.cursorRageBar!.x += 10
-      this.hornSprite!.anims.play('traffic_horn_animation', true)
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
@@ -173,12 +172,15 @@ export default class TraficGameScene extends MinigameScene {
       .setScale(1 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
+    const safeAreaWidth =
+      100 / (Phaser.Math.Clamp(gameStore.difficulty, 1, 15) / 10 + 1)
+
     this.safeRageBarArea = this.add.graphics()
     this.safeRageBarArea.fillStyle(0x6adeb8, 1)
     this.safeRageBarArea.fillRect(
       this.rageBar.width / gameStore.ratioResolution / 2 - 50,
       -(this.rageBar.height / gameStore.ratioResolution) / 2 + 4,
-      100,
+      safeAreaWidth,
       this.rageBar.height / gameStore.ratioResolution - 16
     )
 
@@ -311,6 +313,9 @@ export default class TraficGameScene extends MinigameScene {
             .setScale(1 / gameStore.ratioResolution)
             .setOrigin(0.5, 1)
             .setDepth(10)
+
+          this.hornSprite.alpha = 0
+          this.hornSprite.anims.play('traffic_horn_animation', true)
         }
 
         // Ajout de la voiture dans le tableau de sprite de la 1ere ligne
