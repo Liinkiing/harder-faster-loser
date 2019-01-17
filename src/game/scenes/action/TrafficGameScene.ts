@@ -16,7 +16,8 @@ export default class TraficGameScene extends MinigameScene {
   private controls?: Phaser.GameObjects.Container
   private rageBar?: Phaser.GameObjects.Sprite
   private cursorRageBar?: Phaser.GameObjects.Sprite
-  // private roads?: Phaser.GameObjects.Container
+  private horn?: Phaser.GameObjects.Sprite
+
   private roads: Phaser.GameObjects.Sprite[] = []
   private availableRightCars: string[] = [
     'traffic_blue_car_animation',
@@ -121,16 +122,16 @@ export default class TraficGameScene extends MinigameScene {
   }
 
   private createControls(): Phaser.GameObjects.Container {
-    const horn = this.add
-      .sprite(0, 0, 'horn_on')
+    this.horn = this.add
+      .sprite(0, 0, 'horn_off')
       .setScale(1 / gameStore.ratioResolution)
       .setInteractive()
       .setOrigin(0, 0.5)
 
-    horn.input.hitArea.setSize(horn.width, horn.height)
+    this.horn.input.hitArea.setSize(this.horn.width, this.horn.height)
 
     const rageBarContainer = this.add.container(
-      horn.width / gameStore.ratioResolution - 15,
+      this.horn.width / gameStore.ratioResolution - 15,
       0,
       this.createRageBar()
     )
@@ -138,10 +139,11 @@ export default class TraficGameScene extends MinigameScene {
     const controlsContainer = this.add.container(
       Number(this.game.config.width) / 2 - 200,
       Number(this.game.config.height) - 100,
-      [rageBarContainer, horn]
+      [rageBarContainer, this.horn]
     )
 
-    horn.on('pointerdown', () => {
+    this.horn.on('pointerdown', () => {
+      this.horn!.setTexture('traffic_horn_on')
       this.hornSprite!.alpha = 1
       this.cursorRageBar!.x += 10
       this.hornSprite!.anims.play('traffic_horn_animation', true)
@@ -149,6 +151,10 @@ export default class TraficGameScene extends MinigameScene {
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
       })
+    })
+
+    this.horn.on('pointerup', () => {
+      this.horn!.setTexture('horn_off')
     })
 
     controlsContainer.setDepth(1001)
