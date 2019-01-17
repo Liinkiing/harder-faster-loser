@@ -237,6 +237,25 @@ export default class SubwayGameScene extends MinigameScene {
         true
       )
       this.activeTrainContainer!.add(closeDoorsAnimation)
+
+      closeDoorsAnimation.on('animationcomplete', () => {
+        const translateValue =
+          this.containers[this.containers.length - 1].x +
+          this.containers[this.containers.length - 1].width /
+            gameStore.ratioResolution
+        this.tweens.add({
+          targets: this.containers,
+          x: {
+            value: `-=${translateValue}`,
+            duration: 1300,
+            ease: 'Circ.easeIn',
+          },
+          repeat: 0,
+          onComplete: () => {
+            // finished
+          },
+        })
+      })
     })
   }
 
@@ -393,6 +412,7 @@ export default class SubwayGameScene extends MinigameScene {
     this.containers.push(train3)
     this.containers.push(train4)
     this.containers.push(this.activeTrainContainer)
+    this.containers.push(lastTrain)
   }
 
   private addToTrainArray(element: Phaser.GameObjects.Sprite): void {
