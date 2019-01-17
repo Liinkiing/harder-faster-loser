@@ -43,14 +43,11 @@ const LeaderboardsTable: FunctionComponent<Props> = props => {
   const { addUserToLeaderboards } = leaderboardsStore
   const { secondsElapsed } = gameStore
   const { leaderboards, userRank } = props
-  useEffect(
-    () => {
-      if (userRank && userRank !== 0) {
-        addUserToLeaderboards(userRank, secondsElapsed)
-      }
-    },
-    [userRank]
-  )
+  useEffect(() => {
+    if (userRank && userRank !== 0) {
+      addUserToLeaderboards(userRank, secondsElapsed)
+    }
+  }, [])
 
   return (
     <LeaderboardsTableInner>

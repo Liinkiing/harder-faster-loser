@@ -28,6 +28,9 @@ class LeaderboardStore {
     userRank: number,
     score: number
   ): void => {
+    if (this.leaderboards.find(entry => entry.local)) {
+      return
+    }
     const username = this.username.join('')
     this.leaderboards.splice(userRank - 1, 0, {
       rank: userRank,
@@ -79,7 +82,9 @@ class LeaderboardStore {
   }
 
   @action public postHighscore = async (username: string, score: number) => {
-    await this.client.createNewPlayer(username, score)
+    if (score > 0) {
+      await this.client.createNewPlayer(username, score)
+    }
   }
 }
 

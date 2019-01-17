@@ -36,6 +36,17 @@ const LeaderboardsScore = styled.h2`
   font-size: 30px;
 `
 
+const SocialNetworksIcons = styled.div`
+  display: flex;
+  margin-top: 30px;
+  width: 200px;
+  justify-content: space-evenly;
+  & img {
+    width: 50px;
+    height: 50px;
+  }
+`
+
 const LeaderboardsUI: FunctionComponent = () => {
   const { timeElapsed, secondsElapsed } = gameStore
   const {
@@ -47,32 +58,38 @@ const LeaderboardsUI: FunctionComponent = () => {
     rank,
   } = leaderboardsStore
   const [loading, setLoading] = useState(false)
+  const [hasSubmittedScore, setHasSubmittedScore] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const fetchResults = useCallback(() => {
-    if (secondsElapsed >= 0) {
-      setLoading(true)
-      fetchRankForScore(secondsElapsed)
-        .then(fetchLeaderboards)
-        .then(() => {
-          setLoading(false)
-          setError(null)
-        })
-        .catch(() => {
-          setLoading(false)
-          setError('Could not fetch leaderboards!')
-        })
-    }
+    setLoading(true)
+    setHasSubmittedScore(false)
+    fetchRankForScore(secondsElapsed)
+      .then(fetchLeaderboards)
+      .then(() => {
+        setLoading(false)
+        setError(null)
+      })
+      .catch(() => {
+        setLoading(false)
+        setError('Could not fetch leaderboards!')
+      })
   }, [])
 
   useEffect(fetchResults)
+
+  const handleHomeButtonClick = () => {
+    gameManager.restartGame()
+  }
 
   const onSubmit = () => {
     setLoading(true)
     postHighscore(username.join(''), secondsElapsed)
       .then(() => {
-        gameManager.restartGame()
+        setHasSubmittedScore(true)
+        setLoading(false)
       })
       .catch(() => {
+        setHasSubmittedScore(false)
         setLoading(false)
         setError('Could not submit your highscore!')
       })
@@ -90,15 +107,36 @@ const LeaderboardsUI: FunctionComponent = () => {
       )
     } else if (loading) {
       return <div>Loading...</div>
-    } else if (!loading && !error) {
+    } else if (!error) {
       return (
         <>
           <LeaderboardsTable userRank={rank} leaderboards={leaderboards} />
-          <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
-          <LeaderboardsUsernameInput />
-          <GameButton disabled={loading} onClick={onSubmit}>
-            Submit
-          </GameButton>
+          {!hasSubmittedScore && (
+            <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
+          )}
+          {!hasSubmittedScore && <LeaderboardsUsernameInput />}
+          {!hasSubmittedScore && (
+            <GameButton disabled={loading} onClick={onSubmit}>
+              Submit
+            </GameButton>
+          )}
+          {hasSubmittedScore && (
+            <>
+              <GameButton disabled={loading} onClick={handleHomeButtonClick}>
+                Home
+              </GameButton>
+              <SocialNetworksIcons>
+                <img
+                  alt="Facebook"
+                  src={require('../../assets/images/icons/btn_facebook.png')}
+                />
+                <img
+                  alt="Twitter"
+                  src={require('../../assets/images/icons/btn_twitter.png')}
+                />
+              </SocialNetworksIcons>
+            </>
+          )}
         </>
       )
     }
