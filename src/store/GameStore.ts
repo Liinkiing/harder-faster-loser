@@ -4,6 +4,7 @@ import { GameSettings } from '../utils/interfaces'
 import { HFLGameConfig } from '../utils/game'
 import gameManager from '../game/manager/GameManager'
 import { green } from '../utils/colors'
+import HFLApiClient from '../client/HFLApiClient'
 
 interface TokiStatus {
   hasStress: boolean
@@ -13,6 +14,9 @@ interface TokiStatus {
   hasHeart: boolean
   hasJustHeart: boolean
 }
+
+const MINIGAME_DURATION = 500
+const REMAINING_PAUSE = 10
 
 const PAUSE_MIN_THRESHOLD = 0.2
 
@@ -38,17 +42,17 @@ class GameStore {
     dev: process.env.NODE_ENV === 'development',
     suspended: false,
     fade: true,
-    remainingPause: 10,
+    remainingPause: REMAINING_PAUSE,
     fadeColor: green,
     backgroundColor: green,
-    minigameDuration: 500,
+    minigameDuration: MINIGAME_DURATION,
   }
   @observable public ratioResolution: number = 3
   @observable public transitionning: boolean = false
   @observable
   public uiKey: string = new Phaser.Math.RandomDataGenerator().uuid()
 
-  constructor() {
+  constructor(private client: HFLApiClient) {
     reaction(
       () => this.difficulty,
       difficulty => {
@@ -60,6 +64,25 @@ class GameStore {
         })
       }
     )
+  }
+
+  @action public resetGame = (): void => {
+    this.changeConfig({
+      minigameDuration: MINIGAME_DURATION,
+      remainingPause: REMAINING_PAUSE,
+      suspended: false,
+    })
+    this.elapsed = 0
+    this.status = {
+      hasStress: false,
+      hasBrain: true,
+      hasHeart: true,
+      hasJustStress: false,
+      hasJustBrain: false,
+      hasJustHeart: false,
+    }
+    this.difficulty = 1
+    this.startGame()
   }
 
   @action public showGuideline = (): void => {
@@ -83,6 +106,8 @@ class GameStore {
 
   @action public startGame = (): void => {
     this.started = true
+    // Just used to make sure we call the API on start game to wake up my free Heroku dyno
+    this.client.checkStatus()
   }
 
   @action public stopGame = (): void => {
@@ -227,7 +252,13 @@ class GameStore {
       second: '2-digit',
     })
   }
+
+  public getTimeElapsedForSeconds = (seconds: number): string =>
+    new Date(seconds * 1000).toLocaleTimeString('fr', {
+      minute: '2-digit',
+      second: '2-digit',
+    })
 }
 
-const gameStore = new GameStore()
+const gameStore = new GameStore(new HFLApiClient())
 export default gameStore

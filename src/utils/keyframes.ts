@@ -1,5 +1,14 @@
 import { keyframes } from 'styled-components'
 
+export const blink = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+`
+
 export const guidelineContainerAppear = keyframes`
   from {
     transform: translateX(-100%);

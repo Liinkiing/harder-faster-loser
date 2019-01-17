@@ -9,6 +9,7 @@ export enum GameState {
   Minigame = 'MINIGAME',
   PostMinigame = 'POSTMINIGAME',
   Deathscreen = 'DEATHSCREEN',
+  Leaderboards = 'LEADERBOARDS',
 }
 
 export enum BaseEvents {

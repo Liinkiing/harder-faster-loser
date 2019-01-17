@@ -5,7 +5,10 @@ import { white, yellow } from '../../utils/colors'
 import { boxShadow } from '../../utils/css'
 import gameManager from '../../game/manager/GameManager'
 
-type Props = HTMLAttributes<HTMLButtonElement>
+type Props = HTMLAttributes<HTMLButtonElement> &
+  Partial<Pick<HTMLButtonElement, 'disabled'>> & {
+    size?: 'small' | 'medium' | 'large'
+  }
 
 const GameButton: FunctionComponent<Props> = props => {
   const { onClick } = props
@@ -25,14 +28,18 @@ const GameButton: FunctionComponent<Props> = props => {
   )
 }
 
+GameButton.defaultProps = {
+  size: 'small',
+}
+
 export default styled(GameButton)`
   background: ${yellow};
   border: none;
   color: ${white};
-  padding: 15px 30px;
   text-align: center;
   width: fit-content;
   user-select: none;
+  pointer-events: all;
   ${boxShadow};
   &:hover,
   :active {
@@ -40,4 +47,19 @@ export default styled(GameButton)`
     background: ${white};
     color: ${yellow};
   }
+  &:disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
+  }
+  padding: ${(props: Props) => {
+    switch (props.size) {
+      case 'small':
+        return '15px 30px'
+      case 'medium':
+        return '25px 45px'
+      case 'large':
+        return '40px 65px'
+    }
+    return '15px 30px'
+  }};
 `

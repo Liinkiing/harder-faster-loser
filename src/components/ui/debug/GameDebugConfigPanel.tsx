@@ -2,6 +2,7 @@ import * as React from 'react'
 import { FunctionComponent, useCallback, ChangeEventHandler } from 'react'
 import DebugContainer from './DebugContainer'
 import {
+  ForceThemeProps,
   HideableProps,
   PositionneableProps,
   TitledProps,
@@ -14,7 +15,7 @@ import ValidatableInput from '../ValidatableInput'
 import colors from '../../../utils/colors'
 
 const GameDebugConfigPanel: FunctionComponent<
-  PositionneableProps & TitledProps & HideableProps
+  PositionneableProps & TitledProps & HideableProps & ForceThemeProps
 > = props => {
   const {
     difficulty,

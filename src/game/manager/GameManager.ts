@@ -92,6 +92,10 @@ export class GameManager {
     await this.startScene(scenesKeys.Deathscreen)
   }
 
+  public loadLeaderboards = async () => {
+    await this.startScene(scenesKeys.Leaderboards)
+  }
+
   public startScene = async (
     key: string,
     config: HFLGameConfig = gameStore.config,
@@ -205,6 +209,11 @@ export class GameManager {
       gameStore.hasJustLoosedHeart ||
       gameStore.hasJustStress
     )
+  }
+
+  public restartGame = async () => {
+    gameStore.resetGame()
+    await this.loadNextMinigame()
   }
 
   public resetTokiStatus = (): void => {

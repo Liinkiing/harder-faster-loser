@@ -1,7 +1,6 @@
 {
   "name": "hfl",
   "version": "0.1.0",
-  "homepage": "http://liinkiing.github.io/harder-faster-looser",
   "private": true,
   "dependencies": {
     "@types/gsap": "^1.20.0",
@@ -15,6 +14,7 @@
     "node-sass": "^4.10.0",
     "phaser": "^3.15.1",
     "prettier": "^1.15.3",
+    "query-string": "^6.2.0",
     "react": "^16.7.0-alpha.2",
     "react-color": "^2.14.1",
     "react-dom": "^16.7.0-alpha.2",
