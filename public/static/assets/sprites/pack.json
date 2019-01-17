@@ -90,10 +90,10 @@
       {
         "type": "spritesheet",
         "key": "yo",
-        "url": "/static/assets/sprites/spam-game/yo.png",
+        "url": "/static/assets/sprites/spam-game/yo_284_429.png",
         "frameConfig": {
-          "frameWidth": 854,
-          "frameHeight": 1290
+          "frameWidth": 284,
+          "frameHeight": 429
         }
       },
       {
