@@ -127,6 +127,7 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(1, 1)
       .setScale(3 / gameStore.ratioResolution)
+      .setDepth(5)
 
     return sprite
   }
@@ -221,17 +222,21 @@ export default class SandwichGameScene extends MinigameScene {
     array: Phaser.GameObjects.Sprite[],
     texture: string
   ): void {
-    array[0] = this.add
+    const sprite = this.add
       .sprite(0, Number(this.game.config.height), texture)
       .setOrigin(0, 1)
       .setScale(3 / gameStore.ratioResolution)
+
+    sprite.width = sprite.width * 3
+
+    array[0] = sprite
   }
 
   private createCloneBackgroundElement(
     array: Phaser.GameObjects.Sprite[],
     texture: string
   ): void {
-    array[array.length + 1] = this.add
+    const sprite = this.add
       .sprite(
         array[0].width / gameStore.ratioResolution,
         Number(this.game.config.height),
@@ -239,7 +244,22 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(0, 1)
       .setScale(3 / gameStore.ratioResolution)
-      .setDepth(-1)
+
+    if (texture === 'sky') {
+      sprite.setDepth(-1)
+    } else if (texture === 'building ') {
+      sprite.setDepth(0)
+    } else if (texture === 'landscape') {
+      sprite.setDepth(1)
+    } else if (texture === 'streetLights') {
+      sprite.setDepth(2)
+    } else if (texture === 'ground') {
+      sprite.setDepth(2)
+    }
+
+    sprite.width = sprite.width * 3
+
+    array[array.length + 1] = sprite
   }
 
   private createControls(): void {
