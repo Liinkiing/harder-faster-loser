@@ -601,6 +601,15 @@
         "type": "image",
         "key": "traffic_horn_on",
         "url": "/static/assets/sprites/traffic-game/traffic_horn_on.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_sleep",
+        "url": "/static/assets/sprites/homescreen/intro_toki_sleep_66x120.png",
+        "frameConfig": {
+          "frameWidth": 66,
+          "frameHeight": 120
+        }
       }
     ]
   }

@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameStore from '../store/GameStore'
-import { green, white } from '../utils/colors'
+import { darkBlue, white } from '../utils/colors'
 
 interface Props {
   onLaunchGame: () => void
@@ -21,7 +21,7 @@ const IntroductionInner = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: ${green};
+  background: ${darkBlue};
 `
 
 const Introduction: FunctionComponent<Props> = props => {

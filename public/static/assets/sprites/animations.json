@@ -410,6 +410,18 @@
       "showOnStart": true,
       "repeat": 0,
       "frameRate": 4
+    },
+    {
+      "key": "intro_sleep_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "intro_sleep",
+        "start": 0,
+        "end": 1
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 1
     }
   ]
 }
