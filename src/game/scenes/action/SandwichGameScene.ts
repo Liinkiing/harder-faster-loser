@@ -120,7 +120,7 @@ export default class SandwichGameScene extends MinigameScene {
   ): Phaser.GameObjects.Sprite => {
     const sprite = this.add
       .sprite(
-        900,
+        1300,
         Number(this.game.config.height) -
           (this.grounds![0].height * 3) / gameStore.ratioResolution,
         sandwichTexture
