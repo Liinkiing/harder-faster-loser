@@ -3,8 +3,7 @@ import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { LeaderboardsEntry as Entry } from '../../../client/HFLApiClient'
 import gameStore from '../../../store/GameStore'
-import { red } from '../../../utils/colors'
-import { blink } from '../../../utils/keyframes'
+import { pink, white } from '../../../utils/colors'
 
 interface Props {
   entry: Entry & { local: boolean }
@@ -12,25 +11,42 @@ interface Props {
 
 const LeaderboardsEntryInner = styled.tr<Props>`
   text-transform: uppercase;
-  ${({ entry }) => entry.local && `color: ${red};`};
+  pointer-events: all;
   ${({ entry }) =>
     entry.local &&
     css`
-      animation: ${blink} 2s alternate-reverse infinite ease-in-out;
+      height: 30px;
+      line-height: 30px;
+      color: ${pink};
+      background: ${white};
+      & td {
+        padding: 0;
+        margin: 0;
+      }
     `};
 `
 
 const LeaderboardsEntry: FunctionComponent<Props> = props => {
   const {
-    entry: { rank, score, username },
+    entry: { rank, score, username, spacer },
   } = props
   return (
     <LeaderboardsEntryInner {...props}>
-      <td>{rank}</td>
-      <td>{username}</td>
-      <td>{gameStore.getTimeElapsedForSeconds(score)}</td>
+      {!spacer ? (
+        <>
+          <td>{rank}</td>
+          <td>{username}</td>
+          <td>{gameStore.getTimeElapsedForSeconds(score)}</td>
+        </>
+      ) : (
+        <>
+          <td />
+          <td>...</td>
+          <td />
+        </>
+      )}
     </LeaderboardsEntryInner>
   )
 }
 
-export default LeaderboardsEntry
+export default styled(LeaderboardsEntry)``

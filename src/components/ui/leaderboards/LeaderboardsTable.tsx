@@ -12,7 +12,32 @@ interface Props {
   readonly userRank?: number
 }
 
-const LeaderboardsTableInner = styled.table``
+const LeaderboardsTableInner = styled.table`
+  width: 80%;
+  text-align: center;
+  max-width: 500px;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  & thead tr th:first-of-type {
+    text-align: left;
+    padding-left: 10px;
+  }
+  & thead tr th:last-of-type {
+    text-align: right;
+    padding-right: 10px;
+  }
+  ${LeaderboardsEntry} {
+    td:first-of-type {
+      padding-left: 10px;
+      text-align: left;
+      max-width: 40px;
+    }
+    td:last-of-type {
+      padding-right: 10px;
+      text-align: right;
+    }
+  }
+`
 
 const LeaderboardsTable: FunctionComponent<Props> = props => {
   const { addUserToLeaderboards } = leaderboardsStore
@@ -31,8 +56,8 @@ const LeaderboardsTable: FunctionComponent<Props> = props => {
     <LeaderboardsTableInner>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Username</th>
+          <th>Rank</th>
+          <th>Name</th>
           <th>Score</th>
         </tr>
       </thead>

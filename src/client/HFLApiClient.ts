@@ -9,7 +9,7 @@ type LeaderboardsAllResponse = Array<{
 }>
 
 export type Leaderboards = Array<
-  LeaderboardsAllResponse[0] & { local: boolean }
+  LeaderboardsAllResponse[0] & { local: boolean; spacer: boolean }
 >
 
 export type LeaderboardsEntry = Leaderboards[0]

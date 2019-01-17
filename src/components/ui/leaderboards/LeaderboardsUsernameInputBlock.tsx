@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FunctionComponent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import leaderboardsStore from '../../../store/LeaderboardsStore'
-import { red } from '../../../utils/colors'
+import { pink, red } from '../../../utils/colors'
 import gameManager from '../../../game/manager/GameManager'
 
 interface Props {
@@ -23,7 +23,7 @@ const LeaderboardsUsernameInputBlockInner = styled.div`
   pointer-events: all;
   &:hover,
   :active {
-    color: ${red};
+    color: ${pink};
   }
   &:after {
     content: '';

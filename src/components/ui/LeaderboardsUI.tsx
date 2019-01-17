@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react'
 import styled from 'styled-components'
-import { black } from '../../utils/colors'
+import { black, green } from '../../utils/colors'
 import LeaderboardsTable from './leaderboards/LeaderboardsTable'
 import { observer } from 'mobx-react-lite'
 import leaderboardsStore from '../../store/LeaderboardsStore'
@@ -15,7 +15,8 @@ import GameButton from './GameButton'
 import gameManager from '../../game/manager/GameManager'
 
 const LeaderboardsUIInner = styled.div`
-  background: ${black};
+  background: ${green};
+  color: ${black};
   position: fixed;
   left: 0;
   top: 0;
@@ -32,7 +33,7 @@ const LeaderboardsUIInner = styled.div`
 
 const LeaderboardsScore = styled.h2`
   margin-top: 30px;
-  font-size: 50px;
+  font-size: 30px;
 `
 
 const LeaderboardsUI: FunctionComponent = () => {
@@ -47,24 +48,21 @@ const LeaderboardsUI: FunctionComponent = () => {
   } = leaderboardsStore
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const fetchResults = useCallback(
-    () => {
-      if (secondsElapsed > 0) {
-        setLoading(true)
-        fetchRankForScore(secondsElapsed)
-          .then(fetchLeaderboards)
-          .then(() => {
-            setLoading(false)
-            setError(null)
-          })
-          .catch(() => {
-            setLoading(false)
-            setError('Could not fetch leaderboards!')
-          })
-      }
-    },
-    [secondsElapsed]
-  )
+  const fetchResults = useCallback(() => {
+    if (secondsElapsed >= 0) {
+      setLoading(true)
+      fetchRankForScore(secondsElapsed)
+        .then(fetchLeaderboards)
+        .then(() => {
+          setLoading(false)
+          setError(null)
+        })
+        .catch(() => {
+          setLoading(false)
+          setError('Could not fetch leaderboards!')
+        })
+    }
+  }, [])
 
   useEffect(fetchResults)
 

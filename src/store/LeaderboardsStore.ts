@@ -33,6 +33,7 @@ class LeaderboardStore {
       rank: userRank,
       score,
       username,
+      spacer: false,
       local: true,
     })
     this.leaderboards = this.leaderboards.map(entry => {
@@ -41,18 +42,33 @@ class LeaderboardStore {
       }
       return entry
     })
+    const last = this.leaderboards[this.leaderboards.length - 1]
     if (
       userRank <= MAX_ITEMS &&
-      !this.leaderboards[this.leaderboards.length - 1].local &&
+      !last.local &&
       this.leaderboards.length > MAX_ITEMS
     ) {
       this.leaderboards.splice(-1, 1)
+    }
+    if (
+      this.leaderboards.length >= 2 &&
+      last.local &&
+      last.rank >= MAX_ITEMS &&
+      this.leaderboards[this.leaderboards.length - 2].rank + 1 !== last.rank
+    ) {
+      this.leaderboards.splice(-1, 0, {
+        rank: -1,
+        local: false,
+        spacer: true,
+        score: -1,
+        username: '...',
+      })
     }
   }
 
   @action public fetchLeaderboards = async () => {
     this.leaderboards = (await this.client.getAllLeaderboards(MAX_ITEMS)).map(
-      entry => ({ ...entry, local: false })
+      entry => ({ ...entry, local: false, spacer: false })
     )
   }
 
