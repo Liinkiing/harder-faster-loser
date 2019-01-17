@@ -51,6 +51,17 @@ export default class TraficGameScene extends MinigameScene {
     })
   }
 
+  private resetAllClassVariables(): void {
+    this.roads = []
+    this.widthLastCar = 0
+    this.positionXLastCar = 0
+    this.isTokiInScene = false
+    this.carsTokisRow = []
+    this.heightRoad = 0
+    this.isCursorInSafeArea = true
+    this.isTokiFree = false
+  }
+
   public preload(): void {
     super.preload()
   }
@@ -65,6 +76,7 @@ export default class TraficGameScene extends MinigameScene {
     // })
 
     // this.cars = new CarsContainer(this)
+    this.resetAllClassVariables()
 
     this.createRoad()
     this.createCars()
