@@ -91,7 +91,7 @@ export default class TraficGameScene extends MinigameScene {
       this.cursorRageBar!.x >
       10 + this.cursorRageBar!.width / gameStore.ratioResolution
     ) {
-      this.cursorRageBar!.x -= 1
+      this.cursorRageBar!.x -= 0.8
     }
 
     if (
@@ -109,7 +109,7 @@ export default class TraficGameScene extends MinigameScene {
       // There we determine how much px the first line need to move on each frame depending of the game width
       // 500 = minigameDuration
       // To win, the user need to always stay in the safe area
-      this.tokisRow!.x += Number(this.game.config.width) / 500 + 0.01
+      this.tokisRow!.x += 1
     }
 
     if (
