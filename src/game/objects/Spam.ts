@@ -8,11 +8,17 @@ export default class Spam extends Phaser.GameObjects.Container {
   private readonly spamContent?: Phaser.GameObjects.Sprite
   private readonly closeIcon?: Phaser.GameObjects.Sprite
   private readonly texture: string
+  private containerWidth?: number
 
   constructor(params: ContainerConstructor & { texture: string }) {
     super(params.scene, params.x, params.y, params.children)
     this.texture = params.texture
     this.spamContent = this.createSpamContent(params.texture)
+
+    if (params.texture == 'yoAnimation') {
+      this.spamContent.width = this.spamContent.width * 3
+    }
+
     this.add(this.spamContent)
 
     this.closeIcon = this.createCloseIcon()
@@ -34,10 +40,12 @@ export default class Spam extends Phaser.GameObjects.Container {
   private createSpamContent = (
     spamTexture: string
   ): Phaser.GameObjects.Sprite => {
-    const sprite = this.scene.add
-      .sprite(0, 0, spamTexture)
-      .setOrigin(0, 0)
-      .setScale(1 / gameStore.ratioResolution, 1 / gameStore.ratioResolution)
+    const sprite = this.scene.add.sprite(0, 0, spamTexture).setOrigin(0, 0)
+
+    spamTexture === 'yoAnimation'
+      ? sprite.setScale(3 / gameStore.ratioResolution)
+      : sprite.setScale(1 / gameStore.ratioResolution)
+
     sprite.anims.play(this.texture)
     sprite.setInteractive()
     sprite.on('pointerdown', () => {
@@ -53,7 +61,7 @@ export default class Spam extends Phaser.GameObjects.Container {
     const close = this.scene.add
       .sprite(x, 0, 'close')
       .setOrigin(1, 0)
-      .setScale(1 / gameStore.ratioResolution, 1 / gameStore.ratioResolution)
+      .setScale(1 / gameStore.ratioResolution)
     close.setInteractive()
     close.on('pointerdown', () => {
       Emitter.emit(GameEvents.SpamDestroyed, this)
