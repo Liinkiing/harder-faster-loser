@@ -104,6 +104,7 @@ const LeaderboardsUI: FunctionComponent = () => {
           <GameButton disabled={loading} onClick={fetchResults}>
             Retry
           </GameButton>
+          <GameButton onClick={handleHomeButtonClick}>Home</GameButton>
         </>
       )
     } else if (loading) {
