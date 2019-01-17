@@ -70,7 +70,7 @@ export default class TraficGameScene extends MinigameScene {
     this.createCars()
     this.controls = this.createControls()
 
-    this.tokisRow = this.add.container(0, 0, this.carsTokisRow)
+    this.tokisRow = this.add.container(0, 0, this.carsTokisRow).setDepth(997)
   }
 
   public onSuccess = (): void => {
@@ -106,9 +106,6 @@ export default class TraficGameScene extends MinigameScene {
     }
 
     if (this.isCursorInSafeArea) {
-      // There we determine how much px the first line need to move on each frame depending of the game width
-      // 500 = minigameDuration
-      // To win, the user need to always stay in the safe area
       this.tokisRow!.x += 1
     }
 
