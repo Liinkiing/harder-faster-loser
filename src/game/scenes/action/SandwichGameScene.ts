@@ -222,10 +222,14 @@ export default class SandwichGameScene extends MinigameScene {
     array: Phaser.GameObjects.Sprite[],
     texture: string
   ): void {
-    array[0] = this.add
+    const sprite = this.add
       .sprite(0, Number(this.game.config.height), texture)
       .setOrigin(0, 1)
       .setScale(3 / gameStore.ratioResolution)
+
+    sprite.width = sprite.width * 3
+
+    array[0] = sprite
   }
 
   private createCloneBackgroundElement(
@@ -252,6 +256,8 @@ export default class SandwichGameScene extends MinigameScene {
     } else if (texture === 'ground') {
       sprite.setDepth(2)
     }
+
+    sprite.width = sprite.width * 3
 
     array[array.length + 1] = sprite
   }
