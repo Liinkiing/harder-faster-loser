@@ -10,19 +10,24 @@ import { wait } from './utils/functions'
 const App: FunctionComponent = () => {
   const { started } = gameStore
   const onLaunchGame = useCallback(async () => {
-    // @ts-ignore
-    if (document.body.mozRequestFullScreen) {
+    try {
       // @ts-ignore
-      await document.body.mozRequestFullScreen()
-      // @ts-ignore
-    } else if (document.body.webkitRequestFullscreen) {
-      // @ts-ignore
-      await document.body.webkitRequestFullscreen()
-    } else {
-      await document.body.requestFullscreen()
+      if (document.body.mozRequestFullScreen) {
+        // @ts-ignore
+        await document.body.mozRequestFullScreen()
+        await wait(150)
+        // @ts-ignore
+      } else if (document.body.webkitRequestFullscreen) {
+        // @ts-ignore
+        await document.body.webkitRequestFullscreen()
+        await wait(150)
+      } else {
+        await document.body.requestFullscreen()
+        await wait(150)
+      }
+    } finally {
+      gameManager.startGame()
     }
-    await wait(150)
-    gameManager.startGame()
   }, [])
 
   return (
