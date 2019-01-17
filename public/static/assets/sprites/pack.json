@@ -382,37 +382,65 @@
       {
         "type": "audio",
         "key": "bg",
-        "url": "/static/assets/sounds/bg.ogg"
+        "url": [
+          "/static/assets/sounds/bg.ogg",
+          "/static/assets/sounds/bg.m4a",
+          "/static/assets/sounds/bg.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "beep",
-        "url": "/static/assets/sounds/beep.ogg"
+        "url": [
+          "/static/assets/sounds/beep.ogg",
+          "/static/assets/sounds/beep.m4a",
+          "/static/assets/sounds/beep.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "explosion",
-        "url": "/static/assets/sounds/explosion.ogg"
+        "url": [
+          "/static/assets/sounds/explosion.ogg",
+          "/static/assets/sounds/explosion.m4a",
+          "/static/assets/sounds/explosion.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "tada",
-        "url": "/static/assets/sounds/tada.ogg"
+        "url": [
+          "/static/assets/sounds/tada.ogg",
+          "/static/assets/sounds/tada.m4a",
+          "/static/assets/sounds/tada.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "hit",
-        "url": "/static/assets/sounds/hit.ogg"
+        "url": [
+          "/static/assets/sounds/hit.ogg",
+          "/static/assets/sounds/hit.m4a",
+          "/static/assets/sounds/hit.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "success",
-        "url": "/static/assets/sounds/success.ogg"
+        "url": [
+          "/static/assets/sounds/success.ogg",
+          "/static/assets/sounds/success.m4a",
+          "/static/assets/sounds/success.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "error",
-        "url": "/static/assets/sounds/error.ogg"
+        "url": [
+          "/static/assets/sounds/error.ogg",
+          "/static/assets/sounds/error.m4a",
+          "/static/assets/sounds/error.mp3"
+        ]
       },
       {
         "type": "image",
@@ -462,17 +490,29 @@
       {
         "type": "audio",
         "key": "guideline_appear",
-        "url": "/static/assets/sounds/guideline_appear.ogg"
+        "url": [
+          "/static/assets/sounds/guideline_appear.ogg",
+          "/static/assets/sounds/guideline_appear.m4a",
+          "/static/assets/sounds/guideline_appear.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "guideline_leave",
-        "url": "/static/assets/sounds/guideline_leave.ogg"
+        "url": [
+          "/static/assets/sounds/guideline_leave.ogg",
+          "/static/assets/sounds/guideline_leave.m4a",
+          "/static/assets/sounds/guideline_leave.mp3"
+        ]
       },
       {
         "type": "audio",
         "key": "yeah",
-        "url": "/static/assets/sounds/yeah.ogg"
+        "url": [
+          "/static/assets/sounds/yeah.ogg",
+          "/static/assets/sounds/yeah.m4a",
+          "/static/assets/sounds/yeah.mp3"
+        ]
       },
       {
         "type": "image",
