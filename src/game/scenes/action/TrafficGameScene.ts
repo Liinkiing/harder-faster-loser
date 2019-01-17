@@ -133,11 +133,21 @@ export default class TraficGameScene extends MinigameScene {
       this.createRageBar()
     )
 
-    const controlsContainer = this.add.container(
-      Number(this.game.config.width) / 2 - 200,
-      Number(this.game.config.height) - 100,
-      [rageBarContainer, this.horn]
+    const controlsContainer = this.add
+      .container(
+        Number(this.game.config.width) / 2,
+        Number(this.game.config.height) - 100,
+        [rageBarContainer, this.horn]
+      )
+      .setDepth(1001)
+      .setScale(0.8)
+
+    controlsContainer.setSize(
+      rageBarContainer.width + this.horn!.width,
+      rageBarContainer.height + this.horn!.height
     )
+
+    controlsContainer.x = controlsContainer.x - controlsContainer.width / 2
 
     this.horn.on('pointerdown', () => {
       this.horn!.setTexture('traffic_horn_on')
@@ -153,8 +163,6 @@ export default class TraficGameScene extends MinigameScene {
     this.horn.on('pointerup', () => {
       this.horn!.setTexture('horn_off')
     })
-
-    controlsContainer.setDepth(1001)
 
     return controlsContainer
   }
