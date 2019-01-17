@@ -41,6 +41,7 @@ const SocialNetworksIcons = styled.div`
   margin-top: 30px;
   width: 200px;
   justify-content: space-evenly;
+  pointer-events: all;
   & img {
     width: 50px;
     height: 50px;
@@ -126,14 +127,18 @@ const LeaderboardsUI: FunctionComponent = () => {
                 Home
               </GameButton>
               <SocialNetworksIcons>
-                <img
-                  alt="Facebook"
-                  src={require('../../assets/images/icons/btn_facebook.png')}
-                />
-                <img
-                  alt="Twitter"
-                  src={require('../../assets/images/icons/btn_twitter.png')}
-                />
+                <a target="_blank" href={leaderboardsStore.facebookUrl}>
+                  <img
+                    alt="Facebook"
+                    src={require('../../assets/images/icons/btn_facebook.png')}
+                  />
+                </a>
+                <a target="_blank" href={leaderboardsStore.tweetUrl}>
+                  <img
+                    alt="Twitter"
+                    src={require('../../assets/images/icons/btn_twitter.png')}
+                  />
+                </a>
               </SocialNetworksIcons>
             </>
           )}

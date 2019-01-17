@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx'
 import HFLApiClient, { Leaderboards } from '../client/HFLApiClient'
+import gameStore from './GameStore'
 
 const MAX_ITEMS = 10
 
@@ -85,6 +86,28 @@ class LeaderboardStore {
     if (score > 0) {
       await this.client.createNewPlayer(username, score)
     }
+  }
+
+  get facebookUrl() {
+    console.log(this.rank)
+    const post = `Hey! Can you beat me at Harder, Faster, Looser ? I've just got a score of ${
+      gameStore.timeElapsed
+    } and I'm ranked ${this.rank}!`
+    const uri = `https://www.facebook.com/sharer/sharer.php?u=${
+      window.location.href
+    }&t=${post}`
+    return encodeURI(uri)
+  }
+
+  get tweetUrl() {
+    console.log(this.rank)
+    const tweet = `Hey! Can you beat me at Harder, Faster, Looser ? I've just got a score of ${
+      gameStore.timeElapsed
+    } and I'm ranked ${this.rank}!`
+    const uri = `https://twitter.com/intent/tweet?text=${tweet}&url=${
+      window.location.href
+    }`
+    return encodeURI(uri)
   }
 }
 
