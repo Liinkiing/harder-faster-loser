@@ -239,6 +239,7 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setOrigin(0, 1)
       .setScale(3 / gameStore.ratioResolution)
+      .setDepth(-1)
   }
 
   private createControls(): void {
