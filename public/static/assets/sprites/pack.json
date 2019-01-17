@@ -476,8 +476,8 @@
       },
       {
         "type": "image",
-        "key": "horn_on",
-        "url": "/static/assets/sprites/traffic-game/horn_on.png"
+        "key": "horn_off",
+        "url": "/static/assets/sprites/traffic-game/horn_off.png"
       },
       {
         "type": "image",
@@ -556,6 +556,11 @@
           "frameWidth": 465,
           "frameHeight": 375
         }
+      },
+      {
+        "type": "image",
+        "key": "traffic_horn_on",
+        "url": "/static/assets/sprites/traffic-game/traffic_horn_on.png"
       }
     ]
   }

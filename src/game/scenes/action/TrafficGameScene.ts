@@ -16,7 +16,8 @@ export default class TraficGameScene extends MinigameScene {
   private controls?: Phaser.GameObjects.Container
   private rageBar?: Phaser.GameObjects.Sprite
   private cursorRageBar?: Phaser.GameObjects.Sprite
-  // private roads?: Phaser.GameObjects.Container
+  private horn?: Phaser.GameObjects.Sprite
+
   private roads: Phaser.GameObjects.Sprite[] = []
   private availableRightCars: string[] = [
     'traffic_blue_car_animation',
@@ -30,8 +31,8 @@ export default class TraficGameScene extends MinigameScene {
   private widthLastCar: number = 0
   private positionXLastCar: number = 0
   private isTokiInScene: boolean = false
-  private firstRow?: Phaser.GameObjects.Container
-  private carsFirstRow: Phaser.GameObjects.Sprite[] = []
+  private tokisRow?: Phaser.GameObjects.Container
+  private carsTokisRow: Phaser.GameObjects.Sprite[] = []
   private safeRageBarArea?: Phaser.GameObjects.Graphics
 
   private heightRoad: number = 0
@@ -69,7 +70,7 @@ export default class TraficGameScene extends MinigameScene {
     this.createCars()
     this.controls = this.createControls()
 
-    this.firstRow = this.add.container(0, 0, this.carsFirstRow)
+    this.tokisRow = this.add.container(0, 0, this.carsTokisRow).setDepth(997)
   }
 
   public onSuccess = (): void => {
@@ -90,7 +91,7 @@ export default class TraficGameScene extends MinigameScene {
       this.cursorRageBar!.x >
       10 + this.cursorRageBar!.width / gameStore.ratioResolution
     ) {
-      this.cursorRageBar!.x -= 1
+      this.cursorRageBar!.x -= 0.8
     }
 
     if (
@@ -105,14 +106,11 @@ export default class TraficGameScene extends MinigameScene {
     }
 
     if (this.isCursorInSafeArea) {
-      // There we determine how much px the first line need to move on each frame depending of the game width
-      // 500 = minigameDuration
-      // To win, the user need to always stay in the safe area
-      this.firstRow!.x += Number(this.game.config.width) / 500 + 0.01
+      this.tokisRow!.x += 1
     }
 
     if (
-      this.firstRow!.x > Number(this.game.config.width) &&
+      this.tokisRow!.x > Number(this.game.config.width) &&
       this.isTokiFree === false
     ) {
       this.onSuccess()
@@ -121,37 +119,49 @@ export default class TraficGameScene extends MinigameScene {
   }
 
   private createControls(): Phaser.GameObjects.Container {
-    const horn = this.add
-      .sprite(0, 0, 'horn_on')
+    this.horn = this.add
+      .sprite(0, 0, 'horn_off')
       .setScale(1 / gameStore.ratioResolution)
       .setInteractive()
       .setOrigin(0, 0.5)
 
-    horn.input.hitArea.setSize(horn.width, horn.height)
+    this.horn.input.hitArea.setSize(this.horn.width, this.horn.height)
 
     const rageBarContainer = this.add.container(
-      horn.width / gameStore.ratioResolution - 15,
+      this.horn.width / gameStore.ratioResolution - 15,
       0,
       this.createRageBar()
     )
 
-    const controlsContainer = this.add.container(
-      Number(this.game.config.width) / 2 - 200,
-      Number(this.game.config.height) - 100,
-      [rageBarContainer, horn]
+    const controlsContainer = this.add
+      .container(
+        Number(this.game.config.width) / 2,
+        Number(this.game.config.height) - 100,
+        [rageBarContainer, this.horn]
+      )
+      .setDepth(1001)
+      .setScale(0.8)
+
+    controlsContainer.setSize(
+      rageBarContainer.width + this.horn!.width,
+      rageBarContainer.height + this.horn!.height
     )
 
-    horn.on('pointerdown', () => {
+    controlsContainer.x = controlsContainer.x - controlsContainer.width / 2
+
+    this.horn.on('pointerdown', () => {
+      this.horn!.setTexture('traffic_horn_on')
       this.hornSprite!.alpha = 1
       this.cursorRageBar!.x += 10
-      this.hornSprite!.anims.play('traffic_horn_animation', true)
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
       })
     })
 
-    controlsContainer.setDepth(1001)
+    this.horn.on('pointerup', () => {
+      this.horn!.setTexture('horn_off')
+    })
 
     return controlsContainer
   }
@@ -162,12 +172,15 @@ export default class TraficGameScene extends MinigameScene {
       .setScale(1 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
+    const safeAreaWidth =
+      100 / (Phaser.Math.Clamp(gameStore.difficulty, 1, 15) / 10 + 1)
+
     this.safeRageBarArea = this.add.graphics()
     this.safeRageBarArea.fillStyle(0x6adeb8, 1)
     this.safeRageBarArea.fillRect(
       this.rageBar.width / gameStore.ratioResolution / 2 - 50,
       -(this.rageBar.height / gameStore.ratioResolution) / 2 + 4,
-      100,
+      safeAreaWidth,
       this.rageBar.height / gameStore.ratioResolution - 16
     )
 
@@ -234,17 +247,17 @@ export default class TraficGameScene extends MinigameScene {
     const heightRoad = 390
 
     let carKey = ''
-    let direction = 'left'
+    let direction = 'right'
 
     while (yCounter < yRepeatCount) {
       this.widthLastCar = 0
       this.positionXLastCar = 0
 
       if (yCounter % 2 === 0) {
-        if (direction === 'left') {
-          direction = 'right'
-        } else {
+        if (direction === 'right') {
           direction = 'left'
+        } else {
+          direction = 'right'
         }
       }
 
@@ -267,7 +280,8 @@ export default class TraficGameScene extends MinigameScene {
         if (
           this.isTokiInScene === false &&
           direction === 'right' &&
-          this.positionXLastCar === 0
+          this.positionXLastCar === 0 &&
+          yCounter == 2
         ) {
           carKey = 'traffic_toki_animation'
           this.isTokiInScene = true
@@ -299,14 +313,17 @@ export default class TraficGameScene extends MinigameScene {
             .setScale(1 / gameStore.ratioResolution)
             .setOrigin(0.5, 1)
             .setDepth(10)
+
+          this.hornSprite.alpha = 0
+          this.hornSprite.anims.play('traffic_horn_animation', true)
         }
 
         // Ajout de la voiture dans le tableau de sprite de la 1ere ligne
-        if (yCounter === 0 && carKey !== 'traffic_toki_animation') {
-          this.carsFirstRow.push(car)
-        } else if (yCounter === 0 && carKey === 'traffic_toki_animation') {
-          this.carsFirstRow.push(this.hornSprite!)
-          this.carsFirstRow.push(car)
+        if (yCounter === 2 && carKey !== 'traffic_toki_animation') {
+          this.carsTokisRow.push(car)
+        } else if (yCounter === 2 && carKey === 'traffic_toki_animation') {
+          this.carsTokisRow.push(this.hornSprite!)
+          this.carsTokisRow.push(car)
         }
       }
       yCounter += 1
