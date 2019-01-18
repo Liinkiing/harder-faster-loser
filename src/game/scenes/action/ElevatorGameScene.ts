@@ -71,7 +71,9 @@ export default class ElevatorGameScene extends MinigameScene {
   public create() {
     super.create()
     this.hasPlayedAngrySound = false
-    gameManager.audio.playAmbientMusic(AMBIENT_SOUND)
+    gameManager.audio.playAmbientMusic(AMBIENT_SOUND, {
+      volume: 0.4,
+    })
     this.createElevatorContent()
     this.createTokiContent()
   }

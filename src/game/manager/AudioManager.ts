@@ -93,7 +93,7 @@ export default class AudioManager {
 
   public playAmbientMusic = (
     key: string,
-    extra: ExtraConfig & { playOverBg: boolean } = { playOverBg: false }
+    extra: ExtraConfig & { playOverBg?: boolean } = { playOverBg: false }
   ): void => {
     if (this.bg && !extra.playOverBg) {
       this.bg.pause()
