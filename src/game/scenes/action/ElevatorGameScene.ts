@@ -5,11 +5,19 @@ import gameStore from '../../../store/GameStore'
 import { gameWait } from '../../../utils/functions'
 import { MinigameGuideline } from '../../../utils/interfaces'
 
+const CLICK_SOUND = 'click'
+const ANGRY_SOUND = 'angry'
+const AMBIENT_SOUND = 'waiting'
+const ELEVATOR_ARRIVAL_SOUND = 'elevator_arrival'
+const ELEVATOR_OPENNING_SOUND = 'elevator_openning'
+
 export default class ElevatorGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
     title: 'Call !',
     subtitle: 'the elevator',
   }
+
+  private hasPlayedAngrySound: boolean = false
 
   // Texture
   private elevatorTexture: string
@@ -62,6 +70,8 @@ export default class ElevatorGameScene extends MinigameScene {
 
   public create() {
     super.create()
+    this.hasPlayedAngrySound = false
+    gameManager.audio.playAmbientMusic(AMBIENT_SOUND)
     this.createElevatorContent()
     this.createTokiContent()
   }
@@ -118,6 +128,12 @@ export default class ElevatorGameScene extends MinigameScene {
   }
 
   private makeTokiIrritated(): void {
+    if (!this.hasPlayedAngrySound) {
+      gameManager.audio.playSfx(ANGRY_SOUND, {
+        volume: 0.5,
+      })
+    }
+    this.hasPlayedAngrySound = true
     this.player!.anims.play(this.playerIrritatedTexture, true, 0)
     this.playerWaterDrop!.anims.play(this.playerWaterDropTexture, true, 0)
     this.playerWaterDrop!.setVisible(true)
@@ -197,20 +213,25 @@ export default class ElevatorGameScene extends MinigameScene {
         this.caseCallElevator!.removeAllListeners('pointerup')
         this.caseCallElevator!.removeAllListeners('pointerdown')
         gameManager.suspendMinigame()
-        new Promise(resolve => {
-          this.caseWaterDrop!.setVisible(false)
-          this.caseIrritated!.setVisible(false)
+        this.caseWaterDrop!.setVisible(false)
+        this.caseIrritated!.setVisible(false)
 
-          const animation = this.elevator!.anims.play(
-            this.elevatorTexture,
-            true,
-            0
-          )
-          animation.on('animationcomplete', async () => {
-            await gameWait(this.time, 500)
-            this.onSuccess()
-            resolve()
-          })
+        const animation = this.elevator!.anims.play(
+          this.elevatorTexture,
+          true,
+          0
+        )
+        gameManager.audio.playSfx(ELEVATOR_OPENNING_SOUND, {
+          volume: 0.8,
+          delay: 0.05,
+        })
+        gameManager.audio.playSfx(ELEVATOR_ARRIVAL_SOUND, {
+          volume: 0.4,
+          delay: 1.3,
+        })
+        animation.on('animationcomplete', async () => {
+          await gameWait(this.time, 500)
+          this.onSuccess()
         })
       }
 
@@ -222,6 +243,9 @@ export default class ElevatorGameScene extends MinigameScene {
     }
 
     const onPointerUp = () => {
+      gameManager.audio.playSfx(CLICK_SOUND, {
+        volume: 1,
+      })
       this.caseCallElevator!.anims.play(this.caseCallElevatorTexture, false, 0)
       this.caseCallElevator!.anims.stop()
 

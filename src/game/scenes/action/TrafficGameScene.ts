@@ -3,10 +3,11 @@ import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { randomRange } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
-import RoadsContainer from '../../objects/traffic-game/RoadsContainer'
 import CarsContainer from '../../objects/traffic-game/CarsContainer'
 import { MinigameGuideline } from '../../../utils/interfaces'
-import minigameManager from '../../manager/MinigameManager'
+
+const AMBIENT_SOUND = 'traffic'
+const HORN_SOUND = 'horn'
 
 export default class TraficGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
@@ -68,6 +69,10 @@ export default class TraficGameScene extends MinigameScene {
 
   public create() {
     super.create()
+    gameManager.audio.playAmbientMusic(AMBIENT_SOUND, {
+      playOverBg: true,
+      volume: 0.4,
+    })
 
     // this.roads = new RoadsContainer({
     //   scene: this,
@@ -83,19 +88,6 @@ export default class TraficGameScene extends MinigameScene {
     this.controls = this.createControls()
 
     this.tokisRow = this.add.container(0, 0, this.carsTokisRow).setDepth(997)
-  }
-
-  public onSuccess = (): void => {
-    console.log('you win')
-    minigameManager.addCurrentMinigameToPlayedGames()
-    gameManager.loadPostMinigame()
-  }
-
-  public onFailure = (): void => {
-    console.log('you failed')
-    minigameManager.addCurrentMinigameToPlayedGames()
-    gameManager.looseLife()
-    gameManager.loadPostMinigame()
   }
 
   public update = (time: number, delta: number): void => {
@@ -163,6 +155,9 @@ export default class TraficGameScene extends MinigameScene {
 
     this.horn.on('pointerdown', () => {
       this.horn!.setTexture('traffic_horn_on')
+      gameManager.audio.playUniqueSfx(HORN_SOUND, {
+        volume: 0.3,
+      })
       this.hornSprite!.alpha = 1
       this.cursorRageBar!.x += 10
 

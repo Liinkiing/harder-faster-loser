@@ -27,6 +27,9 @@ export default class BaseScene extends Phaser.Scene {
     gameManager.resizeCamera(window.innerWidth, window.innerHeight)
     gameManager.changeBackgroundColor(gameStore.config.backgroundColor)
     Emitter.emit(BaseEvents.SceneCreated, this)
+    if (gameManager.audio.ambientPlaying) {
+      gameManager.audio.stopAmbientMusic()
+    }
     this.initListeners()
   }
 

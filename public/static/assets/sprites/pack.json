@@ -610,6 +610,69 @@
           "frameWidth": 66,
           "frameHeight": 120
         }
+      },
+      {
+        "type": "audio",
+        "key": "waiting",
+        "url": [
+          "/static/assets/sounds/waiting.ogg",
+          "/static/assets/sounds/waiting.m4a",
+          "/static/assets/sounds/waiting.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "click",
+        "url": [
+          "/static/assets/sounds/click.ogg",
+          "/static/assets/sounds/click.m4a",
+          "/static/assets/sounds/click.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "angry",
+        "url": [
+          "/static/assets/sounds/angry.ogg",
+          "/static/assets/sounds/angry.m4a",
+          "/static/assets/sounds/angry.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "elevator_arrival",
+        "url": [
+          "/static/assets/sounds/elevator_arrival.ogg",
+          "/static/assets/sounds/elevator_arrival.m4a",
+          "/static/assets/sounds/elevator_arrival.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "elevator_openning",
+        "url": [
+          "/static/assets/sounds/elevator_openning.ogg",
+          "/static/assets/sounds/elevator_openning.m4a",
+          "/static/assets/sounds/elevator_openning.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "traffic",
+        "url": [
+          "/static/assets/sounds/traffic.ogg",
+          "/static/assets/sounds/traffic.m4a",
+          "/static/assets/sounds/traffic.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "horn",
+        "url": [
+          "/static/assets/sounds/horn.ogg",
+          "/static/assets/sounds/horn.m4a",
+          "/static/assets/sounds/horn.mp3"
+        ]
       }
     ]
   }
