@@ -38,8 +38,8 @@
         "key": "magic-bottle",
         "url": "/static/assets/sprites/spam-game/magic-bottle.png",
         "frameConfig": {
-          "frameWidth": 854,
-          "frameHeight": 914
+          "frameWidth": 427,
+          "frameHeight": 457
         }
       },
       {
@@ -74,8 +74,8 @@
         "key": "hair",
         "url": "/static/assets/sprites/spam-game/hair.png",
         "frameConfig": {
-          "frameWidth": 794,
-          "frameHeight": 764
+          "frameWidth": 397,
+          "frameHeight": 382
         }
       },
       {

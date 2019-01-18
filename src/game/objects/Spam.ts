@@ -15,8 +15,14 @@ export default class Spam extends Phaser.GameObjects.Container {
     this.texture = params.texture
     this.spamContent = this.createSpamContent(params.texture)
 
-    if (params.texture == 'yoAnimation') {
+    if (params.texture === 'yoAnimation') {
       this.spamContent.width = this.spamContent.width * 3
+    }
+    if (params.texture === 'hairAnimation') {
+      this.spamContent.width = this.spamContent.width * 2
+    }
+    if (params.texture === 'magicBottleAnimation') {
+      this.spamContent.width = this.spamContent.width * 2
     }
 
     this.add(this.spamContent)
@@ -41,10 +47,19 @@ export default class Spam extends Phaser.GameObjects.Container {
     spamTexture: string
   ): Phaser.GameObjects.Sprite => {
     const sprite = this.scene.add.sprite(0, 0, spamTexture).setOrigin(0, 0)
+    sprite.setScale(1 / gameStore.ratioResolution)
 
-    spamTexture === 'yoAnimation'
-      ? sprite.setScale(3 / gameStore.ratioResolution)
-      : sprite.setScale(1 / gameStore.ratioResolution)
+    if (spamTexture === 'yoAnimation') {
+      sprite.setScale(3 / gameStore.ratioResolution)
+    }
+
+    if (spamTexture === 'magicBottleAnimation') {
+      sprite.setScale(2 / gameStore.ratioResolution)
+    }
+
+    if (spamTexture === 'hairAnimation') {
+      sprite.setScale(2 / gameStore.ratioResolution)
+    }
 
     sprite.anims.play(this.texture)
     sprite.setInteractive()
