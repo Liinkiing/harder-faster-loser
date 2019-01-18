@@ -29,7 +29,7 @@ const Introduction: FunctionComponent<Props> = props => {
   const { onLaunchGame } = props
   return (
     <IntroductionInner>
-      <h1>Harder, Faster, Looser</h1>
+      <h1>Harder, Faster, Loser</h1>
       <button disabled={loading} onClick={onLaunchGame}>
         Launch game
       </button>

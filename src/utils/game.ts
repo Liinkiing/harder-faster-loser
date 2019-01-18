@@ -40,7 +40,7 @@ export const gameConfig: GameConfig = {
     },
     default: 'arcade',
   },
-  title: 'Harder, Faster, Looser',
+  title: 'Harder, Faster, Loser',
   version: '1.0',
   disableContextMenu: true,
   width: window.innerWidth,
