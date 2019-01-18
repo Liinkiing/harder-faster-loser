@@ -18,6 +18,9 @@ export default class PostMinigameScene extends BaseScene {
   public create = async () => {
     super.create()
     this.createFillerGraphics()
+    if (gameManager.audio.ambientPlaying) {
+      gameManager.audio.stopAmbientMusic()
+    }
     gameStore.increaseDifficulty()
     const { hasTokiJustLost, isTokiDead } = gameManager
 
