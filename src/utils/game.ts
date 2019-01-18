@@ -35,7 +35,7 @@ export const gameConfig: GameConfig = {
   },
   physics: {
     arcade: {
-      debug: true,
+      debug: process.env.NODE_ENV === 'development',
       gravity: { y: 0 },
     },
     default: 'arcade',
