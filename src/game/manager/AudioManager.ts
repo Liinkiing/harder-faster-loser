@@ -102,7 +102,7 @@ export default class AudioManager {
       ...extra,
       seek: 0,
       volume: (extra && extra.volume) || AMBIANT_VOLUME,
-      loop: false,
+      loop: true,
     })
     this.ambiant.play()
   }
