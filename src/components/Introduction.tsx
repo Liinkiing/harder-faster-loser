@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameStore from '../store/GameStore'
 import { darkBlue, white } from '../utils/colors'
+import GameButton from './ui/GameButton'
 
 interface Props {
   onLaunchGame: () => void
@@ -22,6 +23,9 @@ const IntroductionInner = styled.div`
   align-items: center;
   flex-direction: column;
   background: ${darkBlue};
+  ${GameButton} {
+    margin-top: 20px;
+  }
 `
 
 const Introduction: FunctionComponent<Props> = props => {
@@ -30,9 +34,9 @@ const Introduction: FunctionComponent<Props> = props => {
   return (
     <IntroductionInner>
       <h1>Harder, Faster, Loser</h1>
-      <button disabled={loading} onClick={onLaunchGame}>
+      <GameButton disabled={loading} onClick={onLaunchGame}>
         Launch game
-      </button>
+      </GameButton>
     </IntroductionInner>
   )
 }

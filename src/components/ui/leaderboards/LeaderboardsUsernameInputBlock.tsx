@@ -32,6 +32,7 @@ const LeaderboardsUsernameInputBlockInner = styled.div`
     height: 8px;
     background: currentColor;
     bottom: 10px;
+    left: 10px;
   }
 `
 
