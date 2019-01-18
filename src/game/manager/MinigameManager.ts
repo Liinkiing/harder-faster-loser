@@ -17,6 +17,7 @@ class MinigameManager {
   private games: IGames = {
     [GameCategory.Action]: new List<string>([
       scenesKeys.SpamGame,
+      scenesKeys.SubwayGame,
       scenesKeys.SandwichGame,
       scenesKeys.PasswordGame,
       scenesKeys.TrafficGame,

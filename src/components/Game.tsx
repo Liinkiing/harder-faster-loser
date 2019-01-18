@@ -31,8 +31,8 @@ const Game: FunctionComponent = () => {
 
   return (
     <div id="game" className="game">
-      {/* {started && dev && <GameDebugButtonsToolbar />}
-      {started && dev && <GameDebug hide={debug} />} */}
+      {started && dev && <GameDebugButtonsToolbar />}
+      {started && dev && <GameDebug hide={debug} />}
       {started && <GameUI />}
     </div>
   )

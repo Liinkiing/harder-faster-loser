@@ -42,6 +42,7 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   public create() {
+    super.create()
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
     this.normalizedYOffset =

@@ -15,7 +15,7 @@ interface TokiStatus {
   hasJustHeart: boolean
 }
 
-const MINIGAME_DURATION = 500
+const MINIGAME_DURATION = 50000
 const REMAINING_PAUSE = 10
 
 const PAUSE_MIN_THRESHOLD = 0.2
