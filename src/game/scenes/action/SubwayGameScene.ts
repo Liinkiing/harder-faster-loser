@@ -3,6 +3,7 @@ import { scenesKeys } from '../../../utils/constants'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
+import Wagon from '../../objects/subway-game/Wagon'
 
 export default class SubwayGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
@@ -153,9 +154,6 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.initColliderOnNextSlab()
     this.initListenerOnNextLineContainer()
-
-    this.lineContainers[0].on('pointerdown', () => {})
-
     this.initAnimationTrain()
   }
 
@@ -357,13 +355,16 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private createRailRoad(): void {
-    // const railRoadthis = this.add.sprite(
-    //   0,
-    //   this.windowHeight! - this.windowHeight! * (6.6 / 10),
-    //   "subway_railroad"
-    // )
-    //   .setOrigin(0, 1)
-    //   .setScale(1 / gameStore.ratioResolution)
+    let xPointer = 0
+
+    while (xPointer < this.game.config.width) {
+      const railRoad = this.add
+        .sprite(xPointer, this.normalizedYOffset, 'subway_railroad')
+        .setOrigin(0, 1)
+        .setScale(1 / gameStore.ratioResolution)
+
+      xPointer = railRoad.x + railRoad.width / gameStore.ratioResolution
+    }
   }
 
   private createTrain(): void {
@@ -433,6 +434,14 @@ export default class SubwayGameScene extends MinigameScene {
       )
       .setOrigin(0, 1)
       .setScale(1 / gameStore.ratioResolution)
+
+    // const train4 = new Wagon({
+    //   scene: this,
+    //   x: train3.x + train3.width / gameStore.ratioResolution,
+    //   y: this.normalizedYOffset,
+    //   texture: 'subway_train'
+    // }
+    // )
 
     const train4 = this.add
       .sprite(
