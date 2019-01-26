@@ -2,7 +2,7 @@ import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
-import { gameWait } from '../../../utils/functions'
+import { gameWait, randomRange } from '../../../utils/functions'
 
 export default class SubwayGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
@@ -63,12 +63,13 @@ export default class SubwayGameScene extends MinigameScene {
     while (yCounter < 4) {
       xCounter = 0
       this.spriteLine = []
+      const indexEmptySlab = this.generateEmptySlabPosition()
 
       while (xCounter < 12) {
         let slabTextureKey = ''
         let isEmptySlab = false
 
-        if (xCounter === 10 && yCounter > 0) {
+        if (xCounter === indexEmptySlab && yCounter > 0) {
           slabTextureKey = 'subway_yellow_border_square'
           isEmptySlab = true
         } else {
@@ -179,6 +180,14 @@ export default class SubwayGameScene extends MinigameScene {
       this.toki!.y -= 5
       this.toki!.x -= 1.3
     }
+  }
+
+  private generateEmptySlabPosition(): integer {
+    let index = Math.floor(randomRange(2, 10))
+    while (index === 6) {
+      index = Math.floor(randomRange(2, 10))
+    }
+    return index
   }
 
   private initAnimationTrain(): void {
