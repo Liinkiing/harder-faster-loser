@@ -36,6 +36,9 @@ export default class SubwayGameScene extends MinigameScene {
   private containers: any = []
 
   private nextEmptySlab?: Phaser.GameObjects.Sprite
+  private currentEmptySlab?: Phaser.GameObjects.Sprite
+
+  private goalZone?: Phaser.GameObjects.Rectangle
 
   constructor() {
     super({
@@ -141,10 +144,14 @@ export default class SubwayGameScene extends MinigameScene {
       'empty_slab'
     ) as Phaser.GameObjects.Sprite
 
+    this.currentEmptySlab = this.lineContainers[this.indexCurrentRow].getByName(
+      'empty_slab'
+    ) as Phaser.GameObjects.Sprite
+
     this.physics.world.enable(this.nextEmptySlab)
 
-    this.initColliderOnCurrentSlab()
-    this.initListenerOnCurrentLineContainer()
+    this.initColliderOnNextSlab()
+    this.initListenerOnNextLineContainer()
 
     this.lineContainers[0].on('pointerdown', () => {})
 
@@ -193,7 +200,7 @@ export default class SubwayGameScene extends MinigameScene {
     })
   }
 
-  private initListenerOnCurrentLineContainer(): void {
+  private initListenerOnNextLineContainer(): void {
     if (this.indexNextRow < this.lineContainers!.length) {
       this.lineContainers[this.indexNextRow].on(
         'drag',
@@ -207,8 +214,24 @@ export default class SubwayGameScene extends MinigameScene {
         if (this.isOverlapping) {
           this.triggerRunAnimation()
           this.updateActiveRows()
-          this.initListenerOnCurrentLineContainer()
-          this.initColliderOnCurrentSlab()
+
+          // Value between the left bound of the goal zone and the left bound of the empty slab
+          const translateValue =
+            this.currentEmptySlab!.x -
+            (Math.abs(this.currentRow!.x) + this.goalZone!.x)
+
+          this.tweens.add({
+            targets: this.currentRow,
+            x: {
+              value: `-=${translateValue}`,
+              duration: 100,
+              ease: 'Cubic.easeOut',
+            },
+            repeat: 0,
+          })
+
+          this.initListenerOnNextLineContainer()
+          this.initColliderOnNextSlab()
         }
       })
     } else {
@@ -288,6 +311,9 @@ export default class SubwayGameScene extends MinigameScene {
     }
 
     if (this.currentRow && this.indexCurrentRow > 0) {
+      this.currentEmptySlab = this.currentRow.getByName(
+        'empty_slab'
+      ) as Phaser.GameObjects.Sprite
       this.physics.world.disable(this.currentRow.getByName('empty_slab'))
     }
 
@@ -295,8 +321,8 @@ export default class SubwayGameScene extends MinigameScene {
     this.isOverlapping = false
   }
 
-  private initColliderOnCurrentSlab(): void {
-    const goalZone = this.add
+  private initColliderOnNextSlab(): void {
+    this.goalZone = this.add
       .rectangle(
         this.windowWidth! / 2 + 22,
         0,
@@ -307,11 +333,11 @@ export default class SubwayGameScene extends MinigameScene {
       )
       .setOrigin(0, 0)
 
-    this.physics.world.enable(goalZone)
+    this.physics.world.enable(this.goalZone)
 
     const collider = this.physics.add.overlap(
       this.nextEmptySlab as Phaser.GameObjects.GameObject,
-      goalZone,
+      this.goalZone,
       () => {
         console.log('A slab is colliding with the goalZone')
 
