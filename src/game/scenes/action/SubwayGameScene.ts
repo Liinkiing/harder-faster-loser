@@ -35,6 +35,8 @@ export default class SubwayGameScene extends MinigameScene {
 
   private containers: any = []
 
+  private nextEmptySlab?: Phaser.GameObjects.Sprite
+
   constructor() {
     super({
       key: scenesKeys.SubwayGame,
@@ -135,10 +137,11 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.lineContainers[0].setDepth(1)
 
-    const nextEmptySlab = this.lineContainers[this.indexNextRow].getByName(
+    this.nextEmptySlab = this.lineContainers[this.indexNextRow].getByName(
       'empty_slab'
-    )
-    this.physics.world.enable(nextEmptySlab)
+    ) as Phaser.GameObjects.Sprite
+
+    this.physics.world.enable(this.nextEmptySlab)
 
     this.initColliderOnCurrentSlab()
     this.initListenerOnCurrentLineContainer()
@@ -215,7 +218,7 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerEndTokiAnimation = async () => {
-    await gameWait(this.time, 1000)
+    await gameWait(this.time, 500)
     this.lastLineReached = true
     this.toggleTokiRun = true
     const tokiWinAnimation = this.toki!.anims.play(
@@ -278,7 +281,10 @@ export default class SubwayGameScene extends MinigameScene {
     this.currentRow = this.lineContainers[this.indexCurrentRow]
 
     if (this.nextRow) {
-      this.physics.world.enable(this.nextRow.getByName('empty_slab'))
+      this.nextEmptySlab = this.nextRow.getByName(
+        'empty_slab'
+      ) as Phaser.GameObjects.Sprite
+      this.physics.world.enable(this.nextEmptySlab)
     }
 
     if (this.currentRow && this.indexCurrentRow > 0) {
@@ -303,12 +309,16 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.physics.world.enable(goalZone)
 
-    const collider = this.physics.add.overlap(this.emptySlabs, goalZone, () => {
-      console.log('A slab is colliding with the goalZone')
+    const collider = this.physics.add.overlap(
+      this.nextEmptySlab as Phaser.GameObjects.GameObject,
+      goalZone,
+      () => {
+        console.log('A slab is colliding with the goalZone')
 
-      this.isOverlapping = true
-      this.physics.world.removeCollider(collider)
-    })
+        this.isOverlapping = true
+        this.physics.world.removeCollider(collider)
+      }
+    )
   }
 
   private createRailRoad(): void {
