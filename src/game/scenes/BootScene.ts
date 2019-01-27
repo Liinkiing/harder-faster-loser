@@ -31,7 +31,7 @@ export default class BootScene extends BaseScene {
     gameManager.audio.playBg()
     const initial = gameStore.config.fade
     gameStore.changeConfig({ fade: false })
-    gameManager.loadHomescreen()
+    gameManager.loadDeathscreen()
     gameStore.changeConfig({ fade: initial })
     this.scene.stop(this.scene.key)
   }

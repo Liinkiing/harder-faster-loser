@@ -673,6 +673,33 @@
           "/static/assets/sounds/horn.m4a",
           "/static/assets/sounds/horn.mp3"
         ]
+      },
+      {
+        "type": "spritesheet",
+        "key": "deathscreen_rain",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_rain_280_501.png",
+        "frameConfig": {
+          "frameWidth": 280,
+          "frameHeight": 501
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "deathscreen_stage_set",
+        "url": "/static/assets/sprites/deathscreen/stage_set_200_358.png",
+        "frameConfig": {
+          "frameWidth": 200,
+          "frameHeight": 358
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "deathscreen_cloud",
+        "url": "/static/assets/sprites/deathscreen/cloud_200_185.png",
+        "frameConfig": {
+          "frameWidth": 200,
+          "frameHeight": 92
+        }
       }
     ]
   }
