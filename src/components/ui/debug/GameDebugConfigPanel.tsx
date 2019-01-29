@@ -19,6 +19,8 @@ const GameDebugConfigPanel: FunctionComponent<
 > = props => {
   const {
     difficulty,
+    tutorial,
+    toggleTutorial,
     setDifficulty,
     config: { fade, minigameDuration },
     changeConfig,
@@ -80,6 +82,16 @@ const GameDebugConfigPanel: FunctionComponent<
           max={20}
           min={1}
         />
+      </label>
+      <Spacer />
+      <label>
+        <input
+          type="checkbox"
+          className="checkbox"
+          checked={tutorial}
+          onChange={toggleTutorial}
+        />
+        <span>Tutorial?</span>
       </label>
       <Spacer />
       <label>

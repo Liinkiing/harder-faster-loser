@@ -18,11 +18,14 @@ interface TokiStatus {
 const MINIGAME_DURATION = 500
 const REMAINING_PAUSE = 10
 
+const LS_TUTORIAL = 'tutorial'
+
 const PAUSE_MIN_THRESHOLD = 0.2
 
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
-  @observable public tutorial: boolean = true
+  @observable public tutorial: boolean =
+    window.localStorage.getItem(LS_TUTORIAL) !== 'done'
   @observable public difficulty: number = 1
   @observable public loading: boolean = true
   @observable public showingGuideline: boolean = false
@@ -65,6 +68,7 @@ class GameStore {
         })
       }
     )
+    window.localStorage.setItem(LS_TUTORIAL, this.tutorial ? '' : 'done')
   }
 
   @action public resetGame = (): void => {
@@ -92,10 +96,17 @@ class GameStore {
 
   @action public startTutorial = (): void => {
     this.tutorial = true
+    window.localStorage.setItem(LS_TUTORIAL, '')
+  }
+
+  @action public toggleTutorial = (): void => {
+    this.tutorial = !this.tutorial
+    window.localStorage.setItem(LS_TUTORIAL, this.tutorial ? '' : 'done')
   }
 
   @action public stopTutorial = (): void => {
     this.tutorial = false
+    window.localStorage.setItem(LS_TUTORIAL, 'done')
   }
 
   @action public hideGuideline = (): void => {
