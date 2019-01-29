@@ -10,6 +10,7 @@ import {
   SplashscreenScene,
   ElevatorGameScene,
   LeaderboardsScene,
+  TutorialScreenScene,
 } from '../game/scenes'
 import { GameBackgroundColor } from './types'
 import { green } from './colors'
@@ -51,6 +52,7 @@ export const gameConfig: GameConfig = {
     BootScene,
     SplashscreenScene,
     HomescreenScene,
+    TutorialScreenScene,
 
     SpamGameScene,
     SandwichGameScene,

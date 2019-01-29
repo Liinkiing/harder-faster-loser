@@ -22,6 +22,7 @@ const PAUSE_MIN_THRESHOLD = 0.2
 
 class GameStore {
   @observable public state: GameState = GameState.Splashscreen
+  @observable public tutorial: boolean = true
   @observable public difficulty: number = 1
   @observable public loading: boolean = true
   @observable public showingGuideline: boolean = false
@@ -87,6 +88,14 @@ class GameStore {
 
   @action public showGuideline = (): void => {
     this.showingGuideline = true
+  }
+
+  @action public startTutorial = (): void => {
+    this.tutorial = true
+  }
+
+  @action public stopTutorial = (): void => {
+    this.tutorial = false
   }
 
   @action public hideGuideline = (): void => {
@@ -164,7 +173,9 @@ class GameStore {
   }
 
   @action public increaseDifficulty = (step: number = 1): void => {
-    this.difficulty = Phaser.Math.Clamp(this.difficulty + step, 1, 20)
+    if (!this.tutorial) {
+      this.difficulty = Phaser.Math.Clamp(this.difficulty + step, 1, 20)
+    }
   }
 
   @action public setDifficulty = (difficulty: number): void => {
