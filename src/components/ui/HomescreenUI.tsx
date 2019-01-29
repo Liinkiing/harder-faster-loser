@@ -20,10 +20,10 @@ const HomescreenUIInner = styled.div`
 `
 
 const HomescreenUI: FunctionComponent = () => {
-  const { loadNextMinigame } = gameManager
+  const { loadTutorialScreen } = gameManager
   return (
     <HomescreenUIInner>
-      <GameButton onClick={loadNextMinigame}>Wake up</GameButton>
+      <GameButton onClick={loadTutorialScreen}>Wake up</GameButton>
     </HomescreenUIInner>
   )
 }

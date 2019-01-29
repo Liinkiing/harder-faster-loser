@@ -33,12 +33,15 @@ const RemainingTime = styled.h2`
 
 const WarningSign: FunctionComponent = props => {
   const {
+    tutorial,
     decreasePauseRemaining,
     config: { remainingPause },
   } = gameStore
 
   useInterval(() => {
-    decreasePauseRemaining()
+    if (!tutorial) {
+      decreasePauseRemaining()
+    }
   }, 16)
 
   return (

@@ -21,22 +21,27 @@ export default class PostMinigameScene extends BaseScene {
     if (gameManager.audio.ambientPlaying) {
       gameManager.audio.stopAmbientMusic()
     }
-    gameStore.increaseDifficulty()
-    const { hasTokiJustLost, isTokiDead } = gameManager
-
-    if (hasTokiJustLost) {
-      gameManager.audio.playSfx(SOUND_LOST, { volume: 0.2, delay: 0.5 })
-    } else {
-      gameManager.audio.playSfx(SOUND_WIN, { volume: 0.2, delay: 0.3 })
-    }
-
-    await gameWait(this.time, DISPLAY_TIME)
-    gameManager.resetTokiStatus()
-
-    if (isTokiDead) {
-      gameManager.loadLeaderboards()
-    } else {
+    if (gameStore.tutorial) {
+      await gameWait(this.time, 1)
       gameManager.loadNextMinigame()
+    } else {
+      gameStore.increaseDifficulty()
+      const { hasTokiJustLost, isTokiDead } = gameManager
+
+      if (hasTokiJustLost) {
+        gameManager.audio.playSfx(SOUND_LOST, { volume: 0.2, delay: 0.5 })
+      } else {
+        gameManager.audio.playSfx(SOUND_WIN, { volume: 0.2, delay: 0.3 })
+      }
+
+      await gameWait(this.time, DISPLAY_TIME)
+      gameManager.resetTokiStatus()
+
+      if (isTokiDead) {
+        gameManager.loadLeaderboards()
+      } else {
+        gameManager.loadNextMinigame()
+      }
     }
   }
 

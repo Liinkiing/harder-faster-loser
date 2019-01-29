@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { black } from '../../utils/colors'
+import { observer } from 'mobx-react-lite'
+import gameStore from '../../store/GameStore'
 
 const TutorialScreenUIInner = styled.div`
   position: fixed;
@@ -16,12 +18,22 @@ const TutorialScreenUIInner = styled.div`
 `
 
 const TutorialScreenUI: FunctionComponent = () => {
+  const { tutorial } = gameStore
   return (
     <TutorialScreenUIInner>
-      <h1>Day 1</h1>
-      <p>A peaceful day for Toki</p>
+      {tutorial ? (
+        <>
+          <h1>Day 1</h1>
+          <p>A peaceful day for Toki</p>
+        </>
+      ) : (
+        <>
+          <h1>Day 2</h1>
+          <p>A war day for Toki!</p>
+        </>
+      )}
     </TutorialScreenUIInner>
   )
 }
 
-export default TutorialScreenUI
+export default observer(TutorialScreenUI)

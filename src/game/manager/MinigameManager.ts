@@ -14,6 +14,17 @@ class MinigameManager {
 
   private lastGame?: string
 
+  private tutorialGames: IGames = {
+    [GameCategory.Action]: new List<string>([
+      scenesKeys.SpamGame,
+      scenesKeys.SandwichGame,
+      scenesKeys.PasswordGame,
+      scenesKeys.TrafficGame,
+      scenesKeys.ElevatorGame,
+    ]),
+    [GameCategory.Waiting]: new List<string>([]),
+  }
+
   private games: IGames = {
     [GameCategory.Action]: new List<string>([
       scenesKeys.SpamGame,
@@ -45,6 +56,14 @@ class MinigameManager {
   }
 
   public pickNextGameKey(): string {
+    if (gameStore.tutorial) {
+      if (this.tutorialGames[GameCategory.Action].length > 0) {
+        return this.tutorialGames[GameCategory.Action].shift()!
+      } else {
+        gameStore.stopTutorial()
+        return scenesKeys.TutorialScreen
+      }
+    }
     let selectedCategory: GameCategory
     selectedCategory = this.pickRandomCategory(Math.random())
 

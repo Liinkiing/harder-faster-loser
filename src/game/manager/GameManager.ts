@@ -83,6 +83,11 @@ export class GameManager {
     await this.startScene(minigameManager.pickNextGameKey())
   }
 
+  public loadTutorialScreen = async () => {
+    gameManager.suspendMinigame()
+    await this.startScene(scenesKeys.TutorialScreen)
+  }
+
   public loadPostMinigame = async () => {
     gameManager.suspendMinigame()
     await this.startScene(scenesKeys.PostMinigameScene)
@@ -221,7 +226,9 @@ export class GameManager {
   }
 
   public looseLife = (): void => {
-    gameStore.looseLife()
+    if (!gameStore.tutorial) {
+      gameStore.looseLife()
+    }
   }
 
   get isTokiDead() {

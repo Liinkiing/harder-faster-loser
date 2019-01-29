@@ -26,12 +26,13 @@ const ProgressInner = styled.div`
 
 const RemainingTime: FunctionComponent = () => {
   const {
+    tutorial,
     config: { minigameDuration, suspended },
   } = gameStore
   const [remaining, setRemaining] = useState(0)
   const button = useRef<HTMLButtonElement>(null)
   useGameloop(() => {
-    if (button.current) {
+    if (button.current && !tutorial) {
       button.current.click()
     }
   })
