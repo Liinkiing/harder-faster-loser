@@ -422,6 +422,30 @@
       "showOnStart": true,
       "repeat": -1,
       "frameRate": 1
+    },
+    {
+      "key": "splashscreen_01_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "splashscreen_01",
+        "start": 0,
+        "end": 38
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 12
+    },
+    {
+      "key": "splashscreen_02_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "splashscreen_02",
+        "start": 0,
+        "end": 23
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 12
     }
   ]
 }
