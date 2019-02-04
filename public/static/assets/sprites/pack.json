@@ -399,15 +399,6 @@
       },
       {
         "type": "audio",
-        "key": "explosion",
-        "url": [
-          "/static/assets/sounds/explosion.ogg",
-          "/static/assets/sounds/explosion.m4a",
-          "/static/assets/sounds/explosion.mp3"
-        ]
-      },
-      {
-        "type": "audio",
         "key": "tada",
         "url": [
           "/static/assets/sounds/tada.ogg",
@@ -744,6 +735,15 @@
           "/static/assets/sounds/crack.ogg",
           "/static/assets/sounds/crack.m4a",
           "/static/assets/sounds/crack.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "explosion",
+        "url": [
+          "/static/assets/sounds/explosion.ogg",
+          "/static/assets/sounds/explosion.m4a",
+          "/static/assets/sounds/explosion.mp3"
         ]
       }
     ]
