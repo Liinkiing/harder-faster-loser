@@ -677,34 +677,36 @@
       {
         "type": "spritesheet",
         "key": "deathscreen_rain",
-        "url": "/static/assets/sprites/deathscreen/spritesheets/deathscreen_rain_280_501.png",
+        "url": "/static/assets/sprites/deathscreen/spritesheets/deathscreen_rain_67_120.png",
         "frameConfig": {
-          "frameWidth": 280,
-          "frameHeight": 501
-        }
-      },
-      {
-        "type": "spritesheet",
-        "key": "deathscreen_stage_set",
-        "url": "/static/assets/sprites/deathscreen/spritesheets/deathscreen_stage_set_200_358.png",
-        "frameConfig": {
-          "frameWidth": 200,
-          "frameHeight": 358
-        }
-      },
-      {
-        "type": "spritesheet",
-        "key": "deathscreen_cloud",
-        "url": "/static/assets/sprites/deathscreen/spritesheets/deathscreen_cloud_200_185.png",
-        "frameConfig": {
-          "frameWidth": 200,
-          "frameHeight": 92
+          "frameWidth": 67,
+          "frameHeight": 120
         }
       },
       {
         "type": "image",
         "key": "deathscreen_tombstones",
         "url": "/static/assets/sprites/deathscreen/deathscreen_tombstones.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_stage_set_0",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_0.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_stage_set_1",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_1.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_clouds_0",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_0.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_clouds_1",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_1.png"
       }
     ]
   }

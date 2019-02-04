@@ -13,6 +13,7 @@ export default class DeathscreenScene extends BaseScene {
   private tombstones?: Phaser.GameObjects.Sprite
   private timeoutLightning?: any
   private timeoutResetLightning?: any
+  private firstPartDestroyed: boolean = false
 
   constructor() {
     super({
@@ -23,6 +24,7 @@ export default class DeathscreenScene extends BaseScene {
   public create(): void {
     super.create()
     this.initFirstPart()
+
     setTimeout(() => {
       this.destroyFirstPart()
     }, 3000)
@@ -33,9 +35,11 @@ export default class DeathscreenScene extends BaseScene {
   }
 
   private destroyFirstPart(): void {
+    this.firstPartDestroyed = true
+
     // Destroy timeout
-    clearTimeout(this.timeoutLightning)
     clearTimeout(this.timeoutResetLightning)
+    clearTimeout(this.timeoutLightning)
 
     // Destroy sprites
     this.stageSet!.destroy()
@@ -47,22 +51,11 @@ export default class DeathscreenScene extends BaseScene {
 
   private initFirstPart(): void {
     this.stageSet = this.add
-      .sprite(0, 0, 'deathscreen_stage_set_animation')
+      .sprite(0, 0, 'deathscreen_stage_set_0')
       .setOrigin(0)
-      .play('deathscreen_stage_set_animation', true)
-    this.stageSet.anims.stop()
 
     const ratioStageSet = Number(this.game.config.width) / this.stageSet.width
     this.stageSet.setScale(ratioStageSet)
-
-    this.cloud = this.add
-      .sprite(0, 0, 'deathscreen_cloud_animation')
-      .setOrigin(0)
-      .play('deathscreen_cloud_animation')
-    this.cloud.anims.pause()
-
-    const ratioCloud = Number(this.game.config.width) / this.cloud.width
-    this.cloud.setScale(ratioCloud)
 
     this.rain = this.add
       .sprite(0, 0, 'deathscreen_rain_animation')
@@ -72,36 +65,27 @@ export default class DeathscreenScene extends BaseScene {
     const ratioRain = Number(this.game.config.width) / this.rain.width
     this.rain.setScale(ratioRain)
 
+    this.cloud = this.add.sprite(0, 0, 'deathscreen_clouds_0').setOrigin(0)
+
+    const ratioCloud = Number(this.game.config.width) / this.cloud.width
+    this.cloud.setScale(ratioCloud)
+
     this.initLightning()
   }
 
   private initLightning(): void {
     const delayLightning = Math.floor(randomRange(3000, 4000))
     this.timeoutLightning = setTimeout(() => {
-      if (this.stageSet && this.cloud) {
-        if (this.stageSet.anims && this.cloud.anims) {
-          // Lighting
-          this.stageSet!.anims.play('deathscreen_stage_set_animation', false, 1)
-          this.stageSet!.anims.stop()
+      if (this.stageSet && this.cloud && !this.firstPartDestroyed) {
+        this.stageSet.setTexture('deathscreen_stage_set_1')
+        this.cloud.setTexture('deathscreen_clouds_1')
 
-          this.cloud!.anims.play('deathscreen_cloud_animation', false, 1)
-          this.cloud!.anims.stop()
+        this.timeoutResetLightning = setTimeout(() => {
+          this.stageSet!.setTexture('deathscreen_stage_set_0')
+          this.cloud!.setTexture('deathscreen_clouds_0')
 
-          this.timeoutResetLightning = setTimeout(() => {
-            //Reset lighting
-            this.stageSet!.anims.play(
-              'deathscreen_stage_set_animation',
-              false,
-              0
-            )
-            this.stageSet!.anims.stop()
-
-            this.cloud!.anims.play('deathscreen_cloud_animation', false, 0)
-            this.cloud!.anims.stop()
-
-            this.initLightning()
-          }, 300)
-        }
+          this.initLightning()
+        }, 300)
       }
     }, delayLightning)
   }
