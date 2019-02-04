@@ -58,13 +58,11 @@ class MinigameManager {
     }
 
     this.currentCategory = selectedCategory
-    console.log(this.currentCategory)
 
     return this.pickGameKey(selectedCategory)
   }
 
   public startGame = async (key: string, force: boolean = false) => {
-    console.log('picking ' + key)
     let game: string | undefined
     let category: string | undefined
 
@@ -106,7 +104,6 @@ class MinigameManager {
   }
 
   public pickGameKey(category: GameCategory): string {
-    console.log('picking ' + category)
     let game = this.games[category].random()
 
     if (this.playedGames[category].length === this.games[category].length) {

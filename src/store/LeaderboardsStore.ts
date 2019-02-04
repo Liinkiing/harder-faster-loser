@@ -89,7 +89,6 @@ class LeaderboardStore {
   }
 
   get facebookUrl() {
-    console.log(this.rank)
     const post = `Hey! Can you beat me at Harder, Faster, Loser ? I've just got a score of ${
       gameStore.timeElapsed
     } and I'm ranked ${this.rank}!`
@@ -100,7 +99,6 @@ class LeaderboardStore {
   }
 
   get tweetUrl() {
-    console.log(this.rank)
     const tweet = `Hey! Can you beat me at Harder, Faster, Loser ? I've just got a score of ${
       gameStore.timeElapsed
     } and I'm ranked ${this.rank}!`

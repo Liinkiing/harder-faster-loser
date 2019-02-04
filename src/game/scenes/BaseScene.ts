@@ -7,7 +7,6 @@ export default class BaseScene extends Phaser.Scene {
   protected animationHelper?: AnimationHelper
 
   public init(): void {
-    console.log(`init (${this.scene.key})`)
     this.game.scene.dump()
     Emitter.emit(BaseEvents.SceneInit, this)
     Emitter.removeAllListeners(BaseEvents.SceneDestroyed)
@@ -15,7 +14,6 @@ export default class BaseScene extends Phaser.Scene {
   }
 
   public preload(): void {
-    console.log(`preload (${this.scene.key})`)
     this.load.on('complete', () => {
       if (this.load.totalToLoad < 20) {
         // If there are less than 20 (arbitrary number) files to load, we are preloading for splashscreen
@@ -30,12 +28,10 @@ export default class BaseScene extends Phaser.Scene {
           this.cache.json.get('animations')
         )
       }
-      console.log('PRELOAD FROM BASESCENE FINISH')
     })
   }
 
   public create(): void {
-    console.log(`create (${this.scene.key})`)
     gameManager.resizeCamera(window.innerWidth, window.innerHeight)
     gameManager.changeBackgroundColor(gameStore.config.backgroundColor)
     Emitter.emit(BaseEvents.SceneCreated, this)
@@ -45,9 +41,7 @@ export default class BaseScene extends Phaser.Scene {
     this.initListeners()
   }
 
-  public update(time: number, delta: number): void {
-    console.log(`update (${this.scene.key})`)
-  }
+  public update(time: number, delta: number): void {}
 
   protected destroy(): void {}
 
