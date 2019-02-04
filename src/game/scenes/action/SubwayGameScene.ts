@@ -179,8 +179,8 @@ export default class SubwayGameScene extends MinigameScene {
       this.toki!.x -= 1.3
     }
 
-    //@ts-ignore
     this.isOverlapping = this.physics.world.overlap(
+      //@ts-ignore
       this.nextEmptySlab!,
       this.goalZone!
     )
