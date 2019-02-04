@@ -17,10 +17,20 @@ export default class BaseScene extends Phaser.Scene {
   public preload(): void {
     console.log(`preload (${this.scene.key})`)
     this.load.on('complete', () => {
-      this.animationHelper = new AnimationHelper(
-        this,
-        this.cache.json.get('animations')
-      )
+      if (this.load.totalToLoad < 20) {
+        // If there are less than 20 (arbitrary number) files to load, we are preloading for splashscreen
+        this.animationHelper = new AnimationHelper(
+          this,
+          this.cache.json.get('splashscreen_animations')
+        )
+      } else {
+        // else we are preloading entire game, so our AnimationHelper will get correction json animations
+        this.animationHelper = new AnimationHelper(
+          this,
+          this.cache.json.get('animations')
+        )
+      }
+      console.log('PRELOAD FROM BASESCENE FINISH')
     })
   }
 

@@ -13,7 +13,11 @@ export default class BootScene extends BaseScene {
   public preload(): void {
     super.preload()
     this.load.setBaseURL(process.env.PUBLIC_URL)
-    this.load.pack('preload', '/static/assets/sprites/pack.json', 'preload')
+    this.load.pack(
+      'splashscreen',
+      '/static/assets/sprites/pack.json',
+      'splashscreen'
+    )
   }
 
   public update(time: number, delta: number): void {}

@@ -73,12 +73,20 @@ export default class AudioManager {
     this.uniqueSfx.play()
   }
 
+  public stopUniqueSfx = (): void => {
+    if (this.uniqueSfx) {
+      this.uniqueSfx.stop()
+    }
+  }
+
   public playBg = (extra?: ExtraConfig): void => {
-    this.bg = this.sound.add(BG_MUSIC, {
-      ...extra,
-      volume: (extra && extra.volume) || BG_VOLUME,
-      loop: true,
-    })
+    if (!this.bg) {
+      this.bg = this.sound.add(BG_MUSIC, {
+        ...extra,
+        volume: (extra && extra.volume) || BG_VOLUME,
+        loop: true,
+      })
+    }
     this.bg.play()
   }
 
