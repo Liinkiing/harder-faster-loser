@@ -10,6 +10,8 @@ export default class BaseScene extends Phaser.Scene {
     console.log(`init (${this.scene.key})`)
     this.game.scene.dump()
     Emitter.emit(BaseEvents.SceneInit, this)
+    Emitter.removeAllListeners(BaseEvents.SceneDestroyed)
+    Emitter.on(BaseEvents.SceneDestroyed, this.destroy)
   }
 
   public preload(): void {
@@ -36,6 +38,8 @@ export default class BaseScene extends Phaser.Scene {
   public update(time: number, delta: number): void {
     //console.log(`update (${this.scene.key})`)
   }
+
+  protected destroy(): void {}
 
   protected initListeners(): void {}
 }
