@@ -4,6 +4,7 @@ import gameStore from '../../store/GameStore'
 import { randomRange } from '../../utils/functions'
 import { setTimeout } from 'timers'
 import { Emitter } from '../manager/GameManager'
+import { GameEvents } from '../../utils/enums'
 
 export default class DeathscreenScene extends BaseScene {
   private stageSet?: Phaser.GameObjects.Sprite
@@ -25,6 +26,10 @@ export default class DeathscreenScene extends BaseScene {
     setTimeout(() => {
       this.destroyFirstPart()
     }, 3000)
+
+    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
+      this.initSecondPart()
+    })
   }
 
   private destroyFirstPart(): void {
@@ -37,7 +42,7 @@ export default class DeathscreenScene extends BaseScene {
     this.cloud!.destroy()
     this.rain!.destroy()
 
-    this.initSecondPart()
+    Emitter.emit(GameEvents.DeathscreenFirstSceneDestroyed, this)
   }
 
   private initFirstPart(): void {
