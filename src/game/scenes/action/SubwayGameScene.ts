@@ -178,6 +178,12 @@ export default class SubwayGameScene extends MinigameScene {
       this.toki!.y -= 5
       this.toki!.x -= 1.3
     }
+
+    //@ts-ignore
+    this.isOverlapping = this.physics.world.overlap(
+      this.nextEmptySlab!,
+      this.goalZone!
+    )
   }
 
   private generateEmptySlabPosition(): integer {
@@ -222,7 +228,6 @@ export default class SubwayGameScene extends MinigameScene {
           this.triggerRunAnimation()
           this.updateActiveRows()
 
-          // Value between the left bound of the goal zone and the left bound of the empty slab
           const translateValue =
             this.currentEmptySlab!.x -
             (Math.abs(this.currentRow!.x) + this.goalZone!.x)
@@ -325,7 +330,6 @@ export default class SubwayGameScene extends MinigameScene {
     }
 
     this.toggleTokiRun = true
-    this.isOverlapping = false
   }
 
   private initColliderOnNextSlab(): void {
@@ -347,8 +351,6 @@ export default class SubwayGameScene extends MinigameScene {
       this.goalZone,
       () => {
         console.log('A slab is colliding with the goalZone')
-
-        this.isOverlapping = true
         this.physics.world.removeCollider(collider)
       }
     )
