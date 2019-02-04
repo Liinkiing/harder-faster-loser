@@ -703,8 +703,8 @@
       },
       {
         "type": "image",
-        "key": "deathscreen_second",
-        "url": "/static/assets/sprites/deathscreen/deathscreen_tombestones.png"
+        "key": "deathscreen_tombstones",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_tombstones.png"
       }
     ]
   }
