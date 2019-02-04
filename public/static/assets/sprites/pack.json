@@ -1,5 +1,5 @@
 {
-  "preload": {
+  "game": {
     "files": [
       {
         "type": "json",
@@ -929,11 +929,15 @@
           "frameWidth": 240,
           "frameHeight": 330
         }
-      },
+      }
+    ]
+  },
+  "splashscreen": {
+    "files": [
       {
-        "type": "image",
-        "key": "credits",
-        "url": "/static/assets/sprites/splashscreen/credits.png"
+        "type": "json",
+        "key": "splashscreen_animations",
+        "url": "/static/assets/sprites/splashscreen_animations.json"
       },
       {
         "type": "spritesheet",
@@ -960,6 +964,42 @@
           "/static/assets/sounds/wind.ogg",
           "/static/assets/sounds/wind.m4a",
           "/static/assets/sounds/wind.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "clock",
+        "url": [
+          "/static/assets/sounds/clock.ogg",
+          "/static/assets/sounds/clock.m4a",
+          "/static/assets/sounds/clock.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "falling",
+        "url": [
+          "/static/assets/sounds/falling.ogg",
+          "/static/assets/sounds/falling.m4a",
+          "/static/assets/sounds/falling.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "squash",
+        "url": [
+          "/static/assets/sounds/squash.ogg",
+          "/static/assets/sounds/squash.m4a",
+          "/static/assets/sounds/squash.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "crack",
+        "url": [
+          "/static/assets/sounds/crack.ogg",
+          "/static/assets/sounds/crack.m4a",
+          "/static/assets/sounds/crack.mp3"
         ]
       }
     ]
