@@ -4,6 +4,11 @@ import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
 import Wagon from '../../objects/subway-game/Wagon'
+import gameManager from '../../manager/GameManager'
+
+const SOUND_ERROR = 'error'
+const SOUND_HIT = 'hit'
+const SOUND_SUCCESS = 'success'
 
 export default class SubwayGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
@@ -225,6 +230,10 @@ export default class SubwayGameScene extends MinigameScene {
 
       this.lineContainers[this.indexNextRow].on('pointerup', () => {
         if (this.isOverlapping) {
+          gameManager.audio.playSfx(SOUND_HIT, {
+            detune: -500,
+          })
+
           this.triggerRunAnimation()
           this.updateActiveRows()
 
@@ -244,6 +253,10 @@ export default class SubwayGameScene extends MinigameScene {
 
           this.initListenerOnNextLineContainer()
           this.initColliderOnNextSlab()
+        } else {
+          gameManager.audio.playSfx(SOUND_ERROR, {
+            detune: 500,
+          })
         }
       })
     } else {
@@ -260,6 +273,10 @@ export default class SubwayGameScene extends MinigameScene {
       'subwayTokiWinAnimation',
       true
     )
+
+    gameManager.audio.playSfx(SOUND_SUCCESS, {
+      detune: -500,
+    })
 
     tokiWinAnimation.on('animationcomplete', () => {
       console.log('toki win animation finished')
@@ -291,7 +308,7 @@ export default class SubwayGameScene extends MinigameScene {
           },
           repeat: 0,
           onComplete: () => {
-            // finished
+            this.onSuccess()
           },
         })
       })
