@@ -685,11 +685,6 @@
       },
       {
         "type": "image",
-        "key": "deathscreen_tombstones",
-        "url": "/static/assets/sprites/deathscreen/deathscreen_tombstones.png"
-      },
-      {
-        "type": "image",
         "key": "deathscreen_stage_set_0",
         "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_0.png"
       },
@@ -707,6 +702,16 @@
         "type": "image",
         "key": "deathscreen_clouds_1",
         "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_1.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_tombstones",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_tombstones.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_graveyard_background",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_graveyard_background.png"
       }
     ]
   }

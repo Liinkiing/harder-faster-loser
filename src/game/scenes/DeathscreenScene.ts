@@ -10,7 +10,7 @@ export default class DeathscreenScene extends BaseScene {
   private stageSet?: Phaser.GameObjects.Sprite
   private cloud?: Phaser.GameObjects.Sprite
   private rain?: Phaser.GameObjects.Sprite
-  private tombstones?: Phaser.GameObjects.Sprite
+  private tombstones: Phaser.GameObjects.Sprite[] = []
   private timeoutLightning?: any
   private timeoutResetLightning?: any
   private firstPartDestroyed: boolean = false
@@ -23,15 +23,15 @@ export default class DeathscreenScene extends BaseScene {
 
   public create(): void {
     super.create()
-    this.initFirstPart()
+    //this.initFirstPart()
+    this.initSecondPart()
+    // setTimeout(() => {
+    //   this.destroyFirstPart()
+    // }, 3000)
 
-    setTimeout(() => {
-      this.destroyFirstPart()
-    }, 3000)
-
-    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
-      this.initSecondPart()
-    })
+    // Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
+    //   this.initSecondPart()
+    // })
   }
 
   private destroyFirstPart(): void {
@@ -91,12 +91,42 @@ export default class DeathscreenScene extends BaseScene {
   }
 
   private initSecondPart(): void {
-    this.tombstones = this.add
-      .sprite(0, 0, 'deathscreen_tombstones')
+    const ROWS = 7
+    const COLUMNS = 4
+
+    const graveyardBackground = this.add
+      .sprite(0, 0, 'deathscreen_graveyard_background')
       .setOrigin(0)
 
-    const ratioTombestones =
-      Number(this.game.config.width) / this.tombstones.width
-    this.tombstones.setScale(ratioTombestones)
+    const ratioGraveyardBackground =
+      Number(this.game.config.width) / graveyardBackground.width
+    graveyardBackground.setScale(ratioGraveyardBackground)
+
+    for (let i = 0; i < COLUMNS; i++) {
+      for (let j = 0; j < ROWS; j++) {
+        const tombe = this.add
+          .sprite(0, 0, 'deathscreen_tombstones')
+          .setOrigin(0)
+
+        const ratioTombestones =
+          (Number(this.game.config.width) - 25 * COLUMNS) /
+          tombe.width /
+          COLUMNS
+        tombe.setScale(ratioTombestones)
+
+        tombe.width = tombe.width * ratioTombestones
+        tombe.height = tombe.height * ratioTombestones
+
+        const gapX =
+          (Number(this.game.config.width) - tombe.width * COLUMNS) /
+          (COLUMNS + 1)
+        const gapY =
+          (Number(this.game.config.height) - tombe.height * ROWS) / (ROWS + 1)
+        tombe.x = gapX + (gapX + tombe.width) * i
+        tombe.y = gapY + (gapY + tombe.height) * j
+
+        this.tombstones.push(tombe)
+      }
+    }
   }
 }
