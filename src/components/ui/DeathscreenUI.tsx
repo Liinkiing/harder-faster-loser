@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Emitter } from '../../game/manager/GameManager'
 import { GameEvents } from '../../utils/enums'
@@ -16,15 +16,17 @@ const DeathscreenUI: FunctionComponent = () => {
     </p>
   )
 
-  Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
-    setMessage(
-      <p>
-        {' '}
-        Like Toki, <br /> 3000 people <br />
-        die each year from burnout in France
-      </p>
-    )
-  })
+  useEffect(() => {
+    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
+      setMessage(
+        <p>
+          {' '}
+          Like Toki, <br /> 3000 people <br />
+          die each year from burnout in France
+        </p>
+      )
+    })
+  }, [])
 
   return <Div className="deathscreen-ui">{message}</Div>
 }
