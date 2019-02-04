@@ -104,7 +104,6 @@ export class GameManager {
     Object.keys(GameEvents).forEach(event => {
       Emitter.removeAllListeners(GameEvents[event])
     })
-    console.log('STARTED ' + key)
     if (this.gameFader && config.fade) {
       gameStore.startTransitionning()
       await appear(this.gameFader)
@@ -187,8 +186,6 @@ export class GameManager {
     } else {
       this.pause()
     }
-
-    console.log('TOGGLE PAUSE')
   }
 
   public toggleDebugPause = (): void => {
@@ -204,8 +201,6 @@ export class GameManager {
       this.activeScene!.scene.pause()
       gameDebugStore.pause()
     }
-
-    console.log('TOGGLE PAUSE')
   }
 
   get hasTokiJustLost(): boolean {

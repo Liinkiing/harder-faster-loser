@@ -65,7 +65,6 @@ export default class Spam extends Phaser.GameObjects.Container {
     sprite.setInteractive()
     sprite.on('pointerdown', () => {
       Emitter.emit(GameEvents.SpamClicked, this)
-      console.log('EMITED ' + GameEvents.SpamClicked)
     })
 
     return sprite
@@ -80,7 +79,6 @@ export default class Spam extends Phaser.GameObjects.Container {
     close.setInteractive()
     close.on('pointerdown', () => {
       Emitter.emit(GameEvents.SpamDestroyed, this)
-      console.log('EMITED ' + GameEvents.SpamDestroyed)
       this.destroy(true)
     })
     close.on('pointerover', () => {
