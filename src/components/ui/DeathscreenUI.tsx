@@ -17,14 +17,8 @@ const DeathscreenUI: FunctionComponent = () => {
   )
 
   useEffect(() => {
-    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
-      setMessage(
-        <p>
-          {' '}
-          Like Toki, <br /> 3000 people <br />
-          die each year from burnout in France
-        </p>
-      )
+    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
+      setMessage(<p>{args.text}</p>)
     })
   }, [])
 

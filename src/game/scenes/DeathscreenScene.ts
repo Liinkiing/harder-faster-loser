@@ -25,31 +25,29 @@ export default class DeathscreenScene extends BaseScene {
 
   public create(): void {
     super.create()
-    //this.initFirstPart()
+    this.initFirstPart()
     this.dataContent = dataManager.pickRandomData()
-    this.initSecondPart()
-    // setTimeout(() => {
-    //   this.destroyFirstPart()
-    // }, 3000)
 
-    // Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
-    //   this.initSecondPart()
-    // })
+    setTimeout(() => {
+      this.destroyFirstPart()
+    }, 2000)
+
+    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
+      this.initSecondPart()
+    })
   }
 
   private destroyFirstPart(): void {
     this.firstPartDestroyed = true
 
-    // Destroy timeout
     clearTimeout(this.timeoutResetLightning)
     clearTimeout(this.timeoutLightning)
 
-    // Destroy sprites
     this.stageSet!.destroy()
     this.cloud!.destroy()
     this.rain!.destroy()
 
-    Emitter.emit(GameEvents.DeathscreenFirstSceneDestroyed, this)
+    Emitter.emit(GameEvents.DeathscreenFirstSceneDestroyed, this.dataContent)
   }
 
   private initFirstPart(): void {
