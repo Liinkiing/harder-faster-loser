@@ -52,8 +52,34 @@ export default class SubwayGameScene extends MinigameScene {
     })
   }
 
+  private resetVariables(): void {
+    this.windowHeight = 0
+    this.windowWidth = 0
+    this.normalizedYOffset = 0
+    this.lineContainers = []
+    this.spriteLine = []
+    this.emptySlabs = []
+    this.toki = undefined
+    this.indexCurrentRow = 0
+    this.indexNextRow = 1
+    this.toggleTokiRun = false
+    this.isOverlapping = false
+    this.currentRow = undefined
+    this.nextRow = undefined
+    this.lastLineReached = false
+    this.train = []
+    this.firstTrain = undefined
+    this.doorsActiveTrain = undefined
+    this.activeTrainContainer = undefined
+    this.containers = []
+    this.nextEmptySlab = undefined
+    this.currentEmptySlab = undefined
+    this.goalZone = undefined
+  }
+
   public create() {
     super.create()
+    this.resetVariables()
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
     this.normalizedYOffset =
@@ -165,7 +191,7 @@ export default class SubwayGameScene extends MinigameScene {
   public update(time: number, delta: number): void {
     if (
       this.toggleTokiRun == true &&
-      this.toki!.y > -80 - 105 * (this.indexCurrentRow - 1)
+      this.toki!.y > -60 - 105 * (this.indexCurrentRow - 1)
     ) {
       this.toki!.y -= 5
     } else if (
@@ -181,7 +207,7 @@ export default class SubwayGameScene extends MinigameScene {
       this.toki!.y > -80 - 101 * this.indexCurrentRow
     ) {
       this.toki!.y -= 5
-      this.toki!.x -= 0.8
+      this.toki!.x -= 0.7
     }
 
     this.isOverlapping = this.physics.world.overlap(
@@ -304,7 +330,7 @@ export default class SubwayGameScene extends MinigameScene {
           x: {
             value: `-=${translateValue}`,
             duration: 1300,
-            ease: 'Circ.easeIn',
+            ease: 'Quint.easeIn',
           },
           repeat: 0,
           onComplete: () => {
