@@ -685,6 +685,15 @@
       },
       {
         "type": "spritesheet",
+        "key": "tic_tac",
+        "url": "/static/assets/sprites/splashscreen/spritesheets/tic_tac_133_239.png",
+        "frameConfig": {
+          "frameWidth": 133,
+          "frameHeight": 239
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "splashscreen_02",
         "url": "/static/assets/sprites/splashscreen/spritesheets/splashscreen_02_133_239.png",
         "frameConfig": {
