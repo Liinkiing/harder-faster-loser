@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import { MinigameGuideline as Guideline } from '../../utils/interfaces'
 import styled from 'styled-components'
-import { black } from '../../utils/colors'
+import { darkBlue, pink, yellow } from '../../utils/colors'
 import {
   guidelineAppear,
   guidelineContainerAppear,
@@ -50,14 +50,14 @@ const GuidelineContainer = styled.div<StyledProps>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 200px;
+  height: 100%;
   &::after {
     content: '';
     position: absolute;
     z-index: -1;
     width: 100%;
     height: 100%;
-    background: ${black};
+    background: ${darkBlue};
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.43);
     animation: ${props =>
         props.isLeaving ? guidelineContainerLeaving : guidelineContainerAppear}
@@ -66,6 +66,7 @@ const GuidelineContainer = styled.div<StyledProps>`
 `
 
 const GuidelineTitle = styled.h2<StyledProps>`
+  color: ${yellow};
   text-transform: uppercase;
   font-size: 26px;
   margin-bottom: 20px;
@@ -74,6 +75,7 @@ const GuidelineTitle = styled.h2<StyledProps>`
 `
 
 const GuidelineSubtitle = styled.p<StyledProps>`
+  color: ${pink};
   animation: ${props => (props.isLeaving ? guidelineLeaving : guidelineAppear)}
     0.6s forwards;
 `
