@@ -9,6 +9,8 @@ const SOUND_WIND = 'wind'
 
 export default class SplashscreenScene extends BaseScene {
   private splashscreenIntroduction?: Phaser.GameObjects.Sprite
+  private ticTac?: Phaser.GameObjects.Sprite
+  private loaded = false
 
   constructor() {
     super({
@@ -24,12 +26,34 @@ export default class SplashscreenScene extends BaseScene {
     super.create()
     this.preloadGame()
     gameManager.audio.playAmbientMusic(SOUND_WIND)
-    gameManager.audio.playUniqueSfx('clock', { loop: true, volume: 0.5 })
     gameStore.changeConfig({
       backgroundColor: black,
       fadeColor: black,
     })
     this.splashscreenIntroduction = this.createSplashscreenIntroduction()
+
+    if (!this.loaded) {
+      let tick = false
+      this.time.addEvent({
+        callback: () => {
+          if (!this.loaded) {
+            tick = !tick
+            if (!this.ticTac) {
+              this.ticTac = this.createTicTac()
+            }
+            this.ticTac.setFrame(tick ? 0 : 1)
+            gameManager.audio.playUniqueSfx('clock', {
+              duration: 100,
+              volume: 0.5,
+              seek: tick ? 0.06 : 1.05,
+            })
+          }
+        },
+        delay: 1000,
+        loop: true,
+      })
+    }
+
     this.splashscreenIntroduction.anims.play('splashscreen_01_animation')
   }
 
@@ -51,10 +75,21 @@ export default class SplashscreenScene extends BaseScene {
       .setOrigin(0.5, 0.5)
   }
 
+  private createTicTac = (): Phaser.GameObjects.Sprite => {
+    return this.add
+      .sprite(window.innerWidth / 2, window.innerHeight / 2, 'tic_tac')
+      .setScale(8 / gameStore.ratioResolution)
+      .setOrigin(0.5, 0.5)
+  }
+
   private preloadGame = (): void => {
     this.load
       .pack('game', '/static/assets/sprites/pack.json', 'game')
       .on('complete', async () => {
+        this.loaded = true
+        if (this.ticTac) {
+          this.ticTac!.destroy()
+        }
         await gameWait(this.time, 1) // We wait here because if we come back to the splashscreen scene (e.g from debug)
         // we cant directly play the animation
         this.splashscreenIntroduction!.play('splashscreen_02_animation')
