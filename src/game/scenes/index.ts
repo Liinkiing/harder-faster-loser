@@ -7,6 +7,7 @@ export { default as SandwichGameScene } from './action/SandwichGameScene'
 export { default as PasswordGameScene } from './action/PasswordGameScene'
 export { default as TrafficGameScene } from './action/TrafficGameScene'
 export { default as ElevatorGameScene } from './action/ElevatorGameScene'
+export { default as SubwayGameScene } from './action/SubwayGameScene'
 
 export { default as PostMinigameScene } from './PostMinigameScene'
 

@@ -508,6 +508,34 @@
       {
         "type": "audio",
         "key": "yeah",
+        "url": "/static/assets/sounds/yeah.ogg"
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_character_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "image",
+        "key": "subway_grey_square",
+        "url": "/static/assets/sprites/subway-game/subway_grey_square.png"
+      },
+      {
+        "type": "audio",
+        "key": "yeah",
         "url": [
           "/static/assets/sounds/yeah.ogg",
           "/static/assets/sounds/yeah.m4a",
@@ -673,6 +701,96 @@
           "/static/assets/sounds/horn.m4a",
           "/static/assets/sounds/horn.mp3"
         ]
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_character_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "image",
+        "key": "subway_grey_square",
+        "url": "/static/assets/sprites/subway-game/subway_grey_square.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_run",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_run_120x315.png",
+        "frameConfig": {
+          "frameWidth": 120,
+          "frameHeight": 315
+        }
+      },
+      {
+        "type": "image",
+        "key": "subway_yellow_border_square",
+        "url": "/static/assets/sprites/subway-game/subway_yellow_border_square.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_railroad",
+        "url": "/static/assets/sprites/subway-game/subway_railroad.png"
+      },
+
+      {
+        "type": "image",
+        "key": "subway_first_train",
+        "url": "/static/assets/sprites/subway-game/subway_first_train.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_train",
+        "url": "/static/assets/sprites/subway-game/subway_train.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_active_train",
+        "url": "/static/assets/sprites/subway-game/subway_active_train.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_last_train",
+        "url": "/static/assets/sprites/subway-game/subway_last_train.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_train_door",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_door_660x360.png",
+        "frameConfig": {
+          "frameWidth": 660,
+          "frameHeight": 360
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_train_inside",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_inside_630x390.png",
+        "frameConfig": {
+          "frameWidth": 630,
+          "frameHeight": 390
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_win",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_win_240x330.png",
+        "frameConfig": {
+          "frameWidth": 240,
+          "frameHeight": 330
+        }
       }
     ]
   }
