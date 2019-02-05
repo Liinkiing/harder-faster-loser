@@ -493,7 +493,7 @@
       },
       "showOnStart": true,
       "repeat": 0,
-      "frameRate": 24
+      "frameRate": 12
     }
   ]
 }

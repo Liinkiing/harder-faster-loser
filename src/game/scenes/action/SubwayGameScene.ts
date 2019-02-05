@@ -178,10 +178,10 @@ export default class SubwayGameScene extends MinigameScene {
     if (
       this.toggleTokiRun &&
       this.lastLineReached &&
-      this.toki!.y > -80 - 105 * this.indexCurrentRow
+      this.toki!.y > -80 - 101 * this.indexCurrentRow
     ) {
       this.toki!.y -= 5
-      this.toki!.x -= 1.3
+      this.toki!.x -= 0.8
     }
 
     this.isOverlapping = this.physics.world.overlap(
