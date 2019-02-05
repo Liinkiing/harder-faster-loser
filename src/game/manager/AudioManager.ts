@@ -26,7 +26,7 @@ export default class AudioManager {
   }
 
   set detuneBg(value: number) {
-    if (this.bg) {
+    if (this.bg && this.bg.isPlaying) {
       this.previousDetune = (this.bg as Phaser.Sound.WebAudioSound).detune
       this.bg.play('', {
         detune: value,
@@ -40,7 +40,7 @@ export default class AudioManager {
   }
 
   public untuneBg = (): void => {
-    if (this.bg) {
+    if (this.bg && this.bg.isPlaying) {
       this.bg.play('', {
         detune: this.previousDetune,
         seek: (this.bg as Phaser.Sound.WebAudioSound).seek,
