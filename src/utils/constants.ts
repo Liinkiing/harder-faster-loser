@@ -13,6 +13,7 @@ export const scenesKeys = {
   PasswordGame: 'PASSWORD' + minigameSuffix,
   ElevatorGame: 'ELEVATOR' + minigameSuffix,
   TrafficGame: 'TRAFFIC' + minigameSuffix,
+  SubwayGame: 'SUBWAY' + minigameSuffix,
 
   PostMinigameScene: 'POSTMINIGAME',
 
