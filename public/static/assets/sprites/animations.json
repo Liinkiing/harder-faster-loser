@@ -494,6 +494,18 @@
       "showOnStart": true,
       "repeat": 0,
       "frameRate": 12
+    },
+    {
+      "key": "deathscreen_rain_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "deathscreen_rain",
+        "start": 0,
+        "end": 18
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 10
     }
   ]
 }

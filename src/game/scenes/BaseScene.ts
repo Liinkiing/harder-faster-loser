@@ -34,7 +34,7 @@ export default class BaseScene extends Phaser.Scene {
   }
 
   public update(time: number, delta: number): void {
-    console.log(`update (${this.scene.key})`)
+    //console.log(`update (${this.scene.key})`)
   }
 
   protected initListeners(): void {}

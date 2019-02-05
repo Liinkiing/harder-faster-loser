@@ -704,6 +704,14 @@
       },
       {
         "type": "spritesheet",
+        "key": "deathscreen_rain",
+        "url": "/static/assets/sprites/deathscreen/spritesheets/deathscreen_rain_67_120.png",
+        "frameConfig": {
+          "frameWidth": 67,
+          "frameHeight": 120
+        }
+      },
+      {
         "key": "subway_character_time",
         "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
         "frameConfig": {
@@ -733,6 +741,36 @@
           "frameWidth": 120,
           "frameHeight": 315
         }
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_stage_set_0",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_0.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_stage_set_1",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_1.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_clouds_0",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_0.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_clouds_1",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_1.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_tombstones",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_tombstones.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_graveyard_background",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_graveyard_background.png"
       },
       {
         "type": "image",

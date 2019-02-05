@@ -24,6 +24,8 @@ export enum GameEvents {
   SpamClicked = 'SPAM_CLICKED',
 
   SandwichPicked = 'SANDWICH_PICKED',
+
+  DeathscreenFirstSceneDestroyed = 'DEATH_FIRST_SCENE_DESTROYED',
 }
 
 export enum GameDebugTheme {
