@@ -1,11 +1,11 @@
 import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
-import gameStore from '../../store/GameStore'
 import { randomRange } from '../../utils/functions'
 import { setTimeout } from 'timers'
-import { Emitter } from '../manager/GameManager'
+import gameManager, { Emitter } from '../manager/GameManager'
 import { GameEvents } from '../../utils/enums'
 import dataManager from '../manager/DataManager'
+import { green, lightGray } from '../../utils/colors'
 
 export default class DeathscreenScene extends BaseScene {
   private stageSet?: Phaser.GameObjects.Sprite
@@ -25,6 +25,7 @@ export default class DeathscreenScene extends BaseScene {
 
   public create(): void {
     super.create()
+    gameManager.changeBackgroundColor(lightGray)
     this.initFirstPart()
     this.dataContent = dataManager.pickRandomData()
 
@@ -35,6 +36,11 @@ export default class DeathscreenScene extends BaseScene {
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
       this.initSecondPart()
     })
+  }
+
+  protected destroy(): void {
+    super.destroy()
+    gameManager.changeBackgroundColor(green)
   }
 
   private destroyFirstPart(): void {

@@ -675,6 +675,7 @@
         }
       },
       {
+        "type": "spritesheet",
         "key": "subway_character_time",
         "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
         "frameConfig": {
