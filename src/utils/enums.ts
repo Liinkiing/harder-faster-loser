@@ -15,6 +15,7 @@ export enum GameState {
 export enum BaseEvents {
   SceneInit = 'SCENE_INIT',
   SceneCreated = 'SCENE_CREATED',
+  SceneDestroyed = 'SCENE_DESTROYED',
 }
 
 export enum GameEvents {

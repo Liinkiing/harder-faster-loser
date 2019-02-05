@@ -1,5 +1,5 @@
 {
-  "preload": {
+  "game": {
     "files": [
       {
         "type": "json",
@@ -399,15 +399,6 @@
       },
       {
         "type": "audio",
-        "key": "explosion",
-        "url": [
-          "/static/assets/sounds/explosion.ogg",
-          "/static/assets/sounds/explosion.m4a",
-          "/static/assets/sounds/explosion.mp3"
-        ]
-      },
-      {
-        "type": "audio",
         "key": "tada",
         "url": [
           "/static/assets/sounds/tada.ogg",
@@ -504,34 +495,6 @@
           "/static/assets/sounds/guideline_leave.m4a",
           "/static/assets/sounds/guideline_leave.mp3"
         ]
-      },
-      {
-        "type": "audio",
-        "key": "yeah",
-        "url": "/static/assets/sounds/yeah.ogg"
-      },
-      {
-        "type": "spritesheet",
-        "key": "subway_character_time",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
-        "frameConfig": {
-          "frameWidth": 135,
-          "frameHeight": 300
-        }
-      },
-      {
-        "type": "spritesheet",
-        "key": "subway_toki_time",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
-        "frameConfig": {
-          "frameWidth": 135,
-          "frameHeight": 300
-        }
-      },
-      {
-        "type": "image",
-        "key": "subway_grey_square",
-        "url": "/static/assets/sprites/subway-game/subway_grey_square.png"
       },
       {
         "type": "audio",
@@ -712,6 +675,7 @@
         }
       },
       {
+        "type": "spritesheet",
         "key": "subway_character_time",
         "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
         "frameConfig": {
@@ -829,6 +793,224 @@
           "frameWidth": 240,
           "frameHeight": 330
         }
+      },
+      {
+        "type": "spritesheet",
+        "key": "deathscreen_rain",
+        "url": "/static/assets/sprites/deathscreen/spritesheets/deathscreen_rain_67_120.png",
+        "frameConfig": {
+          "frameWidth": 67,
+          "frameHeight": 120
+        }
+      },
+      {
+        "key": "subway_character_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_time",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
+        "frameConfig": {
+          "frameWidth": 135,
+          "frameHeight": 300
+        }
+      },
+      {
+        "type": "image",
+        "key": "subway_grey_square",
+        "url": "/static/assets/sprites/subway-game/subway_grey_square.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_run",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_run_120x315.png",
+        "frameConfig": {
+          "frameWidth": 120,
+          "frameHeight": 315
+        }
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_stage_set_0",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_0.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_stage_set_1",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_stage_set_1.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_clouds_0",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_0.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_clouds_1",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_clouds_1.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_tombstones",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_tombstones.png"
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_graveyard_background",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_graveyard_background.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_yellow_border_square",
+        "url": "/static/assets/sprites/subway-game/subway_yellow_border_square.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_railroad",
+        "url": "/static/assets/sprites/subway-game/subway_railroad.png"
+      },
+
+      {
+        "type": "image",
+        "key": "subway_first_train",
+        "url": "/static/assets/sprites/subway-game/subway_first_train.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_train",
+        "url": "/static/assets/sprites/subway-game/subway_train.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_active_train",
+        "url": "/static/assets/sprites/subway-game/subway_active_train.png"
+      },
+      {
+        "type": "image",
+        "key": "subway_last_train",
+        "url": "/static/assets/sprites/subway-game/subway_last_train.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_train_door",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_door_660x360.png",
+        "frameConfig": {
+          "frameWidth": 660,
+          "frameHeight": 360
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_train_inside",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_inside_630x390.png",
+        "frameConfig": {
+          "frameWidth": 630,
+          "frameHeight": 390
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "subway_toki_win",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_win_240x330.png",
+        "frameConfig": {
+          "frameWidth": 240,
+          "frameHeight": 330
+        }
+      }
+    ]
+  },
+  "splashscreen": {
+    "files": [
+      {
+        "type": "json",
+        "key": "splashscreen_animations",
+        "url": "/static/assets/sprites/splashscreen_animations.json"
+      },
+      {
+        "type": "spritesheet",
+        "key": "splashscreen_01",
+        "url": "/static/assets/sprites/splashscreen/spritesheets/splashscreen_01_133_239.png",
+        "frameConfig": {
+          "frameWidth": 133,
+          "frameHeight": 239
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "tic_tac",
+        "url": "/static/assets/sprites/splashscreen/spritesheets/tic_tac_133_239.png",
+        "frameConfig": {
+          "frameWidth": 133,
+          "frameHeight": 239
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "splashscreen_02",
+        "url": "/static/assets/sprites/splashscreen/spritesheets/splashscreen_02_133_239.png",
+        "frameConfig": {
+          "frameWidth": 133,
+          "frameHeight": 239
+        }
+      },
+      {
+        "type": "audio",
+        "key": "wind",
+        "url": [
+          "/static/assets/sounds/wind.ogg",
+          "/static/assets/sounds/wind.m4a",
+          "/static/assets/sounds/wind.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "clock",
+        "url": [
+          "/static/assets/sounds/clock.ogg",
+          "/static/assets/sounds/clock.m4a",
+          "/static/assets/sounds/clock.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "falling",
+        "url": [
+          "/static/assets/sounds/falling.ogg",
+          "/static/assets/sounds/falling.m4a",
+          "/static/assets/sounds/falling.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "squash",
+        "url": [
+          "/static/assets/sounds/squash.ogg",
+          "/static/assets/sounds/squash.m4a",
+          "/static/assets/sounds/squash.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "crack",
+        "url": [
+          "/static/assets/sounds/crack.ogg",
+          "/static/assets/sounds/crack.m4a",
+          "/static/assets/sounds/crack.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "explosion",
+        "url": [
+          "/static/assets/sounds/explosion.ogg",
+          "/static/assets/sounds/explosion.m4a",
+          "/static/assets/sounds/explosion.mp3"
+        ]
       }
     ]
   }

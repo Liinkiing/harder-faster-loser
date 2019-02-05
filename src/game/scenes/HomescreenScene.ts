@@ -13,6 +13,7 @@ export default class HomescreenScene extends BaseScene {
 
   public create(): void {
     super.create()
+    gameManager.audio.playBg()
     gameManager.changeBackgroundColor(darkBlue)
     this.add
       .sprite(

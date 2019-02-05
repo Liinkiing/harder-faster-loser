@@ -104,13 +104,17 @@ export class GameManager {
     Object.keys(GameEvents).forEach(event => {
       Emitter.removeAllListeners(GameEvents[event])
     })
-    console.log('STARTED ' + key)
     if (this.gameFader && config.fade) {
       gameStore.startTransitionning()
       await appear(this.gameFader)
       this.game.scene.scenes
         .filter(scene => scene.scene.key !== key)
-        .forEach(scene => scene.scene.stop(scene.scene.key))
+        .forEach(scene => {
+          if (scene.scene.key === this.activeScene!.scene.key) {
+            Emitter.emit(BaseEvents.SceneDestroyed)
+          }
+          scene.scene.stop(scene.scene.key)
+        })
       gameManager.resumeMinigame()
       this.game.scene.start(key, optionnalData)
       gameStore.changeState(
@@ -182,8 +186,6 @@ export class GameManager {
     } else {
       this.pause()
     }
-
-    console.log('TOGGLE PAUSE')
   }
 
   public toggleDebugPause = (): void => {
@@ -199,8 +201,6 @@ export class GameManager {
       this.activeScene!.scene.pause()
       gameDebugStore.pause()
     }
-
-    console.log('TOGGLE PAUSE')
   }
 
   get hasTokiJustLost(): boolean {

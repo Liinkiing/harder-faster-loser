@@ -79,6 +79,7 @@ export default class SubwayGameScene extends MinigameScene {
 
   public create() {
     super.create()
+    gameManager.suspendMinigame()
     this.resetVariables()
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
@@ -239,6 +240,7 @@ export default class SubwayGameScene extends MinigameScene {
       },
       repeat: 0,
       onComplete: () => {
+        gameManager.resumeMinigame()
         this.doorsActiveTrain!.anims.resume()
       },
     })
@@ -292,6 +294,7 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerEndTokiAnimation = async () => {
+    gameManager.suspendMinigame()
     await gameWait(this.time, 500)
     this.lastLineReached = true
     this.toggleTokiRun = true

@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameStore from '../store/GameStore'
-import { darkBlue, white } from '../utils/colors'
+import { black, white } from '../utils/colors'
 import GameButton from './ui/GameButton'
 
 interface Props {
@@ -22,7 +22,7 @@ const IntroductionInner = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: ${darkBlue};
+  background: ${black};
   ${GameButton} {
     margin-top: 20px;
   }
