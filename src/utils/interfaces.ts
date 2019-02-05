@@ -1,5 +1,10 @@
 import { GameDebugTheme } from './enums'
 
+export interface DataItem {
+  text: string
+  percent: number
+}
+
 export interface MinigameGuideline {
   title: string
   subtitle: string
