@@ -44,9 +44,13 @@ const RemainingTime: FunctionComponent = () => {
       Emitter.on(GameEvents.MinigameSuccess, () => {
         addToScore(Math.floor(progress))
       })
+      Emitter.on(GameEvents.MinigameFailure, () => {
+        addToScore(0)
+      })
 
       return () => {
         Emitter.removeAllListeners(GameEvents.MinigameSuccess)
+        Emitter.removeAllListeners(GameEvents.MinigameFailure)
       }
     },
     [progress]

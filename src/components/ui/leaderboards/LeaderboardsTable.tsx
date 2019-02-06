@@ -41,11 +41,11 @@ const LeaderboardsTableInner = styled.table`
 
 const LeaderboardsTable: FunctionComponent<Props> = props => {
   const { addUserToLeaderboards } = leaderboardsStore
-  const { secondsElapsed } = gameStore
+  const { score } = gameStore
   const { leaderboards, userRank } = props
   useEffect(() => {
     if (userRank && userRank !== 0) {
-      addUserToLeaderboards(userRank, secondsElapsed)
+      addUserToLeaderboards(userRank, score.current)
     }
   }, [])
 

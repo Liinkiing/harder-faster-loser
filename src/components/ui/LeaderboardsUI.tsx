@@ -49,7 +49,7 @@ const SocialNetworksIcons = styled.div`
 `
 
 const LeaderboardsUI: FunctionComponent = () => {
-  const { timeElapsed, secondsElapsed } = gameStore
+  const { score } = gameStore
   const {
     fetchLeaderboards,
     fetchRankForScore,
@@ -64,7 +64,7 @@ const LeaderboardsUI: FunctionComponent = () => {
   const fetchResults = useCallback(() => {
     setLoading(true)
     setHasSubmittedScore(false)
-    fetchRankForScore(secondsElapsed)
+    fetchRankForScore(score.current)
       .then(fetchLeaderboards)
       .then(() => {
         setLoading(false)
@@ -84,7 +84,7 @@ const LeaderboardsUI: FunctionComponent = () => {
 
   const onSubmit = () => {
     setLoading(true)
-    postHighscore(username.join(''), secondsElapsed)
+    postHighscore(username.join(''), score.current)
       .then(() => {
         setHasSubmittedScore(true)
         setLoading(false)
@@ -114,7 +114,7 @@ const LeaderboardsUI: FunctionComponent = () => {
         <>
           <LeaderboardsTable userRank={rank} leaderboards={leaderboards} />
           {!hasSubmittedScore && (
-            <LeaderboardsScore>{timeElapsed}</LeaderboardsScore>
+            <LeaderboardsScore>{score.current}</LeaderboardsScore>
           )}
           {!hasSubmittedScore && <LeaderboardsUsernameInput />}
           {!hasSubmittedScore && (

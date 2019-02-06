@@ -90,7 +90,7 @@ class LeaderboardStore {
 
   get facebookUrl() {
     const post = `Hey! Can you beat me at Harder, Faster, Loser ? I've just got a score of ${
-      gameStore.timeElapsed
+      gameStore.score.current
     } and I'm ranked ${this.rank}!`
     const uri = `https://www.facebook.com/sharer/sharer.php?u=${
       window.location.href
@@ -100,7 +100,7 @@ class LeaderboardStore {
 
   get tweetUrl() {
     const tweet = `Hey! Can you beat me at Harder, Faster, Loser ? I've just got a score of ${
-      gameStore.timeElapsed
+      gameStore.score.current
     } and I'm ranked ${this.rank}!`
     const uri = `https://twitter.com/intent/tweet?text=${tweet}&url=${
       window.location.href
