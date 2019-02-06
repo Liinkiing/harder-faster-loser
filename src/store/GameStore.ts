@@ -82,6 +82,7 @@ class GameStore {
       hasJustHeart: false,
     }
     this.difficulty = 1
+    gameManager.audio.detuneBg = 0
     this.startGame()
   }
 
