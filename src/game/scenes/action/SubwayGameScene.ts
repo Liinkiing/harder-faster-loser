@@ -5,6 +5,7 @@ import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
 import Wagon from '../../objects/subway-game/Wagon'
 import gameManager from '../../manager/GameManager'
+import { lightBlue } from '../../../utils/colors'
 
 const SOUND_ERROR = 'error'
 const SOUND_HIT = 'hit'
@@ -81,6 +82,7 @@ export default class SubwayGameScene extends MinigameScene {
     super.create()
     gameManager.suspendMinigame()
     this.resetVariables()
+    gameManager.changeBackgroundColor(lightBlue)
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
     this.normalizedYOffset =
