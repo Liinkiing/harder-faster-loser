@@ -10,6 +10,7 @@ const SOUND_WIND = 'wind'
 export default class SplashscreenScene extends BaseScene {
   private splashscreenIntroduction?: Phaser.GameObjects.Sprite
   private ticTac?: Phaser.GameObjects.Sprite
+  private loader?: Phaser.GameObjects.Image
   private loaded = false
 
   constructor() {
@@ -31,8 +32,22 @@ export default class SplashscreenScene extends BaseScene {
       fadeColor: black,
     })
     this.splashscreenIntroduction = this.createSplashscreenIntroduction()
+    const credits = this.add
+      .image(window.innerWidth / 2, window.innerHeight / 2 + 280, 'credits')
+      .setScale(0.5)
+      .setOrigin(0.5, 0.5)
 
     if (!this.loaded) {
+      this.loader = this.add
+        .sprite(
+          window.innerWidth / 2 + 140,
+          window.innerHeight / 2 + 280,
+          'loader'
+        )
+        .setScale(2)
+        .setOrigin(0.5, 0.5)
+        .play('loader_animation')
+
       let tick = false
       this.time.addEvent({
         callback: () => {
@@ -89,6 +104,9 @@ export default class SplashscreenScene extends BaseScene {
         this.loaded = true
         if (this.ticTac) {
           this.ticTac!.destroy()
+        }
+        if (this.loader) {
+          this.loader.destroy()
         }
         await gameWait(this.time, 1) // We wait here because if we come back to the splashscreen scene (e.g from debug)
         // we cant directly play the animation

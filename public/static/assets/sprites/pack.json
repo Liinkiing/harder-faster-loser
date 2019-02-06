@@ -975,6 +975,15 @@
       },
       {
         "type": "spritesheet",
+        "key": "loader",
+        "url": "/static/assets/sprites/splashscreen/spritesheets/loader_10_10.png",
+        "frameConfig": {
+          "frameWidth": 10,
+          "frameHeight": 10
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "tic_tac",
         "url": "/static/assets/sprites/splashscreen/spritesheets/tic_tac_133_239.png",
         "frameConfig": {
@@ -990,6 +999,11 @@
           "frameWidth": 133,
           "frameHeight": 239
         }
+      },
+      {
+        "type": "image",
+        "key": "credits",
+        "url": "/static/assets/sprites/splashscreen/credits.png"
       },
       {
         "type": "audio",
