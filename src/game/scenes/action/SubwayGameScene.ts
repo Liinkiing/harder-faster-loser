@@ -242,9 +242,14 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private generateEmptySlabPosition(): integer {
-    let index = Math.floor(randomRange(2, 10))
-    while (index === 6) {
-      index = Math.floor(randomRange(2, 10))
+    let index = Math.floor(randomRange(2, this.numberHiddenCharacters * 3 - 3))
+    while (
+      index ===
+      Math.floor(
+        2 * this.numberHiddenCharacters - this.numberHiddenCharacters / 2
+      )
+    ) {
+      index = Math.floor(randomRange(2, this.numberHiddenCharacters * 3 - 3))
     }
     return index
   }
