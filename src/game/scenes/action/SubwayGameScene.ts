@@ -32,7 +32,7 @@ export default class SubwayGameScene extends MinigameScene {
   private gapY: number = 0
   private numberHiddenCharacters: number = 0
 
-  private toggleTokiRun: boolean = false
+  private allowTokiToRun: boolean = true
   private isOverlapping: boolean = false
 
   private currentRow?: Phaser.GameObjects.Container
@@ -67,7 +67,7 @@ export default class SubwayGameScene extends MinigameScene {
     this.toki = undefined
     this.indexCurrentRow = 0
     this.indexNextRow = 1
-    this.toggleTokiRun = false
+    this.allowTokiToRun = true
     this.isOverlapping = false
     this.currentRow = undefined
     this.nextRow = undefined
@@ -220,25 +220,19 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-    if (
-      this.toggleTokiRun == true &&
-      this.toki!.y > -60 - 105 * (this.indexCurrentRow - 1)
-    ) {
-      this.toki!.y -= 5
-    } else if (
-      this.toki!.y <= -80 - 105 * (this.indexCurrentRow - 1) &&
-      this.lastLineReached == false
-    ) {
-      this.toggleTokiRun = false
+    // normal slab
+    let threshold =
+      -(this.gapY + this.slabWidth) * this.indexCurrentRow + this.slabWidth / 2
+    let xIncrement = 0
+
+    if (this.lastLineReached) {
+      threshold = -(this.windowHeight! * (6.6 / 10) - (this.gapY + 2))
+      xIncrement = 1.3
     }
 
-    if (
-      this.toggleTokiRun &&
-      this.lastLineReached &&
-      this.toki!.y > -80 - 101 * this.indexCurrentRow
-    ) {
+    if (this.allowTokiToRun && this.toki!.y > threshold) {
       this.toki!.y -= 5
-      this.toki!.x -= 0.7
+      this.toki!.x -= xIncrement
     }
 
     this.isOverlapping = this.physics.world.overlap(
@@ -328,7 +322,6 @@ export default class SubwayGameScene extends MinigameScene {
     gameManager.suspendMinigame()
     await gameWait(this.time, 500)
     this.lastLineReached = true
-    this.toggleTokiRun = true
     const tokiWinAnimation = this.toki!.anims.play(
       'subwayTokiWinAnimation',
       true
@@ -339,7 +332,7 @@ export default class SubwayGameScene extends MinigameScene {
     })
 
     tokiWinAnimation.on('animationcomplete', () => {
-      this.toggleTokiRun = false
+      this.allowTokiToRun = false
       this.toki!.x =
         this.activeTrainContainer!.width / gameStore.ratioResolution / 2
       this.toki!.y = -25
@@ -403,8 +396,6 @@ export default class SubwayGameScene extends MinigameScene {
       ) as Phaser.GameObjects.Sprite
       this.physics.world.disable(this.currentRow.getByName('empty_slab'))
     }
-
-    this.toggleTokiRun = true
   }
 
   private initColliderOnNextSlab(): void {
