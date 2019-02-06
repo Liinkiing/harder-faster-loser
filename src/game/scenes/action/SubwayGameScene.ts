@@ -226,8 +226,8 @@ export default class SubwayGameScene extends MinigameScene {
     let xIncrement = 0
 
     if (this.lastLineReached) {
-      threshold = -(this.windowHeight! * (6.6 / 10) - (this.gapY + 2))
-      xIncrement = 1.3
+      threshold = -(this.windowHeight! * (6.6 / 10) - (this.gapY + 5))
+      xIncrement = this.gapX / 19.4
     }
 
     if (this.allowTokiToRun && this.toki!.y > threshold) {
