@@ -214,7 +214,7 @@ export default class SubwayGameScene extends MinigameScene {
 
     this.physics.world.enable(this.nextEmptySlab)
 
-    this.initColliderOnNextSlab()
+    this.initGoalZone()
     this.initListenerOnNextLineContainer()
     this.initAnimationTrain()
   }
@@ -304,7 +304,6 @@ export default class SubwayGameScene extends MinigameScene {
           })
 
           this.initListenerOnNextLineContainer()
-          this.initColliderOnNextSlab()
         } else {
           gameManager.audio.playSfx(SOUND_ERROR, {
             detune: 500,
@@ -397,7 +396,7 @@ export default class SubwayGameScene extends MinigameScene {
     }
   }
 
-  private initColliderOnNextSlab(): void {
+  private initGoalZone(): void {
     this.goalZone = this.add
       .rectangle(
         (this.numberHiddenCharacters / 2) * this.slabWidth +
@@ -411,14 +410,6 @@ export default class SubwayGameScene extends MinigameScene {
       .setOrigin(0, 0)
 
     this.physics.world.enable(this.goalZone)
-
-    const collider = this.physics.add.overlap(
-      this.nextEmptySlab as Phaser.GameObjects.GameObject,
-      this.goalZone,
-      () => {
-        this.physics.world.removeCollider(collider)
-      }
-    )
   }
 
   private createRailRoad(): void {
