@@ -29,6 +29,7 @@ export default class SubwayGameScene extends MinigameScene {
   private indexNextRow: number = 1
   private slabWidth: number = 0
   private gapX: number = 0
+  private gapY: number = 0
   private numberHiddenCharacters: number = 0
 
   private toggleTokiRun: boolean = false
@@ -105,10 +106,7 @@ export default class SubwayGameScene extends MinigameScene {
       (this.windowWidth - this.numberHiddenCharacters * this.slabWidth) /
       (this.numberHiddenCharacters + 1)
 
-    const test = (this.windowHeight! * (6.6 / 10) - 4 * 55) / 5
-    console.log(test)
-
-    const gapY = test
+    this.gapY = (this.windowHeight! * (6.6 / 10) - 4 * 55) / 5
 
     while (yPointer < 4) {
       xPointer = 0
@@ -181,8 +179,8 @@ export default class SubwayGameScene extends MinigameScene {
           this.gapX,
         this.windowHeight -
           this.slabWidth / 2 -
-          yPointer * (this.slabWidth + gapY) -
-          gapY,
+          yPointer * (this.slabWidth + this.gapY) -
+          this.gapY,
         this.spriteLine
       )
 
