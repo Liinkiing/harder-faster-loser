@@ -41,13 +41,14 @@ const Score = styled.h2`
 const PostMinigameUI: FunctionComponent = () => {
   const {
     timeElapsed,
+    score,
     config: { backgroundColor },
   } = gameStore
   return (
     <PostMinigameUIInner
       backgroundColor={gameBackgroundColorToCss(backgroundColor)}
     >
-      <Score>{timeElapsed}</Score>
+      <Score>{score}</Score>
       <LivesContainer />
     </PostMinigameUIInner>
   )

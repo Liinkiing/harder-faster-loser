@@ -26,15 +26,31 @@ const ProgressInner = styled.div`
 
 const RemainingTime: FunctionComponent = () => {
   const {
+    addToScore,
     config: { minigameDuration, suspended },
   } = gameStore
   const [remaining, setRemaining] = useState(0)
   const button = useRef<HTMLButtonElement>(null)
+  const progress = 100 - (remaining / minigameDuration) * 100
+
   useGameloop(() => {
     if (button.current) {
       button.current.click()
     }
   })
+
+  useEffect(
+    () => {
+      Emitter.on(GameEvents.MinigameSuccess, () => {
+        addToScore(Math.floor(progress))
+      })
+
+      return () => {
+        Emitter.removeAllListeners(GameEvents.MinigameSuccess)
+      }
+    },
+    [progress]
+  )
 
   if (remaining >= minigameDuration!) {
     gameManager.activeScene!.time.removeAllEvents()
@@ -48,8 +64,6 @@ const RemainingTime: FunctionComponent = () => {
       setRemaining(remaining + 1)
     }
   }
-
-  const progress = 100 - (remaining / minigameDuration) * 100
 
   return (
     <ProgressOuter className="progress remaining-time">

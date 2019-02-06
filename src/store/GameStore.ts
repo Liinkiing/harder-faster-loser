@@ -36,6 +36,7 @@ class GameStore {
   }
 
   @observable public elapsed: number = 0
+  @observable public score: number = 0
   @observable public paused: boolean = false
   @observable public settings: GameSettings = { volume: 1 }
   @observable public config: HFLGameConfig = {
@@ -73,6 +74,7 @@ class GameStore {
       suspended: false,
     })
     this.elapsed = 0
+    this.score = 0
     this.status = {
       hasStress: false,
       hasBrain: true,
@@ -103,6 +105,10 @@ class GameStore {
 
   @action public increaseElapsed = (delta: number = 1): void => {
     this.elapsed += delta
+  }
+
+  @action public addToScore = (score: number): void => {
+    this.score += score
   }
 
   @action public startGame = (): void => {
