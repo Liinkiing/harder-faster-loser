@@ -104,7 +104,11 @@ export default class SubwayGameScene extends MinigameScene {
     this.gapX =
       (this.windowWidth - this.numberHiddenCharacters * this.slabWidth) /
       (this.numberHiddenCharacters + 1)
-    const gapY = 50
+
+    const test = (this.windowHeight! * (6.6 / 10) - 4 * 55) / 5
+    console.log(test)
+
+    const gapY = test
 
     while (yPointer < 4) {
       xPointer = 0
@@ -124,7 +128,11 @@ export default class SubwayGameScene extends MinigameScene {
         }
 
         const slab = this.add
-          .sprite(xPointer * (this.slabWidth + this.gapX), gapY, slabTextureKey)
+          .sprite(
+            xPointer * (this.slabWidth + this.gapX),
+            this.slabWidth / 2,
+            slabTextureKey
+          )
           .setOrigin(0, 1)
           .setScale(1 / gameStore.ratioResolution)
           .setDepth(-1)
@@ -149,7 +157,7 @@ export default class SubwayGameScene extends MinigameScene {
           const character = this.add
             .sprite(
               xPointer * (this.slabWidth + this.gapX),
-              gapY,
+              this.slabWidth / 2,
               characterTextureKey
             )
             .setOrigin(0, 1)
@@ -171,7 +179,10 @@ export default class SubwayGameScene extends MinigameScene {
       const currentLineContainer = this.add.container(
         -(this.numberHiddenCharacters * (this.slabWidth + this.gapX)) +
           this.gapX,
-        this.windowHeight - 80 - yPointer * 105,
+        this.windowHeight -
+          this.slabWidth / 2 -
+          yPointer * (this.slabWidth + gapY) -
+          gapY,
         this.spriteLine
       )
 
