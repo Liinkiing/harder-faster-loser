@@ -107,7 +107,6 @@ export default class SandwichGameScene extends MinigameScene {
         (this.grounds![0].height * 14) / gameStore.ratioResolution,
       playerTexture
     )
-    // .setOrigin(0, 1)
 
     sprite.setOrigin(0, 1).setScale(14 / gameStore.ratioResolution)
 
