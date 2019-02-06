@@ -43,7 +43,7 @@ const SpritesheetContainer = styled.div`
 `
 
 const PauseModal: FunctionComponent = props => {
-  const { resume } = gameManager
+  const { resume, restartGame } = gameManager
   let PauseAnimation = (
     <Spritesheet
       image={cigaretteSpritesheet}
@@ -78,7 +78,7 @@ const PauseModal: FunctionComponent = props => {
         <WarningSize />
         <SpritesheetContainer>{PauseAnimation}</SpritesheetContainer>
         <GameButton onClick={resume}>Resume</GameButton>
-        <GameButton>Quit</GameButton>
+        <GameButton onClick={restartGame}>Quit</GameButton>
       </PauseModalContainer>
     </ModalsContainer>
   )
