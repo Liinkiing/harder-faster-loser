@@ -220,7 +220,6 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-    // normal slab
     let threshold =
       -(this.gapY + this.slabWidth) * this.indexCurrentRow + this.slabWidth / 2
     let xIncrement = 0
