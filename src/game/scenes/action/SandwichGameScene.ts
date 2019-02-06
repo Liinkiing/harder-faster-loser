@@ -293,6 +293,9 @@ export default class SandwichGameScene extends MinigameScene {
 
       btn.on('pointerdown', () => {
         if (this.isControlsEnabled) {
+          if (btn.texture.key.includes('on')) {
+            this.animateGame()
+          }
           if (btn === this.leftBtn) {
             this.leftBtn.setTexture('btn_left_off')
             this.rightBtn!.setTexture('btn_right_on')
@@ -300,7 +303,6 @@ export default class SandwichGameScene extends MinigameScene {
             this.leftBtn!.setTexture('btn_left_on')
             this.rightBtn!.setTexture('btn_right_off')
           }
-          this.animateGame()
         }
       })
     })
