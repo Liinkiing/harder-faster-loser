@@ -27,6 +27,9 @@ export default class SubwayGameScene extends MinigameScene {
   private toki?: Phaser.GameObjects.Sprite
   private indexCurrentRow: number = 0
   private indexNextRow: number = 1
+  private slabWidth: number = 0
+  private gapX: number = 0
+  private numberHiddenCharacters: number = 0
 
   private toggleTokiRun: boolean = false
   private isOverlapping: boolean = false
@@ -92,19 +95,27 @@ export default class SubwayGameScene extends MinigameScene {
     this.createRailRoad()
     this.createTrain()
 
-    let xCounter = 0
-    let yCounter = 0
+    let xPointer = 0
+    let yPointer = 0
 
-    while (yCounter < 4) {
-      xCounter = 0
+    this.numberHiddenCharacters = Math.floor(this.windowWidth / 90)
+    const xCounter = this.numberHiddenCharacters * 3
+    this.slabWidth = 55
+    this.gapX =
+      (this.windowWidth - this.numberHiddenCharacters * this.slabWidth) /
+      (this.numberHiddenCharacters + 1)
+    const gapY = 50
+
+    while (yPointer < 4) {
+      xPointer = 0
       this.spriteLine = []
       const indexEmptySlab = this.generateEmptySlabPosition()
 
-      while (xCounter < 12) {
+      while (xPointer < xCounter) {
         let slabTextureKey = ''
         let isEmptySlab = false
 
-        if (xCounter === indexEmptySlab && yCounter > 0) {
+        if (xPointer === indexEmptySlab && yPointer > 0) {
           slabTextureKey = 'subway_yellow_border_square'
           isEmptySlab = true
         } else {
@@ -113,7 +124,7 @@ export default class SubwayGameScene extends MinigameScene {
         }
 
         const slab = this.add
-          .sprite(xCounter * 90, 50, slabTextureKey)
+          .sprite(xPointer * (this.slabWidth + this.gapX), gapY, slabTextureKey)
           .setOrigin(0, 1)
           .setScale(1 / gameStore.ratioResolution)
           .setDepth(-1)
@@ -128,12 +139,19 @@ export default class SubwayGameScene extends MinigameScene {
         if (!isEmptySlab) {
           let characterTextureKey = ''
 
-          xCounter === 6 && yCounter == 0
+          xPointer ===
+            Math.floor(
+              2 * this.numberHiddenCharacters - this.numberHiddenCharacters / 2
+            ) && yPointer == 0
             ? (characterTextureKey = 'subwayTokiTimeAnimation')
             : (characterTextureKey = 'subwayCharacterTimeAnimation')
 
           const character = this.add
-            .sprite(xCounter * 90, 50, characterTextureKey)
+            .sprite(
+              xPointer * (this.slabWidth + this.gapX),
+              gapY,
+              characterTextureKey
+            )
             .setOrigin(0, 1)
             .setScale(1 / gameStore.ratioResolution)
             .setDepth(-1)
@@ -147,12 +165,13 @@ export default class SubwayGameScene extends MinigameScene {
           }
         }
 
-        xCounter += 1
+        xPointer += 1
       }
 
       const currentLineContainer = this.add.container(
-        -this.windowWidth + 45,
-        this.windowHeight - 80 - yCounter * 105,
+        -(this.numberHiddenCharacters * (this.slabWidth + this.gapX)) +
+          this.gapX,
+        this.windowHeight - 80 - yPointer * 105,
         this.spriteLine
       )
 
@@ -171,7 +190,7 @@ export default class SubwayGameScene extends MinigameScene {
       this.input.setDraggable(currentLineContainer)
       this.lineContainers[this.lineContainers.length] = currentLineContainer
 
-      yCounter += 1
+      yPointer += 1
     }
 
     this.lineContainers[0].setDepth(1)
@@ -311,8 +330,6 @@ export default class SubwayGameScene extends MinigameScene {
     })
 
     tokiWinAnimation.on('animationcomplete', () => {
-      console.log('toki win animation finished')
-
       this.toggleTokiRun = false
       this.toki!.x =
         this.activeTrainContainer!.width / gameStore.ratioResolution / 2
@@ -384,7 +401,8 @@ export default class SubwayGameScene extends MinigameScene {
   private initColliderOnNextSlab(): void {
     this.goalZone = this.add
       .rectangle(
-        this.windowWidth! / 2 + 22,
+        (this.numberHiddenCharacters / 2) * this.slabWidth +
+          (this.numberHiddenCharacters / 2 + 1) * this.gapX,
         0,
         56,
         this.windowHeight,
@@ -399,7 +417,6 @@ export default class SubwayGameScene extends MinigameScene {
       this.nextEmptySlab as Phaser.GameObjects.GameObject,
       this.goalZone,
       () => {
-        console.log('A slab is colliding with the goalZone')
         this.physics.world.removeCollider(collider)
       }
     )
