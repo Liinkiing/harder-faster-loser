@@ -198,11 +198,12 @@ export default class SubwayGameScene extends MinigameScene {
       currentLineContainer.setInteractive({ draggable: true })
       this.input.setDraggable(currentLineContainer)
       this.lineContainers[this.lineContainers.length] = currentLineContainer
+      this.lineContainers[this.lineContainers.length - 1].setDepth(
+        100 - yPointer
+      )
 
       yPointer += 1
     }
-
-    this.lineContainers[0].setDepth(1)
 
     this.nextEmptySlab = this.lineContainers[this.indexNextRow].getByName(
       'empty_slab'
