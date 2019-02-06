@@ -230,8 +230,9 @@ export default class SubwayGameScene extends MinigameScene {
 
   private initAnimationTrain(): void {
     const translateValue =
-      this.activeTrainContainer!.x -
-      this.activeTrainContainer!.width / gameStore.ratioResolution / 2 +
+      Number(this.windowWidth) / 2 +
+      (this.activeTrainContainer!.x - this.firstTrain!.x) +
+      this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
     this.tweens.add({
       targets: this.containers,
