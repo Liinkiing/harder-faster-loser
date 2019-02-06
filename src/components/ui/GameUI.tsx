@@ -11,6 +11,7 @@ import Transition from './Transition'
 import gameManager from '../../game/manager/GameManager'
 import gameDebugStore from '../../store/GameDebugStore'
 import LeaderboardsUI from './LeaderboardsUI'
+import IntroductionUI from './IntroductionUI'
 
 const GameUI: FunctionComponent = () => {
   const { state, uiKey } = gameStore
@@ -31,6 +32,9 @@ const GameUI: FunctionComponent = () => {
       break
     case GameState.Homescreen:
       UIComponent = HomescreenUI
+      break
+    case GameState.Introduction:
+      UIComponent = IntroductionUI
       break
     case GameState.Minigame:
       UIComponent = MinigameUI

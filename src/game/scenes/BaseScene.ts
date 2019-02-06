@@ -46,4 +46,12 @@ export default class BaseScene extends Phaser.Scene {
   protected destroy(): void {}
 
   protected initListeners(): void {}
+
+  protected createFillerGraphics = (): void => {
+    const graphics = this.add.graphics()
+    graphics.fillStyle(0xff3300, 0)
+    graphics.fillRect(100, 200, 600, 300)
+    graphics.fillRect(100, 100, 100, 100)
+    this.add.text(-100, -100, this.scene.key)
+  }
 }

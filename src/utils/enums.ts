@@ -5,6 +5,7 @@ export enum GameCategory {
 
 export enum GameState {
   Splashscreen = 'SPLASHSCREEN',
+  Introduction = 'INTRODUCTION',
   Homescreen = 'HOMESCREEN',
   Minigame = 'MINIGAME',
   PostMinigame = 'POSTMINIGAME',

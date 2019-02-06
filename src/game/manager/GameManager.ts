@@ -68,6 +68,11 @@ export class GameManager {
     gameStore.changeState(GameState.Homescreen)
   }
 
+  public loadIntroduction = async () => {
+    await this.startScene(scenesKeys.Introduction)
+    gameStore.changeState(GameState.Introduction)
+  }
+
   public loadMinigame = async (minigameKey: string) => {
     gameManager.suspendMinigame()
     await minigameManager.startGame(minigameKey)
