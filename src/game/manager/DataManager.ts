@@ -10,6 +10,10 @@ export class DataManager {
   public pickRandomData = (): DataItem => {
     return data[Math.floor(randomRange(0, data.length))]
   }
+
+  public pickDataAtIndex = (index: number): DataItem => {
+    return data[index]
+  }
 }
 
 const dataManager = new DataManager()
