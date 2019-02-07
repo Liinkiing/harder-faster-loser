@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, MouseEventHandler } from 'react'
 import styled from 'styled-components'
 import { green, lightGray, white } from '../../../utils/colors'
 import PauseIcon from '../icons/PauseIcon'
@@ -52,11 +52,16 @@ const GamePauseButton: FunctionComponent = () => {
   const { paused, canPause, showingGuideline } = gameStore
   const { togglePause } = gameManager
 
+  const onClick = () => {
+    gameManager.vibrate(30)
+    togglePause()
+  }
+
   return (
     <Button
       disabled={showingGuideline || !canPause}
       paused={paused}
-      onClick={togglePause}
+      onClick={onClick}
     >
       <PauseIcon />
     </Button>

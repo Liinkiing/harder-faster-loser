@@ -35,6 +35,7 @@ const BigButton: FunctionComponent<Props> = props => {
   const { onClick } = props
 
   const onClickHandler: MouseEventHandler<HTMLButtonElement> = evt => {
+    gameManager.vibrate(30)
     if (gameManager.audio) {
       gameManager.audio.playSfx('explosion')
     }

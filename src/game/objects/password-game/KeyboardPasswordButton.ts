@@ -3,6 +3,7 @@ import gameStore from '../../../store/GameStore'
 import { Emitter } from '../../manager/GameManager'
 import { GameEvents } from '../../../utils/enums'
 import { Omit } from '../../../utils/types'
+import gameManager from '../../manager/GameManager'
 
 export type Code = '◻' | '▲' | '|||' | '☰' | 'O' | 'U'
 
@@ -54,6 +55,7 @@ export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
         this.setTexture(`${texture}`)
       })
       this.on('pointerdown', () => {
+        gameManager.vibrate()
         Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, this.code)
       })
     }

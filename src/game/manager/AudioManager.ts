@@ -19,10 +19,15 @@ export default class AudioManager {
     return this.sound.mute
   }
 
+  set volume(value: number) {
+    this.sound.volume = value
+  }
+
   constructor(private gm: GameManager) {
     this.sound = gm.game.sound
     this.previousDetune = this.sound.detune
     this.sound.pauseOnBlur = true
+    this.sound.volume = gameStore.settings.volume
   }
 
   set detuneBg(value: number) {

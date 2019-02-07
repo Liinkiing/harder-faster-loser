@@ -17,6 +17,7 @@ export interface KeyboardShortcut {
 
 export interface GameSettings {
   volume: number
+  vibrations: boolean
 }
 
 export interface HideableProps {

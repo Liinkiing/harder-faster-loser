@@ -3,6 +3,7 @@ import gameStore from '../../store/GameStore'
 import { Emitter } from '../manager/GameManager'
 import { GameEvents } from '../../utils/enums'
 import { randomRange } from '../../utils/functions'
+import gameManager from '../manager/GameManager'
 
 export default class Spam extends Phaser.GameObjects.Container {
   private readonly spamContent?: Phaser.GameObjects.Sprite
@@ -64,6 +65,7 @@ export default class Spam extends Phaser.GameObjects.Container {
     sprite.anims.play(this.texture)
     sprite.setInteractive()
     sprite.on('pointerdown', () => {
+      gameManager.vibrate()
       Emitter.emit(GameEvents.SpamClicked, this)
     })
 
@@ -78,6 +80,7 @@ export default class Spam extends Phaser.GameObjects.Container {
       .setScale(1 / gameStore.ratioResolution)
     close.setInteractive()
     close.on('pointerdown', () => {
+      gameManager.vibrate()
       Emitter.emit(GameEvents.SpamDestroyed, this)
       this.destroy(true)
     })

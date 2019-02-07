@@ -293,6 +293,7 @@ export default class SandwichGameScene extends MinigameScene {
         if (this.isControlsEnabled) {
           if (btn.texture.key.includes('on')) {
             this.animateGame()
+            gameManager.vibrate()
           }
           if (btn === this.leftBtn) {
             this.leftBtn.setTexture('btn_left_off')

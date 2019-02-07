@@ -219,6 +219,7 @@ export default class ElevatorGameScene extends MinigameScene {
 
     const onPointerDown = () => {
       this.destroyActionIndicator()
+      gameManager.vibrate()
       this.hitCaseCallElevator++
       if (this.hitCaseCallElevator === this.nbrHitCaseCall) {
         this.currentFrame++
