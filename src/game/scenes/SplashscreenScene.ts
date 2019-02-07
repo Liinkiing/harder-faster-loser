@@ -75,10 +75,6 @@ export default class SplashscreenScene extends BaseScene {
   public update(time: number, delta: number): void {}
 
   protected destroy(): void {
-    gameStore.changeConfig({
-      backgroundColor: green,
-      fadeColor: green,
-    })
     gameManager.audio.stopAmbientMusic()
     gameManager.audio.stopUniqueSfx()
   }
@@ -117,7 +113,7 @@ export default class SplashscreenScene extends BaseScene {
           await gameWait(this.time, 500)
           gameManager.audio.playUniqueSfx('squash', { volume: 0.7 })
           await gameWait(this.time, 1000)
-          gameManager.loadHomescreen()
+          gameManager.loadIntroduction()
         })
       })
     this.load.start()
