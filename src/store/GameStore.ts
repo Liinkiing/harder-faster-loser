@@ -15,6 +15,8 @@ interface TokiStatus {
   hasJustHeart: boolean
 }
 
+const LS_GAME_SETTINGS = 'settings'
+
 const MINIGAME_DURATION = 500
 const REMAINING_PAUSE = 10
 
@@ -41,7 +43,7 @@ class GameStore {
     current: 0,
   }
   @observable public paused: boolean = false
-  @observable public settings: GameSettings = { volume: 1 }
+  @observable public settings: GameSettings = { volume: 1, vibrations: true }
   @observable public config: HFLGameConfig = {
     dev: process.env.NODE_ENV === 'development',
     suspended: false,
@@ -57,6 +59,20 @@ class GameStore {
   public uiKey: string = new Phaser.Math.RandomDataGenerator().uuid()
 
   constructor(private client: HFLApiClient) {
+    if (!window.localStorage.getItem(LS_GAME_SETTINGS)) {
+      window.localStorage.setItem(
+        LS_GAME_SETTINGS,
+        JSON.stringify(this.settings)
+      )
+    }
+    this.settings = JSON.parse(window.localStorage.getItem(LS_GAME_SETTINGS)!)
+    reaction(
+      () => this.settings,
+      settings => {
+        window.localStorage.setItem(LS_GAME_SETTINGS, JSON.stringify(settings))
+        gameManager.audio.volume = settings.volume
+      }
+    )
     reaction(
       () => this.difficulty,
       difficulty => {

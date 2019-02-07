@@ -51,6 +51,12 @@ export class GameManager {
   }
 
   public vibrate = (pattern: number | number[] = 10): boolean => {
+    const {
+      settings: { vibrations },
+    } = gameStore
+    if (!vibrations) {
+      return false
+    }
     return window.navigator.vibrate(pattern)
   }
 
