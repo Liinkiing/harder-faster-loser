@@ -328,7 +328,10 @@ export default class SubwayGameScene extends MinigameScene {
         }
       })
     } else {
-      this.lineContainers![this.indexCurrentRow].input.draggable = false
+      this.lineContainers.forEach(lineContainer => {
+        lineContainer.input.draggable = false
+      })
+
       this.triggerEndTokiAnimation()
     }
   }
