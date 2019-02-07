@@ -25,6 +25,7 @@ export default class DeathscreenScene extends BaseScene {
 
   public create(): void {
     super.create()
+    this.resetClassVariables()
     gameManager.changeBackgroundColor(lightGray)
     this.initFirstPart()
     this.dataContent = dataManager.pickRandomData()
@@ -36,6 +37,17 @@ export default class DeathscreenScene extends BaseScene {
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
       this.initSecondPart()
     })
+  }
+
+  private resetClassVariables(): void {
+    this.stageSet = undefined
+    this.cloud = undefined
+    this.rain = undefined
+    this.tombstones = []
+    this.timeoutLightning = null
+    this.timeoutResetLightning = null
+    this.firstPartDestroyed = false
+    this.dataContent = null
   }
 
   protected destroy(): void {
