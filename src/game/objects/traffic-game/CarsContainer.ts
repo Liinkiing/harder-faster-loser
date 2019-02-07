@@ -11,7 +11,7 @@ export default class CarsContainer {
 
   constructor(scene: Phaser.Scene) {
     let yCounter = 0
-    const heightRoadT = 390 / gameStore.ratioResolution
+    const heightRoadT = (390 * 15) / gameStore.ratioResolution
 
     while (yCounter < 3) {
       this.carLines[yCounter] = new CarLine({

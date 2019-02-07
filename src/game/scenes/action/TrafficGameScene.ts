@@ -74,13 +74,6 @@ export default class TraficGameScene extends MinigameScene {
       volume: 0.4,
     })
 
-    // this.roads = new RoadsContainer({
-    //   scene: this,
-    //   x: 0,
-    //   y: 0
-    // })
-
-    // this.cars = new CarsContainer(this)
     this.resetAllClassVariables()
 
     this.createRoad()
@@ -93,16 +86,16 @@ export default class TraficGameScene extends MinigameScene {
   public update = (time: number, delta: number): void => {
     if (
       this.cursorRageBar!.x >
-      10 + this.cursorRageBar!.width / gameStore.ratioResolution
+      10 + (this.cursorRageBar!.width * 15) / gameStore.ratioResolution
     ) {
       this.cursorRageBar!.x -= 0.8
     }
 
     if (
       this.cursorRageBar!.x <
-        this.rageBar!.width / gameStore.ratioResolution / 2 - 50 ||
+        (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 - 50 ||
       this.cursorRageBar!.x >
-        this.rageBar!.width / gameStore.ratioResolution / 2 + 50
+        (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 + 50
     ) {
       this.isCursorInSafeArea = false
     } else {
@@ -110,7 +103,7 @@ export default class TraficGameScene extends MinigameScene {
     }
 
     if (this.isCursorInSafeArea) {
-      this.tokisRow!.x += 1
+      this.tokisRow!.x += 2
     }
 
     if (
@@ -125,14 +118,14 @@ export default class TraficGameScene extends MinigameScene {
   private createControls(): Phaser.GameObjects.Container {
     this.horn = this.add
       .sprite(0, 0, 'horn_off')
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
       .setInteractive()
       .setOrigin(0, 0.5)
 
     this.horn.input.hitArea.setSize(this.horn.width, this.horn.height)
 
     const rageBarContainer = this.add.container(
-      this.horn.width / gameStore.ratioResolution - 15,
+      (this.horn.width * 15) / gameStore.ratioResolution - 15,
       0,
       this.createRageBar()
     )
@@ -151,7 +144,8 @@ export default class TraficGameScene extends MinigameScene {
       rageBarContainer.height + this.horn!.height
     )
 
-    controlsContainer.x = controlsContainer.x - controlsContainer.width / 2
+    controlsContainer.x =
+      controlsContainer.x - (controlsContainer.width * 15) / 2
 
     this.horn.on('pointerdown', () => {
       this.horn!.setTexture('traffic_horn_on')
@@ -159,7 +153,7 @@ export default class TraficGameScene extends MinigameScene {
         volume: 0.3,
       })
       this.hornSprite!.alpha = 1
-      this.cursorRageBar!.x += 10
+      this.cursorRageBar!.x += 20
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
@@ -175,8 +169,8 @@ export default class TraficGameScene extends MinigameScene {
 
   private createRageBar(): any {
     this.rageBar = this.add
-      .sprite(0, 0, 'rage_bar')
-      .setScale(1 / gameStore.ratioResolution)
+      .sprite(0, 2, 'rage_bar')
+      .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
     const safeAreaWidth =
@@ -185,19 +179,19 @@ export default class TraficGameScene extends MinigameScene {
     this.safeRageBarArea = this.add.graphics()
     this.safeRageBarArea.fillStyle(0x6adeb8, 1)
     this.safeRageBarArea.fillRect(
-      this.rageBar.width / gameStore.ratioResolution / 2 - 50,
-      -(this.rageBar.height / gameStore.ratioResolution) / 2 + 4,
+      (this.rageBar.width * 15) / gameStore.ratioResolution / 2 - 50,
+      -((this.rageBar.height * 15) / gameStore.ratioResolution) / 2 + 4,
       safeAreaWidth,
-      this.rageBar.height / gameStore.ratioResolution - 16
+      (this.rageBar.height * 15) / gameStore.ratioResolution - 15
     )
 
     this.cursorRageBar = this.add
       .sprite(
-        this.rageBar.width / gameStore.ratioResolution / 2,
+        (this.rageBar.width * 15) / gameStore.ratioResolution / 2,
         -3,
         'rage_cursor'
       )
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
 
     return [this.rageBar, this.safeRageBarArea, this.cursorRageBar]
   }
@@ -205,20 +199,20 @@ export default class TraficGameScene extends MinigameScene {
   private createRoad(): void {
     this.roads![this.roads!.length] = this.add
       .sprite(0, Number(this.game.config.height), 'road')
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 1)
 
     let xCounter = 0
     let yCounter = 0
     const windowWidth = Number(this.game.config.width)
     const windowHeight = Number(this.game.config.height)
-    const widthRoadT = this.roads![0].width / gameStore.ratioResolution
-    const heightRoadT = this.roads![0].height / gameStore.ratioResolution
+    const widthRoadT = (this.roads![0].width * 15) / gameStore.ratioResolution
+    const heightRoadT = (this.roads![0].height * 15) / gameStore.ratioResolution
     const xRepeatCount = Math.ceil(windowWidth / widthRoadT)
     const yRepeatCount = Math.ceil(windowHeight / heightRoadT)
 
-    this.heightRoad = this.roads![0].height
-    const widthRoad = this.roads![0].width
+    this.heightRoad = this.roads![0].height * 15
+    const widthRoad = this.roads![0].width * 15
 
     while (yCounter < yRepeatCount) {
       xCounter = 0
@@ -232,7 +226,7 @@ export default class TraficGameScene extends MinigameScene {
               (this.heightRoad / gameStore.ratioResolution) * yCounter,
             'road'
           )
-          .setScale(1 / gameStore.ratioResolution)
+          .setScale(15 / gameStore.ratioResolution)
           .setOrigin(0, 1)
 
         this.roads![this.roads!.length] = road
@@ -301,23 +295,23 @@ export default class TraficGameScene extends MinigameScene {
               (heightRoad / gameStore.ratioResolution) * yCounter,
             carKey
           )
-          .setScale(1 / gameStore.ratioResolution)
+          .setScale(15 / gameStore.ratioResolution)
           .setOrigin(0, 1)
           .setDepth(1000 - yCounter)
         car.anims.play(carKey, true)
 
-        this.widthLastCar = car.width / gameStore.ratioResolution
+        this.widthLastCar = (car.width * 15) / gameStore.ratioResolution
         this.positionXLastCar = car.x
 
         // Ajout du sprite du klaxon
         if (carKey === 'traffic_toki_animation') {
           this.hornSprite = this.add
             .sprite(
-              car.x + car.width / gameStore.ratioResolution / 2 + 15,
+              car.x + (car.width * 15) / gameStore.ratioResolution / 2 + 15,
               car.y - 25,
               'traffic_horn_animation'
             )
-            .setScale(1 / gameStore.ratioResolution)
+            .setScale(15 / gameStore.ratioResolution)
             .setOrigin(0.5, 1)
             .setDepth(10)
 

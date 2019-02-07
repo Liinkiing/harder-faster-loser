@@ -11,7 +11,7 @@ export default class Car extends Phaser.GameObjects.Sprite {
 
     const car = params.scene.add
       .sprite(params.x, params.y, params.texture)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 1)
     car.anims.play(params.texture, true)
   }
