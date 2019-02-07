@@ -112,28 +112,30 @@ export default class DeathscreenScene extends BaseScene {
     const thresHoldData = ROWS * COLUMNS * (this.dataContent.percent / 100)
     for (let j = 0; j < ROWS; j++) {
       for (let i = 0; i < COLUMNS; i++) {
-        if (this.tombstones.length < thresHoldData) {
-          const tombe = this.add
-            .sprite(0, 0, 'deathscreen_tombstones')
-            .setOrigin(0)
+        let textureKey = 'deathscreen_tombstones'
+        if (this.tombstones.length > thresHoldData) {
+          textureKey = 'deathscreen_empty_tombstone'
+        }
+        const tombe = this.add.sprite(0, 0, textureKey).setOrigin(0)
 
-          const ratioTombestones =
-            (Number(this.game.config.width) - 25 * COLUMNS) /
-            tombe.width /
-            COLUMNS
-          tombe.setScale(ratioTombestones)
+        const ratioTombestones =
+          (Number(this.game.config.width) - 25 * COLUMNS) /
+          tombe.width /
+          COLUMNS
+        tombe.setScale(ratioTombestones)
 
-          tombe.width = tombe.width * ratioTombestones
-          tombe.height = tombe.height * ratioTombestones
+        tombe.width = tombe.width * ratioTombestones
+        tombe.height = tombe.height * ratioTombestones
 
-          const gapX =
-            (Number(this.game.config.width) - tombe.width * COLUMNS) /
-            (COLUMNS + 1)
-          const gapY =
-            (Number(this.game.config.height) - tombe.height * ROWS) / (ROWS + 1)
-          tombe.x = gapX + (gapX + tombe.width) * i
-          tombe.y = gapY + (gapY + tombe.height) * j
+        const gapX =
+          (Number(this.game.config.width) - tombe.width * COLUMNS) /
+          (COLUMNS + 1)
+        const gapY =
+          (Number(this.game.config.height) - tombe.height * ROWS) / (ROWS + 1)
+        tombe.x = gapX + (gapX + tombe.width) * i
+        tombe.y = gapY + (gapY + tombe.height) * j
 
+        if (this.tombstones.length <= thresHoldData) {
           this.tombstones.push(tombe)
         }
       }
