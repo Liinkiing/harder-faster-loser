@@ -84,6 +84,16 @@ class GameStore {
         })
       }
     )
+    reaction(
+      () => this.paused,
+      paused => {
+        if (paused) {
+          gameManager.audio.detuneBg = -1200
+        } else {
+          gameManager.audio.untuneBg()
+        }
+      }
+    )
   }
 
   @action public resetGame = (): void => {
@@ -103,7 +113,6 @@ class GameStore {
       hasJustHeart: false,
     }
     this.difficulty = 1
-    gameManager.audio.detuneBg = 0
     this.startGame()
   }
 
