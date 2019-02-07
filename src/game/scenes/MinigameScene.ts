@@ -14,11 +14,13 @@ export default abstract class MinigameScene extends BaseScene {
   }
 
   protected onSuccess(): void {
+    Emitter.emit(GameEvents.MinigameSuccess)
     minigameManager.addCurrentMinigameToPlayedGames()
     gameManager.loadPostMinigame()
   }
 
   protected onFailure(): void {
+    Emitter.emit(GameEvents.MinigameFailure)
     minigameManager.addCurrentMinigameToPlayedGames()
     gameManager.looseLife()
     gameManager.loadPostMinigame()

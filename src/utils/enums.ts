@@ -20,6 +20,9 @@ export enum BaseEvents {
 }
 
 export enum GameEvents {
+  MinigameSuccess = 'MINIGAME_SUCCESS',
+  MinigameFailure = 'MINIGAME_FAILURE',
+
   KeyboardPasswordButtonClicked = 'KEYBOARD_PASSWORD_BUTTON_CLICKED',
   SpamDestroyed = 'SPAM_DESTROYED',
   RemainingTimeOver = 'REMANING_TIME_OVER',

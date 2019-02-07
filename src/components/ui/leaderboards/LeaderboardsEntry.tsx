@@ -36,7 +36,7 @@ const LeaderboardsEntry: FunctionComponent<Props> = props => {
         <>
           <td>{rank}</td>
           <td>{username}</td>
-          <td>{gameStore.getTimeElapsedForSeconds(score)}</td>
+          <td>{score}</td>
         </>
       ) : (
         <>

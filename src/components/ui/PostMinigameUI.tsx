@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled, { keyframes } from 'styled-components'
+import CountUp from 'react-countup'
 import gameStore from '../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import { gameBackgroundColorToCss } from '../../utils/functions'
@@ -9,15 +10,6 @@ import { black } from '../../utils/colors'
 interface StyledProps {
   backgroundColor?: string
 }
-
-const show = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
 
 const PostMinigameUIInner = styled.div<StyledProps>`
   background: ${(props: StyledProps) => props.backgroundColor};
@@ -40,14 +32,17 @@ const Score = styled.h2`
 
 const PostMinigameUI: FunctionComponent = () => {
   const {
-    timeElapsed,
+    score: { previous, current },
     config: { backgroundColor },
   } = gameStore
+
   return (
     <PostMinigameUIInner
       backgroundColor={gameBackgroundColorToCss(backgroundColor)}
     >
-      <Score>{timeElapsed}</Score>
+      <Score>
+        <CountUp start={previous} end={current} />
+      </Score>
       <LivesContainer />
     </PostMinigameUIInner>
   )
