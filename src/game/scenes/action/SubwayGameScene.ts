@@ -80,6 +80,10 @@ export default class SubwayGameScene extends MinigameScene {
     this.nextEmptySlab = undefined
     this.currentEmptySlab = undefined
     this.goalZone = undefined
+    this.gapX = 0
+    this.gapY = 0
+    this.numberHiddenCharacters = 0
+    this.allowTokiToRun = true
   }
 
   public create() {
