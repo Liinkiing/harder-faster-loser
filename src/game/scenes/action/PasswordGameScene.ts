@@ -146,6 +146,19 @@ export default class PasswordGameScene extends MinigameScene {
           )
         })
 
+        buttons.forEach(button => {
+          let offset = 50
+          switch (buttons.length) {
+            case 4:
+              offset = 25
+              break
+            case 5:
+              offset = 0
+              break
+          }
+          button.setX(button.x + offset)
+        })
+
         await gameWait(this.time, PASSWORD_DISPLAY_TIME)
         animation.destroy()
         buttons.forEach(button => button.destroy())
