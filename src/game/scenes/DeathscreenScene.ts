@@ -81,7 +81,7 @@ export default class DeathscreenScene extends BaseScene {
       .setOrigin(0)
       .play('deathscreen_rain_animation')
 
-    const ratioRain = Number(this.game.config.width) / this.rain.width
+    const ratioRain = Number(this.game.config.height) / this.rain.height
     this.rain.setScale(ratioRain)
 
     this.cloud = this.add.sprite(0, 0, 'deathscreen_clouds_0').setOrigin(0)
