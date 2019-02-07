@@ -1,4 +1,5 @@
 export const yellow = '#fcdb73'
+export const lightBlue = '#449BEA'
 export const blue = '#1334ff'
 export const darkBlue = '#091d95'
 export const pink = '#f99bf3'
@@ -32,6 +33,7 @@ export const hexToRgba = (hex: string, alpha: number): string => {
 export default [
   yellow,
   blue,
+  lightBlue,
   pink,
   green,
   orange,
