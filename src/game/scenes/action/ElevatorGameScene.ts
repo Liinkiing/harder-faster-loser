@@ -17,6 +17,8 @@ export default class ElevatorGameScene extends MinigameScene {
     subtitle: 'the elevator',
   }
 
+  protected hasActionIndicators = true
+
   private hasPlayedAngrySound: boolean = false
 
   // Texture
@@ -85,6 +87,15 @@ export default class ElevatorGameScene extends MinigameScene {
     if (this.currentFrame === 14) {
       this.makeTokiIrritated()
     }
+  }
+
+  protected configureActionIndicator = (): void => {
+    this.actionIndicator!.setTexture('hand')
+      .setPosition(window.innerWidth / 2 - 70, window.innerHeight - 245)
+      .setScale(4)
+      .setOrigin(0.5, 0.5)
+      .setDepth(9999)
+      .play('hand_animation')
   }
 
   private createTokiWhistle(): void {
@@ -207,6 +218,7 @@ export default class ElevatorGameScene extends MinigameScene {
     )
 
     const onPointerDown = () => {
+      this.destroyActionIndicator()
       this.hitCaseCallElevator++
       if (this.hitCaseCallElevator === this.nbrHitCaseCall) {
         this.currentFrame++
