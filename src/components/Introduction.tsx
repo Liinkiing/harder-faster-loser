@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameStore from '../store/GameStore'
-import { black, white } from '../utils/colors'
-import GameButton from './ui/GameButton'
+import { green, white } from '../utils/colors'
+import BigButton from './ui/BigButton'
 
 interface Props {
   onLaunchGame: () => void
@@ -18,13 +18,20 @@ const IntroductionInner = styled.div`
   bottom: 0;
   z-index: 1;
   color: ${white};
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: ${black};
-  ${GameButton} {
-    margin-top: 20px;
+  background: ${green};
+  p {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 34px;
+  }
+  ${BigButton} {
+    margin-top: 80px;
   }
 `
 
@@ -33,10 +40,11 @@ const Introduction: FunctionComponent<Props> = props => {
   const { onLaunchGame } = props
   return (
     <IntroductionInner>
-      <h1>Harder, Faster, Loser</h1>
-      <GameButton disabled={loading} onClick={onLaunchGame}>
-        Launch game
-      </GameButton>
+      <p>
+        Dear visitor, we want you to live the best interactive experience. This
+        is why you have to press this button >
+      </p>
+      <BigButton disabled={loading} onClick={onLaunchGame} />
     </IntroductionInner>
   )
 }
