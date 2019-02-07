@@ -1,6 +1,8 @@
 # Harder, Faster, Loser
 
-A game made with **Typescript**, **React** (with _hooks_) and **PhaserJS**
+A game made with **Typescript**, **React** (with _hooks_), **Mobx** and **PhaserJS**
+
+![Splashscreen](https://image.noelshack.com/fichiers/2019/06/4/1549565092-splashscreen-01.gif)
 
 ## Useful links :
 
