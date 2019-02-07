@@ -16,6 +16,7 @@ const GameButton: FunctionComponent<Props> = props => {
     if (gameManager.audio) {
       gameManager.audio.playSfx('explosion')
     }
+    gameManager.vibrate(30)
     if (onClick) {
       onClick(evt)
     }

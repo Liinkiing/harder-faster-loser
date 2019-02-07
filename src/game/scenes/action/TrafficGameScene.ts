@@ -154,6 +154,7 @@ export default class TraficGameScene extends MinigameScene {
       controlsContainer.x - (controlsContainer.width * 15) / 2
 
     this.horn.on('pointerdown', () => {
+      gameManager.vibrate()
       this.destroyActionIndicator()
       this.horn!.setTexture('traffic_horn_on')
       gameManager.audio.playUniqueSfx(HORN_SOUND, {

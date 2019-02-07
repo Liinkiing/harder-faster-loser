@@ -50,6 +50,10 @@ export class GameManager {
     })
   }
 
+  public vibrate = (pattern: number | number[] = 10): boolean => {
+    return window.navigator.vibrate(pattern)
+  }
+
   public startGame = (): void => {
     ;(this.game.scene.getScene(scenesKeys.Boot) as BootScene).startGame()
   }
