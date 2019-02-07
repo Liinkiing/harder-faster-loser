@@ -1,19 +1,16 @@
 import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
-import { randomRange } from '../../utils/functions'
-import { setTimeout } from 'timers'
+import { randomRange, gameWait } from '../../utils/functions'
 import gameManager, { Emitter } from '../manager/GameManager'
 import { GameEvents } from '../../utils/enums'
 import dataManager from '../manager/DataManager'
-import { green, lightGray } from '../../utils/colors'
+import { green, lightGray, black } from '../../utils/colors'
 
 export default class DeathscreenScene extends BaseScene {
   private stageSet?: Phaser.GameObjects.Sprite
   private cloud?: Phaser.GameObjects.Sprite
   private rain?: Phaser.GameObjects.Sprite
   private tombstones: Phaser.GameObjects.Sprite[] = []
-  private timeoutLightning?: any
-  private timeoutResetLightning?: any
   private firstPartDestroyed: boolean = false
   private dataContent?: any
 
@@ -23,19 +20,28 @@ export default class DeathscreenScene extends BaseScene {
     })
   }
 
-  public create(): void {
+  public create = async () => {
     super.create()
+    this.resetClassVariables()
     gameManager.changeBackgroundColor(lightGray)
     this.initFirstPart()
     this.dataContent = dataManager.pickRandomData()
 
-    setTimeout(() => {
-      this.destroyFirstPart()
-    }, 2000)
-
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
       this.initSecondPart()
     })
+
+    await gameWait(this.time, 5000)
+    this.destroyFirstPart()
+  }
+
+  private resetClassVariables(): void {
+    this.stageSet = undefined
+    this.cloud = undefined
+    this.rain = undefined
+    this.tombstones = []
+    this.firstPartDestroyed = false
+    this.dataContent = null
   }
 
   protected destroy(): void {
@@ -45,9 +51,6 @@ export default class DeathscreenScene extends BaseScene {
 
   private destroyFirstPart(): void {
     this.firstPartDestroyed = true
-
-    clearTimeout(this.timeoutResetLightning)
-    clearTimeout(this.timeoutLightning)
 
     this.stageSet!.destroy()
     this.cloud!.destroy()
@@ -69,7 +72,7 @@ export default class DeathscreenScene extends BaseScene {
       .setOrigin(0)
       .play('deathscreen_rain_animation')
 
-    const ratioRain = Number(this.game.config.width) / this.rain.width
+    const ratioRain = Number(this.game.config.height) / this.rain.height
     this.rain.setScale(ratioRain)
 
     this.cloud = this.add.sprite(0, 0, 'deathscreen_clouds_0').setOrigin(0)
@@ -80,21 +83,23 @@ export default class DeathscreenScene extends BaseScene {
     this.initLightning()
   }
 
-  private initLightning(): void {
+  private initLightning = async () => {
     const delayLightning = Math.floor(randomRange(3000, 4000))
-    this.timeoutLightning = setTimeout(() => {
-      if (this.stageSet && this.cloud && !this.firstPartDestroyed) {
-        this.stageSet.setTexture('deathscreen_stage_set_1')
-        this.cloud.setTexture('deathscreen_clouds_1')
 
-        this.timeoutResetLightning = setTimeout(() => {
-          this.stageSet!.setTexture('deathscreen_stage_set_0')
-          this.cloud!.setTexture('deathscreen_clouds_0')
+    await gameWait(this.time, delayLightning)
 
-          this.initLightning()
-        }, 300)
-      }
-    }, delayLightning)
+    if (this.stageSet && this.cloud && !this.firstPartDestroyed) {
+      gameManager.changeBackgroundColor(black)
+      this.stageSet.setTexture('deathscreen_stage_set_1')
+      this.cloud.setTexture('deathscreen_clouds_1')
+
+      await gameWait(this.time, 300)
+      gameManager.changeBackgroundColor(lightGray)
+      this.stageSet!.setTexture('deathscreen_stage_set_0')
+      this.cloud!.setTexture('deathscreen_clouds_0')
+
+      this.initLightning()
+    }
   }
 
   private initSecondPart(): void {
@@ -112,29 +117,32 @@ export default class DeathscreenScene extends BaseScene {
     const thresHoldData = ROWS * COLUMNS * (this.dataContent.percent / 100)
     for (let j = 0; j < ROWS; j++) {
       for (let i = 0; i < COLUMNS; i++) {
-        if (this.tombstones.length < thresHoldData) {
-          const tombe = this.add
-            .sprite(0, 0, 'deathscreen_tombstones')
-            .setOrigin(0)
+        let textureKey = 'deathscreen_tombstones'
+        if (this.tombstones.length > thresHoldData) {
+          textureKey = 'deathscreen_empty_tombstone'
+        }
+        const tombstone = this.add.sprite(0, 0, textureKey).setOrigin(0)
 
-          const ratioTombestones =
-            (Number(this.game.config.width) - 25 * COLUMNS) /
-            tombe.width /
-            COLUMNS
-          tombe.setScale(ratioTombestones)
+        const ratioTombstones =
+          (Number(this.game.config.width) - 25 * COLUMNS) /
+          tombstone.width /
+          COLUMNS
+        tombstone.setScale(ratioTombstones)
 
-          tombe.width = tombe.width * ratioTombestones
-          tombe.height = tombe.height * ratioTombestones
+        tombstone.width = tombstone.width * ratioTombstones
+        tombstone.height = tombstone.height * ratioTombstones
 
-          const gapX =
-            (Number(this.game.config.width) - tombe.width * COLUMNS) /
-            (COLUMNS + 1)
-          const gapY =
-            (Number(this.game.config.height) - tombe.height * ROWS) / (ROWS + 1)
-          tombe.x = gapX + (gapX + tombe.width) * i
-          tombe.y = gapY + (gapY + tombe.height) * j
+        const gapX =
+          (Number(this.game.config.width) - tombstone.width * COLUMNS) /
+          (COLUMNS + 1)
+        const gapY =
+          (Number(this.game.config.height) - tombstone.height * ROWS) /
+          (ROWS + 1)
+        tombstone.x = gapX + (gapX + tombstone.width) * i
+        tombstone.y = gapY + (gapY + tombstone.height) * j
 
-          this.tombstones.push(tombe)
+        if (this.tombstones.length <= thresHoldData) {
+          this.tombstones.push(tombstone)
         }
       }
     }

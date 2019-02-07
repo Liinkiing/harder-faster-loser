@@ -1058,6 +1058,11 @@
           "/static/assets/sounds/explosion.m4a",
           "/static/assets/sounds/explosion.mp3"
         ]
+      },
+      {
+        "type": "image",
+        "key": "deathscreen_empty_tombstone",
+        "url": "/static/assets/sprites/deathscreen/deathscreen_empty_tombstone.png"
       }
     ]
   }
