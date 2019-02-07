@@ -101,16 +101,14 @@ export default class SandwichGameScene extends MinigameScene {
   }
 
   private createPlayer = (playerTexture: string): Phaser.GameObjects.Sprite => {
-    const sprite = this.add
-      .sprite(
-        50,
-        Number(this.game.config.height) -
-          (this.grounds![0].height * 3) / gameStore.ratioResolution,
-        playerTexture
-      )
-      .setOrigin(0, 1)
+    const sprite = this.add.sprite(
+      50,
+      Number(this.game.config.height) -
+        (this.grounds![0].height * 14) / gameStore.ratioResolution,
+      playerTexture
+    )
 
-    sprite.setOrigin(0, 1).setScale(1 / gameStore.ratioResolution)
+    sprite.setOrigin(0, 1).setScale(14 / gameStore.ratioResolution)
 
     return sprite
   }
@@ -122,11 +120,11 @@ export default class SandwichGameScene extends MinigameScene {
       .sprite(
         1300,
         Number(this.game.config.height) -
-          (this.grounds![0].height * 3) / gameStore.ratioResolution,
+          (this.grounds![0].height * 14) / gameStore.ratioResolution,
         sandwichTexture
       )
       .setOrigin(1, 1)
-      .setScale(3 / gameStore.ratioResolution)
+      .setScale(14 / gameStore.ratioResolution)
       .setDepth(5)
 
     return sprite
@@ -203,8 +201,8 @@ export default class SandwichGameScene extends MinigameScene {
       this.physics.world.enable(element)
 
       element.setDisplaySize(
-        element.width / gameStore.ratioResolution - 1,
-        element.height / gameStore.ratioResolution - 1
+        (element.width * 14) / gameStore.ratioResolution - 1,
+        (element.height * 14) / gameStore.ratioResolution - 1
       )
     })
 
@@ -225,9 +223,9 @@ export default class SandwichGameScene extends MinigameScene {
     const sprite = this.add
       .sprite(0, Number(this.game.config.height), texture)
       .setOrigin(0, 1)
-      .setScale(3 / gameStore.ratioResolution)
+      .setScale(14 / gameStore.ratioResolution)
 
-    sprite.width = sprite.width * 3
+    sprite.width = sprite.width * 10.465
 
     array[0] = sprite
   }
@@ -243,7 +241,7 @@ export default class SandwichGameScene extends MinigameScene {
         texture
       )
       .setOrigin(0, 1)
-      .setScale(3 / gameStore.ratioResolution)
+      .setScale(14 / gameStore.ratioResolution)
 
     if (texture === 'sky') {
       sprite.setDepth(-1)
@@ -257,7 +255,7 @@ export default class SandwichGameScene extends MinigameScene {
       sprite.setDepth(2)
     }
 
-    sprite.width = sprite.width * 3
+    sprite.width = sprite.width * 14
 
     array[array.length + 1] = sprite
   }
@@ -271,9 +269,9 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setDepth(1000)
       .setOrigin(0.5, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(14 / gameStore.ratioResolution)
     this.leftBtn.x =
-      this.leftBtn.x - this.leftBtn.width / gameStore.ratioResolution
+      this.leftBtn.x - (14 * this.leftBtn.width) / gameStore.ratioResolution
 
     this.rightBtn = this.add
       .sprite(
@@ -283,9 +281,9 @@ export default class SandwichGameScene extends MinigameScene {
       )
       .setDepth(1000)
       .setOrigin(0.5, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(14 / gameStore.ratioResolution)
     this.rightBtn.x =
-      this.rightBtn.x + this.rightBtn.width / gameStore.ratioResolution
+      this.rightBtn.x + (14 * this.rightBtn.width) / gameStore.ratioResolution
 
     Array.from([this.leftBtn, this.rightBtn]).forEach(btn => {
       btn.setInteractive()

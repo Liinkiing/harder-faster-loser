@@ -98,33 +98,6 @@
       },
       {
         "type": "spritesheet",
-        "key": "toki_run",
-        "url": "/static/assets/sprites/sandwich-game/toki_run_255_480.png",
-        "frameConfig": {
-          "frameWidth": 255,
-          "frameHeight": 480
-        }
-      },
-      {
-        "type": "spritesheet",
-        "key": "toki_win",
-        "url": "/static/assets/sprites/sandwich-game/toki_win_390_855.png",
-        "frameConfig": {
-          "frameWidth": 390,
-          "frameHeight": 855
-        }
-      },
-      {
-        "type": "spritesheet",
-        "key": "sandwich_flying",
-        "url": "/static/assets/sprites/sandwich-game/sandwich_flying_585_540.png",
-        "frameConfig": {
-          "frameWidth": 585,
-          "frameHeight": 540
-        }
-      },
-      {
-        "type": "spritesheet",
         "key": "mdp_nope",
         "url": "/static/assets/sprites/password-game/spritesheets/mdp_nope_870x975.png",
         "frameConfig": {
@@ -169,6 +142,33 @@
         "type": "image",
         "key": "btn_right_off",
         "url": "/static/assets/sprites/sandwich-game/btn_right_off.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_run",
+        "url": "/static/assets/sprites/sandwich-game/toki_run_17_32.png",
+        "frameConfig": {
+          "frameWidth": 17,
+          "frameHeight": 32
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "toki_win",
+        "url": "/static/assets/sprites/sandwich-game/toki_win_26_57.png",
+        "frameConfig": {
+          "frameWidth": 26,
+          "frameHeight": 57
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "sandwich_flying",
+        "url": "/static/assets/sprites/sandwich-game/sandwich_flying_39_36.png",
+        "frameConfig": {
+          "frameWidth": 39,
+          "frameHeight": 36
+        }
       },
       {
         "type": "image",
