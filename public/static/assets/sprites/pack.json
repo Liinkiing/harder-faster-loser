@@ -954,6 +954,24 @@
           "frameWidth": 240,
           "frameHeight": 330
         }
+      },
+      {
+        "type": "spritesheet",
+        "key": "hand",
+        "url": "/static/assets/sprites/action-indicators/hand_16_23.png",
+        "frameConfig": {
+          "frameWidth": 16,
+          "frameHeight": 23
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "shake",
+        "url": "/static/assets/sprites/action-indicators/shake_34_25.png",
+        "frameConfig": {
+          "frameWidth": 34,
+          "frameHeight": 25
+        }
       }
     ]
   },

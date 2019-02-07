@@ -7,10 +7,29 @@ import minigameManager from '../manager/MinigameManager'
 
 export default abstract class MinigameScene extends BaseScene {
   public abstract guideline: MinigameGuideline
+  protected hasActionIndicators = false
+  protected actionIndicator?: Phaser.GameObjects.Sprite
 
   public create(): void {
     super.create()
     gameStore.regenerateUiKey()
+    if (this.hasActionIndicators) {
+      gameManager.suspendMinigame()
+      this.actionIndicator = this.add.sprite(0, 0, '')
+      this.configureActionIndicator()
+    } else {
+      gameManager.resumeMinigame()
+    }
+  }
+
+  protected configureActionIndicator = (): void => {}
+
+  protected destroyActionIndicator = (): void => {
+    if (this.hasActionIndicators && this.actionIndicator) {
+      gameManager.resumeMinigame()
+      this.actionIndicator.destroy()
+      this.hasActionIndicators = false
+    }
   }
 
   protected onSuccess(): void {

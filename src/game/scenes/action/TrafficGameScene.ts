@@ -3,7 +3,6 @@ import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { randomRange } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
-import CarsContainer from '../../objects/traffic-game/CarsContainer'
 import { MinigameGuideline } from '../../../utils/interfaces'
 
 const AMBIENT_SOUND = 'traffic'
@@ -14,6 +13,7 @@ export default class TraficGameScene extends MinigameScene {
     title: 'Honk !',
     subtitle: 'to get out off the traffic jam',
   }
+  protected hasActionIndicators = true
   private controls?: Phaser.GameObjects.Container
   private rageBar?: Phaser.GameObjects.Sprite
   private cursorRageBar?: Phaser.GameObjects.Sprite
@@ -38,8 +38,6 @@ export default class TraficGameScene extends MinigameScene {
 
   private heightRoad: number = 0
 
-  private cars?: CarsContainer
-
   private hornSprite?: Phaser.GameObjects.Sprite
 
   private isCursorInSafeArea: boolean = true
@@ -50,17 +48,6 @@ export default class TraficGameScene extends MinigameScene {
     super({
       key: scenesKeys.TrafficGame,
     })
-  }
-
-  private resetAllClassVariables(): void {
-    this.roads = []
-    this.widthLastCar = 0
-    this.positionXLastCar = 0
-    this.isTokiInScene = false
-    this.carsTokisRow = []
-    this.heightRoad = 0
-    this.isCursorInSafeArea = true
-    this.isTokiFree = false
   }
 
   public preload(): void {
@@ -75,7 +62,6 @@ export default class TraficGameScene extends MinigameScene {
     })
 
     this.resetAllClassVariables()
-
     this.createRoad()
     this.createCars()
     this.controls = this.createControls()
@@ -115,6 +101,26 @@ export default class TraficGameScene extends MinigameScene {
     }
   }
 
+  protected configureActionIndicator = () => {
+    this.actionIndicator!.setTexture('hand')
+      .setPosition(window.innerWidth / 2 - 110, window.innerHeight - 200)
+      .setScale(4)
+      .setOrigin(0.5, 0.5)
+      .setDepth(9999)
+      .play('hand_animation')
+  }
+
+  private resetAllClassVariables(): void {
+    this.roads = []
+    this.widthLastCar = 0
+    this.positionXLastCar = 0
+    this.isTokiInScene = false
+    this.carsTokisRow = []
+    this.heightRoad = 0
+    this.isCursorInSafeArea = true
+    this.isTokiFree = false
+  }
+
   private createControls(): Phaser.GameObjects.Container {
     this.horn = this.add
       .sprite(0, 0, 'horn_off')
@@ -148,6 +154,7 @@ export default class TraficGameScene extends MinigameScene {
       controlsContainer.x - (controlsContainer.width * 15) / 2
 
     this.horn.on('pointerdown', () => {
+      this.destroyActionIndicator()
       this.horn!.setTexture('traffic_horn_on')
       gameManager.audio.playUniqueSfx(HORN_SOUND, {
         volume: 0.3,
@@ -282,7 +289,7 @@ export default class TraficGameScene extends MinigameScene {
           this.isTokiInScene === false &&
           direction === 'right' &&
           this.positionXLastCar === 0 &&
-          yCounter == 2
+          yCounter === 2
         ) {
           carKey = 'traffic_toki_animation'
           this.isTokiInScene = true
