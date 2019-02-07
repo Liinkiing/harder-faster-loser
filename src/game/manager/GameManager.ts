@@ -161,7 +161,6 @@ export class GameManager {
     if (!this.activeScene) {
       return
     }
-    this.audio.detuneBg = -1200
     this.activeScene!.scene.pause()
     gameStore.pause()
   }
@@ -208,11 +207,9 @@ export class GameManager {
       return
     }
     if (gameDebugStore.paused) {
-      this.activeScene!.sound.setDetune(0)
       this.activeScene!.scene.resume()
       gameDebugStore.resume()
     } else {
-      this.activeScene!.sound.setDetune(-1200)
       this.activeScene!.scene.pause()
       gameDebugStore.pause()
     }
