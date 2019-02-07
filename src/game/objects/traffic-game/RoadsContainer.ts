@@ -16,15 +16,15 @@ export default class RoadsContainer extends Phaser.GameObjects.Container {
   private createRoads(): Phaser.GameObjects.Sprite[] {
     this.roads![this.roads!.length] = this.scene.add
       .sprite(0, Number(this.scene.game.config.height), 'road')
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 1)
 
     let xCounter = 0
     let yCounter = 0
     const windowWidth = Number(this.scene.game.config.width)
     const windowHeight = Number(this.scene.game.config.height)
-    const widthRoadT = this.roads![0].width / gameStore.ratioResolution
-    const heightRoadT = this.roads![0].height / gameStore.ratioResolution
+    const widthRoadT = (this.roads![0].width * 15) / gameStore.ratioResolution
+    const heightRoadT = (this.roads![0].height * 15) / gameStore.ratioResolution
     const xRepeatCount = Math.ceil(windowWidth / widthRoadT)
     const yRepeatCount = Math.ceil(windowHeight / heightRoadT)
 
@@ -43,7 +43,7 @@ export default class RoadsContainer extends Phaser.GameObjects.Container {
               (this.heightRoad / gameStore.ratioResolution) * yCounter,
             'road'
           )
-          .setScale(1 / gameStore.ratioResolution)
+          .setScale(15 / gameStore.ratioResolution)
           .setOrigin(0, 1)
 
         this.roads![this.roads!.length] = road

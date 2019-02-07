@@ -561,70 +561,70 @@
       {
         "type": "spritesheet",
         "key": "traffic_blue_car",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_blue_car_570_435.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_blue_car_38_29.png",
         "frameConfig": {
-          "frameWidth": 570,
-          "frameHeight": 435
+          "frameWidth": 38,
+          "frameHeight": 29
         }
       },
       {
         "type": "spritesheet",
         "key": "traffic_toki",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_toki_570_540.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_toki_38_36.png",
         "frameConfig": {
-          "frameWidth": 570,
-          "frameHeight": 540
+          "frameWidth": 38,
+          "frameHeight": 36
         }
       },
       {
         "type": "spritesheet",
         "key": "traffic_cars_01",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_01_1395_540.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_01_93_36.png",
         "frameConfig": {
-          "frameWidth": 1395,
-          "frameHeight": 540
+          "frameWidth": 93,
+          "frameHeight": 36
         }
       },
       {
         "type": "spritesheet",
         "key": "traffic_cars_02",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_02_930_450.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_02_62_30.png",
         "frameConfig": {
-          "frameWidth": 930,
-          "frameHeight": 450
+          "frameWidth": 62,
+          "frameHeight": 30
         }
       },
       {
         "type": "spritesheet",
         "key": "traffic_cars_03",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_03_990_540.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_03_66_36.png",
         "frameConfig": {
-          "frameWidth": 990,
-          "frameHeight": 540
+          "frameWidth": 66,
+          "frameHeight": 36
         }
       },
       {
         "type": "spritesheet",
         "key": "traffic_cars_04",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_04_1200_495.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_cars_04_80_33.png",
         "frameConfig": {
-          "frameWidth": 1200,
-          "frameHeight": 495
+          "frameWidth": 80,
+          "frameHeight": 33
         }
       },
       {
         "type": "spritesheet",
         "key": "traffic_horn",
-        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_horn_465_375.png",
+        "url": "/static/assets/sprites/traffic-game/spritesheets/traffic_klaxon_sound_31_25.png",
         "frameConfig": {
-          "frameWidth": 465,
-          "frameHeight": 375
+          "frameWidth": 31,
+          "frameHeight": 25
         }
       },
       {
         "type": "image",
         "key": "traffic_horn_on",
-        "url": "/static/assets/sprites/traffic-game/traffic_horn_on.png"
+        "url": "/static/assets/sprites/traffic-game/horn_on.png"
       },
       {
         "type": "spritesheet",
