@@ -170,11 +170,7 @@ export default class ElevatorGameScene extends MinigameScene {
     this.floorsElevator.anims.stop()
 
     this.plante = this.add
-      .sprite(
-        -160,
-        0, // (- this.elevator.height * 16) / gameStore.ratioResolution - 200,
-        this.planteTexture
-      )
+      .sprite(-160, 0, this.planteTexture)
       .setOrigin(0.5, 1)
       .setScale(16 / gameStore.ratioResolution)
 
