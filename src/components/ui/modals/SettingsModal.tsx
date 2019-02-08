@@ -154,6 +154,7 @@ const SettingsModal: FunctionComponent<Props> = props => {
     settings: { vibrations, volume },
     changeSettings,
   } = gameStore
+  const { canVibrate } = gameManager
   const { onClose } = props
 
   const onVolumeChange: ChangeEventHandler<HTMLInputElement> = evt => {
@@ -202,15 +203,17 @@ const SettingsModal: FunctionComponent<Props> = props => {
             />
           </Row>
           <Spacer size="medium" />
-          <label>
-            <input
-              type="checkbox"
-              className="checkbox"
-              checked={vibrations}
-              onChange={onChangeVibrationsInput}
-            />
-            <span>Vibrations?</span>
-          </label>
+          {canVibrate && (
+            <label>
+              <input
+                type="checkbox"
+                className="checkbox"
+                checked={vibrations}
+                onChange={onChangeVibrationsInput}
+              />
+              <span>Vibrations?</span>
+            </label>
+          )}
           <Heading>Team</Heading>
           <h3>Programming</h3>
           <TeamProfilePicture
