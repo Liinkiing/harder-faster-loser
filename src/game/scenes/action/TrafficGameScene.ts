@@ -188,9 +188,9 @@ export default class TraficGameScene extends MinigameScene {
     this.safeRageBarArea.fillStyle(0x6adeb8, 1)
     this.safeRageBarArea.fillRect(
       (this.rageBar.width * 15) / gameStore.ratioResolution / 2 - 50,
-      -((this.rageBar.height * 15) / gameStore.ratioResolution) / 2 + 4,
+      -((this.rageBar.height * 15) / gameStore.ratioResolution) / 2 + 3.5,
       safeAreaWidth,
-      (this.rageBar.height * 15) / gameStore.ratioResolution - 15
+      (this.rageBar.height * 15) / gameStore.ratioResolution - 15.4
     )
 
     this.cursorRageBar = this.add
