@@ -25,9 +25,9 @@ const SettingsModalContainer = styled.div`
   width: 80%;
   height: 80%;
   max-width: 340px;
-  max-height: 518px;
+  max-height: 80vh;
   background: url(${pauseBg}) no-repeat center;
-  background-size: contain;
+  background-size: 100%;
   image-rendering: pixelated;
   padding: 40px;
   color: ${black};
