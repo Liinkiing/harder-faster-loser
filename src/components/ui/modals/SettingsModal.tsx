@@ -27,19 +27,28 @@ const SettingsModalContainer = styled.div`
   max-width: 340px;
   max-height: 80vh;
   background: url(${pauseBg}) no-repeat center;
-  background-size: 100%;
+  background-size: 100% 100%;
   image-rendering: pixelated;
-  padding: 40px;
+  padding: 40px 30px;
   color: ${black};
   & h3 {
     text-align: center;
     margin-top: 10px;
+  }
+
+  @media screen and (max-width: 330px) {
+    width: 90%;
+    height: 90%;
   }
 `
 
 const ModalInner = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   &::-webkit-scrollbar {
     display: none;
   }
