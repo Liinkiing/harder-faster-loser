@@ -27,7 +27,7 @@ export default class DeathscreenScene extends BaseScene {
     this.initFirstPart()
     this.dataContent = dataManager.pickRandomData()
 
-    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
+    Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
       this.initSecondPart()
     })
 
