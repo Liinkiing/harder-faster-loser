@@ -49,8 +49,10 @@ const GuidelineContainer = styled.div<StyledProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px;
   width: 100%;
   height: 100%;
+  text-align: center;
   &::after {
     content: '';
     position: absolute;
@@ -76,6 +78,7 @@ const GuidelineTitle = styled.h2<StyledProps>`
 
 const GuidelineSubtitle = styled.p<StyledProps>`
   color: ${pink};
+  line-height: 1.6em;
   animation: ${props => (props.isLeaving ? guidelineLeaving : guidelineAppear)}
     0.6s forwards;
 `
