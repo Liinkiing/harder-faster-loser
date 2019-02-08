@@ -224,8 +224,8 @@ export class GameManager {
   }
 
   public restartGame = async () => {
-    gameStore.resetGame()
     await this.loadHomescreen()
+    gameStore.resetGame()
   }
 
   public resetTokiStatus = (): void => {
