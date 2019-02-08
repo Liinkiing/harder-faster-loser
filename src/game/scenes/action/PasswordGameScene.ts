@@ -65,6 +65,7 @@ export default class PasswordGameScene extends MinigameScene {
       if (this.typedPassword.length === this.password.length) {
         return
       }
+      gameManager.vibrate()
       gameManager.audio.playSfx(SOUND_KEYBOARD_BUTTON)
       this.typedPassword.push(code)
       if (this.typedPassword.length <= this.password.length) {

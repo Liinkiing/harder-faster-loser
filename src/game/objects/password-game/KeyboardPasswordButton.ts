@@ -55,7 +55,6 @@ export default class KeyboardPasswordButton extends Phaser.GameObjects.Sprite {
         this.setTexture(`${texture}`)
       })
       this.on('pointerdown', () => {
-        gameManager.vibrate()
         Emitter.emit(GameEvents.KeyboardPasswordButtonClicked, this.code)
       })
     }
