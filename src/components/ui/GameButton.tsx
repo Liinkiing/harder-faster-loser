@@ -38,7 +38,9 @@ export default styled(GameButton)`
   border: none;
   color: ${white};
   text-align: center;
-  width: fit-content;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: intrinsic;
   user-select: none;
   pointer-events: all;
   ${boxShadow};

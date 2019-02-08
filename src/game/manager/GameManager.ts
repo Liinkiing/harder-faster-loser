@@ -54,7 +54,7 @@ export class GameManager {
     const {
       settings: { vibrations },
     } = gameStore
-    if (!vibrations) {
+    if (!vibrations || window.navigator.vibrate === undefined) {
       return false
     }
     return window.navigator.vibrate(pattern)
