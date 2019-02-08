@@ -18,6 +18,12 @@ const IntroductionUIInner = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
+
+  div {
+    max-width: 1280px;
+    padding: 15px;
+  }
 `
 
 const IntroductionUI: FunctionComponent = () => {

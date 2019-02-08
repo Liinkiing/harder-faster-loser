@@ -104,6 +104,7 @@ export default class SubwayGameScene extends MinigameScene {
     let yPointer = 0
 
     this.numberHiddenCharacters = Math.floor(this.windowWidth / 90)
+    if (this.numberHiddenCharacters % 2 === 1) this.numberHiddenCharacters -= 1
     const xCounter = this.numberHiddenCharacters * 3
     this.slabWidth = 55
     this.gapX =

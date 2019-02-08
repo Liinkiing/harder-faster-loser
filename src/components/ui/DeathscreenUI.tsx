@@ -16,9 +16,13 @@ const Div = styled.div`
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  font-size: 30px;
+  font-size: 26px;
   background-color: rgba(0, 0, 0, 0.5);
+  line-height: 1.5em;
   padding: 0 40px;
+  p {
+    max-width: 1280px;
+  }
   ${GameButton} {
     position: fixed;
     bottom: 20px;
