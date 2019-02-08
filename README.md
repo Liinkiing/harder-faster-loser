@@ -8,5 +8,5 @@ A **PWA game** (which finally works OFFLINE when loaded once) made with **Typesc
 
 ## Useful links :
 
-- 📅 [Backlog](https://github.com/Liinkiing/harder-faster-looser/projects/1)
-- ☑ [Issues](https://github.com/Liinkiing/harder-faster-looser/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+- 📅 [Backlog](https://github.com/Liinkiing/harder-faster-loser/projects/1)
+- ☑ [Issues](https://github.com/Liinkiing/harder-faster-loser/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
