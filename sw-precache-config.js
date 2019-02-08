@@ -1,5 +1,6 @@
 module.exports = {
   staticFileGlobs: [
+    'build/icons/**/*.png',
     'build/*.{html,ico,json}',
     'build/static/css/**/*.css',
     'build/static/js/**/*.js',
