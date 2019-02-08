@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
@@ -43,6 +43,7 @@
     "gh-pages": "^2.0.1",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
+    "sw-precache": "^5.2.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
