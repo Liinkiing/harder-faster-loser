@@ -7,5 +7,5 @@ import registerServiceWorker, { unregister } from './registerServiceWorker'
 import './utils/extensions'
 
 ReactDOM.render(<App />, document.getElementById('root') as HTMLElement)
-// registerServiceWorker()
-unregister()
+registerServiceWorker()
+// unregister()
