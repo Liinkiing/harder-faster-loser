@@ -31,6 +31,25 @@ export default class DeathscreenScene extends BaseScene {
       this.initSecondPart()
     })
 
+    Emitter.on(GameEvents.DeathscreenThunderOn, async () => {
+      if (this.stageSet && this.cloud && !this.firstPartDestroyed) {
+        gameManager.changeBackgroundColor(black)
+        this.stageSet.setTexture('deathscreen_stage_set_1')
+        this.cloud.setTexture('deathscreen_clouds_1')
+
+        await gameWait(this.time, 300)
+        Emitter.emit(GameEvents.DeathscreenThunderOff)
+      }
+    })
+
+    Emitter.on(GameEvents.DeathscreenThunderOff, () => {
+      gameManager.changeBackgroundColor(lightGray)
+      this.stageSet!.setTexture('deathscreen_stage_set_0')
+      this.cloud!.setTexture('deathscreen_clouds_0')
+
+      this.initLightning()
+    })
+
     await gameWait(this.time, 5000)
     this.destroyFirstPart()
   }
@@ -88,18 +107,7 @@ export default class DeathscreenScene extends BaseScene {
 
     await gameWait(this.time, delayLightning)
 
-    if (this.stageSet && this.cloud && !this.firstPartDestroyed) {
-      gameManager.changeBackgroundColor(black)
-      this.stageSet.setTexture('deathscreen_stage_set_1')
-      this.cloud.setTexture('deathscreen_clouds_1')
-
-      await gameWait(this.time, 300)
-      gameManager.changeBackgroundColor(lightGray)
-      this.stageSet!.setTexture('deathscreen_stage_set_0')
-      this.cloud!.setTexture('deathscreen_clouds_0')
-
-      this.initLightning()
-    }
+    Emitter.emit(GameEvents.DeathscreenThunderOn)
   }
 
   private initSecondPart(): void {

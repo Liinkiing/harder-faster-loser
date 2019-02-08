@@ -4,7 +4,7 @@ import gameManager, { Emitter } from '../../game/manager/GameManager'
 import { GameEvents } from '../../utils/enums'
 import GameButton from './GameButton'
 import CountUp from 'react-countup'
-import { lightGray } from '../../utils/colors'
+import { lightGray, white } from '../../utils/colors'
 
 const Div = styled.div`
   position: fixed;
@@ -63,12 +63,21 @@ const DeathscreenUI: FunctionComponent = () => {
   )
   const [percent, setPercent] = useState(0)
   const [deathTime, setDeathTime] = useState('15.02.19')
+  const [fontColor, setFontColor] = useState(lightGray)
 
   useEffect(() => {
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
       setPercent(args.percent)
       setMessage(<p>{args.text}</p>)
       setShowButton(true)
+    })
+
+    Emitter.on(GameEvents.DeathscreenThunderOn, () => {
+      setFontColor(white)
+    })
+
+    Emitter.on(GameEvents.DeathscreenThunderOff, () => {
+      setFontColor(lightGray)
     })
 
     const newDate = new Date()

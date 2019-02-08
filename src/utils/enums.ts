@@ -30,7 +30,9 @@ export enum GameEvents {
 
   SandwichPicked = 'SANDWICH_PICKED',
 
-  DeathscreenFirstSceneDestroyed = 'DEATH_FIRST_SCENE_DESTROYED',
+  DeathscreenThunderOn = 'DEATHSCREEN_THUNDER_ON',
+  DeathscreenThunderOff = 'DEATHSCREEN_THUNDER_FF',
+  DeathscreenFirstSceneDestroyed = 'DEATHSCREEN_FIRST_SCENE_DESTROYED',
 }
 
 export enum GameDebugTheme {
