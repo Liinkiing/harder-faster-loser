@@ -89,7 +89,7 @@ export default class TraficGameScene extends MinigameScene {
     }
 
     if (this.isCursorInSafeArea) {
-      this.tokisRow!.x += 2
+      this.tokisRow!.x += Number(this.game.config.width) / 400
     }
 
     if (
@@ -195,7 +195,7 @@ export default class TraficGameScene extends MinigameScene {
 
     this.cursorRageBar = this.add
       .sprite(
-        (this.rageBar.width * 15) / gameStore.ratioResolution / 2,
+        (this.rageBar.width * 2) / gameStore.ratioResolution / 2,
         -3,
         'rage_cursor'
       )
