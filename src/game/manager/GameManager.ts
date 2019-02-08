@@ -38,6 +38,10 @@ export class GameManager {
     }
   }
 
+  public get canVibrate() {
+    return window.navigator.vibrate !== undefined
+  }
+
   public suspendMinigame = (): void => {
     gameStore.changeConfig({
       suspended: true,
@@ -54,7 +58,7 @@ export class GameManager {
     const {
       settings: { vibrations },
     } = gameStore
-    if (!vibrations) {
+    if (!vibrations || !this.canVibrate) {
       return false
     }
     return window.navigator.vibrate(pattern)
