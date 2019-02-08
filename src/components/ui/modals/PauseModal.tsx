@@ -46,6 +46,7 @@ const PauseModal: FunctionComponent = props => {
   const { resume, restartGame } = gameManager
   let PauseAnimation = (
     <Spritesheet
+      isResponsive={false}
       image={cigaretteSpritesheet}
       widthFrame={150}
       heightFrame={110}
@@ -56,6 +57,7 @@ const PauseModal: FunctionComponent = props => {
   if (Math.random() >= 0.5) {
     PauseAnimation = (
       <Spritesheet
+        isResponsive={false}
         image={mugSpritesheet}
         widthFrame={85}
         heightFrame={155}
