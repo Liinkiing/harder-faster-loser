@@ -25,7 +25,7 @@ export default class DeathscreenScene extends BaseScene {
     this.resetClassVariables()
     gameManager.changeBackgroundColor(lightGray)
     this.initFirstPart()
-    this.dataContent = dataManager.pickRandomData()
+    this.dataContent = dataManager.pickDataAtIndex(0)
 
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
       this.initSecondPart()
