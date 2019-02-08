@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b0cb21c4-399c-4c26-86f5-c28eb6773b84/deploy-status)](https://app.netlify.com/sites/harder-faster-loser/deploys)
 # Harder, Faster, Loser
 
 A **PWA game** (which finally works OFFLINE when loaded once) made with **Typescript**, **React** (with _hooks_), **Mobx** and **PhaserJS**
