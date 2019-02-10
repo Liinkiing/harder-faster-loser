@@ -74,7 +74,7 @@ export default class SplashscreenScene extends BaseScene {
 
   public update(time: number, delta: number): void {}
 
-  protected destroy(): void {
+  public destroy(): void {
     gameManager.audio.stopAmbientMusic()
     gameManager.audio.stopUniqueSfx()
   }

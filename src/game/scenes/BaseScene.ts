@@ -9,8 +9,6 @@ export default class BaseScene extends Phaser.Scene {
   public init(): void {
     this.game.scene.dump()
     Emitter.emit(BaseEvents.SceneInit, this)
-    Emitter.removeAllListeners(BaseEvents.SceneDestroyed)
-    Emitter.on(BaseEvents.SceneDestroyed, this.destroy)
   }
 
   public preload(): void {
@@ -43,7 +41,7 @@ export default class BaseScene extends Phaser.Scene {
 
   public update(time: number, delta: number): void {}
 
-  protected destroy(): void {}
+  public destroy(): void {}
 
   protected initListeners(): void {}
 

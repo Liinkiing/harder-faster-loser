@@ -28,7 +28,7 @@ const SettingsButton = styled(GameButton)`
 `
 
 const HomescreenUI: FunctionComponent = () => {
-  const { loadNextMinigame } = gameManager
+  const { loadNextMinigame, isDesktop } = gameManager
   const [showSettings, setShowSettings] = useState(false)
 
   const onSettingsModalClose = () => {
@@ -43,7 +43,7 @@ const HomescreenUI: FunctionComponent = () => {
     <HomescreenUIInner>
       {showSettings && <SettingsModal onClose={onSettingsModalClose} />}
       <SettingsButton onClick={onSettingsButtonClick}>S</SettingsButton>
-      <PlayButton onClick={loadNextMinigame}>Wake up</PlayButton>
+      {isDesktop && <PlayButton onClick={loadNextMinigame}>Wake up</PlayButton>}
     </HomescreenUIInner>
   )
 }

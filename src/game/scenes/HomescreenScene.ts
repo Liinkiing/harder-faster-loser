@@ -12,11 +12,13 @@ enum TokiState {
   WakedUp,
 }
 
+const CYCLE_BEFORE_WAKE_UP = 3
 const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 
 export default class HomescreenScene extends BaseScene {
   private shaker?: Shaker
   private toki?: Phaser.GameObjects.Sprite
+  private cycleRemaining = CYCLE_BEFORE_WAKE_UP
   private actionIndicator?: Phaser.GameObjects.Sprite
   private shakeFrame = 0
   private state: TokiState = TokiState.Sleeping
@@ -30,8 +32,9 @@ export default class HomescreenScene extends BaseScene {
   public create(): void {
     super.create()
     this.shakeFrame = 0
+    this.cycleRemaining = CYCLE_BEFORE_WAKE_UP
     this.state = TokiState.Sleeping
-    if (Shaker.hasDeviceMotion()) {
+    if (!gameManager.isDesktop && Shaker.hasDeviceMotion()) {
       this.shaker = new Shaker({ timeout: 20, threshold: 1 })
       this.shaker.start()
       this.shaker.addEventListener('shake', this.onShake)
@@ -39,7 +42,9 @@ export default class HomescreenScene extends BaseScene {
     gameManager.audio.resetDetune()
     gameManager.audio.playBg()
     gameManager.changeBackgroundColor(blue)
-    this.createActionIndicator()
+    if (!gameManager.isDesktop) {
+      this.createActionIndicator()
+    }
     this.toki = this.add
       .sprite(window.innerWidth / 2, window.innerHeight, 'intro_sleep')
       .setOrigin(0.5, 1)
@@ -49,9 +54,10 @@ export default class HomescreenScene extends BaseScene {
 
   public update(time: number, delta: number): void {}
 
-  protected destroy(): void {
+  public destroy(): void {
     super.destroy()
     if (this.shaker) {
+      console.log('DESTROYING SHAKER')
       this.shaker.stop()
       this.shaker.removeEventListener('shake', this.onShake)
     }
@@ -59,25 +65,35 @@ export default class HomescreenScene extends BaseScene {
 
   private onShake = (): void => {
     console.log('ON SHAKE')
-    if (this.state !== TokiState.WakingUp) {
-      this.state = TokiState.WakingUp
+    if (this.cycleRemaining === 0) {
+      this.state = TokiState.WakedUp
     }
-    if (this.state === TokiState.WakingUp) {
-      if (this.actionIndicator) {
-        this.actionIndicator.destroy()
-      }
-      this.toki!.anims.play('intro_shake_animation', false, this.shakeFrame)
-      this.toki!.anims.stop()
-      this.shakeFrame++
-      this.shakeFrame = this.shakeFrame % 29
-      if (this.shakeFrame === 9 || this.shakeFrame === 23) {
-        // Corresponds to frame in which Toki is actually hurt
-        gameManager.audio.playUniqueSfx(AVAILABLE_HURT_SOUNDS.random(), {
-          volume: 0.9,
-        })
-      }
+    switch (this.state) {
+      case TokiState.Sleeping:
+        this.state = TokiState.WakingUp
+        break
+      case TokiState.WakingUp:
+        if (this.actionIndicator) {
+          this.actionIndicator.destroy()
+        }
+        this.toki!.anims.play('intro_shake_animation', false, this.shakeFrame)
+        this.toki!.anims.stop()
+        this.shakeFrame++
+        this.shakeFrame = this.shakeFrame % 29
+        if (this.shakeFrame % 29 === 0) {
+          this.cycleRemaining--
+        }
+        if (this.shakeFrame === 9 || this.shakeFrame === 23) {
+          // Corresponds to frame in which Toki is actually hurt
+          gameManager.audio.playUniqueSfx(AVAILABLE_HURT_SOUNDS.random(), {
+            volume: 0.9,
+          })
+        }
+        break
+      case TokiState.WakedUp:
+        gameManager.loadNextMinigame()
+        break
     }
-    console.log(this.shakeFrame)
   }
 
   private createActionIndicator = () => {
