@@ -43,14 +43,14 @@ const PercentData = styled.div`
   display: flex;
 `
 
-const DeathTime = styled.span`
+const DeathTime = styled.span<{ fontColor: string }>`
   display: inline-block;
   width: 100%;
   text-align: center;
   position: absolute;
   left: 0;
   top: 113vw;
-  color: ${lightGray};
+  color: ${props => props.fontColor};
 `
 
 const DeathscreenUI: FunctionComponent = () => {
@@ -99,7 +99,7 @@ const DeathscreenUI: FunctionComponent = () => {
 
   return (
     <Div className="deathscreen-ui">
-      <DeathTime>{deathTime}</DeathTime>
+      <DeathTime fontColor={fontColor}>{deathTime}</DeathTime>
       <ContainerMessage>
         {showButton && (
           <PercentData>
