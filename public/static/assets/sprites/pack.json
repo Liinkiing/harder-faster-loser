@@ -611,10 +611,19 @@
       {
         "type": "spritesheet",
         "key": "intro_sleep",
-        "url": "/static/assets/sprites/homescreen/intro_toki_sleep_66x120.png",
+        "url": "/static/assets/sprites/homescreen/intro_sleep_72x74.png",
         "frameConfig": {
-          "frameWidth": 66,
-          "frameHeight": 120
+          "frameWidth": 72,
+          "frameHeight": 74
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_shake",
+        "url": "/static/assets/sprites/homescreen/intro_shake_72x74.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 74
         }
       },
       {
