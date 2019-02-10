@@ -17,6 +17,9 @@ export enum BaseEvents {
   SceneInit = 'SCENE_INIT',
   SceneCreated = 'SCENE_CREATED',
   SceneDestroyed = 'SCENE_DESTROYED',
+
+  NewContentAvailable = 'NEW_CONTENT_AVAILABLE',
+  ContentCached = 'CONTENT_CACHED',
 }
 
 export enum GameEvents {

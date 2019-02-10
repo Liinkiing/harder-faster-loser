@@ -6,6 +6,8 @@ import gameStore from './store/GameStore'
 import Introduction from './components/Introduction'
 import gameManager from './game/manager/GameManager'
 import { wait } from './utils/functions'
+import NotificationsContainer from './components/ui/notifications/NotificationsContainer'
+import Notification from './components/ui/notifications/Notification'
 
 const App: FunctionComponent = () => {
   const { started } = gameStore
@@ -34,6 +36,9 @@ const App: FunctionComponent = () => {
     <div className="App">
       {!started && <Introduction onLaunchGame={onLaunchGame} />}
       <Game />
+      <NotificationsContainer>
+        <Notification type="info">test notification</Notification>
+      </NotificationsContainer>
     </div>
   )
 }
