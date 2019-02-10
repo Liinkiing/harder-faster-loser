@@ -44,7 +44,7 @@ const App: FunctionComponent = () => {
     Emitter.on(UIEvents.NewContentAvailable, () => {
       notify({
         content: 'New content is available. Please refresh.',
-        type: 'success',
+        type: 'info',
       })
     })
   }, [])
