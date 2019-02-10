@@ -12,6 +12,7 @@ import { MinigameGuideline } from '../../utils/interfaces'
 import MinigameScene from '../scenes/MinigameScene'
 import { BootScene } from '../scenes'
 import gameDebugStore from '../../store/GameDebugStore'
+import BaseScene from '../scenes/BaseScene'
 
 export const Emitter = new EventEmitter()
 
@@ -28,6 +29,10 @@ export class GameManager {
     })
   }
 
+  public get isDesktop() {
+    return this.game.device.os.desktop
+  }
+
   public get minigameGuideline(): MinigameGuideline {
     if (gameStore.state === GameState.Minigame && this.activeScene) {
       return (this.activeScene as MinigameScene).guideline
@@ -39,7 +44,7 @@ export class GameManager {
   }
 
   public get canVibrate() {
-    return window.navigator.vibrate !== undefined
+    return !this.isDesktop && window.navigator.vibrate !== undefined
   }
 
   public suspendMinigame = (): void => {
@@ -130,7 +135,8 @@ export class GameManager {
         .filter(scene => scene.scene.key !== key)
         .forEach(scene => {
           if (scene.scene.key === this.activeScene!.scene.key) {
-            Emitter.emit(BaseEvents.SceneDestroyed)
+            ;(this.activeScene! as BaseScene).destroy()
+            // Emitter.emit(BaseEvents.SceneDestroyed)
           }
           scene.scene.stop(scene.scene.key)
         })
