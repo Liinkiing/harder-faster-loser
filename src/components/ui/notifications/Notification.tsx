@@ -28,6 +28,7 @@ type StyledProps = Props & { animation: Keyframes }
 const NotificationInner = styled.div<StyledProps>`
   position: relative;
   pointer-events: all;
+  line-height: 18px;
   box-shadow: 4px 0 20px ${hexToRgba(black, 0.4)};
   animation: ${(props: StyledProps) => props.animation} 0.3s forwards
     ease-in-out;
