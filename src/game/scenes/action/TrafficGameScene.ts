@@ -4,6 +4,7 @@ import gameStore from '../../../store/GameStore'
 import { randomRange } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
 import { MinigameGuideline } from '../../../utils/interfaces'
+import { number } from 'prop-types'
 
 const AMBIENT_SOUND = 'traffic'
 const HORN_SOUND = 'horn'
@@ -44,6 +45,8 @@ export default class TraficGameScene extends MinigameScene {
 
   private isTokiFree: boolean = false
 
+  private nbrIncreaseDifficulty = 80 /////////////////
+
   constructor() {
     super({
       key: scenesKeys.TrafficGame,
@@ -67,6 +70,16 @@ export default class TraficGameScene extends MinigameScene {
     this.controls = this.createControls()
 
     this.tokisRow = this.add.container(0, 0, this.carsTokisRow).setDepth(997)
+
+    if (gameStore.difficulty <= 3) {
+      this.nbrIncreaseDifficulty = 80
+    } else if (gameStore.difficulty <= 6) {
+      this.nbrIncreaseDifficulty = 60
+    } else if (gameStore.difficulty <= 9) {
+      this.nbrIncreaseDifficulty = 30
+    } else if (gameStore.difficulty >= 10) {
+      this.nbrIncreaseDifficulty = 20
+    }
   }
 
   public update = (time: number, delta: number): void => {
@@ -79,9 +92,11 @@ export default class TraficGameScene extends MinigameScene {
 
     if (
       this.cursorRageBar!.x <
-        (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 - 50 ||
+        (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 -
+          (this.nbrIncreaseDifficulty * 1.5) / 2 ||
       this.cursorRageBar!.x >
-        (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 + 50
+        (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 +
+          (this.nbrIncreaseDifficulty * 1.5) / 2
     ) {
       this.isCursorInSafeArea = false
     } else {
@@ -89,8 +104,9 @@ export default class TraficGameScene extends MinigameScene {
     }
 
     if (this.isCursorInSafeArea) {
-      this.tokisRow!.x += Number(this.game.config.width) / 400
+      this.tokisRow!.x += Number(this.game.config.width) / 300 // * (this.nbrIncreaseDifficulty / 40) // * (this.nbrIncreaseDifficulty/50)
     }
+    // console.log(Phaser.Math.Clamp((Number(this.game.config.width) / 300) * (this.nbrIncreaseDifficulty / 40), 2, 4))
 
     if (
       this.tokisRow!.x > Number(this.game.config.width) &&
@@ -161,7 +177,7 @@ export default class TraficGameScene extends MinigameScene {
         volume: 0.3,
       })
       this.hornSprite!.alpha = 1
-      this.cursorRageBar!.x += 20
+      this.cursorRageBar!.x += this.nbrIncreaseDifficulty / 2 // 20
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
@@ -181,21 +197,23 @@ export default class TraficGameScene extends MinigameScene {
       .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
-    const safeAreaWidth =
-      100 / (Phaser.Math.Clamp(gameStore.difficulty, 1, 15) / 10 + 1)
+    const safeAreaWidth = this.nbrIncreaseDifficulty * 1.5
+    // 100 / (Phaser.Math.Clamp(gameStore.difficulty, 1, 15) / 10 + 1) ///////////////////////////////////////////////
 
     this.safeRageBarArea = this.add.graphics()
     this.safeRageBarArea.fillStyle(0x6adeb8, 1)
     this.safeRageBarArea.fillRect(
-      (this.rageBar.width * 15) / gameStore.ratioResolution / 2 - 50,
+      (this.rageBar.width * 15) / gameStore.ratioResolution / 2 -
+        safeAreaWidth / 2, // -(this.nbrIncreaseDifficulty - 15), /////////////
       -((this.rageBar.height * 15) / gameStore.ratioResolution) / 2 + 3.5,
       safeAreaWidth,
-      (this.rageBar.height * 15) / gameStore.ratioResolution - 15.4
+      (this.rageBar.height * 15) / gameStore.ratioResolution - 15
     )
 
     this.cursorRageBar = this.add
       .sprite(
-        (this.rageBar.width * 2) / gameStore.ratioResolution / 2,
+        20,
+        // (this.rageBar.width * 2) / gameStore.ratioResolution / 2,
         -3,
         'rage_cursor'
       )
