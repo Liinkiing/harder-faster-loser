@@ -4,12 +4,15 @@ import gameStore from '../../store/GameStore'
 import gameManager from '../manager/GameManager'
 import { blue } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
+import { List } from '../../utils/extensions'
 
 enum TokiState {
   Sleeping,
   WakingUp,
   WakedUp,
 }
+
+const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 
 export default class HomescreenScene extends BaseScene {
   private shaker?: Shaker
@@ -60,8 +63,15 @@ export default class HomescreenScene extends BaseScene {
     }
     if (this.state === TokiState.WakingUp) {
       this.toki!.anims.play('intro_shake_animation', false, this.shakeFrame)
+      this.toki!.anims.stop()
       this.shakeFrame++
       this.shakeFrame = this.shakeFrame % 29
+      if (this.shakeFrame === 9 || this.shakeFrame === 23) {
+        // Corresponds to frame in which Toki is actually hurt
+        gameManager.audio.playUniqueSfx(AVAILABLE_HURT_SOUNDS.random(), {
+          volume: 0.9,
+        })
+      }
     }
     console.log(this.shakeFrame)
   }
