@@ -139,6 +139,31 @@ export const useTimeout = (
   }, inputs)
 }
 
+export const useDeviceMotion = (
+  inputs?: InputIdentityList
+): DeviceAcceleration => {
+  const [acceleration, setAcceleration] = useState<DeviceAcceleration>({
+    x: 0,
+    y: 0,
+    z: 0,
+  })
+  const listener = useCallback((e: DeviceMotionEvent) => {
+    if (e.accelerationIncludingGravity) {
+      setAcceleration(e.accelerationIncludingGravity)
+    }
+  }, inputs || [])
+
+  useEffect(() => {
+    window.addEventListener('devicemotion', listener)
+
+    return () => {
+      window.removeEventListener('devicemotion', listener)
+    }
+  }, inputs)
+
+  return acceleration
+}
+
 export const useRaf = (ms: number = 1e12, delay: number = 0): number => {
   const [elapsed, set] = useState<number>(0)
 
