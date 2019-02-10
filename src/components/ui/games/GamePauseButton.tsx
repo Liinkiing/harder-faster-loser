@@ -6,6 +6,7 @@ import gameStore from '../../../store/GameStore'
 import { observer } from 'mobx-react-lite'
 import gameManager from '../../../game/manager/GameManager'
 import { border, boxShadow } from '../../../utils/css'
+import { BUTTON_VIBRATION_DURATION } from '../../../utils/constants'
 
 interface StyledProps {
   paused: boolean
@@ -53,7 +54,7 @@ const GamePauseButton: FunctionComponent = () => {
   const { togglePause } = gameManager
 
   const onClick = () => {
-    gameManager.vibrate(30)
+    gameManager.vibrate(BUTTON_VIBRATION_DURATION)
     togglePause()
   }
 

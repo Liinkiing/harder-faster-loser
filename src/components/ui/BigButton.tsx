@@ -4,6 +4,7 @@ import spritesheet from '../../assets/sprites/btn_red.png'
 import styled, { css } from 'styled-components'
 import gameManager from '../../game/manager/GameManager'
 import { MouseEventHandler } from 'react'
+import { BUTTON_VIBRATION_DURATION } from '../../utils/constants'
 
 type Props = HTMLAttributes<HTMLButtonElement> & {
   disabled?: boolean
@@ -35,7 +36,7 @@ const BigButton: FunctionComponent<Props> = props => {
   const { onClick } = props
 
   const onClickHandler: MouseEventHandler<HTMLButtonElement> = evt => {
-    gameManager.vibrate(30)
+    gameManager.vibrate(BUTTON_VIBRATION_DURATION)
     if (gameManager.audio) {
       gameManager.audio.playSfx('explosion')
     }

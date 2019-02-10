@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { white, yellow } from '../../utils/colors'
 import { boxShadow } from '../../utils/css'
 import gameManager from '../../game/manager/GameManager'
+import { BUTTON_VIBRATION_DURATION } from '../../utils/constants'
 
 type Props = HTMLAttributes<HTMLButtonElement> &
   Partial<Pick<HTMLButtonElement, 'disabled'>> & {
@@ -16,7 +17,7 @@ const GameButton: FunctionComponent<Props> = props => {
     if (gameManager.audio) {
       gameManager.audio.playSfx('explosion')
     }
-    gameManager.vibrate(30)
+    gameManager.vibrate(BUTTON_VIBRATION_DURATION)
     if (onClick) {
       onClick(evt)
     }

@@ -2,8 +2,9 @@ import * as React from 'react'
 import { FunctionComponent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import leaderboardsStore from '../../../store/LeaderboardsStore'
-import { pink, red } from '../../../utils/colors'
+import { pink } from '../../../utils/colors'
 import gameManager from '../../../game/manager/GameManager'
+import { BUTTON_VIBRATION_DURATION } from '../../../utils/constants'
 
 interface Props {
   readonly usernameIndex: number
@@ -44,6 +45,7 @@ const LeaderboardsUsernameInputBlock: FunctionComponent<Props> = props => {
   const handleClick = () => {
     setChar((char + 1) % AVAILABLE_CHARS.length)
     gameManager.audio.playSfx('explosion')
+    gameManager.vibrate(BUTTON_VIBRATION_DURATION)
   }
 
   useEffect(
