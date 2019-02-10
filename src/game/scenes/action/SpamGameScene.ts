@@ -7,6 +7,17 @@ import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
+import {
+  blue,
+  green,
+  lightBlue,
+  lightGray,
+  lightRed,
+  mediumGray,
+  orange,
+  pink,
+  yellow,
+} from '../../../utils/colors'
 
 const SOUND_SPAM_DESTROYED = 'explosion'
 const SOUND_CLOSE_CLICK = 'beep'
@@ -16,6 +27,18 @@ export default class SpamGameScene extends MinigameScene {
     title: 'Click !',
     subtitle: 'to close the spams',
   }
+  public availableBackgroundColors = new List<string>([
+    green,
+    lightGray,
+    mediumGray,
+    yellow,
+    pink,
+    blue,
+    orange,
+    lightRed,
+    lightBlue,
+  ])
+
   public spams: List<Spam> = new List<Spam>()
   constructor() {
     super({

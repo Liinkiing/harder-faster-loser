@@ -3,9 +3,15 @@ import { scenesKeys } from '../../../utils/constants'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
-import Wagon from '../../objects/subway-game/Wagon'
 import gameManager from '../../manager/GameManager'
-import { lightBlue } from '../../../utils/colors'
+import { List } from '../../../utils/extensions'
+import {
+  blue,
+  darkGray,
+  lightBlue,
+  lightGray,
+  mediumGray,
+} from '../../../utils/colors'
 
 const SOUND_ERROR = 'error'
 const SOUND_HIT = 'hit'
@@ -16,6 +22,13 @@ export default class SubwayGameScene extends MinigameScene {
     title: 'Slide !',
     subtitle: 'to enter the train',
   }
+  public availableBackgroundColors = new List<string>([
+    lightBlue,
+    blue,
+    darkGray,
+    mediumGray,
+    lightGray,
+  ])
 
   private windowHeight?: number
   private windowWidth?: number
@@ -57,40 +70,10 @@ export default class SubwayGameScene extends MinigameScene {
     })
   }
 
-  private resetVariables(): void {
-    this.windowHeight = 0
-    this.windowWidth = 0
-    this.normalizedYOffset = 0
-    this.lineContainers = []
-    this.spriteLine = []
-    this.emptySlabs = []
-    this.toki = undefined
-    this.indexCurrentRow = 0
-    this.indexNextRow = 1
-    this.allowTokiToRun = true
-    this.isOverlapping = false
-    this.currentRow = undefined
-    this.nextRow = undefined
-    this.lastLineReached = false
-    this.train = []
-    this.firstTrain = undefined
-    this.doorsActiveTrain = undefined
-    this.activeTrainContainer = undefined
-    this.containers = []
-    this.nextEmptySlab = undefined
-    this.currentEmptySlab = undefined
-    this.goalZone = undefined
-    this.gapX = 0
-    this.gapY = 0
-    this.numberHiddenCharacters = 0
-    this.allowTokiToRun = true
-  }
-
   public create() {
     super.create()
     gameManager.suspendMinigame()
     this.resetVariables()
-    gameManager.changeBackgroundColor(lightBlue)
     this.windowHeight = Number(this.game.config.height)
     this.windowWidth = Number(this.game.config.width)
     this.normalizedYOffset =
@@ -104,7 +87,9 @@ export default class SubwayGameScene extends MinigameScene {
     let yPointer = 0
 
     this.numberHiddenCharacters = Math.floor(this.windowWidth / 90)
-    if (this.numberHiddenCharacters % 2 === 1) this.numberHiddenCharacters -= 1
+    if (this.numberHiddenCharacters % 2 === 1) {
+      this.numberHiddenCharacters -= 1
+    }
     const xCounter = this.numberHiddenCharacters * 3
     this.slabWidth = 55
     this.gapX =
@@ -241,10 +226,39 @@ export default class SubwayGameScene extends MinigameScene {
     }
 
     this.isOverlapping = this.physics.world.overlap(
-      //@ts-ignore
+      // @ts-ignore
       this.nextEmptySlab!,
       this.goalZone!
     )
+  }
+
+  private resetVariables(): void {
+    this.windowHeight = 0
+    this.windowWidth = 0
+    this.normalizedYOffset = 0
+    this.lineContainers = []
+    this.spriteLine = []
+    this.emptySlabs = []
+    this.toki = undefined
+    this.indexCurrentRow = 0
+    this.indexNextRow = 1
+    this.allowTokiToRun = true
+    this.isOverlapping = false
+    this.currentRow = undefined
+    this.nextRow = undefined
+    this.lastLineReached = false
+    this.train = []
+    this.firstTrain = undefined
+    this.doorsActiveTrain = undefined
+    this.activeTrainContainer = undefined
+    this.containers = []
+    this.nextEmptySlab = undefined
+    this.currentEmptySlab = undefined
+    this.goalZone = undefined
+    this.gapX = 0
+    this.gapY = 0
+    this.numberHiddenCharacters = 0
+    this.allowTokiToRun = true
   }
 
   private generateEmptySlabPosition(): integer {

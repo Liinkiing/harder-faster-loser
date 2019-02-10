@@ -4,14 +4,20 @@ import { GameEvents } from '../../utils/enums'
 import { MinigameGuideline } from '../../utils/interfaces'
 import gameStore from '../../store/GameStore'
 import minigameManager from '../manager/MinigameManager'
+import { List } from '../../utils/extensions'
+import { green } from '../../utils/colors'
 
 export default abstract class MinigameScene extends BaseScene {
   public abstract guideline: MinigameGuideline
+  protected availableBackgroundColors: List<string> = new List([green])
   protected hasActionIndicators = false
   protected actionIndicator?: Phaser.GameObjects.Sprite
 
   public create(): void {
     super.create()
+    gameStore.changeConfig({
+      backgroundColor: this.availableBackgroundColors.random(),
+    })
     gameStore.regenerateUiKey()
     if (this.hasActionIndicators) {
       gameManager.suspendMinigame()
