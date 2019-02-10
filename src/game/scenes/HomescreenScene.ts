@@ -17,6 +17,7 @@ const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 export default class HomescreenScene extends BaseScene {
   private shaker?: Shaker
   private toki?: Phaser.GameObjects.Sprite
+  private actionIndicator?: Phaser.GameObjects.Sprite
   private shakeFrame = 0
   private state: TokiState = TokiState.Sleeping
 
@@ -31,14 +32,14 @@ export default class HomescreenScene extends BaseScene {
     this.shakeFrame = 0
     this.state = TokiState.Sleeping
     if (Shaker.hasDeviceMotion()) {
-      this.shaker = new Shaker({ timeout: 10, threshold: 1 })
+      this.shaker = new Shaker({ timeout: 20, threshold: 1 })
       this.shaker.start()
       this.shaker.addEventListener('shake', this.onShake)
     }
     gameManager.audio.resetDetune()
     gameManager.audio.playBg()
     gameManager.changeBackgroundColor(blue)
-    // this.createActionIndicator()
+    this.createActionIndicator()
     this.toki = this.add
       .sprite(window.innerWidth / 2, window.innerHeight, 'intro_sleep')
       .setOrigin(0.5, 1)
@@ -62,6 +63,9 @@ export default class HomescreenScene extends BaseScene {
       this.state = TokiState.WakingUp
     }
     if (this.state === TokiState.WakingUp) {
+      if (this.actionIndicator) {
+        this.actionIndicator.destroy()
+      }
       this.toki!.anims.play('intro_shake_animation', false, this.shakeFrame)
       this.toki!.anims.stop()
       this.shakeFrame++
@@ -77,7 +81,7 @@ export default class HomescreenScene extends BaseScene {
   }
 
   private createActionIndicator = () => {
-    this.add
+    this.actionIndicator = this.add
       .sprite(window.innerWidth / 2, window.innerHeight / 2 - 220, 'shake')
       .setOrigin(0.5, 0.5)
       .setScale(3)
