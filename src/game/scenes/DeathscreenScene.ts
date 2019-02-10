@@ -56,7 +56,7 @@ export default class DeathscreenScene extends BaseScene {
       this.initLightning()
     })
 
-    await gameWait(this.time, 50000)
+    await gameWait(this.time, 8000)
     this.destroyFirstPart()
   }
 
