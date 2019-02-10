@@ -2,11 +2,20 @@ import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
 import gameStore from '../../store/GameStore'
 import gameManager from '../manager/GameManager'
-import { darkBlue } from '../../utils/colors'
+import { blue } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
+
+enum TokiState {
+  Sleeping,
+  WakingUp,
+  WakedUp,
+}
 
 export default class HomescreenScene extends BaseScene {
   private shaker?: Shaker
+  private toki?: Phaser.GameObjects.Sprite
+  private shakeFrame = 0
+  private state: TokiState = TokiState.Sleeping
 
   constructor() {
     super({
@@ -16,22 +25,20 @@ export default class HomescreenScene extends BaseScene {
 
   public create(): void {
     super.create()
+    this.shakeFrame = 0
+    this.state = TokiState.Sleeping
     if (Shaker.hasDeviceMotion()) {
-      this.shaker = new Shaker()
+      this.shaker = new Shaker({ timeout: 10, threshold: 1 })
       this.shaker.start()
       this.shaker.addEventListener('shake', this.onShake)
     }
     gameManager.audio.resetDetune()
     gameManager.audio.playBg()
-    gameManager.changeBackgroundColor(darkBlue)
+    gameManager.changeBackgroundColor(blue)
     // this.createActionIndicator()
-    this.add
-      .sprite(
-        window.innerWidth / 2,
-        window.innerHeight / 2,
-        'intro_sleep_animation'
-      )
-      .setOrigin(0.5, 0.5)
+    this.toki = this.add
+      .sprite(window.innerWidth / 2, window.innerHeight, 'intro_sleep')
+      .setOrigin(0.5, 1)
       .setScale(18 / gameStore.ratioResolution)
       .play('intro_sleep_animation')
   }
@@ -46,7 +53,18 @@ export default class HomescreenScene extends BaseScene {
     }
   }
 
-  private onShake = (): void => {}
+  private onShake = (): void => {
+    console.log('ON SHAKE')
+    if (this.state !== TokiState.WakingUp) {
+      this.state = TokiState.WakingUp
+    }
+    if (this.state === TokiState.WakingUp) {
+      this.toki!.anims.play('intro_shake_animation', false, this.shakeFrame)
+      this.shakeFrame++
+      this.shakeFrame = this.shakeFrame % 29
+    }
+    console.log(this.shakeFrame)
+  }
 
   private createActionIndicator = () => {
     this.add
