@@ -4,8 +4,17 @@ import gameManager, { Emitter } from '../../game/manager/GameManager'
 import { GameEvents } from '../../utils/enums'
 import GameButton from './GameButton'
 import CountUp from 'react-countup'
+import { lightGray, white } from '../../utils/colors'
 
 const Div = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`
+
+const ContainerMessage = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -34,6 +43,16 @@ const PercentData = styled.div`
   display: flex;
 `
 
+const DeathTime = styled.span<{ fontColor: string }>`
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 113vw;
+  color: ${props => props.fontColor};
+`
+
 const DeathscreenUI: FunctionComponent = () => {
   const { loadLeaderboards } = gameManager
   const [showButton, setShowButton] = useState(false)
@@ -43,6 +62,8 @@ const DeathscreenUI: FunctionComponent = () => {
     </p>
   )
   const [percent, setPercent] = useState(0)
+  const [deathTime, setDeathTime] = useState('15.02.19')
+  const [fontColor, setFontColor] = useState(lightGray)
 
   useEffect(() => {
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
@@ -50,23 +71,50 @@ const DeathscreenUI: FunctionComponent = () => {
       setMessage(<p>{args.text}</p>)
       setShowButton(true)
     })
+
+    Emitter.on(GameEvents.DeathscreenThunderOn, () => {
+      setFontColor(white)
+    })
+
+    Emitter.on(GameEvents.DeathscreenThunderOff, () => {
+      setFontColor(lightGray)
+    })
+
+    const newDate = new Date()
+    let day = newDate.getDate().toString()
+    let month = newDate.getMonth().toString()
+    let year = newDate.getFullYear().toString()
+    year = year.slice(-2)
+
+    if (day.length === 1) {
+      day = '0' + day
+    }
+    if (month.length === 1) {
+      month = '0' + month
+    }
+
+    const deathDate = [day, month, year].join('.')
+    setDeathTime(deathDate)
   }, [])
 
   return (
     <Div className="deathscreen-ui">
-      {showButton && (
-        <PercentData>
-          <CountUp start={0} end={percent} />
-          <span>%</span>
-        </PercentData>
-      )}
+      <DeathTime fontColor={fontColor}>{deathTime}</DeathTime>
+      <ContainerMessage>
+        {showButton && (
+          <PercentData>
+            <CountUp start={0} end={percent} />
+            <span>%</span>
+          </PercentData>
+        )}
 
-      {message}
-      {showButton && (
-        <GameButton onClick={loadLeaderboards} size="small">
-          Leaderboards
-        </GameButton>
-      )}
+        {message}
+        {showButton && (
+          <GameButton onClick={loadLeaderboards} size="small">
+            Leaderboards
+          </GameButton>
+        )}
+      </ContainerMessage>
     </Div>
   )
 }
