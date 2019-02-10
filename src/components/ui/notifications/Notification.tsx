@@ -1,7 +1,13 @@
 import * as React from 'react'
 import { FunctionComponent, useEffect, useState } from 'react'
 import styled, { Keyframes } from 'styled-components'
-import { black, green, hexToRgba, lightBlue } from '../../../utils/colors'
+import {
+  black,
+  green,
+  hexToRgba,
+  lightBlue,
+  lightRed,
+} from '../../../utils/colors'
 import { disappearFromUp, slideInUp } from '../../../utils/keyframes'
 import { useTimeout } from '../../../utils/hooks'
 import { useRef } from 'react'
@@ -10,7 +16,7 @@ import { UIEvents } from '../../../utils/enums'
 
 export interface INotification {
   id: string
-  type: 'info' | 'success'
+  type: 'info' | 'success' | 'error'
   content: string
   duration?: number
 }
@@ -34,6 +40,8 @@ const NotificationInner = styled.div<StyledProps>`
         return lightBlue
       case 'success':
         return green
+      case 'error':
+        return lightRed
     }
   }};
   &::after {

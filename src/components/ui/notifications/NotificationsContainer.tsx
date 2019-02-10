@@ -2,11 +2,15 @@ import * as React from 'react'
 import { FunctionComponent, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { INotification } from './Notification'
-import { Emitter } from '../../../game/manager/GameManager'
+import gameManager, { Emitter } from '../../../game/manager/GameManager'
 import { UIEvents } from '../../../utils/enums'
 import Notification from './Notification'
 import { Omit } from '../../../utils/types'
 import { uuid } from '../../../utils/functions'
+
+const SUCCESS_SOUND = 'success'
+const INFO_SOUND = 'explosion'
+const ERROR_SOUND = 'error'
 
 const notificationsRoot = document.getElementById(
   'notifications'
@@ -38,6 +42,19 @@ const NotificationsContainer: FunctionComponent = props => {
 }
 
 export const notify = (notification: Omit<INotification, 'id'>): void => {
+  if (gameManager && gameManager.audio) {
+    switch (notification.type) {
+      case 'info':
+        gameManager.audio.playSfx(INFO_SOUND, { volume: 0.3 })
+        break
+      case 'success':
+        gameManager.audio.playSfx(SUCCESS_SOUND, { volume: 0.3 })
+        break
+      case 'error':
+        gameManager.audio.playSfx(ERROR_SOUND, { volume: 0.3 })
+        break
+    }
+  }
   Emitter.emit(UIEvents.NotificationShow, { ...notification, id: uuid() })
 }
 
