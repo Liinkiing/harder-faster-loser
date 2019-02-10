@@ -454,24 +454,6 @@
         ]
       },
       {
-        "type": "audio",
-        "key": "success",
-        "url": [
-          "/static/assets/sounds/success.ogg",
-          "/static/assets/sounds/success.m4a",
-          "/static/assets/sounds/success.mp3"
-        ]
-      },
-      {
-        "type": "audio",
-        "key": "error",
-        "url": [
-          "/static/assets/sounds/error.ogg",
-          "/static/assets/sounds/error.m4a",
-          "/static/assets/sounds/error.mp3"
-        ]
-      },
-      {
         "type": "image",
         "key": "sky",
         "url": "/static/assets/sprites/sandwich-game/sandwich_plan_sky.png"
@@ -1075,6 +1057,24 @@
           "/static/assets/sounds/explosion.ogg",
           "/static/assets/sounds/explosion.m4a",
           "/static/assets/sounds/explosion.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "success",
+        "url": [
+          "/static/assets/sounds/success.ogg",
+          "/static/assets/sounds/success.m4a",
+          "/static/assets/sounds/success.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "error",
+        "url": [
+          "/static/assets/sounds/error.ogg",
+          "/static/assets/sounds/error.m4a",
+          "/static/assets/sounds/error.mp3"
         ]
       },
       {
