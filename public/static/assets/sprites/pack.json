@@ -1081,6 +1081,24 @@
         "type": "image",
         "key": "deathscreen_empty_tombstone",
         "url": "/static/assets/sprites/deathscreen/deathscreen_empty_tombstone.png"
+      },
+      {
+        "type": "audio",
+        "key": "rain",
+        "url": [
+          "/static/assets/sounds/rain.ogg",
+          "/static/assets/sounds/rain.m4a",
+          "/static/assets/sounds/rain.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "thunder",
+        "url": [
+          "/static/assets/sounds/thunder.ogg",
+          "/static/assets/sounds/thunder.m4a",
+          "/static/assets/sounds/thunder.mp3"
+        ]
       }
     ]
   }

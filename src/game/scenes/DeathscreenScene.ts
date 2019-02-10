@@ -6,6 +6,9 @@ import { GameEvents } from '../../utils/enums'
 import dataManager from '../manager/DataManager'
 import { green, lightGray, black } from '../../utils/colors'
 
+const SOUND_RAIN = 'rain'
+const SOUND_THUNDER = 'thunder'
+
 export default class DeathscreenScene extends BaseScene {
   private stageSet?: Phaser.GameObjects.Sprite
   private cloud?: Phaser.GameObjects.Sprite
@@ -24,6 +27,7 @@ export default class DeathscreenScene extends BaseScene {
     super.create()
     this.resetClassVariables()
     gameManager.changeBackgroundColor(lightGray)
+    gameManager.audio.playAmbientMusic(SOUND_RAIN, { volume: 0.2, delay: 0.3 })
     this.initFirstPart()
     this.dataContent = dataManager.pickDataAtIndex(0)
 
@@ -36,6 +40,8 @@ export default class DeathscreenScene extends BaseScene {
         gameManager.changeBackgroundColor(black)
         this.stageSet.setTexture('deathscreen_stage_set_1')
         this.cloud.setTexture('deathscreen_clouds_1')
+
+        gameManager.audio.playSfx(SOUND_THUNDER, { volume: 0.2, delay: 0.3 })
 
         await gameWait(this.time, 300)
         Emitter.emit(GameEvents.DeathscreenThunderOff)
@@ -50,7 +56,7 @@ export default class DeathscreenScene extends BaseScene {
       this.initLightning()
     })
 
-    await gameWait(this.time, 5000)
+    await gameWait(this.time, 50000)
     this.destroyFirstPart()
   }
 
@@ -103,7 +109,7 @@ export default class DeathscreenScene extends BaseScene {
   }
 
   private initLightning = async () => {
-    const delayLightning = Math.floor(randomRange(3000, 4000))
+    const delayLightning = Math.floor(randomRange(2000, 8000))
 
     await gameWait(this.time, delayLightning)
 
