@@ -3,6 +3,8 @@ import { GameCategory } from './enums'
 export const minigameSuffix = '_MINIGAME'
 export const minigameToolbarHeight = 84
 
+export const BUTTON_VIBRATION_DURATION = 30
+
 export const scenesKeys = {
   Boot: 'BOOT',
   Splashscreen: 'SPLASHSCREEN',
