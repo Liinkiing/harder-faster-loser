@@ -59,7 +59,6 @@ export default class HomescreenScene extends BaseScene {
   }
 
   private onShake = (): void => {
-    console.log('ON SHAKE')
     if (this.cycleRemaining === 0) {
       this.state = TokiState.WakedUp
     }
@@ -83,6 +82,7 @@ export default class HomescreenScene extends BaseScene {
           gameManager.audio.playUniqueSfx(AVAILABLE_HURT_SOUNDS.random(), {
             volume: 0.9,
           })
+          gameManager.vibrate(200)
         }
         break
       case TokiState.WakedUp:
