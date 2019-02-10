@@ -125,6 +125,20 @@ export const useInterval = (
   }, inputs)
 }
 
+export const useTimeout = (
+  handler: TimerHandler,
+  ms: number,
+  inputs?: InputIdentityList
+): void => {
+  useEffect(() => {
+    const interval = setTimeout(handler, ms)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, inputs)
+}
+
 export const useRaf = (ms: number = 1e12, delay: number = 0): number => {
   const [elapsed, set] = useState<number>(0)
 
