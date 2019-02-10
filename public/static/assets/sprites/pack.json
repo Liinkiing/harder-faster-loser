@@ -1093,6 +1093,24 @@
       },
       {
         "type": "audio",
+        "key": "hurtmc",
+        "url": [
+          "/static/assets/sounds/hurtmc.ogg",
+          "/static/assets/sounds/hurtmc.m4a",
+          "/static/assets/sounds/hurtmc.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "hurtrb",
+        "url": [
+          "/static/assets/sounds/hurtrb.ogg",
+          "/static/assets/sounds/hurtrb.m4a",
+          "/static/assets/sounds/hurtrb.mp3"
+        ]
+      },
+      {
+        "type": "audio",
         "key": "rain",
         "url": [
           "/static/assets/sounds/rain.ogg",
