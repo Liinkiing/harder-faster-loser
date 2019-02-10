@@ -56,11 +56,6 @@ export default class HomescreenScene extends BaseScene {
 
   public destroy(): void {
     super.destroy()
-    if (this.shaker) {
-      console.log('DESTROYING SHAKER')
-      this.shaker.stop()
-      this.shaker.removeEventListener('shake', this.onShake)
-    }
   }
 
   private onShake = (): void => {
@@ -91,6 +86,10 @@ export default class HomescreenScene extends BaseScene {
         }
         break
       case TokiState.WakedUp:
+        if (this.shaker) {
+          this.shaker.stop()
+          this.shaker.removeEventListener('shake', this.onShake)
+        }
         gameManager.loadNextMinigame()
         break
     }
