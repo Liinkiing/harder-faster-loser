@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import GameButton from './GameButton'
 import gameManager from '../../game/manager/GameManager'
 import SettingsModal from './modals/SettingsModal'
+import { Shaker } from '../../Shaker'
 
 const HomescreenUIInner = styled.div`
   position: fixed;
@@ -43,7 +44,9 @@ const HomescreenUI: FunctionComponent = () => {
     <HomescreenUIInner>
       {showSettings && <SettingsModal onClose={onSettingsModalClose} />}
       <SettingsButton onClick={onSettingsButtonClick}>S</SettingsButton>
-      {isDesktop && <PlayButton onClick={loadNextMinigame}>Wake up</PlayButton>}
+      {(isDesktop || !Shaker.hasDeviceMotion()) && (
+        <PlayButton onClick={loadNextMinigame}>Wake up</PlayButton>
+      )}
     </HomescreenUIInner>
   )
 }
