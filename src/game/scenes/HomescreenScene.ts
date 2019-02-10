@@ -3,8 +3,11 @@ import BaseScene from './BaseScene'
 import gameStore from '../../store/GameStore'
 import gameManager from '../manager/GameManager'
 import { darkBlue } from '../../utils/colors'
+import { Shaker } from '../../Shaker'
 
 export default class HomescreenScene extends BaseScene {
+  private shaker?: Shaker
+
   constructor() {
     super({
       key: scenesKeys.Homescreen,
@@ -13,6 +16,11 @@ export default class HomescreenScene extends BaseScene {
 
   public create(): void {
     super.create()
+    if (Shaker.hasDeviceMotion()) {
+      this.shaker = new Shaker()
+      this.shaker.start()
+      this.shaker.addEventListener('shake', this.onShake)
+    }
     gameManager.audio.resetDetune()
     gameManager.audio.playBg()
     gameManager.changeBackgroundColor(darkBlue)
@@ -29,6 +37,16 @@ export default class HomescreenScene extends BaseScene {
   }
 
   public update(time: number, delta: number): void {}
+
+  protected destroy(): void {
+    super.destroy()
+    if (this.shaker) {
+      this.shaker.stop()
+      this.shaker.removeEventListener('shake', this.onShake)
+    }
+  }
+
+  private onShake = (): void => {}
 
   private createActionIndicator = () => {
     this.add
