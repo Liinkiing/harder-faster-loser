@@ -26,14 +26,20 @@ const NotificationsContainer: FunctionComponent = props => {
         ...n,
         <Notification key={notification.id} {...notification} />,
       ])
+      notificationsRoot.classList.add('visible')
     })
     Emitter.on(UIEvents.NotificationHide, (notification: INotification) => {
-      setNotifications(n =>
-        n.filter(notif => notif.props.id !== notification.id)
-      )
+      setNotifications(n => {
+        const filtered = n.filter(notif => notif.props.id !== notification.id)
+        if (filtered.length === 0) {
+          notificationsRoot.classList.remove('visible')
+        }
+        return filtered
+      })
     })
 
     return () => {
+      notificationsRoot.classList.remove('visible')
       Emitter.removeAllListeners(UIEvents.NotificationShow)
     }
   }, [])
