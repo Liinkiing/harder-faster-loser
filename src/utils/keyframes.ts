@@ -65,3 +65,14 @@ export const slideInUp = keyframes`
     opacity: 1;
   }
 `
+
+export const disappearFromUp = keyframes`
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+`

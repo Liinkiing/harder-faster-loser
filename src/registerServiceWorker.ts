@@ -10,7 +10,7 @@
 // This link also includes instructions on opting out of this behavior.
 
 import { Emitter } from './game/manager/GameManager'
-import { BaseEvents } from './utils/enums'
+import { UIEvents } from './utils/enums'
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -74,13 +74,13 @@ function registerValidSW(swUrl: string) {
                 // It's the perfect time to display a 'New content is
                 // available; please refresh.' message in your web app.
                 console.log('New content is available; please refresh.')
-                Emitter.emit(BaseEvents.NewContentAvailable)
+                Emitter.emit(UIEvents.NewContentAvailable)
               } else {
                 // At this point, everything has been precached.
                 // It's the perfect time to display a
                 // 'Content is cached for offline use.' message.
                 console.log('Content is cached for offline use.')
-                Emitter.emit(BaseEvents.ContentCached)
+                Emitter.emit(UIEvents.ContentCached)
               }
             }
           }

@@ -17,9 +17,14 @@ export enum BaseEvents {
   SceneInit = 'SCENE_INIT',
   SceneCreated = 'SCENE_CREATED',
   SceneDestroyed = 'SCENE_DESTROYED',
+}
 
+export enum UIEvents {
   NewContentAvailable = 'NEW_CONTENT_AVAILABLE',
   ContentCached = 'CONTENT_CACHED',
+
+  NotificationShow = 'NOTIFICATION_SHOW',
+  NotificationHide = 'NOTIFICATION_HIDE',
 }
 
 export enum GameEvents {
