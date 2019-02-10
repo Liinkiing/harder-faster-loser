@@ -49,7 +49,7 @@ const DeathTime = styled.span`
   text-align: center;
   position: absolute;
   left: 0;
-  top: calc(50% + 17px);
+  top: 113vw;
   color: ${lightGray};
 `
 
