@@ -19,6 +19,7 @@ const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 
 export default class HomescreenScene extends BaseScene {
   private shaker?: Shaker
+  private dreams?: TokiDreams
   private toki?: Phaser.GameObjects.Sprite
   private cycleRemaining = CYCLE_BEFORE_WAKE_UP
   private actionIndicator?: Phaser.GameObjects.Sprite
@@ -53,7 +54,7 @@ export default class HomescreenScene extends BaseScene {
       .setScale(18 / gameStore.ratioResolution)
       .play('intro_sleep_animation')
 
-    const dreams = new TokiDreams({
+    this.dreams = new TokiDreams({
       scene: this,
       x: window.innerWidth / 2,
       y: window.innerHeight - 660,
@@ -82,6 +83,7 @@ export default class HomescreenScene extends BaseScene {
         this.toki!.anims.stop()
         this.shakeFrame++
         this.shakeFrame = this.shakeFrame % 29
+        this.dreams!.setX(TokiDreams.positionsOffset[this.shakeFrame])
         if (this.shakeFrame % 29 === 0) {
           this.cycleRemaining--
         }
@@ -97,6 +99,9 @@ export default class HomescreenScene extends BaseScene {
         if (this.shaker) {
           this.shaker.stop()
           this.shaker.removeEventListener('shake', this.onShake)
+        }
+        if (this.dreams) {
+          this.dreams.destroy()
         }
         this.toki!.anims.play('intro_wake_up_animation', true).on(
           'animationcomplete',
