@@ -999,6 +999,24 @@
           "frameWidth": 33,
           "frameHeight": 46
         }
+      },
+      {
+        "type": "audio",
+        "key": "snoring_1",
+        "url": [
+          "/static/assets/sounds/snoring_1.ogg",
+          "/static/assets/sounds/snoring_1.m4a",
+          "/static/assets/sounds/snoring_1.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "snoring_2",
+        "url": [
+          "/static/assets/sounds/snoring_2.ogg",
+          "/static/assets/sounds/snoring_2.m4a",
+          "/static/assets/sounds/snoring_2.mp3"
+        ]
       }
     ]
   },

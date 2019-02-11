@@ -32,6 +32,11 @@ const HomescreenUI: FunctionComponent = () => {
   const { loadNextMinigame, isDesktop } = gameManager
   const [showSettings, setShowSettings] = useState(false)
 
+  const onPlay = () => {
+    gameManager.audio.playBg()
+    loadNextMinigame()
+  }
+
   const onSettingsModalClose = () => {
     setShowSettings(false)
   }
@@ -45,7 +50,7 @@ const HomescreenUI: FunctionComponent = () => {
       {showSettings && <SettingsModal onClose={onSettingsModalClose} />}
       <SettingsButton onClick={onSettingsButtonClick}>S</SettingsButton>
       {(isDesktop || !Shaker.hasDeviceMotion()) && (
-        <PlayButton onClick={loadNextMinigame}>Wake up</PlayButton>
+        <PlayButton onClick={onPlay}>Wake up</PlayButton>
       )}
     </HomescreenUIInner>
   )

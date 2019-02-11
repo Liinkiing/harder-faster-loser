@@ -43,7 +43,6 @@ export default class HomescreenScene extends BaseScene {
       this.shaker.addEventListener('shake', this.onShake)
     }
     gameManager.audio.resetDetune()
-    gameManager.audio.playBg()
     gameManager.changeBackgroundColor(blue)
     if (!gameManager.isDesktop) {
       this.createActionIndicator()
@@ -53,6 +52,26 @@ export default class HomescreenScene extends BaseScene {
       .setOrigin(0.5, 1)
       .setScale(18 / gameStore.ratioResolution)
       .play('intro_sleep_animation')
+
+    this.time.addEvent({
+      loop: true,
+      delay: this.toki.anims.currentAnim.msPerFrame,
+      callback: () => {
+        if (
+          this.toki &&
+          this.toki.anims.currentAnim.key === 'intro_sleep_animation'
+        ) {
+          switch (this.toki.anims.currentFrame.index) {
+            case 1:
+              gameManager.audio.playSfx('snoring_1')
+              break
+            case 3:
+              gameManager.audio.playSfx('snoring_2')
+              break
+          }
+        }
+      },
+    })
 
     this.dreams = new TokiDreams({
       scene: this,
@@ -112,6 +131,7 @@ export default class HomescreenScene extends BaseScene {
         this.toki!.anims.play('intro_wake_up_animation', true).on(
           'animationcomplete',
           () => {
+            gameManager.audio.playBg()
             gameManager.loadNextMinigame()
           }
         )
