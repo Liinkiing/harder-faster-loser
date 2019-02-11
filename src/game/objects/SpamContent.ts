@@ -1,6 +1,4 @@
 import { SpriteConstructor } from '../../utils/interfaces'
-import gameStore from '../../store/GameStore'
-import { useKeyboardInput } from '../../utils/hooks'
 
 export default class SpamContent extends Phaser.GameObjects.Sprite {
   constructor(params: SpriteConstructor) {

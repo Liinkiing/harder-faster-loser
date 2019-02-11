@@ -972,6 +972,33 @@
           "frameWidth": 72,
           "frameHeight": 142
         }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_pizza_dream",
+        "url": "/static/assets/sprites/homescreen/intro_pizza_dream_33x46.png",
+        "frameConfig": {
+          "frameWidth": 33,
+          "frameHeight": 46
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_unicorn_dream",
+        "url": "/static/assets/sprites/homescreen/intro_unicorn_dream_33x46.png",
+        "frameConfig": {
+          "frameWidth": 33,
+          "frameHeight": 46
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_zzz",
+        "url": "/static/assets/sprites/homescreen/intro_zzz_33x46.png",
+        "frameConfig": {
+          "frameWidth": 33,
+          "frameHeight": 46
+        }
       }
     ]
   },
