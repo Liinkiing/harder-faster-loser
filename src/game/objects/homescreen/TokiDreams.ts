@@ -47,9 +47,10 @@ export default class TokiDreams extends Phaser.GameObjects.Sprite {
     this.setOrigin(0.5, 0)
       .setScale(12 / gameStore.ratioResolution)
       .play(getAnimationName())
-      .on('animationcomplete', async () => {
-        await gameWait(params.scene.time, randomRange(800, 4000))
-        this.play(getAnimationName())
+      .on('animationcomplete', () => {
+        gameWait(params.scene.time, randomRange(800, 4000)).then(() => {
+          this.play(getAnimationName())
+        })
       })
 
     this.zzz = new Phaser.GameObjects.Sprite(

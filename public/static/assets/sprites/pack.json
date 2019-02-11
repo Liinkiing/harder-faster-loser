@@ -1017,6 +1017,24 @@
           "/static/assets/sounds/snoring_2.m4a",
           "/static/assets/sounds/snoring_2.mp3"
         ]
+      },
+      {
+        "type": "audio",
+        "key": "lullaby",
+        "url": [
+          "/static/assets/sounds/lullaby.ogg",
+          "/static/assets/sounds/lullaby.m4a",
+          "/static/assets/sounds/lullaby.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "lullaby_crushed",
+        "url": [
+          "/static/assets/sounds/lullaby_crushed.ogg",
+          "/static/assets/sounds/lullaby_crushed.m4a",
+          "/static/assets/sounds/lullaby_crushed.mp3"
+        ]
       }
     ]
   },

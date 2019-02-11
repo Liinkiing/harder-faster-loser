@@ -5,7 +5,7 @@ import gameManager from '../manager/GameManager'
 import { blue, yellow } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
 import { List } from '../../utils/extensions'
-import { gameWait } from '../../utils/functions'
+import { gameWait, mapRange } from '../../utils/functions'
 import TokiDreams from '../objects/homescreen/TokiDreams'
 
 enum TokiState {
@@ -14,12 +14,14 @@ enum TokiState {
   WakedUp,
 }
 
-const CYCLE_BEFORE_WAKE_UP = 20
+const CYCLE_BEFORE_WAKE_UP = 5
 const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 
 export default class HomescreenScene extends BaseScene {
   private shaker?: Shaker
   private dreams?: TokiDreams
+  private lullaby?: Phaser.Sound.WebAudioSound
+  private crushedLullaby?: Phaser.Sound.WebAudioSound
   private toki?: Phaser.GameObjects.Sprite
   private cycleRemaining = CYCLE_BEFORE_WAKE_UP
   private actionIndicator?: Phaser.GameObjects.Sprite
@@ -43,6 +45,18 @@ export default class HomescreenScene extends BaseScene {
       this.shaker.addEventListener('shake', this.onShake)
     }
     gameManager.audio.resetDetune()
+    this.lullaby = gameManager.audio.addLayeredSound('lullaby', {
+      volume: 0.05,
+      loop: true,
+    })
+    this.lullaby.play()
+    if (!gameManager.isDesktop) {
+      this.crushedLullaby = gameManager.audio.addLayeredSound(
+        'lullaby_crushed',
+        { volume: 0, loop: true }
+      )
+      this.crushedLullaby.play()
+    }
     gameManager.changeBackgroundColor(blue)
     if (!gameManager.isDesktop) {
       this.createActionIndicator()
@@ -111,6 +125,23 @@ export default class HomescreenScene extends BaseScene {
         }
         if (this.shakeFrame % 29 === 0) {
           this.cycleRemaining--
+          const lullabyCrushedSound = mapRange(
+            this.cycleRemaining,
+            CYCLE_BEFORE_WAKE_UP,
+            0.1,
+            0,
+            0.3
+          )
+          const lullabySound = mapRange(
+            this.cycleRemaining,
+            0,
+            CYCLE_BEFORE_WAKE_UP,
+            0,
+            0.05
+          )
+
+          this.lullaby!.setVolume(lullabySound)
+          this.crushedLullaby!.setVolume(lullabyCrushedSound)
         }
         if (this.shakeFrame === 9 || this.shakeFrame === 23) {
           // Corresponds to frame in which Toki is actually hurt
@@ -128,6 +159,7 @@ export default class HomescreenScene extends BaseScene {
         if (this.dreams) {
           this.dreams.destroy()
         }
+        gameManager.audio.stopLayeredSounds()
         this.toki!.anims.play('intro_wake_up_animation', true).on(
           'animationcomplete',
           () => {
