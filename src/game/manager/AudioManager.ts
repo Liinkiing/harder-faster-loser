@@ -12,6 +12,7 @@ export default class AudioManager {
   private previousDetune: number
   private sound: Phaser.Sound.BaseSoundManager
   private bg?: Phaser.Sound.BaseSound
+  private layeredSounds: Phaser.Sound.WebAudioSound[] = []
   private ambiant?: Phaser.Sound.BaseSound
   private uniqueSfx?: Phaser.Sound.BaseSound
 
@@ -119,5 +120,27 @@ export default class AudioManager {
       loop: true,
     })
     this.ambiant.play()
+  }
+
+  public addLayeredSound = (
+    key: string,
+    extra?: ExtraConfig
+  ): Phaser.Sound.WebAudioSound => {
+    const sound = this.sound.add(key, extra) as Phaser.Sound.WebAudioSound
+    this.layeredSounds.push(sound)
+    return sound as Phaser.Sound.WebAudioSound
+  }
+
+  public getLayeredSound = (
+    key: string
+  ): Phaser.Sound.WebAudioSound | undefined => {
+    return this.layeredSounds.find(sound => sound.key === key)
+  }
+
+  public stopLayeredSounds = (): void => {
+    this.layeredSounds.forEach(sound => {
+      sound.stop()
+    })
+    this.layeredSounds = []
   }
 }
