@@ -578,6 +578,42 @@
       "showOnStart": true,
       "repeat": 0,
       "frameRate": 16
+    },
+    {
+      "key": "intro_pizza_dream_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "intro_pizza_dream",
+        "start": 0,
+        "end": 28
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 12
+    },
+    {
+      "key": "intro_unicorn_dream_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "intro_unicorn_dream",
+        "start": 0,
+        "end": 26
+      },
+      "showOnStart": true,
+      "repeat": 0,
+      "frameRate": 11
+    },
+    {
+      "key": "intro_zzz_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "intro_zzz",
+        "start": 0,
+        "end": 20
+      },
+      "showOnStart": true,
+      "repeat": -1,
+      "frameRate": 10
     }
   ]
 }

@@ -6,6 +6,7 @@ import { blue, yellow } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
 import { List } from '../../utils/extensions'
 import { gameWait } from '../../utils/functions'
+import TokiDreams from '../objects/homescreen/TokiDreams'
 
 enum TokiState {
   Sleeping,
@@ -51,6 +52,12 @@ export default class HomescreenScene extends BaseScene {
       .setOrigin(0.5, 1)
       .setScale(18 / gameStore.ratioResolution)
       .play('intro_sleep_animation')
+
+    const dreams = new TokiDreams({
+      scene: this,
+      x: window.innerWidth / 2,
+      y: window.innerHeight - 660,
+    })
   }
 
   public update(time: number, delta: number): void {}
@@ -116,7 +123,7 @@ export default class HomescreenScene extends BaseScene {
 
   private createActionIndicator = () => {
     this.actionIndicator = this.add
-      .sprite(window.innerWidth / 2, window.innerHeight / 2 - 220, 'shake')
+      .sprite(window.innerWidth / 2, window.innerHeight - 60, 'shake')
       .setOrigin(0.5, 0.5)
       .setScale(3)
       .setDepth(9999)
