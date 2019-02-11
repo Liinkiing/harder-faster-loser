@@ -14,7 +14,7 @@ enum TokiState {
   WakedUp,
 }
 
-const CYCLE_BEFORE_WAKE_UP = 3
+const CYCLE_BEFORE_WAKE_UP = 20
 const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 
 export default class HomescreenScene extends BaseScene {
@@ -83,7 +83,13 @@ export default class HomescreenScene extends BaseScene {
         this.toki!.anims.stop()
         this.shakeFrame++
         this.shakeFrame = this.shakeFrame % 29
-        this.dreams!.setX(TokiDreams.positionsOffset[this.shakeFrame])
+        if (this.dreams) {
+          this.dreams.setX(TokiDreams.positionsOffset[this.shakeFrame])
+          this.dreams.setZzzPosition(
+            TokiDreams.positionsOffset[this.shakeFrame],
+            this.dreams.y
+          )
+        }
         if (this.shakeFrame % 29 === 0) {
           this.cycleRemaining--
         }
