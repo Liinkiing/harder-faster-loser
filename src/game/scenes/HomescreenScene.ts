@@ -2,7 +2,7 @@ import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
 import gameStore from '../../store/GameStore'
 import gameManager from '../manager/GameManager'
-import { blue } from '../../utils/colors'
+import { blue, yellow } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
 import { List } from '../../utils/extensions'
 import { gameWait } from '../../utils/functions'
@@ -94,8 +94,11 @@ export default class HomescreenScene extends BaseScene {
         gameWait(this.time, 1550).then(() => {
           gameManager.audio.playSfx('angry', { volume: 0.6 })
         })
-        gameWait(this.time, 1100).then(() => {
+        gameWait(this.time, 1110).then(() => {
           gameManager.audio.playSfx('crack', { volume: 0.8 })
+          gameStore.changeConfig({
+            backgroundColor: yellow,
+          })
         })
         this.toki!.anims.play('intro_wake_up_animation', true).on(
           'animationcomplete',
