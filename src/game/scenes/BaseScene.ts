@@ -13,8 +13,8 @@ export default class BaseScene extends Phaser.Scene {
 
   public preload(): void {
     this.load.on('complete', () => {
-      if (this.load.totalToLoad < 20) {
-        // If there are less than 20 (arbitrary number) files to load, we are preloading for splashscreen
+      if (this.load.totalToLoad <= 40) {
+        // If there are less than 30 (arbitrary number) files to load, we are preloading for splashscreen
         this.animationHelper = new AnimationHelper(
           this,
           this.cache.json.get('splashscreen_animations')
