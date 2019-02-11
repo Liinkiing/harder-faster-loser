@@ -12,6 +12,14 @@ export const uuid = (): string => {
   return _p8() + _p8(true) + _p8(true) + _p8()
 }
 
+export const mapRange = (
+  value: number,
+  low1: number,
+  high1: number,
+  low2: number,
+  high2: number
+): number => low2 + ((high2 - low2) * (value - low1)) / (high1 - low1)
+
 export const gameWait = (
   clock: Phaser.Time.Clock,
   ms: number
