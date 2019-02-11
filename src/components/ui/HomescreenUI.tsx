@@ -33,6 +33,7 @@ const HomescreenUI: FunctionComponent = () => {
   const [showSettings, setShowSettings] = useState(false)
 
   const onPlay = () => {
+    gameManager.audio.stopLayeredSounds()
     gameManager.audio.playBg()
     loadNextMinigame()
   }
