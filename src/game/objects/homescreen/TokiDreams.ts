@@ -1,6 +1,7 @@
 import { SpriteConstructor } from '../../../utils/interfaces'
 import { Omit } from '../../../utils/types'
 import gameStore from '../../../store/GameStore'
+import { gameWait, randomRange } from '../../../utils/functions'
 
 const Y_OFFSET = 300
 const X_OFFSET = -120
@@ -46,7 +47,8 @@ export default class TokiDreams extends Phaser.GameObjects.Sprite {
     this.setOrigin(0.5, 0)
       .setScale(12 / gameStore.ratioResolution)
       .play(getAnimationName())
-      .on('animationcomplete', () => {
+      .on('animationcomplete', async () => {
+        await gameWait(params.scene.time, randomRange(800, 4000))
         this.play(getAnimationName())
       })
 
