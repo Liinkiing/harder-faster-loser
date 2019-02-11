@@ -5,6 +5,7 @@ import gameManager from '../manager/GameManager'
 import { blue } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
 import { List } from '../../utils/extensions'
+import { gameWait } from '../../utils/functions'
 
 enum TokiState {
   Sleeping,
@@ -90,7 +91,19 @@ export default class HomescreenScene extends BaseScene {
           this.shaker.stop()
           this.shaker.removeEventListener('shake', this.onShake)
         }
-        gameManager.loadNextMinigame()
+        gameWait(this.time, 1550).then(() => {
+          gameManager.audio.playSfx('angry', { volume: 0.6 })
+        })
+        gameWait(this.time, 1100).then(() => {
+          gameManager.audio.playSfx('crack', { volume: 0.8 })
+        })
+        this.toki!.anims.play('intro_wake_up_animation', true).on(
+          'animationcomplete',
+          () => {
+            gameManager.loadNextMinigame()
+          }
+        )
+        console.log(this.toki!.anims.currentFrame)
         break
     }
   }
