@@ -963,6 +963,15 @@
           "frameWidth": 34,
           "frameHeight": 25
         }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_wake_up",
+        "url": "/static/assets/sprites/homescreen/intro_wake_up_72x142.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 142
+        }
       }
     ]
   },
