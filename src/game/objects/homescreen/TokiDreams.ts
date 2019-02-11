@@ -3,6 +3,38 @@ import { Omit } from '../../../utils/types'
 import gameStore from '../../../store/GameStore'
 
 export default class TokiDreams extends Phaser.GameObjects.Sprite {
+  public static positionsOffset = [
+    window.innerWidth / 2,
+    window.innerWidth / 2,
+    window.innerWidth / 2,
+    window.innerWidth / 2,
+    window.innerWidth / 2 - 10 - 20,
+    window.innerWidth / 2 - 13 - 20,
+    window.innerWidth / 2 - 16 - 20,
+    window.innerWidth / 2 - 20 - 20,
+    window.innerWidth / 2 - 24 - 20,
+    window.innerWidth / 2 - 28 - 20,
+    window.innerWidth / 2 - 28 - 20,
+    window.innerWidth / 2 - 24 - 20,
+    window.innerWidth / 2 - 20 - 20,
+    window.innerWidth / 2 - 16 - 20,
+    window.innerWidth / 2 - 13 - 20,
+    window.innerWidth / 2 - 10 - 20,
+    window.innerWidth / 2,
+    window.innerWidth / 2 + 13 + 20,
+    window.innerWidth / 2 + 16 + 20,
+    window.innerWidth / 2 + 20 + 20,
+    window.innerWidth / 2 + 24 + 20,
+    window.innerWidth / 2 + 28 + 20,
+    window.innerWidth / 2 + 28 + 20,
+    window.innerWidth / 2 + 24 + 20,
+    window.innerWidth / 2 + 20 + 20,
+    window.innerWidth / 2 + 16 + 20,
+    window.innerWidth / 2 + 13 + 20,
+    window.innerWidth / 2 + 10 + 20,
+    window.innerWidth / 2 + 10 + 20,
+  ]
+
   constructor(params: Omit<SpriteConstructor, 'texture' | 'frame'>) {
     super(params.scene, params.x, params.y, '')
     const { getAnimationName } = this
