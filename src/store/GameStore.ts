@@ -5,6 +5,7 @@ import { HFLGameConfig } from '../utils/game'
 import gameManager from '../game/manager/GameManager'
 import { green } from '../utils/colors'
 import HFLApiClient from '../client/HFLApiClient'
+import { gameBackgroundColorToCss } from '../utils/functions'
 
 interface TokiStatus {
   hasStress: boolean
@@ -163,6 +164,12 @@ class GameStore {
   @action public changeConfig = (newConfig: Partial<HFLGameConfig>): void => {
     this.config = { ...this.config, ...newConfig }
     if (newConfig.backgroundColor) {
+      document
+        .querySelector('meta[name="theme-color"]')!
+        .setAttribute(
+          'content',
+          gameBackgroundColorToCss(newConfig.backgroundColor)
+        )
       gameManager.changeBackgroundColor(this.config.backgroundColor)
     }
   }
