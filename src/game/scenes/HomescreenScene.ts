@@ -103,11 +103,6 @@ export default class HomescreenScene extends BaseScene {
   }
 
   private playAnimationSfx = (): void => {
-    gameWait(this.time, 2200).then(async () => {
-      gameManager.audio.playSfx('beep', { volume: 0.1, detune: 300 })
-      await gameWait(this.time, 1718)
-      gameManager.audio.playSfx('beep', { volume: 0.1, detune: 300 })
-    })
     gameWait(this.time, 1900).then(() => {
       gameManager.audio.playSfx('angry', { volume: 0.6 })
     })
