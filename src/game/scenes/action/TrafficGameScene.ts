@@ -64,22 +64,22 @@ export default class TraficGameScene extends MinigameScene {
       volume: 0.4,
     })
 
+    if (gameStore.difficulty <= 4) {
+      this.nbrIncreaseDifficulty = 80
+    } else if (gameStore.difficulty <= 8) {
+      this.nbrIncreaseDifficulty = 60
+    } else if (gameStore.difficulty <= 12) {
+      this.nbrIncreaseDifficulty = 30
+    } else if (gameStore.difficulty >= 16) {
+      this.nbrIncreaseDifficulty = 20
+    }
+
     this.resetAllClassVariables()
     this.createRoad()
     this.createCars()
     this.controls = this.createControls()
 
     this.tokisRow = this.add.container(0, 0, this.carsTokisRow).setDepth(997)
-
-    if (gameStore.difficulty <= 3) {
-      this.nbrIncreaseDifficulty = 80
-    } else if (gameStore.difficulty <= 6) {
-      this.nbrIncreaseDifficulty = 60
-    } else if (gameStore.difficulty <= 9) {
-      this.nbrIncreaseDifficulty = 30
-    } else if (gameStore.difficulty >= 10) {
-      this.nbrIncreaseDifficulty = 20
-    }
   }
 
   public update = (time: number, delta: number): void => {
@@ -90,6 +90,7 @@ export default class TraficGameScene extends MinigameScene {
       this.cursorRageBar!.x -= 0.8
     }
 
+    console.log('Condition : ' + this.nbrIncreaseDifficulty)
     if (
       this.cursorRageBar!.x <
         (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 -
@@ -178,6 +179,7 @@ export default class TraficGameScene extends MinigameScene {
       })
       this.hornSprite!.alpha = 1
       this.cursorRageBar!.x += this.nbrIncreaseDifficulty / 2 // 20
+      console.log('cursorRageBar.x : ' + this.nbrIncreaseDifficulty)
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
@@ -197,7 +199,9 @@ export default class TraficGameScene extends MinigameScene {
       .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
+    console.log('this nbrIncre before : ' + this.nbrIncreaseDifficulty)
     const safeAreaWidth = this.nbrIncreaseDifficulty * 1.5
+    console.log('this nbrIn after : ' + this.nbrIncreaseDifficulty)
     // 100 / (Phaser.Math.Clamp(gameStore.difficulty, 1, 15) / 10 + 1) ///////////////////////////////////////////////
 
     this.safeRageBarArea = this.add.graphics()
