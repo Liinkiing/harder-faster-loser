@@ -7,17 +7,7 @@ import gameManager, { Emitter } from '../../manager/GameManager'
 import MinigameScene from '../MinigameScene'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
-import {
-  blue,
-  green,
-  lightBlue,
-  lightGray,
-  lightRed,
-  mediumGray,
-  orange,
-  pink,
-  yellow,
-} from '../../../utils/colors'
+import { green, lightBlue, lightGray } from '../../../utils/colors'
 
 const SOUND_SPAM_DESTROYED = 'explosion'
 const SOUND_CLOSE_CLICK = 'beep'
@@ -30,12 +20,6 @@ export default class SpamGameScene extends MinigameScene {
   public availableBackgroundColors = new List<string>([
     green,
     lightGray,
-    mediumGray,
-    yellow,
-    pink,
-    blue,
-    orange,
-    lightRed,
     lightBlue,
   ])
 

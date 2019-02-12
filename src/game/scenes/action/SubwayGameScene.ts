@@ -5,13 +5,7 @@ import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
 import { List } from '../../../utils/extensions'
-import {
-  blue,
-  darkGray,
-  lightBlue,
-  lightGray,
-  mediumGray,
-} from '../../../utils/colors'
+import { lightBlue } from '../../../utils/colors'
 
 const SOUND_ERROR = 'error'
 const SOUND_HIT = 'hit'
@@ -22,13 +16,7 @@ export default class SubwayGameScene extends MinigameScene {
     title: 'Slide !',
     subtitle: 'to enter the train',
   }
-  public availableBackgroundColors = new List<string>([
-    lightBlue,
-    blue,
-    darkGray,
-    mediumGray,
-    lightGray,
-  ])
+  public availableBackgroundColors = new List<string>([lightBlue])
 
   private windowHeight?: number
   private windowWidth?: number
