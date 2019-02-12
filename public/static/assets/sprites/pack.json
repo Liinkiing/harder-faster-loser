@@ -692,19 +692,19 @@
       {
         "type": "spritesheet",
         "key": "subway_character_time",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_135x300.png",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_character_time_9x20.png",
         "frameConfig": {
-          "frameWidth": 135,
-          "frameHeight": 300
+          "frameWidth": 9,
+          "frameHeight": 20
         }
       },
       {
         "type": "spritesheet",
         "key": "subway_toki_time",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_135x285.png",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_time_9x20.png",
         "frameConfig": {
-          "frameWidth": 135,
-          "frameHeight": 300
+          "frameWidth": 9,
+          "frameHeight": 20
         }
       },
       {
@@ -715,10 +715,10 @@
       {
         "type": "spritesheet",
         "key": "subway_toki_run",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_run_120x315.png",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_run_8x21.png",
         "frameConfig": {
-          "frameWidth": 120,
-          "frameHeight": 315
+          "frameWidth": 8,
+          "frameHeight": 21
         }
       },
       {
@@ -785,28 +785,28 @@
       {
         "type": "spritesheet",
         "key": "subway_train_door",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_door_660x360.png",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_door_44x24.png",
         "frameConfig": {
-          "frameWidth": 660,
-          "frameHeight": 360
+          "frameWidth": 44,
+          "frameHeight": 24
         }
       },
       {
         "type": "spritesheet",
         "key": "subway_train_inside",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_inside_630x390.png",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_train_inside_42x26.png",
         "frameConfig": {
-          "frameWidth": 630,
-          "frameHeight": 390
+          "frameWidth": 42,
+          "frameHeight": 26
         }
       },
       {
         "type": "spritesheet",
         "key": "subway_toki_win",
-        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_win_240x330.png",
+        "url": "/static/assets/sprites/subway-game/spritesheets/subway_toki_win_16x22.png",
         "frameConfig": {
-          "frameWidth": 240,
-          "frameHeight": 330
+          "frameWidth": 16,
+          "frameHeight": 22
         }
       },
       {

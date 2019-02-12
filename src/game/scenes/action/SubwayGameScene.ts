@@ -153,7 +153,7 @@ export default class SubwayGameScene extends MinigameScene {
               characterTextureKey
             )
             .setOrigin(0, 1)
-            .setScale(1 / gameStore.ratioResolution)
+            .setScale(15 / gameStore.ratioResolution)
             .setDepth(-1)
 
           character.anims.play(characterTextureKey, true)
@@ -512,7 +512,7 @@ export default class SubwayGameScene extends MinigameScene {
     this.doorsActiveTrain = this.add
       .sprite(0, -25, 'subwayTrainDoorAnimation')
       .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
 
     const doorsAnimation = this.doorsActiveTrain!.anims
     doorsAnimation.play('subwayTrainDoorAnimation', true)
@@ -521,7 +521,7 @@ export default class SubwayGameScene extends MinigameScene {
     const insideActiveTrain = this.add
       .sprite(5, -25, 'subwayTrainInsideAnimation')
       .setOrigin(0, 1)
-      .setScale(1 / gameStore.ratioResolution)
+      .setScale(15 / gameStore.ratioResolution)
 
     insideActiveTrain.anims.play('subwayTrainInsideAnimation', true)
 
