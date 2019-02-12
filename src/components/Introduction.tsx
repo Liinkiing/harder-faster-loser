@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import gameStore from '../store/GameStore'
-import { green, white } from '../utils/colors'
+import { black, green, white } from '../utils/colors'
 import BigButton from './ui/BigButton'
 
 interface Props {
@@ -23,7 +23,7 @@ const IntroductionInner = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: ${green};
+  background: ${black};
   p {
     font-size: 26px;
     text-transform: uppercase;

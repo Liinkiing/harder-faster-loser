@@ -27,7 +27,7 @@ const IntroductionUIInner = styled.div`
 `
 
 const IntroductionUI: FunctionComponent = () => {
-  const { loadHomescreen } = gameManager
+  const { loadSplashscreen } = gameManager
   return (
     <IntroductionUIInner>
       <AutoScroll duration={3000}>
@@ -66,7 +66,7 @@ const IntroductionUI: FunctionComponent = () => {
           tempora voluptatibus.
         </div>
         <Spacer size="large" />
-        <GameButton size="small" onClick={loadHomescreen}>
+        <GameButton size="small" onClick={loadSplashscreen}>
           Wake toki
         </GameButton>
         <Spacer size="large" />

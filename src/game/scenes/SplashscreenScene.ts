@@ -113,7 +113,7 @@ export default class SplashscreenScene extends BaseScene {
           await gameWait(this.time, 500)
           gameManager.audio.playUniqueSfx('squash', { volume: 0.7 })
           await gameWait(this.time, 1000)
-          gameManager.loadIntroduction()
+          gameManager.loadHomescreen()
         })
       })
     this.load.start()

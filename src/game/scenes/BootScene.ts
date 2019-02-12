@@ -34,7 +34,7 @@ export default class BootScene extends BaseScene {
     gameStore.startGame()
     const initial = gameStore.config.fade
     gameStore.changeConfig({ fade: false })
-    gameManager.loadSplashscreen()
+    gameManager.loadIntroduction()
     gameStore.changeConfig({ fade: initial })
     this.scene.stop(this.scene.key)
   }

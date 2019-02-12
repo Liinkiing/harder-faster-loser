@@ -51,7 +51,7 @@ const App: FunctionComponent = () => {
 
   return (
     <div className="App">
-      {!started && <Introduction onLaunchGame={onLaunchGame} />}
+      {/*{!started && <Introduction onLaunchGame={onLaunchGame} />}*/}
       <Game />
       <NotificationsContainer />
     </div>

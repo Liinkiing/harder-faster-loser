@@ -14,7 +14,7 @@ import {
   IntroductionScene,
 } from '../game/scenes'
 import { GameBackgroundColor } from './types'
-import { green } from './colors'
+import { black, green } from './colors'
 
 export interface HFLGameConfig {
   dev: boolean
@@ -28,7 +28,7 @@ export interface HFLGameConfig {
 
 export const gameConfig: GameConfig = {
   antialias: false,
-  backgroundColor: green,
+  backgroundColor: black,
   input: {
     gamepad: false,
     keyboard: true,
