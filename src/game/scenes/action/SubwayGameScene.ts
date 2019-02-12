@@ -23,13 +23,7 @@ export default class SubwayGameScene extends MinigameScene {
     title: 'Slide !',
     subtitle: 'to enter the train',
   }
-  public availableBackgroundColors = new List<string>([
-    lightBlue,
-    blue,
-    darkGray,
-    mediumGray,
-    lightGray,
-  ])
+  public availableBackgroundColors = new List<string>([lightBlue])
 
   private windowHeight?: number
   private windowWidth?: number
