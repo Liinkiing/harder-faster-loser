@@ -97,6 +97,12 @@ export default class AudioManager {
     this.bg.play()
   }
 
+  public stopBg = (): void => {
+    if (this.bg) {
+      this.bg.stop()
+    }
+  }
+
   public stopAmbientMusic = (resumeBg: boolean = true): void => {
     if (this.ambiant) {
       this.ambiant.stop()

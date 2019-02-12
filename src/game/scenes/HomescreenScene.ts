@@ -45,6 +45,7 @@ export default class HomescreenScene extends BaseScene {
       this.shaker.addEventListener('shake', this.onShake)
     }
     gameManager.audio.resetDetune()
+    gameManager.audio.stopBg()
     this.lullaby = gameManager.audio.addLayeredSound('lullaby', {
       volume: 0.05,
       loop: true,
