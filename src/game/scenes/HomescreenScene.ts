@@ -2,7 +2,7 @@ import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
 import gameStore from '../../store/GameStore'
 import gameManager from '../manager/GameManager'
-import { blue, yellow } from '../../utils/colors'
+import { blue, green, yellow } from '../../utils/colors'
 import { Shaker } from '../../Shaker'
 import { List } from '../../utils/extensions'
 import { gameWait, mapRange } from '../../utils/functions'
@@ -98,6 +98,9 @@ export default class HomescreenScene extends BaseScene {
 
   public destroy(): void {
     super.destroy()
+    gameStore.changeConfig({
+      backgroundColor: green,
+    })
   }
 
   private onShake = (): void => {
