@@ -5,6 +5,8 @@ import MinigameScene from '../MinigameScene'
 import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
 import { MinigameGuideline } from '../../../utils/interfaces'
+import { List } from '../../../utils/extensions'
+import { green, yellow } from '../../../utils/colors'
 
 const SOUND_WALK = 'beep'
 const SOUND_GET_SANDWICH = 'tada'
@@ -14,6 +16,8 @@ export default class SandwichGameScene extends MinigameScene {
     title: 'Run !',
     subtitle: 'to get your food',
   }
+  public availableBackgroundColors = new List<string>([green, yellow])
+
   private skies?: Phaser.GameObjects.Sprite[] = []
   private buildings?: Phaser.GameObjects.Sprite[] = []
   private landscapes?: Phaser.GameObjects.Sprite[] = []

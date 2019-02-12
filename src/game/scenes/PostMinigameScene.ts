@@ -3,6 +3,7 @@ import BaseScene from './BaseScene'
 import { gameWait } from '../../utils/functions'
 import gameManager from '../manager/GameManager'
 import gameStore from '../../store/GameStore'
+import { green } from '../../utils/colors'
 
 const SOUND_LOST = 'hit'
 const SOUND_WIN = 'success'
@@ -17,6 +18,9 @@ export default class PostMinigameScene extends BaseScene {
 
   public create = async () => {
     super.create()
+    gameStore.changeConfig({
+      backgroundColor: green,
+    })
     this.createFillerGraphics()
     if (gameManager.audio.ambientPlaying) {
       gameManager.audio.stopAmbientMusic()

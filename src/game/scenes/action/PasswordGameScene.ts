@@ -10,6 +10,8 @@ import { GameEvents } from '../../../utils/enums'
 import ComputerPasswordScreen from '../../objects/password-game/ComputerPasswordScreen'
 import gameStore from '../../../store/GameStore'
 import { MinigameGuideline } from '../../../utils/interfaces'
+import { List } from '../../../utils/extensions'
+import { green, lightBlue, lightRed, pink } from '../../../utils/colors'
 
 const PASSWORD_DISPLAY_TIME = 3000
 const PAW_DISPLAY_TIME = 180
@@ -27,6 +29,13 @@ export default class PasswordGameScene extends MinigameScene {
     title: 'Memorise !',
     subtitle: 'to enter password',
   }
+  public availableBackgroundColors = new List<string>([
+    green,
+    pink,
+    lightRed,
+    lightBlue,
+  ])
+
   public password: Code[] = []
   public typedPassword: Code[] = []
   private keyboard?: KeyboardContainer

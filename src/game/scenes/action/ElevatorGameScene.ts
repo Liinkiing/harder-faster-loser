@@ -4,6 +4,15 @@ import { scenesKeys } from '../../../utils/constants'
 import gameStore from '../../../store/GameStore'
 import { gameWait } from '../../../utils/functions'
 import { MinigameGuideline } from '../../../utils/interfaces'
+import { List } from '../../../utils/extensions'
+import {
+  blue,
+  darkGray,
+  green,
+  lightBlue,
+  lightGray,
+  mediumGray,
+} from '../../../utils/colors'
 
 const CLICK_SOUND = 'click'
 const ANGRY_SOUND = 'angry'
@@ -16,6 +25,14 @@ export default class ElevatorGameScene extends MinigameScene {
     title: 'Call !',
     subtitle: 'the elevator',
   }
+  public availableBackgroundColors = new List<string>([
+    lightBlue,
+    blue,
+    darkGray,
+    mediumGray,
+    lightGray,
+    green,
+  ])
 
   protected hasActionIndicators = true
 
