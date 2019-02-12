@@ -49,7 +49,9 @@ export default class TokiDreams extends Phaser.GameObjects.Sprite {
       .play(getAnimationName())
       .on('animationcomplete', () => {
         gameWait(params.scene.time, randomRange(800, 4000)).then(() => {
-          this.play(getAnimationName())
+          try {
+            this.play(getAnimationName())
+          } catch (e) {}
         })
       })
 
