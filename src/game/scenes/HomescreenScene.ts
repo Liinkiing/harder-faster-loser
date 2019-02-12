@@ -78,10 +78,10 @@ export default class HomescreenScene extends BaseScene {
         ) {
           switch (this.toki.anims.currentFrame.index) {
             case 1:
-              gameManager.audio.playSfx('snoring_1')
+              gameManager.audio.playSfx('snoring_1', { volume: 0.4 })
               break
             case 3:
-              gameManager.audio.playSfx('snoring_2')
+              gameManager.audio.playSfx('snoring_2', { volume: 0.4 })
               break
           }
         }
