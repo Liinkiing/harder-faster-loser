@@ -12,6 +12,7 @@ import {
   lightGray,
   mediumGray,
 } from '../../../utils/colors'
+import minigameManager from '../../manager/MinigameManager'
 
 const SOUND_ERROR = 'error'
 const SOUND_HIT = 'hit'
@@ -63,6 +64,9 @@ export default class SubwayGameScene extends MinigameScene {
   private currentEmptySlab?: Phaser.GameObjects.Sprite
 
   private goalZone?: Phaser.GameObjects.Rectangle
+
+  private isTweenFirstLineEnable: boolean = true
+  private tweenLine: any = null
 
   constructor() {
     super({
@@ -138,7 +142,7 @@ export default class SubwayGameScene extends MinigameScene {
           xPointer ===
             Math.floor(
               2 * this.numberHiddenCharacters - this.numberHiddenCharacters / 2
-            ) && yPointer == 0
+            ) && yPointer === 0
             ? (characterTextureKey = 'subwayTokiTimeAnimation')
             : (characterTextureKey = 'subwayCharacterTimeAnimation')
 
@@ -259,6 +263,7 @@ export default class SubwayGameScene extends MinigameScene {
     this.gapY = 0
     this.numberHiddenCharacters = 0
     this.allowTokiToRun = true
+    this.isTweenFirstLineEnable = true
   }
 
   private generateEmptySlabPosition(): integer {
@@ -280,6 +285,7 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
+
     this.tweens.add({
       targets: this.containers,
       x: {
@@ -289,7 +295,11 @@ export default class SubwayGameScene extends MinigameScene {
       },
       repeat: 0,
       onComplete: () => {
-        gameManager.resumeMinigame()
+        if (minigameManager.hasPlayedCurrentMinigame) {
+          gameManager.resumeMinigame()
+        } else {
+          this.tweenFirstLine()
+        }
         this.doorsActiveTrain!.anims.resume()
       },
     })
@@ -300,6 +310,14 @@ export default class SubwayGameScene extends MinigameScene {
       this.lineContainers[this.indexNextRow].on(
         'drag',
         (pointer: any, dragX: number, dragY: number) => {
+          console.log(dragX)
+          if (this.isTweenFirstLineEnable) {
+            if (this.tweenLine) {
+              this.tweenLine.stop()
+            }
+            this.isTweenFirstLineEnable = false
+            gameManager.resumeMinigame()
+          }
           const translateValue = Phaser.Math.Clamp(
             dragX,
             -(
@@ -582,5 +600,24 @@ export default class SubwayGameScene extends MinigameScene {
       this.windowHeight! - this.windowHeight! * (6.6 / 10),
       [platform, warningLinePlatform]
     )
+  }
+
+  private tweenFirstLine(): void {
+    if (
+      this.isTweenFirstLineEnable &&
+      !minigameManager.hasPlayedCurrentMinigame
+    ) {
+      this.tweenLine = this.tweens.add({
+        targets: this.lineContainers[1],
+        x: {
+          value: `-=20`,
+          duration: 500,
+          ease: 'Cubic.easeInOut',
+        },
+        repeat: -1,
+        yoyo: true,
+        onComplete: () => {},
+      })
+    }
   }
 }
