@@ -14,20 +14,21 @@ const Div = styled.div`
   bottom: 0;
 `
 
-const ContainerMessage = styled.div`
+const ContainerMessage = styled.div<{ position: string; paddingTop: integer }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  align-items: center;
   text-align: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: ${props => props.position};
   font-size: 26px;
   background-color: rgba(0, 0, 0, 0.5);
   line-height: 1.5em;
-  padding: 50px 40px;
+  padding: ${props => props.paddingTop}px 40px 0px 40px;
   p {
     max-width: 1280px;
   }
@@ -63,12 +64,20 @@ const DeathscreenUI: FunctionComponent = () => {
   const [percent, setPercent] = useState(0)
   const [deathTime, setDeathTime] = useState('15.02.19')
   const [fontColor, setFontColor] = useState(lightGray)
+  const [containerMessagePosition, setContainerMessagePosition] = useState(
+    'normal'
+  )
+  const [containerMessagePaddingTop, setcontainerMessagePaddingTop] = useState(
+    50
+  )
 
   useEffect(() => {
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
       setPercent(args.percent)
       setMessage(<p>{args.text}</p>)
       setShowButton(true)
+      setContainerMessagePosition('center')
+      setcontainerMessagePaddingTop(0)
     })
 
     Emitter.on(GameEvents.DeathscreenThunderOn, () => {
@@ -99,7 +108,10 @@ const DeathscreenUI: FunctionComponent = () => {
   return (
     <Div className="deathscreen-ui">
       <DeathTime fontColor={fontColor}>{deathTime}</DeathTime>
-      <ContainerMessage>
+      <ContainerMessage
+        position={containerMessagePosition}
+        paddingTop={containerMessagePaddingTop}
+      >
         {showButton && (
           <PercentData>
             <CountUp start={0} end={percent} />
