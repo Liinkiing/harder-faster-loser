@@ -176,7 +176,7 @@ export default class HomescreenScene extends BaseScene {
           .setDepth(1000)
 
         transition
-          .play('intro_transition_v_02_animation')
+          .play('intro_transition_animation')
           .on('animationcomplete', () => {
             transition.destroy()
           })

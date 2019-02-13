@@ -604,7 +604,7 @@
       "frameRate": 19
     },
     {
-      "key": "intro_transition_v_02_animation",
+      "key": "intro_transition_animation",
       "frames": {
         "typeOfGeneration": "generateFrameNumbers",
         "key": "intro_transition_v_02",
