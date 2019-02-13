@@ -164,28 +164,27 @@ export default class HomescreenScene extends BaseScene {
           this.dreams.destroy()
         }
         gameManager.audio.stopLayeredSounds()
-        this.toki!.anims.play('intro_wake_up_animation', true).on(
+        this.toki!.anims.play('intro_wake_up_blue_animation', true).on(
           'animationcomplete',
           () => {
-            gameManager.audio.playBg()
-            gameManager.loadNextMinigame()
+            gameStore.changeConfig({
+              backgroundColor: yellow,
+            })
+            gameManager.audio.playSfx('crack', { volume: 0.8 })
+            gameWait(this.time, 1000).then(() => {
+              gameManager.audio.playSfx('angry', { volume: 0.6 })
+            })
+            this.toki!.anims.play('intro_wake_up_yellow_animation', true).on(
+              'animationcomplete',
+              () => {
+                gameManager.audio.playBg()
+                gameManager.loadNextMinigame()
+              }
+            )
           }
         )
-        this.playAnimationSfx()
         break
     }
-  }
-
-  private playAnimationSfx = (): void => {
-    gameWait(this.time, 1900).then(() => {
-      gameManager.audio.playSfx('angry', { volume: 0.6 })
-    })
-    gameWait(this.time, 1110).then(() => {
-      gameManager.audio.playSfx('crack', { volume: 0.8 })
-      gameStore.changeConfig({
-        backgroundColor: yellow,
-      })
-    })
   }
 
   private createActionIndicator = () => {

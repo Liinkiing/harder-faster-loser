@@ -975,6 +975,24 @@
       },
       {
         "type": "spritesheet",
+        "key": "intro_wake_up_blue",
+        "url": "/static/assets/sprites/homescreen/intro_wake_up_blue_72x158.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 158
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_wake_up_yellow",
+        "url": "/static/assets/sprites/homescreen/intro_wake_up_yellow_72x158.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 158
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "intro_pizza_dream",
         "url": "/static/assets/sprites/homescreen/intro_pizza_dream_33x46.png",
         "frameConfig": {
