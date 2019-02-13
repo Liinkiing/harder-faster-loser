@@ -172,7 +172,7 @@ export default class HomescreenScene extends BaseScene {
             'intro_transition_v_02'
           )
           .setOrigin(0.5, 0.5)
-          .setScale(20 / gameStore.ratioResolution)
+          .setScale(18 / gameStore.ratioResolution)
           .setDepth(1000)
 
         transition

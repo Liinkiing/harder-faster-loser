@@ -4,7 +4,7 @@ import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
 
 const Y_OFFSET = 300
-const X_OFFSET = -120
+const X_OFFSET = -100
 
 export default class TokiDreams extends Phaser.GameObjects.Sprite {
   public static positionsOffset = [
@@ -61,7 +61,7 @@ export default class TokiDreams extends Phaser.GameObjects.Sprite {
       this.y + Y_OFFSET,
       'intro_zzz'
     )
-      .setScale(16 / gameStore.ratioResolution)
+      .setScale(12 / gameStore.ratioResolution)
       .play('intro_zzz_animation')
 
     params.scene.add.existing(this)
