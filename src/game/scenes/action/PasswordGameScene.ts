@@ -96,9 +96,9 @@ export default class PasswordGameScene extends MinigameScene {
         )
       ) {
         gameManager.suspendMinigame()
-        this.computerScreen!.screen.setDepth(1000).anims.play(
-          'mdp_valid_animation'
-        )
+        this.computerScreen!.screen.setDepth(1000)
+          .setScale(15 / gameStore.ratioResolution)
+          .anims.play('mdp_valid_animation')
         gameManager.audio.playSfx(SOUND_PASSWORD_VALID, {
           volume: 0.4,
           delay: 0.1,
@@ -112,9 +112,9 @@ export default class PasswordGameScene extends MinigameScene {
         )
       ) {
         gameManager.suspendMinigame()
-        this.computerScreen!.screen.setDepth(1000).anims.play(
-          'mdp_nope_animation'
-        )
+        this.computerScreen!.screen.setDepth(1000)
+          .setScale(15 / gameStore.ratioResolution)
+          .anims.play('mdp_nope_animation')
         gameManager.audio.playSfx(SOUND_PASSWORD_INVALID, {
           volume: 0.4,
           delay: 0.1,
@@ -131,7 +131,7 @@ export default class PasswordGameScene extends MinigameScene {
       const buttons: KeyboardPasswordButton[] = []
       const animation = this.scene.scene.add
         .sprite(window.innerWidth / 2, window.innerHeight, 'mdp_paper')
-        .setScale(1 / gameStore.ratioResolution)
+        .setScale(15 / gameStore.ratioResolution)
         .setOrigin(0.5, 1)
         .anims.play('mdp_paper_animation')
 

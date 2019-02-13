@@ -99,28 +99,28 @@
       {
         "type": "spritesheet",
         "key": "mdp_nope",
-        "url": "/static/assets/sprites/password-game/spritesheets/mdp_nope_870x975.png",
+        "url": "/static/assets/sprites/password-game/spritesheets/mdp_nope_58x65.png",
         "frameConfig": {
-          "frameWidth": 870,
-          "frameHeight": 975
+          "frameWidth": 58,
+          "frameHeight": 65
         }
       },
       {
         "type": "spritesheet",
         "key": "mdp_paper",
-        "url": "/static/assets/sprites/password-game/spritesheets/mdp_paper_915x1215.png",
+        "url": "/static/assets/sprites/password-game/spritesheets/mdp_paper_60x81.png",
         "frameConfig": {
-          "frameWidth": 915,
-          "frameHeight": 1215
+          "frameWidth": 60,
+          "frameHeight": 81
         }
       },
       {
         "type": "spritesheet",
         "key": "mdp_valid",
-        "url": "/static/assets/sprites/password-game/spritesheets/mdp_valid_870x975.png",
+        "url": "/static/assets/sprites/password-game/spritesheets/mdp_valid_58x65.png",
         "frameConfig": {
-          "frameWidth": 870,
-          "frameHeight": 975
+          "frameWidth": 58,
+          "frameHeight": 65
         }
       },
       {
