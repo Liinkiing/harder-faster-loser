@@ -265,7 +265,9 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
-
+    gameWait(this.time, 1).then(() => {
+      gameManager.audio.playSfx('train', { volume: 0.7 })
+    })
     this.tweens.add({
       targets: this.containers,
       x: {
@@ -275,6 +277,7 @@ export default class SubwayGameScene extends MinigameScene {
       },
       repeat: 0,
       onComplete: () => {
+        gameManager.audio.playSfx('subway_doors_opening', { volume: 0.7 })
         if (minigameManager.hasPlayedCurrentMinigame) {
           gameManager.resumeMinigame()
         } else {
@@ -396,12 +399,14 @@ export default class SubwayGameScene extends MinigameScene {
         true
       )
       this.activeTrainContainer!.add(closeDoorsAnimation)
+      gameManager.audio.playSfx('subway_doors_closing', { volume: 0.7 })
 
       closeDoorsAnimation.on('animationcomplete', () => {
         const translateValue =
           this.containers[this.containers.length - 1].x +
           this.containers[this.containers.length - 1].width /
             gameStore.ratioResolution
+        gameManager.audio.playSfx('train', { volume: 0.7, delay: 0.53 })
         this.tweens.add({
           targets: this.containers,
           x: {
