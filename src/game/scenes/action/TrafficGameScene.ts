@@ -176,7 +176,15 @@ export default class TraficGameScene extends MinigameScene {
         volume: 0.3,
       })
       this.hornSprite!.alpha = 1
-      this.cursorRageBar!.x += this.nbrIncreaseDifficulty / 2
+      const thresholdMaxRageBar = this.rageBar!.width * 4.7
+      const targetedCursorPosition =
+        this.cursorRageBar!.x + this.nbrIncreaseDifficulty / 2
+
+      this.cursorRageBar!.x = Phaser.Math.Clamp(
+        targetedCursorPosition,
+        20,
+        thresholdMaxRageBar
+      )
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
