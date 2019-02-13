@@ -116,7 +116,7 @@ export default class SubwayGameScene extends MinigameScene {
         const slab = this.add
           .sprite(
             xPointer * (this.slabWidth + this.gapX),
-            this.slabWidth / 2,
+            this.slabWidth / 1.5,
             slabTextureKey
           )
           .setOrigin(0, 1)
