@@ -53,6 +53,7 @@ export default class ElevatorGameScene extends MinigameScene {
   private currentFrame: integer = 1
   private hitCaseCallElevator: integer = 0
   private nbrHitCaseCall: integer = 2
+  private nbrFrameToPass: integer = 1
 
   constructor() {
     super({
@@ -165,6 +166,20 @@ export default class ElevatorGameScene extends MinigameScene {
   private createElevatorContent(): void {
     this.currentFrame = 1
 
+    if (gameStore.difficulty <= 3) {
+      this.nbrHitCaseCall = 1
+      this.nbrFrameToPass = 4
+    } else if (gameStore.difficulty <= 6) {
+      this.nbrHitCaseCall = 2
+      this.nbrFrameToPass = 2
+    } else if (gameStore.difficulty <= 9) {
+      this.nbrHitCaseCall = 2
+      this.nbrFrameToPass = 1
+    } else if (gameStore.difficulty >= 10) {
+      this.nbrHitCaseCall = 3
+      this.nbrFrameToPass = 1
+    }
+
     this.elevator = this.add
       .sprite(0, 0, this.elevatorTexture)
       .setOrigin(0.5, 1)
@@ -225,7 +240,7 @@ export default class ElevatorGameScene extends MinigameScene {
       gameManager.vibrate()
       this.hitCaseCallElevator++
       if (this.hitCaseCallElevator === this.nbrHitCaseCall) {
-        this.currentFrame++
+        this.currentFrame += this.nbrFrameToPass
         this.hitCaseCallElevator = 0
       }
       this.currentFrame = Phaser.Math.Clamp(this.currentFrame, 1, 23)

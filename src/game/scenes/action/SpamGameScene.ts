@@ -34,7 +34,9 @@ export default class SpamGameScene extends MinigameScene {
     super.create()
     this.spams = new List<Spam>()
     this.input.setGlobalTopOnly(true)
-    const max = gameStore.difficulty * 1.25 + 10
+    const max =
+      gameStore.difficulty * 1.25 +
+      Phaser.Math.Clamp(gameStore.difficulty, 1, 15)
     for (let nbrSpam = 0; nbrSpam < max; nbrSpam++) {
       this.spams.push(this.createSpam())
     }

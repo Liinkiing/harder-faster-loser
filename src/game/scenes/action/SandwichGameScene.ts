@@ -138,7 +138,18 @@ export default class SandwichGameScene extends MinigameScene {
     gameManager.audio.playSfx(SOUND_WALK, {
       detune: randomRange(-500, 500),
     })
-    const speedFactor = 3
+    let speedFactor = 3
+    if (gameStore.difficulty < 2) {
+      speedFactor = 9
+    } else if (gameStore.difficulty < 4) {
+      speedFactor = 7
+    } else if (gameStore.difficulty < 8) {
+      speedFactor = 5
+    } else if (gameStore.difficulty < 12) {
+      speedFactor = 3
+    } else if (gameStore.difficulty < 16) {
+      speedFactor = 2
+    }
 
     Array.from([
       this.skies,
