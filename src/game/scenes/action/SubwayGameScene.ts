@@ -116,7 +116,7 @@ export default class SubwayGameScene extends MinigameScene {
         const slab = this.add
           .sprite(
             xPointer * (this.slabWidth + this.gapX),
-            this.slabWidth / 2,
+            this.slabWidth / 1.5,
             slabTextureKey
           )
           .setOrigin(0, 1)
@@ -209,20 +209,6 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-    let threshold =
-      -(this.gapY + this.slabWidth) * this.indexCurrentRow + this.slabWidth / 2
-    let xIncrement = 0
-
-    if (this.lastLineReached) {
-      threshold = -(this.windowHeight! * (6.6 / 10) - (this.gapY + 5))
-      xIncrement = this.gapX / 19.4
-    }
-
-    if (this.allowTokiToRun && this.toki!.y > threshold) {
-      this.toki!.y -= 5
-      this.toki!.x -= xIncrement
-    }
-
     this.isOverlapping = this.physics.world.overlap(
       // @ts-ignore
       this.nextEmptySlab!,
@@ -304,7 +290,6 @@ export default class SubwayGameScene extends MinigameScene {
       this.lineContainers[this.indexNextRow].on(
         'drag',
         (pointer: any, dragX: number, dragY: number) => {
-          console.log(dragX)
           if (this.isTweenFirstLineEnable) {
             if (this.tweenLine) {
               this.tweenLine.stop()
@@ -333,9 +318,13 @@ export default class SubwayGameScene extends MinigameScene {
           this.triggerRunAnimation()
           this.updateActiveRows()
 
-          const translateValue =
+          let translateValue =
             this.currentEmptySlab!.x -
             (Math.abs(this.currentRow!.x) + this.goalZone!.x)
+
+          if (this.currentEmptySlab!.x + this.gapX === this.goalZone!.x) {
+            translateValue = 0
+          }
 
           this.tweens.add({
             targets: this.currentRow,
@@ -367,6 +356,24 @@ export default class SubwayGameScene extends MinigameScene {
     gameManager.suspendMinigame()
     await gameWait(this.time, 500)
     this.lastLineReached = true
+
+    this.tweens.add({
+      targets: this.toki,
+      x: {
+        value: `-=${this.gapX / 1.7 + this.slabWidth / 2}`,
+        duration: 300,
+        ease: 'Cubic.ease',
+      },
+      y: {
+        value: `-=${Number(this.windowHeight) -
+          this.lineContainers![0].y +
+          this.slabWidth -
+          2}`,
+        duration: 300,
+        ease: 'Cubic.ease',
+      },
+    })
+
     const tokiWinAnimation = this.toki!.anims.play(
       'subwayTokiWinAnimation',
       true
@@ -379,7 +386,7 @@ export default class SubwayGameScene extends MinigameScene {
     tokiWinAnimation.on('animationcomplete', () => {
       this.allowTokiToRun = false
       this.toki!.x =
-        this.activeTrainContainer!.width / gameStore.ratioResolution / 2
+        this.activeTrainContainer!.width / gameStore.ratioResolution / 2 - 10
       this.toki!.y = -25
       this.toki!.setOrigin(0.5, 1)
       this.activeTrainContainer!.addAt(this.toki!, 1)
@@ -412,12 +419,20 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerRunAnimation(): void {
-    const animation = this.toki!.anims.play('subwayTokiRunAnimation', true)
+    this.toki!.anims.play('subwayTokiRunAnimation', true)
 
-    animation.on('animationcomplete', () => {
-      if (!this.lastLineReached) {
-        this.toki!.anims.play('subwayTokiTimeAnimation', true)
-      }
+    this.tweens.add({
+      targets: this.toki,
+      y: {
+        value: `-=${this.gapY + this.slabWidth}`,
+        duration: 300,
+        ease: 'Cubic.ease',
+      },
+      onComplete: () => {
+        if (!this.lastLineReached) {
+          this.toki!.anims.play('subwayTokiTimeAnimation', true)
+        }
+      },
     })
   }
 
@@ -610,7 +625,6 @@ export default class SubwayGameScene extends MinigameScene {
         },
         repeat: -1,
         yoyo: true,
-        onComplete: () => {},
       })
     }
   }
