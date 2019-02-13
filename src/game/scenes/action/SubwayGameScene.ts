@@ -265,9 +265,6 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
-    gameWait(this.time, 10).then(() => {
-      gameManager.audio.playSfx('train', { volume: 0.7 })
-    })
     this.tweens.add({
       targets: this.containers,
       x: {
@@ -276,6 +273,9 @@ export default class SubwayGameScene extends MinigameScene {
         ease: 'Cubic.easeOut',
       },
       repeat: 0,
+      onStart: () => {
+        gameManager.audio.playSfx('train', { volume: 0.7 })
+      },
       onComplete: () => {
         gameManager.audio.playSfx('subway_doors_opening', { volume: 0.7 })
         if (minigameManager.hasPlayedCurrentMinigame) {
