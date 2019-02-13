@@ -265,7 +265,7 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
-    gameWait(this.time, 1).then(() => {
+    gameWait(this.time, 10).then(() => {
       gameManager.audio.playSfx('train', { volume: 0.7 })
     })
     this.tweens.add({
