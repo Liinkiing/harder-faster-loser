@@ -2,7 +2,7 @@ import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
-import { gameWait, randomRange } from '../../../utils/functions'
+import { gameWait, randomRange, wait } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
 import { List } from '../../../utils/extensions'
 import {
@@ -13,6 +13,7 @@ import {
   mediumGray,
 } from '../../../utils/colors'
 import minigameManager from '../../manager/MinigameManager'
+import { SHOW_DURATION } from '../../../components/ui/MinigameGuideline'
 
 const SOUND_ERROR = 'error'
 const SOUND_HIT = 'hit'
@@ -265,6 +266,9 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
+    wait(SHOW_DURATION).then(() => {
+      gameManager.audio.playSfx('train', { volume: 0.7 })
+    })
     this.tweens.add({
       targets: this.containers,
       x: {
@@ -273,9 +277,6 @@ export default class SubwayGameScene extends MinigameScene {
         ease: 'Cubic.easeOut',
       },
       repeat: 0,
-      onStart: () => {
-        gameManager.audio.playSfx('train', { volume: 0.7 })
-      },
       onComplete: () => {
         gameManager.audio.playSfx('subway_doors_opening', { volume: 0.7 })
         if (minigameManager.hasPlayedCurrentMinigame) {

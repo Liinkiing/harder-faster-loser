@@ -21,7 +21,7 @@ interface StyledProps {
   isLeaving: boolean
 }
 
-const SHOW_DURATION = 2500
+export const SHOW_DURATION = 2500
 const APPEAR_SOUND = 'guideline_appear'
 const LEAVE_SOUND = 'guideline_leave'
 
