@@ -318,9 +318,13 @@ export default class SubwayGameScene extends MinigameScene {
           this.triggerRunAnimation()
           this.updateActiveRows()
 
-          const translateValue =
+          let translateValue =
             this.currentEmptySlab!.x -
             (Math.abs(this.currentRow!.x) + this.goalZone!.x)
+
+          if (this.currentEmptySlab!.x + this.gapX === this.goalZone!.x) {
+            translateValue = 0
+          }
 
           this.tweens.add({
             targets: this.currentRow,
