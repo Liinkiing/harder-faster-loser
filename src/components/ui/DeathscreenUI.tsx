@@ -73,6 +73,7 @@ const DeathscreenUI: FunctionComponent = () => {
 
   useEffect(() => {
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, args => {
+      setFontColor('transparent')
       setPercent(args.percent)
       setMessage(<p>{args.text}</p>)
       setShowButton(true)
@@ -80,8 +81,12 @@ const DeathscreenUI: FunctionComponent = () => {
       setcontainerMessagePaddingTop(0)
     })
 
-    Emitter.on(GameEvents.DeathscreenThunderOn, () => {
-      setFontColor(white)
+    Emitter.on(GameEvents.DeathscreenThunderOn, args => {
+      if (args === false) {
+        setFontColor(white)
+      } else {
+        setFontColor('transparent')
+      }
     })
 
     Emitter.on(GameEvents.DeathscreenThunderOff, () => {

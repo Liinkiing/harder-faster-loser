@@ -113,7 +113,7 @@ export default class DeathscreenScene extends BaseScene {
 
     await gameWait(this.time, delayLightning)
 
-    Emitter.emit(GameEvents.DeathscreenThunderOn)
+    Emitter.emit(GameEvents.DeathscreenThunderOn, this.firstPartDestroyed)
   }
 
   private initSecondPart(): void {
