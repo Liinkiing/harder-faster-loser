@@ -209,20 +209,6 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   public update(time: number, delta: number): void {
-    let threshold =
-      -(this.gapY + this.slabWidth) * this.indexCurrentRow + this.slabWidth / 2
-    let xIncrement = 0
-
-    if (this.lastLineReached) {
-      threshold = -(this.windowHeight! * (6.6 / 10) - (this.gapY + 5))
-      xIncrement = this.gapX / 19.3
-    }
-
-    if (this.allowTokiToRun && this.toki!.y > threshold) {
-      this.toki!.y -= 5
-      this.toki!.x -= xIncrement
-    }
-
     this.isOverlapping = this.physics.world.overlap(
       // @ts-ignore
       this.nextEmptySlab!,
@@ -304,7 +290,6 @@ export default class SubwayGameScene extends MinigameScene {
       this.lineContainers[this.indexNextRow].on(
         'drag',
         (pointer: any, dragX: number, dragY: number) => {
-          console.log(dragX)
           if (this.isTweenFirstLineEnable) {
             if (this.tweenLine) {
               this.tweenLine.stop()
@@ -367,6 +352,25 @@ export default class SubwayGameScene extends MinigameScene {
     gameManager.suspendMinigame()
     await gameWait(this.time, 500)
     this.lastLineReached = true
+
+    this.tweens.add({
+      targets: this.toki,
+      x: {
+        value: `-=${this.gapX / 1.7 + this.slabWidth / 2}`,
+        duration: 100,
+        ease: 'Cubic.easeOut',
+      },
+      y: {
+        value: `-=${Number(this.windowHeight) -
+          this.lineContainers![0].y +
+          this.slabWidth -
+          2}`,
+        duration: 300,
+        ease: 'Cubic.easeOut',
+      },
+      repeat: 0,
+    })
+
     const tokiWinAnimation = this.toki!.anims.play(
       'subwayTokiWinAnimation',
       true
@@ -412,6 +416,16 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerRunAnimation(): void {
+    this.tweens.add({
+      targets: this.toki,
+      y: {
+        value: `-=${this.gapY + this.slabWidth}`,
+        duration: 500,
+        ease: 'Cubic.easeOut',
+      },
+      repeat: 0,
+    })
+
     const animation = this.toki!.anims.play('subwayTokiRunAnimation', true)
 
     animation.on('animationcomplete', () => {
@@ -610,7 +624,6 @@ export default class SubwayGameScene extends MinigameScene {
         },
         repeat: -1,
         yoyo: true,
-        onComplete: () => {},
       })
     }
   }
