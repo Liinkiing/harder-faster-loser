@@ -164,25 +164,47 @@ export default class HomescreenScene extends BaseScene {
           this.dreams.destroy()
         }
         gameManager.audio.stopLayeredSounds()
-        this.toki!.anims.play('intro_wake_up_blue_animation', true).on(
-          'animationcomplete',
-          () => {
-            gameStore.changeConfig({
-              backgroundColor: yellow,
-            })
-            gameManager.audio.playSfx('crack', { volume: 0.8 })
-            gameWait(this.time, 1000).then(() => {
-              gameManager.audio.playSfx('angry', { volume: 0.6 })
-            })
-            this.toki!.anims.play('intro_wake_up_yellow_animation', true).on(
-              'animationcomplete',
-              () => {
-                gameManager.audio.playBg()
-                gameManager.loadNextMinigame()
+        const transition = this.add
+          .sprite(
+            window.innerWidth / 2,
+            window.innerHeight / 2,
+            'intro_transition_v_02'
+          )
+          .setOrigin(0.5, 0.5)
+          .setScale(20 / gameStore.ratioResolution)
+          .setDepth(1000)
+
+        transition
+          .play('intro_transition_v_02_animation')
+          .on('animationcomplete', () => {
+            transition.destroy()
+          })
+        gameWait(this.time, 700).then(() => {
+          this.toki!.anims.play('intro_wake_up_blue_animation', true).on(
+            'animationcomplete',
+            () => {
+              gameStore.changeConfig({
+                backgroundColor: yellow,
+              })
+              if (
+                this.toki!.anims.currentAnim.key ===
+                'intro_wake_up_blue_animation'
+              ) {
+                gameManager.audio.playSfx('crack', { volume: 0.8 })
+                gameWait(this.time, 1000).then(() => {
+                  gameManager.audio.playSfx('angry', { volume: 0.6 })
+                })
+                this.toki!.anims.play(
+                  'intro_wake_up_yellow_animation',
+                  true
+                ).on('animationcomplete', () => {
+                  gameManager.audio.playBg()
+                  gameManager.loadNextMinigame()
+                })
               }
-            )
-          }
-        )
+            }
+          )
+        })
         break
     }
   }

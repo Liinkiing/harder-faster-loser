@@ -993,6 +993,15 @@
       },
       {
         "type": "spritesheet",
+        "key": "intro_transition_v_02",
+        "url": "/static/assets/sprites/homescreen/intro_transition_v_02_72x158.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 158
+        }
+      },
+      {
+        "type": "spritesheet",
         "key": "intro_pizza_dream",
         "url": "/static/assets/sprites/homescreen/intro_pizza_dream_33x46.png",
         "frameConfig": {

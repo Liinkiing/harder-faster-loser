@@ -589,7 +589,7 @@
       },
       "showOnStart": true,
       "repeat": 0,
-      "frameRate": 12
+      "frameRate": 10
     },
     {
       "key": "intro_wake_up_yellow_animation",
@@ -601,6 +601,18 @@
       },
       "showOnStart": true,
       "repeat": 1,
+      "frameRate": 19
+    },
+    {
+      "key": "intro_transition_v_02_animation",
+      "frames": {
+        "typeOfGeneration": "generateFrameNumbers",
+        "key": "intro_transition_v_02",
+        "start": 0,
+        "end": 14
+      },
+      "showOnStart": true,
+      "repeat": 0,
       "frameRate": 16
     },
     {
