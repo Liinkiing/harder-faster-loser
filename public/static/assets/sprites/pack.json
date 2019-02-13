@@ -9,91 +9,91 @@
       {
         "type": "spritesheet",
         "key": "sexy",
-        "url": "/static/assets/sprites/spam-game/sexy.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_sexy_57_86.png",
         "frameConfig": {
-          "frameWidth": 854,
-          "frameHeight": 1290
+          "frameWidth": 57,
+          "frameHeight": 86
         }
       },
       {
         "type": "spritesheet",
         "key": "sold",
-        "url": "/static/assets/sprites/spam-game/sold.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_sold_53_68.png",
         "frameConfig": {
-          "frameWidth": 794,
-          "frameHeight": 1020
+          "frameWidth": 53,
+          "frameHeight": 68
         }
       },
       {
         "type": "spritesheet",
         "key": "pizza",
-        "url": "/static/assets/sprites/spam-game/pizza.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_pizza_57_86.png",
         "frameConfig": {
-          "frameWidth": 854,
-          "frameHeight": 1290
+          "frameWidth": 57,
+          "frameHeight": 86
         }
       },
       {
         "type": "spritesheet",
         "key": "magic-bottle",
-        "url": "/static/assets/sprites/spam-game/magic-bottle.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_magic_bottle_57_61.png",
         "frameConfig": {
-          "frameWidth": 427,
-          "frameHeight": 457
+          "frameWidth": 57,
+          "frameHeight": 61
         }
       },
       {
         "type": "spritesheet",
         "key": "muscles",
-        "url": "/static/assets/sprites/spam-game/muscles.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_muscles_53_68.png",
         "frameConfig": {
-          "frameWidth": 794,
-          "frameHeight": 1020
+          "frameWidth": 53,
+          "frameHeight": 68
         }
       },
       {
         "type": "spritesheet",
         "key": "play",
-        "url": "/static/assets/sprites/spam-game/play.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_play_53_40.png",
         "frameConfig": {
-          "frameWidth": 794,
-          "frameHeight": 600
+          "frameWidth": 53,
+          "frameHeight": 40
         }
       },
       {
         "type": "spritesheet",
         "key": "tooth",
-        "url": "/static/assets/sprites/spam-game/tooth.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_tooth_53_68.png",
         "frameConfig": {
-          "frameWidth": 794,
-          "frameHeight": 1020
+          "frameWidth": 53,
+          "frameHeight": 68
         }
       },
       {
         "type": "spritesheet",
         "key": "hair",
-        "url": "/static/assets/sprites/spam-game/hair.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_hair_53_51.png",
         "frameConfig": {
-          "frameWidth": 397,
-          "frameHeight": 382
+          "frameWidth": 53,
+          "frameHeight": 51
         }
       },
       {
         "type": "spritesheet",
         "key": "gambling",
-        "url": "/static/assets/sprites/spam-game/gambling.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_gambling_61_68.png",
         "frameConfig": {
-          "frameWidth": 914,
-          "frameHeight": 1020
+          "frameWidth": 61,
+          "frameHeight": 68
         }
       },
       {
         "type": "spritesheet",
         "key": "yo",
-        "url": "/static/assets/sprites/spam-game/yo_284_429.png",
+        "url": "/static/assets/sprites/spam-game/spritesheets/sp_yo_57_86.png",
         "frameConfig": {
-          "frameWidth": 284,
-          "frameHeight": 429
+          "frameWidth": 57,
+          "frameHeight": 86
         }
       },
       {

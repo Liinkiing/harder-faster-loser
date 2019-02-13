@@ -9,29 +9,20 @@ export default class Spam extends Phaser.GameObjects.Container {
   private readonly spamContent?: Phaser.GameObjects.Sprite
   private readonly closeIcon?: Phaser.GameObjects.Sprite
   private readonly texture: string
-  private containerWidth?: number
 
   constructor(params: ContainerConstructor & { texture: string }) {
     super(params.scene, params.x, params.y, params.children)
     this.texture = params.texture
     this.spamContent = this.createSpamContent(params.texture)
 
-    if (params.texture === 'yoAnimation') {
-      this.spamContent.width = this.spamContent.width * 3
-    }
-    if (params.texture === 'hairAnimation') {
-      this.spamContent.width = this.spamContent.width * 2
-    }
-    if (params.texture === 'magicBottleAnimation') {
-      this.spamContent.width = this.spamContent.width * 2
-    }
+    this.spamContent.width = this.spamContent.width * 15
+    this.spamContent.height = this.spamContent.height * 15
 
     this.add(this.spamContent)
 
     this.closeIcon = this.createCloseIcon()
     this.add(this.closeIcon)
 
-    // set X & Y of spam container (80 for UI -> have to be replace)
     this.x = randomRange(
       0,
       window.innerWidth - this.spamContent.width / gameStore.ratioResolution
@@ -47,23 +38,13 @@ export default class Spam extends Phaser.GameObjects.Container {
   private createSpamContent = (
     spamTexture: string
   ): Phaser.GameObjects.Sprite => {
-    const sprite = this.scene.add.sprite(0, 0, spamTexture).setOrigin(0, 0)
-    sprite.setScale(1 / gameStore.ratioResolution)
-
-    if (spamTexture === 'yoAnimation') {
-      sprite.setScale(3 / gameStore.ratioResolution)
-    }
-
-    if (spamTexture === 'magicBottleAnimation') {
-      sprite.setScale(2 / gameStore.ratioResolution)
-    }
-
-    if (spamTexture === 'hairAnimation') {
-      sprite.setScale(2 / gameStore.ratioResolution)
-    }
+    const sprite = this.scene.add
+      .sprite(0, 0, spamTexture)
+      .setOrigin(0, 0)
+      .setScale(15 / gameStore.ratioResolution)
+      .setInteractive()
 
     sprite.anims.play(this.texture)
-    sprite.setInteractive()
     sprite.on('pointerdown', () => {
       gameManager.vibrate()
       Emitter.emit(GameEvents.SpamClicked, this)
