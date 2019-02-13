@@ -44,7 +44,9 @@ export default class DeathscreenScene extends BaseScene {
         gameManager.audio.playSfx(SOUND_THUNDER, { volume: 0.2, delay: 0.3 })
 
         await gameWait(this.time, 300)
-        Emitter.emit(GameEvents.DeathscreenThunderOff)
+        if (!this.firstPartDestroyed) {
+          Emitter.emit(GameEvents.DeathscreenThunderOff)
+        }
       }
     })
 
@@ -113,7 +115,9 @@ export default class DeathscreenScene extends BaseScene {
 
     await gameWait(this.time, delayLightning)
 
-    Emitter.emit(GameEvents.DeathscreenThunderOn)
+    if (!this.firstPartDestroyed) {
+      Emitter.emit(GameEvents.DeathscreenThunderOn, this.firstPartDestroyed)
+    }
   }
 
   private initSecondPart(): void {
