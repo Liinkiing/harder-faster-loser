@@ -95,7 +95,7 @@ const DeathscreenUI: FunctionComponent = () => {
 
     const newDate = new Date()
     let day = newDate.getDate().toString()
-    let month = newDate.getMonth().toString()
+    let month = (newDate.getMonth() + 1).toString()
     let year = newDate.getFullYear().toString()
     year = year.slice(-2)
 
