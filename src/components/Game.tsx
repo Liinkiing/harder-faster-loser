@@ -14,6 +14,7 @@ const Game: FunctionComponent = () => {
   const { width, height } = useResize()
   const { debug } = gameDebugStore
   const {
+    hideUi,
     started,
     config: { dev },
   } = gameStore
@@ -33,7 +34,7 @@ const Game: FunctionComponent = () => {
     <div id="game" className="game">
       {started && dev && <GameDebugButtonsToolbar />}
       {started && dev && <GameDebug hide={debug} />}
-      {started && <GameUI />}
+      {started && !hideUi && <GameUI />}
     </div>
   )
 }

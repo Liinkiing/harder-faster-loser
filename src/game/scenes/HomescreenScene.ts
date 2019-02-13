@@ -102,6 +102,7 @@ export default class HomescreenScene extends BaseScene {
     gameStore.changeConfig({
       backgroundColor: green,
     })
+    gameStore.showUserInterface()
   }
 
   private onShake = (): void => {
@@ -179,6 +180,7 @@ export default class HomescreenScene extends BaseScene {
           .on('animationcomplete', () => {
             transition.destroy()
           })
+        gameStore.hideUserInterface()
         gameWait(this.time, 700).then(() => {
           this.toki!.anims.play('intro_wake_up_blue_animation', true).on(
             'animationcomplete',

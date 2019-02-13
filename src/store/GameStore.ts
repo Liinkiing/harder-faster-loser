@@ -27,6 +27,7 @@ class GameStore {
   @observable public state: GameState = GameState.Splashscreen
   @observable public difficulty: number = 1
   @observable public loading: boolean = true
+  @observable public hideUi: boolean = false
   @observable public showingGuideline: boolean = false
   @observable public started: boolean = false
   @observable public status: TokiStatus = {
@@ -95,6 +96,14 @@ class GameStore {
         }
       }
     )
+  }
+
+  @action public hideUserInterface = (): void => {
+    this.hideUi = true
+  }
+
+  @action public showUserInterface = (): void => {
+    this.hideUi = false
   }
 
   @action public resetGame = (): void => {
