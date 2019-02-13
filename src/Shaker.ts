@@ -10,11 +10,12 @@ const DEFAULT_OPTIONS: Options = {
   timeout: 400,
 }
 
-export class Shaker extends EventTarget {
+export class Shaker implements EventTarget {
   public static hasDeviceMotion() {
     return 'ondevicemotion' in window
   }
 
+  private delegate = document.createDocumentFragment()
   private lastX: number | null = null
   private lastY: number | null = null
   private lastZ: number | null = null
@@ -23,7 +24,6 @@ export class Shaker extends EventTarget {
   private readonly event: Event = new Event('shake')
 
   constructor(options?: Partial<Options>) {
-    super()
     this.options = { ...DEFAULT_OPTIONS, ...options }
   }
 
@@ -53,7 +53,7 @@ export class Shaker extends EventTarget {
     listener: ShakeEventHandler | null,
     options?: boolean | AddEventListenerOptions
   ): void {
-    super.addEventListener(type, listener, options)
+    this.delegate.addEventListener(type, listener, options)
   }
 
   public removeEventListener(
@@ -61,7 +61,11 @@ export class Shaker extends EventTarget {
     callback: EventListenerOrEventListenerObject | null,
     options?: EventListenerOptions | boolean
   ): void {
-    super.removeEventListener(type, callback, options)
+    this.delegate.removeEventListener(type, callback, options)
+  }
+
+  public dispatchEvent(event: Event): boolean {
+    return this.delegate.dispatchEvent(event)
   }
 
   private onDeviceMotion = (e: DeviceMotionEvent): void => {
