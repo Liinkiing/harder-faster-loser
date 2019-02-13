@@ -357,8 +357,8 @@ export default class SubwayGameScene extends MinigameScene {
       targets: this.toki,
       x: {
         value: `-=${this.gapX / 1.7 + this.slabWidth / 2}`,
-        duration: 100,
-        ease: 'Cubic.easeOut',
+        duration: 300,
+        ease: 'Cubic.ease',
       },
       y: {
         value: `-=${Number(this.windowHeight) -
@@ -366,9 +366,8 @@ export default class SubwayGameScene extends MinigameScene {
           this.slabWidth -
           2}`,
         duration: 300,
-        ease: 'Cubic.easeOut',
+        ease: 'Cubic.ease',
       },
-      repeat: 0,
     })
 
     const tokiWinAnimation = this.toki!.anims.play(
@@ -416,22 +415,20 @@ export default class SubwayGameScene extends MinigameScene {
   }
 
   private triggerRunAnimation(): void {
+    this.toki!.anims.play('subwayTokiRunAnimation', true)
+
     this.tweens.add({
       targets: this.toki,
       y: {
         value: `-=${this.gapY + this.slabWidth}`,
-        duration: 500,
-        ease: 'Cubic.easeOut',
+        duration: 300,
+        ease: 'Cubic.ease',
       },
-      repeat: 0,
-    })
-
-    const animation = this.toki!.anims.play('subwayTokiRunAnimation', true)
-
-    animation.on('animationcomplete', () => {
-      if (!this.lastLineReached) {
-        this.toki!.anims.play('subwayTokiTimeAnimation', true)
-      }
+      onComplete: () => {
+        if (!this.lastLineReached) {
+          this.toki!.anims.play('subwayTokiTimeAnimation', true)
+        }
+      },
     })
   }
 

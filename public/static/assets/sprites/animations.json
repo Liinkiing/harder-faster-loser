@@ -480,7 +480,7 @@
         "end": 8
       },
       "showOnStart": true,
-      "repeat": 0,
+      "repeat": -1,
       "frameRate": 30
     },
     {
