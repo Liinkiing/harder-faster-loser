@@ -90,7 +90,6 @@ export default class TraficGameScene extends MinigameScene {
       this.cursorRageBar!.x -= 0.8
     }
 
-    console.log('Condition : ' + this.nbrIncreaseDifficulty)
     if (
       this.cursorRageBar!.x <
         (this.rageBar!.width * 15) / gameStore.ratioResolution / 2 -
@@ -177,8 +176,15 @@ export default class TraficGameScene extends MinigameScene {
         volume: 0.3,
       })
       this.hornSprite!.alpha = 1
-      this.cursorRageBar!.x += this.nbrIncreaseDifficulty / 2 // 20
-      console.log('cursorRageBar.x : ' + this.nbrIncreaseDifficulty)
+      const thresholdMaxRageBar = this.rageBar!.width * 4.7
+      const targetedCursorPosition =
+        this.cursorRageBar!.x + this.nbrIncreaseDifficulty / 2
+
+      this.cursorRageBar!.x = Phaser.Math.Clamp(
+        targetedCursorPosition,
+        20,
+        thresholdMaxRageBar
+      )
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
@@ -198,9 +204,7 @@ export default class TraficGameScene extends MinigameScene {
       .setScale(15 / gameStore.ratioResolution)
       .setOrigin(0, 0.5)
 
-    console.log('this nbrIncre before : ' + this.nbrIncreaseDifficulty)
     const safeAreaWidth = this.nbrIncreaseDifficulty * 1.5
-    console.log('this nbrIn after : ' + this.nbrIncreaseDifficulty)
 
     this.safeRageBarArea = this.add.graphics()
     this.safeRageBarArea.fillStyle(0x6adeb8, 1)
