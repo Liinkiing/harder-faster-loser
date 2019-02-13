@@ -215,7 +215,7 @@ export default class SubwayGameScene extends MinigameScene {
 
     if (this.lastLineReached) {
       threshold = -(this.windowHeight! * (6.6 / 10) - (this.gapY + 5))
-      xIncrement = this.gapX / 19.4
+      xIncrement = this.gapX / 19.3
     }
 
     if (this.allowTokiToRun && this.toki!.y > threshold) {
@@ -379,7 +379,7 @@ export default class SubwayGameScene extends MinigameScene {
     tokiWinAnimation.on('animationcomplete', () => {
       this.allowTokiToRun = false
       this.toki!.x =
-        this.activeTrainContainer!.width / gameStore.ratioResolution / 2
+        this.activeTrainContainer!.width / gameStore.ratioResolution / 2 - 10
       this.toki!.y = -25
       this.toki!.setOrigin(0.5, 1)
       this.activeTrainContainer!.addAt(this.toki!, 1)
