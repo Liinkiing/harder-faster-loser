@@ -4,7 +4,7 @@ module.exports = {
     'build/*.{html,ico,json}',
     'build/static/css/**/*.css',
     'build/static/js/**/*.js',
-    'build/static/media/*.png',
+    'build/static/media/*.{png,gif}',
     'build/static/assets/**/*.{json,png,ogg,mp3,m4a}',
   ],
   swFilePath: './build/service-worker.js',
