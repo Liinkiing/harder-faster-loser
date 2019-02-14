@@ -266,6 +266,10 @@ class GameStore {
     this.status.hasJustHeart = false
   }
 
+  get muted() {
+    return this.settings.volume === 0
+  }
+
   get canPause() {
     return this.config.remainingPause >= PAUSE_MIN_THRESHOLD
   }
