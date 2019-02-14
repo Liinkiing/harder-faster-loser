@@ -11,6 +11,9 @@ export default class BootScene extends BaseScene {
   }
 
   public preload(): void {
+    if (gameManager.isDesktop) {
+      return
+    }
     super.preload()
     this.load.setBaseURL(process.env.PUBLIC_URL)
     this.load.pack(
@@ -23,6 +26,9 @@ export default class BootScene extends BaseScene {
   public update(time: number, delta: number): void {}
 
   public create = async () => {
+    if (gameManager.isDesktop) {
+      return
+    }
     super.create()
     gameStore.stopLoading()
     if (gameStore.config.dev) {
@@ -31,6 +37,9 @@ export default class BootScene extends BaseScene {
   }
 
   public startGame = (): void => {
+    if (gameManager.isDesktop) {
+      return
+    }
     gameStore.startGame()
     const initial = gameStore.config.fade
     gameStore.changeConfig({ fade: false })

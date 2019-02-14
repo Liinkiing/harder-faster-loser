@@ -27,15 +27,6 @@ export class GameManager {
     Emitter.on(BaseEvents.SceneInit, (scene: Phaser.Scene) => {
       this.activeScene = scene
     })
-    if (this.isDesktop) {
-      console.log(document.querySelector('canvas'))
-      wait(1000).then(() => {
-        const canvas = document.querySelector('canvas')
-        if (canvas) {
-          canvas.remove()
-        }
-      })
-    }
   }
 
   public get isDesktop() {
