@@ -10,7 +10,7 @@ export default class IntroductionScene extends BaseScene {
     })
   }
 
-  protected destroy(): void {
+  public destroy(): void {
     super.destroy()
     gameStore.changeConfig({
       backgroundColor: green,

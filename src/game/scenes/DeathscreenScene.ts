@@ -62,6 +62,11 @@ export default class DeathscreenScene extends BaseScene {
     this.destroyFirstPart()
   }
 
+  public destroy(): void {
+    super.destroy()
+    gameManager.changeBackgroundColor(green)
+  }
+
   private resetClassVariables(): void {
     this.stageSet = undefined
     this.cloud = undefined
@@ -69,11 +74,6 @@ export default class DeathscreenScene extends BaseScene {
     this.tombstones = []
     this.firstPartDestroyed = false
     this.dataContent = null
-  }
-
-  protected destroy(): void {
-    super.destroy()
-    gameManager.changeBackgroundColor(green)
   }
 
   private destroyFirstPart(): void {

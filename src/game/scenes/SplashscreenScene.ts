@@ -1,7 +1,7 @@
 import { scenesKeys } from '../../utils/constants'
 import BaseScene from './BaseScene'
 import gameStore from '../../store/GameStore'
-import { black, green } from '../../utils/colors'
+import { black } from '../../utils/colors'
 import gameManager from '../manager/GameManager'
 import { gameWait } from '../../utils/functions'
 
@@ -74,7 +74,7 @@ export default class SplashscreenScene extends BaseScene {
 
   public update(time: number, delta: number): void {}
 
-  protected destroy(): void {
+  public destroy(): void {
     gameManager.audio.stopAmbientMusic()
     gameManager.audio.stopUniqueSfx()
   }

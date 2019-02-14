@@ -611,10 +611,19 @@
       {
         "type": "spritesheet",
         "key": "intro_sleep",
-        "url": "/static/assets/sprites/homescreen/intro_toki_sleep_66x120.png",
+        "url": "/static/assets/sprites/homescreen/intro_sleep_72x74.png",
         "frameConfig": {
-          "frameWidth": 66,
-          "frameHeight": 120
+          "frameWidth": 72,
+          "frameHeight": 74
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_shake",
+        "url": "/static/assets/sprites/homescreen/intro_shake_72x74.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 74
         }
       },
       {
@@ -954,6 +963,105 @@
           "frameWidth": 34,
           "frameHeight": 25
         }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_wake_up",
+        "url": "/static/assets/sprites/homescreen/intro_wake_up_72x142.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 142
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_wake_up_blue",
+        "url": "/static/assets/sprites/homescreen/intro_wake_up_blue_72x158.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 158
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_wake_up_yellow",
+        "url": "/static/assets/sprites/homescreen/intro_wake_up_yellow_72x158.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 158
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_transition_v_02",
+        "url": "/static/assets/sprites/homescreen/intro_transition_v_02_72x158.png",
+        "frameConfig": {
+          "frameWidth": 72,
+          "frameHeight": 158
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_pizza_dream",
+        "url": "/static/assets/sprites/homescreen/intro_pizza_dream_33x46.png",
+        "frameConfig": {
+          "frameWidth": 33,
+          "frameHeight": 46
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_unicorn_dream",
+        "url": "/static/assets/sprites/homescreen/intro_unicorn_dream_33x46.png",
+        "frameConfig": {
+          "frameWidth": 33,
+          "frameHeight": 46
+        }
+      },
+      {
+        "type": "spritesheet",
+        "key": "intro_zzz",
+        "url": "/static/assets/sprites/homescreen/intro_zzz_33x46.png",
+        "frameConfig": {
+          "frameWidth": 33,
+          "frameHeight": 46
+        }
+      },
+      {
+        "type": "audio",
+        "key": "snoring_1",
+        "url": [
+          "/static/assets/sounds/snoring_1.ogg",
+          "/static/assets/sounds/snoring_1.m4a",
+          "/static/assets/sounds/snoring_1.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "snoring_2",
+        "url": [
+          "/static/assets/sounds/snoring_2.ogg",
+          "/static/assets/sounds/snoring_2.m4a",
+          "/static/assets/sounds/snoring_2.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "lullaby",
+        "url": [
+          "/static/assets/sounds/lullaby.ogg",
+          "/static/assets/sounds/lullaby.m4a",
+          "/static/assets/sounds/lullaby.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "lullaby_crushed",
+        "url": [
+          "/static/assets/sounds/lullaby_crushed.ogg",
+          "/static/assets/sounds/lullaby_crushed.m4a",
+          "/static/assets/sounds/lullaby_crushed.mp3"
+        ]
       }
     ]
   },
@@ -1081,6 +1189,24 @@
         "type": "image",
         "key": "deathscreen_empty_tombstone",
         "url": "/static/assets/sprites/deathscreen/deathscreen_empty_tombstone.png"
+      },
+      {
+        "type": "audio",
+        "key": "hurtmc",
+        "url": [
+          "/static/assets/sounds/hurtmc.ogg",
+          "/static/assets/sounds/hurtmc.m4a",
+          "/static/assets/sounds/hurtmc.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "hurtrb",
+        "url": [
+          "/static/assets/sounds/hurtrb.ogg",
+          "/static/assets/sounds/hurtrb.m4a",
+          "/static/assets/sounds/hurtrb.mp3"
+        ]
       },
       {
         "type": "audio",

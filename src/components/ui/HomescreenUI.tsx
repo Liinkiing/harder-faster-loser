@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import GameButton from './GameButton'
 import gameManager from '../../game/manager/GameManager'
 import SettingsModal from './modals/SettingsModal'
+import { Shaker } from '../../Shaker'
 
 const HomescreenUIInner = styled.div`
   position: fixed;
@@ -28,8 +29,14 @@ const SettingsButton = styled(GameButton)`
 `
 
 const HomescreenUI: FunctionComponent = () => {
-  const { loadNextMinigame } = gameManager
+  const { loadNextMinigame, isDesktop } = gameManager
   const [showSettings, setShowSettings] = useState(false)
+
+  const onPlay = () => {
+    gameManager.audio.stopLayeredSounds()
+    gameManager.audio.playBg()
+    loadNextMinigame()
+  }
 
   const onSettingsModalClose = () => {
     setShowSettings(false)
@@ -43,7 +50,9 @@ const HomescreenUI: FunctionComponent = () => {
     <HomescreenUIInner>
       {showSettings && <SettingsModal onClose={onSettingsModalClose} />}
       <SettingsButton onClick={onSettingsButtonClick}>S</SettingsButton>
-      <PlayButton onClick={loadNextMinigame}>Wake up</PlayButton>
+      {(isDesktop || !Shaker.hasDeviceMotion()) && (
+        <PlayButton onClick={onPlay}>Wake up</PlayButton>
+      )}
     </HomescreenUIInner>
   )
 }
