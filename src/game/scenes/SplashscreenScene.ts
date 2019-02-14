@@ -8,9 +8,13 @@ import { gameWait } from '../../utils/functions'
 const SOUND_WIND = 'wind'
 
 export default class SplashscreenScene extends BaseScene {
+  private splashscreenContainer?: Phaser.GameObjects.Container
   private splashscreenIntroduction?: Phaser.GameObjects.Sprite
+  private greenBackground?: Phaser.GameObjects.Graphics
   private ticTac?: Phaser.GameObjects.Sprite
   private loader?: Phaser.GameObjects.Image
+  private ground?: Phaser.GameObjects.Image
+  private grounds?: Phaser.GameObjects.Image[] = []
   private loaded = false
 
   constructor() {
@@ -31,9 +35,17 @@ export default class SplashscreenScene extends BaseScene {
       backgroundColor: black,
       fadeColor: black,
     })
+
     this.splashscreenIntroduction = this.createSplashscreenIntroduction()
     const credits = this.add
-      .image(window.innerWidth / 2, window.innerHeight / 2 + 280, 'credits')
+      .image(
+        window.innerWidth / 2,
+        (this.splashscreenIntroduction.height * 8) /
+          gameStore.ratioResolution /
+          2 +
+          280,
+        'credits'
+      )
       .setScale(0.5)
       .setOrigin(0.5, 0.5)
 
@@ -41,7 +53,10 @@ export default class SplashscreenScene extends BaseScene {
       this.loader = this.add
         .sprite(
           window.innerWidth / 2 + 140,
-          window.innerHeight / 2 + 280,
+          (this.splashscreenIntroduction.height * 8) /
+            gameStore.ratioResolution /
+            2 +
+            280,
           'loader'
         )
         .setScale(2)
@@ -69,7 +84,43 @@ export default class SplashscreenScene extends BaseScene {
       })
     }
 
-    this.splashscreenIntroduction.anims.play('splashscreen_01_animation')
+    this.ground = this.createSplashscreenGround({ number: 0, width: 0 })
+
+    // add grounds
+    const groundWidthBase = this.ground!.width * (8 / gameStore.ratioResolution)
+    let groundWidth = this.ground!.width * (8 / gameStore.ratioResolution)
+    let ratio = window.innerWidth / groundWidth
+
+    while (ratio > 1) {
+      this.grounds!.push(
+        this.createSplashscreenGround({ number: 1, width: groundWidth })
+      )
+      console.log('array length : ' + this.grounds!.length)
+      groundWidth = groundWidthBase * (this.grounds!.length + 1)
+      ratio = window.innerWidth / groundWidth
+    }
+
+    this.greenBackground = this.add.graphics()
+    this.greenBackground.fillStyle(0x00e7b3, 1)
+    this.greenBackground.fillRect(
+      0,
+      -1,
+      window.innerWidth,
+      this.splashscreenIntroduction.height * (8 / gameStore.ratioResolution) -
+        68
+    )
+
+    this.splashscreenContainer = this.add.container(0, 0, [
+      this.greenBackground,
+      this.splashscreenIntroduction,
+      this.ground,
+    ])
+    this.splashscreenContainer!.add(this.grounds!)
+    this.splashscreenContainer!.add([this.loader!, credits])
+
+    this.splashscreenContainer.y =
+      window.innerHeight / 2 -
+      (this.splashscreenIntroduction.height * 8) / gameStore.ratioResolution / 2
   }
 
   public update(time: number, delta: number): void {}
@@ -81,9 +132,26 @@ export default class SplashscreenScene extends BaseScene {
 
   private createSplashscreenIntroduction = (): Phaser.GameObjects.Sprite => {
     return this.add
-      .sprite(window.innerWidth / 2, window.innerHeight / 2, 'splashscreen_01')
+      .sprite(window.innerWidth / 2, 0, 'splashscreen_01')
       .setScale(8 / gameStore.ratioResolution)
-      .setOrigin(0.5, 0.5)
+      .setOrigin(0.5, 0)
+  }
+
+  private createSplashscreenGround = (parameters: {
+    number: any
+    width: any
+  }): Phaser.GameObjects.Image => {
+    const { number, width } = parameters
+    return this.add
+      .sprite(
+        number * width,
+        (this.splashscreenIntroduction!.height * 8) /
+          gameStore.ratioResolution +
+          1,
+        'ground_splashscreen'
+      )
+      .setScale(8 / gameStore.ratioResolution)
+      .setOrigin(0, 1)
   }
 
   private createTicTac = (): Phaser.GameObjects.Sprite => {
