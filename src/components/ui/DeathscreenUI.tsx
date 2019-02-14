@@ -68,7 +68,7 @@ const DeathscreenUI: FunctionComponent = () => {
     'normal'
   )
   const [containerMessagePaddingTop, setcontainerMessagePaddingTop] = useState(
-    50
+    70
   )
 
   useEffect(() => {
