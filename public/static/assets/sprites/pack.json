@@ -965,6 +965,33 @@
         }
       },
       {
+        "type": "audio",
+        "key": "subway_doors_opening",
+        "url": [
+          "/static/assets/sounds/subway_doors_opening.ogg",
+          "/static/assets/sounds/subway_doors_opening.m4a",
+          "/static/assets/sounds/subway_doors_opening.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "subway_doors_closing",
+        "url": [
+          "/static/assets/sounds/subway_doors_closing.ogg",
+          "/static/assets/sounds/subway_doors_closing.m4a",
+          "/static/assets/sounds/subway_doors_closing.mp3"
+        ]
+      },
+      {
+        "type": "audio",
+        "key": "train",
+        "url": [
+          "/static/assets/sounds/train.ogg",
+          "/static/assets/sounds/train.m4a",
+          "/static/assets/sounds/train.mp3"
+        ]
+      },
+      {
         "type": "spritesheet",
         "key": "intro_wake_up",
         "url": "/static/assets/sprites/homescreen/intro_wake_up_72x142.png",

@@ -2,7 +2,7 @@ import MinigameScene from '../MinigameScene'
 import { scenesKeys } from '../../../utils/constants'
 import { MinigameGuideline } from '../../../utils/interfaces'
 import gameStore from '../../../store/GameStore'
-import { gameWait, randomRange } from '../../../utils/functions'
+import { gameWait, randomRange, wait } from '../../../utils/functions'
 import gameManager from '../../manager/GameManager'
 import { List } from '../../../utils/extensions'
 import {
@@ -13,6 +13,7 @@ import {
   mediumGray,
 } from '../../../utils/colors'
 import minigameManager from '../../manager/MinigameManager'
+import { SHOW_DURATION } from '../../../components/ui/MinigameGuideline'
 
 const SOUND_ERROR = 'error'
 const SOUND_HIT = 'hit'
@@ -265,7 +266,9 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
-
+    wait(SHOW_DURATION).then(() => {
+      gameManager.audio.playSfx('train', { volume: 0.7 })
+    })
     this.tweens.add({
       targets: this.containers,
       x: {
@@ -275,6 +278,7 @@ export default class SubwayGameScene extends MinigameScene {
       },
       repeat: 0,
       onComplete: () => {
+        gameManager.audio.playSfx('subway_doors_opening', { volume: 0.7 })
         if (minigameManager.hasPlayedCurrentMinigame) {
           gameManager.resumeMinigame()
         } else {
@@ -396,12 +400,14 @@ export default class SubwayGameScene extends MinigameScene {
         true
       )
       this.activeTrainContainer!.add(closeDoorsAnimation)
+      gameManager.audio.playSfx('subway_doors_closing', { volume: 0.7 })
 
       closeDoorsAnimation.on('animationcomplete', () => {
         const translateValue =
           this.containers[this.containers.length - 1].x +
           this.containers[this.containers.length - 1].width /
             gameStore.ratioResolution
+        gameManager.audio.playSfx('train', { volume: 0.7, delay: 0.53 })
         this.tweens.add({
           targets: this.containers,
           x: {
