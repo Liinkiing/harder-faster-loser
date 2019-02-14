@@ -966,20 +966,11 @@
       },
       {
         "type": "audio",
-        "key": "subway_doors_opening",
+        "key": "subway_doors",
         "url": [
-          "/static/assets/sounds/subway_doors_opening.ogg",
-          "/static/assets/sounds/subway_doors_opening.m4a",
-          "/static/assets/sounds/subway_doors_opening.mp3"
-        ]
-      },
-      {
-        "type": "audio",
-        "key": "subway_doors_closing",
-        "url": [
-          "/static/assets/sounds/subway_doors_closing.ogg",
-          "/static/assets/sounds/subway_doors_closing.m4a",
-          "/static/assets/sounds/subway_doors_closing.mp3"
+          "/static/assets/sounds/subway_doors.ogg",
+          "/static/assets/sounds/subway_doors.m4a",
+          "/static/assets/sounds/subway_doors.mp3"
         ]
       },
       {
