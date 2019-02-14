@@ -5,6 +5,8 @@ import AutoScroll from './AutoScroll'
 import Spacer from './Spacer'
 import GameButton from './GameButton'
 import gameManager from '../../game/manager/GameManager'
+import Spritesheet from './Spritesheet'
+import TokiWheel from '../../assets/sprites/introduction/intro_toki_running.gif'
 
 const IntroductionUIInner = styled.div`
   position: fixed;
@@ -24,6 +26,10 @@ const IntroductionUIInner = styled.div`
   div {
     max-width: 1280px;
     padding: 15px;
+  }
+
+  img {
+    width: 55%;
   }
 `
 
@@ -50,9 +56,12 @@ const IntroductionUI: FunctionComponent = () => {
           possible. Can you make it? Tic toc tic toc... loser!
         </div>
         <Spacer size="large" />
+        <img src={TokiWheel} alt="Toki is running" />
+        <Spacer size="large" />
         <GameButton size="small" onClick={loadHomescreen}>
           Wake toki
         </GameButton>
+        <Spacer size="large" />
         <Spacer size="large" />
       </AutoScroll>
     </IntroductionUIInner>
