@@ -29,7 +29,7 @@ export default class DeathscreenScene extends BaseScene {
     gameManager.changeBackgroundColor(lightGray)
     gameManager.audio.playAmbientMusic(SOUND_RAIN, { volume: 0.2, delay: 0.3 })
     this.initFirstPart()
-    this.dataContent = dataManager.pickDataAtIndex(0)
+    this.dataContent = dataManager.pickRandomData()
 
     Emitter.on(GameEvents.DeathscreenFirstSceneDestroyed, () => {
       this.initSecondPart()
