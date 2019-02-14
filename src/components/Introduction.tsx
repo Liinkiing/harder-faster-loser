@@ -25,7 +25,7 @@ const IntroductionInner = styled.div`
   flex-direction: column;
   background: ${green};
   p {
-    font-size: 26px;
+    font-size: 22px;
     text-transform: uppercase;
     letter-spacing: 4px;
     line-height: 34px;
@@ -41,8 +41,8 @@ const Introduction: FunctionComponent<Props> = props => {
   return (
     <IntroductionInner>
       <p>
-        Hey loser, we want you to live the best interactive web experience you
-        ever seen. This is why you have to press this button >
+        Hey loser, we want you to live the best interactive experience. This is
+        why you have to press this button >
       </p>
       <BigButton disabled={loading} onClick={onLaunchGame} />
     </IntroductionInner>
