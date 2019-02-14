@@ -3,7 +3,7 @@ import { Omit } from '../../../utils/types'
 import gameStore from '../../../store/GameStore'
 import { gameWait, randomRange } from '../../../utils/functions'
 
-const Y_OFFSET = 300
+const Y_OFFSET = 260
 const X_OFFSET = -100
 
 export default class TokiDreams extends Phaser.GameObjects.Sprite {
