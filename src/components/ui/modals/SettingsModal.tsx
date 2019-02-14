@@ -1,10 +1,5 @@
 import * as React from 'react'
-import {
-  ChangeEventHandler,
-  FunctionComponent,
-  useCallback,
-  useState,
-} from 'react'
+import { ChangeEventHandler, FunctionComponent, useCallback } from 'react'
 import ModalsContainer from '../ModalsContainer'
 import pauseBg from '../../../assets/sprites/pause/pause_bg.png'
 import closeIcon from '../../../assets/images/icons/btn_close.png'
@@ -16,6 +11,7 @@ import gameStore from '../../../store/GameStore'
 import Spacer from '../Spacer'
 import gameManager from '../../../game/manager/GameManager'
 import TeamProfilePicture from './TeamProfilePicture'
+import SoundPicto from '../SoundPicto'
 
 const SettingsModalContainer = styled.div`
   display: flex;
@@ -94,12 +90,6 @@ const CloseButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
-
-const SoundPicto = styled.img`
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
 `
 
 const Row = styled.div<{ inverse?: boolean }>`
@@ -197,10 +187,7 @@ const SettingsModal: FunctionComponent<Props> = props => {
           <Heading>Settings</Heading>
           <Spacer />
           <Row>
-            <SoundPicto
-              src={require('../../../assets/images/icons/picto_son.png')}
-              alt="Sound picto"
-            />
+            <SoundPicto />
             <VolumeSlider
               type="range"
               min={0}
