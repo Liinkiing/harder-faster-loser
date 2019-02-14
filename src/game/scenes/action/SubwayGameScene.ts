@@ -20,7 +20,7 @@ const SOUND_SUCCESS = 'success'
 
 export default class SubwayGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
-    title: 'Slide !',
+    title: 'Slide&thinsp;!',
     subtitle: 'to enter the train',
   }
   public availableBackgroundColors = new List<string>([lightBlue])

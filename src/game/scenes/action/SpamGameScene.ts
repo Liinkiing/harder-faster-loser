@@ -14,7 +14,7 @@ const SOUND_CLOSE_CLICK = 'beep'
 
 export default class SpamGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
-    title: 'Click !',
+    title: 'Click&thinsp;!',
     subtitle: 'to close the spams',
   }
   public availableBackgroundColors = new List<string>([

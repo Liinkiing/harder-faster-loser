@@ -15,7 +15,7 @@ const ELEVATOR_OPENNING_SOUND = 'elevator_openning'
 
 export default class ElevatorGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
-    title: 'Call !',
+    title: 'Call&thinsp;!',
     subtitle: 'the elevator',
   }
   public availableBackgroundColors = new List<string>([lightBlue, green])

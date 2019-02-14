@@ -13,7 +13,7 @@ const SOUND_GET_SANDWICH = 'tada'
 
 export default class SandwichGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
-    title: 'Run !',
+    title: 'Run&thinsp;!',
     subtitle: 'to get your food',
   }
   public availableBackgroundColors = new List<string>([green, yellow])

@@ -169,8 +169,14 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
   return (
     <MinigameGuidelineOverlay>
       <GuidelineContainer ref={container} isLeaving={isLeaving}>
-        <GuidelineTitle isLeaving={isLeaving}>{title}</GuidelineTitle>
-        <GuidelineSubtitle isLeaving={isLeaving}>{subtitle}</GuidelineSubtitle>
+        <GuidelineTitle
+          dangerouslySetInnerHTML={{ __html: title }}
+          isLeaving={isLeaving}
+        />
+        <GuidelineSubtitle
+          dangerouslySetInnerHTML={{ __html: subtitle }}
+          isLeaving={isLeaving}
+        />
       </GuidelineContainer>
     </MinigameGuidelineOverlay>
   )
