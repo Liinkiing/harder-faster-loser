@@ -11,7 +11,7 @@ const HORN_SOUND = 'horn'
 
 export default class TraficGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
-    title: 'Honk !',
+    title: 'Honk&thinsp;!',
     subtitle: 'to get out off the traffic jam',
   }
   protected hasActionIndicators = true

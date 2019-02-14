@@ -26,7 +26,7 @@ const SOUND_KEYBOARD_BUTTON = 'beep'
 
 export default class PasswordGameScene extends MinigameScene {
   public guideline: MinigameGuideline = {
-    title: 'Memorise !',
+    title: 'Memorise&thinsp;!',
     subtitle: 'to enter password',
   }
   public availableBackgroundColors = new List<string>([green, lightBlue])
