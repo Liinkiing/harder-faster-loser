@@ -174,7 +174,7 @@ export default class SplashscreenScene extends BaseScene {
         }
         await gameWait(this.time, 1) // We wait here because if we come back to the splashscreen scene (e.g from debug)
         // we cant directly play the animation
-        // this.splashscreenIntroduction!.play('splashscreen_02_animation')
+        this.splashscreenIntroduction!.play('splashscreen_02_animation')
         gameWait(this.time, 200).then(async () => {
           gameManager.audio.playSfx('crack', { volume: 0.85 })
           gameManager.audio.playUniqueSfx('falling', { volume: 0.5 })
