@@ -278,7 +278,7 @@ export default class SubwayGameScene extends MinigameScene {
       },
       repeat: 0,
       onComplete: () => {
-        gameManager.audio.playSfx('subway_doors_opening', { volume: 0.7 })
+        gameManager.audio.playSfx('subway_doors', { volume: 0.5, delay: 0.12 })
         if (minigameManager.hasPlayedCurrentMinigame) {
           gameManager.resumeMinigame()
         } else {
@@ -400,8 +400,7 @@ export default class SubwayGameScene extends MinigameScene {
         true
       )
       this.activeTrainContainer!.add(closeDoorsAnimation)
-      gameManager.audio.playSfx('subway_doors_closing', { volume: 0.7 })
-
+      gameManager.audio.playSfx('subway_doors', { volume: 0.4, delay: 0.15 })
       closeDoorsAnimation.on('animationcomplete', () => {
         const translateValue =
           this.containers[this.containers.length - 1].x +
