@@ -161,7 +161,9 @@ export default class TraficGameScene extends MinigameScene {
         volume: 0.3,
       })
       this.hornSprite!.alpha = 1
-      this.cursorRageBar!.x += 20
+      if (this.cursorRageBar!.x < 250) {
+        this.cursorRageBar!.x += 20
+      }
 
       this.hornSprite!.on('animationcomplete', () => {
         this.hornSprite!.alpha = 0
@@ -190,7 +192,7 @@ export default class TraficGameScene extends MinigameScene {
       (this.rageBar.width * 15) / gameStore.ratioResolution / 2 - 50,
       -((this.rageBar.height * 15) / gameStore.ratioResolution) / 2 + 3.5,
       safeAreaWidth,
-      (this.rageBar.height * 15) / gameStore.ratioResolution - 15.4
+      (this.rageBar.height * 15) / gameStore.ratioResolution - 15.2
     )
 
     this.cursorRageBar = this.add
