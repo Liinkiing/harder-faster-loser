@@ -5,7 +5,7 @@ import { minigameSuffix, scenesKeys } from '../../utils/constants'
 import { EventEmitter } from 'events'
 import { appear, disappear } from '../../utils/anims'
 import { GameBackgroundColor } from '../../utils/types'
-import { gameBackgroundColorToCss } from '../../utils/functions'
+import { gameBackgroundColorToCss, wait } from '../../utils/functions'
 import minigameManager from './MinigameManager'
 import AudioManager from './AudioManager'
 import { MinigameGuideline } from '../../utils/interfaces'
@@ -27,6 +27,15 @@ export class GameManager {
     Emitter.on(BaseEvents.SceneInit, (scene: Phaser.Scene) => {
       this.activeScene = scene
     })
+    if (this.isDesktop) {
+      console.log(document.querySelector('canvas'))
+      wait(1000).then(() => {
+        const canvas = document.querySelector('canvas')
+        if (canvas) {
+          canvas.remove()
+        }
+      })
+    }
   }
 
   public get isDesktop() {

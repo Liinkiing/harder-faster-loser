@@ -9,7 +9,7 @@
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
 
-import { Emitter } from './game/manager/GameManager'
+import gameManager, { Emitter } from './game/manager/GameManager'
 import { UIEvents } from './utils/enums'
 
 const isLocalhost = Boolean(
@@ -74,13 +74,17 @@ function registerValidSW(swUrl: string) {
                 // It's the perfect time to display a 'New content is
                 // available; please refresh.' message in your web app.
                 console.log('New content is available; please refresh.')
-                Emitter.emit(UIEvents.NewContentAvailable)
+                if (!gameManager.isDesktop) {
+                  Emitter.emit(UIEvents.NewContentAvailable)
+                }
               } else {
                 // At this point, everything has been precached.
                 // It's the perfect time to display a
                 // 'Content is cached for offline use.' message.
                 console.log('Content is cached for offline use.')
-                Emitter.emit(UIEvents.ContentCached)
+                if (!gameManager.isDesktop) {
+                  Emitter.emit(UIEvents.ContentCached)
+                }
               }
             }
           }

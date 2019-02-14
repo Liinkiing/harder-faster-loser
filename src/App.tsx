@@ -10,9 +10,11 @@ import NotificationsContainer, {
   notify,
 } from './components/ui/notifications/NotificationsContainer'
 import { UIEvents } from './utils/enums'
+import DesktopWarning from './components/DesktopWarning'
 
 const App: FunctionComponent = () => {
   const { started } = gameStore
+  const { isDesktop } = gameManager
   const onLaunchGame = useCallback(async () => {
     try {
       // @ts-ignore
@@ -51,9 +53,15 @@ const App: FunctionComponent = () => {
 
   return (
     <div className="App">
-      {!started && <Introduction onLaunchGame={onLaunchGame} />}
-      <Game />
-      <NotificationsContainer />
+      {isDesktop ? (
+        <DesktopWarning />
+      ) : (
+        <>
+          {!started && <Introduction onLaunchGame={onLaunchGame} />}
+          <Game />
+          <NotificationsContainer />
+        </>
+      )}
     </div>
   )
 }
