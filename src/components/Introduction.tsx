@@ -41,8 +41,8 @@ const Introduction: FunctionComponent<Props> = props => {
   return (
     <IntroductionInner>
       <p>
-        Dear visitor, we want you to live the best interactive experience. This
-        is why you have to press this button >
+        Hey loser, we want you to live the best interactive web experience you
+        ever seen. This is why you have to press this button >
       </p>
       <BigButton disabled={loading} onClick={onLaunchGame} />
     </IntroductionInner>
