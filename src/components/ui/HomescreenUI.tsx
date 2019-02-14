@@ -5,6 +5,12 @@ import gameManager from '../../game/manager/GameManager'
 import SettingsModal from './modals/SettingsModal'
 import { Shaker } from '../../Shaker'
 
+const SettingsButton = styled(GameButton)`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+`
+
 const HomescreenUIInner = styled.div`
   position: fixed;
   left: 0;
@@ -15,17 +21,14 @@ const HomescreenUIInner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  ${SettingsButton} {
+    padding: 5px;
+  }
 `
 
 const PlayButton = styled(GameButton)`
   position: absolute;
   bottom: 40px;
-`
-
-const SettingsButton = styled(GameButton)`
-  position: fixed;
-  top: 20px;
-  left: 20px;
 `
 
 const HomescreenUI: FunctionComponent = () => {
@@ -49,7 +52,12 @@ const HomescreenUI: FunctionComponent = () => {
   return (
     <HomescreenUIInner>
       {showSettings && <SettingsModal onClose={onSettingsModalClose} />}
-      <SettingsButton onClick={onSettingsButtonClick}>S</SettingsButton>
+      <SettingsButton onClick={onSettingsButtonClick}>
+        <img
+          alt="Settings"
+          src={require('../../assets/images/icons/settings.png')}
+        />
+      </SettingsButton>
       {(isDesktop || !Shaker.hasDeviceMotion()) && (
         <PlayButton onClick={onPlay}>Wake up</PlayButton>
       )}
