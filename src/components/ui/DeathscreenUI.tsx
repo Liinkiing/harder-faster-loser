@@ -34,7 +34,7 @@ const ContainerMessage = styled.div<{ position: string; paddingTop: integer }>`
   }
   ${GameButton} {
     position: fixed;
-    bottom: 20px;
+    bottom: 50px;
     font-size: 16px;
   }
 `

@@ -5,6 +5,8 @@ import AutoScroll from './AutoScroll'
 import Spacer from './Spacer'
 import GameButton from './GameButton'
 import gameManager from '../../game/manager/GameManager'
+import Spritesheet from './Spritesheet'
+import TokiWheel from '../../assets/sprites/introduction/intro_toki_running.gif'
 
 const IntroductionUIInner = styled.div`
   position: fixed;
@@ -19,10 +21,15 @@ const IntroductionUIInner = styled.div`
   flex-direction: column;
   text-align: center;
   align-items: center;
+  line-height: 1.5em;
 
   div {
     max-width: 1280px;
     padding: 15px;
+  }
+
+  img {
+    width: 55%;
   }
 `
 
@@ -31,44 +38,30 @@ const IntroductionUI: FunctionComponent = () => {
   return (
     <IntroductionUIInner>
       <AutoScroll duration={3000}>
+        <div>Hey! 21st century isn’t a joke.</div>
+        <Spacer size="large" />
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
-          accusantium aliquid amet commodi, cupiditate earum eum ipsum
-          laudantium, nisi non omnis perferendis quae quas quasi quos recusandae
-          tenetur ut voluptatum?
+          If you want to survive, you don’t have a choice but to follow
+          society’s rules. Phones, watches, alarms, schedules, queueings,
+          messages, notifications…
         </div>
         <Spacer size="large" />
         <div>
-          Accusamus aspernatur autem corporis, delectus ducimus ea eaque eius
-          esse et expedita in itaque nisi, obcaecati officia possimus quas
-          reprehenderit veniam, voluptate? Adipisci, fuga nihil? Laborum
-          molestias quis vitae voluptatum.
+          STOOOOOOOOOOOP, we’re drowning here. Is this real life? In this game
+          it is.
         </div>
         <Spacer size="large" />
         <div>
-          Culpa doloremque dolorum et mollitia repellat! Dignissimos ducimus
-          harum illum ipsum molestias natus, nulla quam rem saepe sequi. Aliquam
-          ducimus ea obcaecati omnis pariatur quibusdam reiciendis! Cum officia
-          reiciendis sit.
+          Help Toki survive on this battlefield. Obey the orders as fast as
+          possible. Can you make it? Tic toc tic toc... loser!
         </div>
         <Spacer size="large" />
-        <div>
-          Accusamus accusantium ad amet aperiam aspernatur atque aut debitis
-          dolore ex explicabo illo illum inventore maxime natus porro
-          praesentium quibusdam quis recusandae rem totam unde vel voluptate
-          voluptatem voluptates, voluptatibus?
-        </div>
-        <Spacer size="large" />
-        <div>
-          Consequatur ea, vel. A ab architecto dolorem doloremque ea esse
-          eveniet explicabo inventore iste magni minima nesciunt, nihil nostrum
-          officiis pariatur perspiciatis quasi qui quibusdam quidem, quo sunt
-          tempora voluptatibus.
-        </div>
+        <img src={TokiWheel} alt="Toki is running" />
         <Spacer size="large" />
         <GameButton size="small" onClick={loadHomescreen}>
           Wake toki
         </GameButton>
+        <Spacer size="large" />
         <Spacer size="large" />
       </AutoScroll>
     </IntroductionUIInner>
