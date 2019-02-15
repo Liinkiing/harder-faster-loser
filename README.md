@@ -8,6 +8,6 @@ A **PWA game** (which finally works OFFLINE when loaded once) made with **Typesc
 </p>
 
 ## Useful links :
-
+- 🎮 [Play the game](https://harder-faster-loser.netlify.com) (mobile only)
 - 📅 [Backlog](https://github.com/Liinkiing/harder-faster-loser/projects/1)
 - ☑ [Issues](https://github.com/Liinkiing/harder-faster-loser/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
