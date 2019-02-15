@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import styled from 'styled-components'
 import { black } from '../../utils/colors'
 import AutoScroll from './AutoScroll'
@@ -33,11 +33,31 @@ const IntroductionUIInner = styled.div`
   }
 `
 
+const SkipButton = styled(GameButton)`
+  position: fixed;
+  z-index: 1000;
+  font-size: 12px;
+  padding: 10px 15px;
+  top: 20px;
+  right: 20px;
+`
+
 const IntroductionUI: FunctionComponent = () => {
   const { loadHomescreen } = gameManager
+  const [showSkip, setShowSkip] = useState(true)
+
+  const onScrollEnd = () => {
+    setShowSkip(false)
+  }
+
   return (
     <IntroductionUIInner>
-      <AutoScroll duration={28000}>
+      {showSkip && (
+        <SkipButton size="small" onClick={loadHomescreen}>
+          Skip introduction
+        </SkipButton>
+      )}
+      <AutoScroll duration={28000} onScrollEnd={onScrollEnd}>
         <div>Hey! 21st century isn’t a joke.</div>
         <Spacer size="large" />
         <div>
