@@ -27,7 +27,7 @@ export default class DeathscreenScene extends BaseScene {
     super.create()
     this.resetClassVariables()
     gameManager.changeBackgroundColor(lightGray)
-    gameManager.audio.playAmbientMusic(SOUND_RAIN, { volume: 0.2, delay: 0.3 })
+    gameManager.audio.playAmbientMusic(SOUND_RAIN, { volume: 0.5, delay: 0.3 })
     this.initFirstPart()
     this.dataContent = dataManager.pickRandomData()
 
@@ -41,7 +41,7 @@ export default class DeathscreenScene extends BaseScene {
         this.stageSet.setTexture('deathscreen_stage_set_1')
         this.cloud.setTexture('deathscreen_clouds_1')
 
-        gameManager.audio.playSfx(SOUND_THUNDER, { volume: 0.2, delay: 0.3 })
+        gameManager.audio.playSfx(SOUND_THUNDER, { volume: 0.6 })
 
         await gameWait(this.time, 300)
         if (!this.firstPartDestroyed) {
