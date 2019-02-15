@@ -37,7 +37,7 @@ const IntroductionUI: FunctionComponent = () => {
   const { loadHomescreen } = gameManager
   return (
     <IntroductionUIInner>
-      <AutoScroll duration={20000}>
+      <AutoScroll duration={28000}>
         <div>Hey! 21st century isn’t a joke.</div>
         <Spacer size="large" />
         <div>
