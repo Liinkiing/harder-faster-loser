@@ -93,24 +93,17 @@ const MinigameGuideline: FunctionComponent<Props> = props => {
   const [time, setTime] = useState(0)
   const [display, setDisplay] = useState(true)
   const container = useRef<HTMLDivElement>(null)
-  useEffect(
-    () => {
-      const handler = () => {
-        setTime(time + 10)
-      }
-      let interval: undefined | NodeJS.Timeout
-      if (time !== -1 && time <= SHOW_DURATION) {
-        interval = setInterval(handler, 1)
-      }
+  useEffect(() => {
+    const handler = () => {
+      setTime(SHOW_DURATION)
+    }
 
-      return () => {
-        if (interval) {
-          clearInterval(interval)
-        }
-      }
-    },
-    [time]
-  )
+    const timeout = setTimeout(handler, SHOW_DURATION)
+
+    return () => {
+      clearInterval(timeout)
+    }
+  }, [])
 
   useEffect(() => {
     gameStore.showGuideline()

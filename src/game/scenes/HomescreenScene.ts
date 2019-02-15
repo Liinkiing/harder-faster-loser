@@ -103,6 +103,7 @@ export default class HomescreenScene extends BaseScene {
       backgroundColor: green,
     })
     gameStore.showUserInterface()
+    gameManager.audio.stopLayeredSounds()
   }
 
   private onShake = (): void => {
