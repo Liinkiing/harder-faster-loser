@@ -14,7 +14,7 @@ enum TokiState {
   WakedUp,
 }
 
-const CYCLE_BEFORE_WAKE_UP = 5
+const CYCLE_BEFORE_WAKE_UP = 3
 const AVAILABLE_HURT_SOUNDS = new List(['hurtmc', 'hurtrb'])
 
 export default class HomescreenScene extends BaseScene {
