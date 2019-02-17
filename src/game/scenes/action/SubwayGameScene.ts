@@ -266,9 +266,13 @@ export default class SubwayGameScene extends MinigameScene {
       (this.activeTrainContainer!.x - this.firstTrain!.x) +
       this.activeTrainContainer!.width / gameStore.ratioResolution / 2 -
       20
-    wait(SHOW_DURATION).then(() => {
+    if (!minigameManager.hasPlayedCurrentMinigame) {
+      wait(SHOW_DURATION).then(() => {
+        gameManager.audio.playSfx('train', { volume: 0.7 })
+      })
+    } else {
       gameManager.audio.playSfx('train', { volume: 0.7 })
-    })
+    }
     this.tweens.add({
       targets: this.containers,
       x: {
