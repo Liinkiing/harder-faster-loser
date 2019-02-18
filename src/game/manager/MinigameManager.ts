@@ -42,7 +42,7 @@ class MinigameManager {
       return this.allPlayedGames.has(gameManager.activeScene!.scene.key)
     }
 
-    throw new Error('Current scene is not a minigame!')
+    return false
   }
 
   public pickNextGameKey(): string {
