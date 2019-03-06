@@ -29,6 +29,10 @@ const IntroductionInner = styled.div`
     text-transform: uppercase;
     letter-spacing: 4px;
     line-height: 34px;
+    @media screen and (max-width: 320px) {
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
   ${BigButton} {
     margin-top: 80px;
